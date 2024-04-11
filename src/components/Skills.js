@@ -11,6 +11,17 @@ import api from "../assets/img//skills_icons/api.png";
 import database from "../assets/img//skills_icons/database.png";
 import cloud from "../assets/img//skills_icons/cloud.png";
 import lock from "../assets/img//skills_icons/lock.png";
+import python from "../assets/img//skills_icons/python.png";
+import javascript from "../assets/img//skills_icons/javascript.png";
+import csharp from "../assets/img//skills_icons/csharp.png";
+import java from "../assets/img//skills_icons/java.png";
+import html from "../assets/img//skills_icons/html.png";
+import css from "../assets/img//skills_icons/css.png";
+import git from "../assets/img//skills_icons/git.png";
+import flask from "../assets/img//skills_icons/flask.png";
+import _react from "../assets/img//skills_icons/react.png";
+import postgres from "../assets/img//skills_icons/postgres.png";
+import docker from "../assets/img//skills_icons/docker.png";
 
 export const Skills = () => {
   const responsive = {
@@ -33,6 +44,31 @@ export const Skills = () => {
     }
   };
 
+    const skillsData = [
+        { src: server, title: "Backend Development" },
+        { src: api, title: "APIs" },
+        { src: database, title: "Databases" },
+        { src: cloud, title: "DevOps, Cloud, CI/CD" },
+        { src: lock, title: "Security" },
+    ];
+
+    const basicTechnologies = [
+        { src: python, title: "Python" },
+        { src: javascript, title: "Javascript" },
+        { src: csharp, title: "C#" },
+        { src: java, title: "Java" },
+        { src: html, title: "HTML" },
+        { src: css, title: "CSS" },
+    ];
+
+    const frameworks = [
+        { src: git, title: "GIT" },
+        { src: flask, title: "Flask" },
+        { src: _react, title: "React" },
+        { src: postgres, title: "Postgres" },
+        { src: docker, title: "Docker" }
+    ];
+
   return (
     <section className="skill" id="skills">
         <div className="container">
@@ -40,28 +76,44 @@ export const Skills = () => {
                 <div className="col-12">
                     <div className="skill-bx wow zoomIn">
                         <h2>Skills</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br></br> Lorem Ipsum has been the industry's standard dummy text.</p>
-                        <Carousel responsive={responsive} infinite={false} className="owl-carousel owl-theme skill-slider">
-                            <div className="item">
-                                <img src={server} alt="Image" />
-                                <h5>Backend Development</h5>
-                            </div>
-                            <div className="item">
-                                <img src={api} alt="Image" />
-                                <h5>APIs</h5>
-                            </div>
-                            <div className="item">
-                                <img src={database} alt="Image" />
-                                <h5>Databases</h5>
-                            </div>
-                            <div className="item">
-                                <img src={cloud} alt="Image" />
-                                <h5>DevOps, Cloud, CI/CD</h5>
-                            </div>
-                            <div className="item">
-                                <img src={lock} alt="Image" />
-                                <h5>Security</h5>
-                            </div>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br></br> Lorem
+                            Ipsum has been the industry's standard dummy text.</p>
+                        <Carousel responsive={responsive} infinite={false}
+                                  className="owl-carousel owl-theme skill-slider">
+                            {skillsData.map((skill, index) => (
+                                <div className="item" key={index}>
+                                    <img src={skill.src} alt={skill.title}/>
+                                    <h5>{skill.title}</h5>
+                                </div>
+                            ))}
+                        </Carousel>
+                    </div>
+                    <div className="skill-bx wow zoomIn">
+                        <h2>Technologies</h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br></br> Lorem
+                            Ipsum has been the industry's standard dummy text.</p>
+                        <Carousel responsive={responsive} infinite={false}
+                                  className="owl-carousel owl-theme skill-slider">
+                            {basicTechnologies.map((skill, index) => (
+                                <div className="item" key={index}>
+                                    <img src={skill.src} alt={skill.title}/>
+                                    <h5>{skill.title}</h5>
+                                </div>
+                            ))}
+                        </Carousel>
+                    </div>
+                    <div className="skill-bx wow zoomIn">
+                        <h2>Frameworks</h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br></br> Lorem
+                            Ipsum has been the industry's standard dummy text.</p>
+                        <Carousel responsive={responsive} infinite={false}
+                                  className="owl-carousel owl-theme skill-slider">
+                            {frameworks.map((skill, index) => (
+                                <div className="item" key={index}>
+                                    <img src={skill.src} alt={skill.title}/>
+                                    <h5>{skill.title}</h5>
+                                </div>
+                            ))}
                         </Carousel>
                     </div>
                 </div>
