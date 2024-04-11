@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { FullLayout} from "./components/FullLayout";
 import { NavBar } from "./components/NavBar";
 import { Banner } from "./components/Banner";
 import { Skills } from "./components/Skills";
@@ -13,24 +14,13 @@ function App() {
     return (
         <div className="App">
             <Routes>
-                <Route path="/mateus_portfolio" element={
-                    <>
-                        <NavBar/>
-                        <div className="section shared-background">
-                            <Banner/>
-                            <Skills/>
-                        </div>
-                        <Projects/>
-                        <Contact/>
-                        <Footer/>
-                    </>
-                }/>
-                <Route path="/navbar" element={<NavBar/>} />
-                <Route path="/banner" element={<Banner/>} />
-                <Route path="/skills" element={<Skills/>} />
-                <Route path="/projects" element={<Projects/>} />
-                <Route path="/contact" element={<Contact/>} />
-                <Route path="/footer" element={<Footer/>} />
+                <Route path="/mateus_portfolio/" element={<FullLayout/>} />
+                <Route path="/mateus_portfolio/navbar" element={<NavBar/>} />
+                <Route path="/mateus_portfolio/banner" element={<Banner/>} />
+                <Route path="/mateus_portfolio/skills" element={<Skills/>} />
+                <Route path="/mateus_portfolio/projects" element={<Projects/>} />
+                <Route path="/mateus_portfolio/contact" element={<Contact/>} />
+                <Route path="/mateus_portfolio/footer" element={<Footer/>} />
             </Routes>
         </div>
     );

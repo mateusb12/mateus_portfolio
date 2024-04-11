@@ -22,6 +22,7 @@ import flask from "../assets/img//skills_icons/flask.png";
 import _react from "../assets/img//skills_icons/react.png";
 import postgres from "../assets/img//skills_icons/postgres.png";
 import docker from "../assets/img//skills_icons/docker.png";
+import jwt from "../assets/img//skills_icons/jwt.png";
 
 export const Skills = () => {
   const responsive = {
@@ -65,6 +66,7 @@ export const Skills = () => {
         { src: git, title: "GIT" },
         { src: flask, title: "Flask" },
         { src: _react, title: "React" },
+        { src: jwt, title: "JWT" },
         { src: postgres, title: "Postgres" },
         { src: docker, title: "Docker" }
     ];
@@ -75,7 +77,7 @@ export const Skills = () => {
             <div className="row">
                 <div className="col-12">
                     <div className="skill-bx wow zoomIn">
-                        <h2>Skills</h2>
+                        <h2>Key Skills</h2>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br></br> Lorem
                             Ipsum has been the industry's standard dummy text.</p>
                         <Carousel responsive={responsive} infinite={false}
@@ -89,7 +91,7 @@ export const Skills = () => {
                         </Carousel>
                     </div>
                     <div className="skill-bx wow zoomIn">
-                        <h2>Technologies</h2>
+                        <h2>Programming Foundations</h2>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br></br> Lorem
                             Ipsum has been the industry's standard dummy text.</p>
                         <Carousel responsive={responsive} infinite={false}
@@ -103,7 +105,7 @@ export const Skills = () => {
                         </Carousel>
                     </div>
                     <div className="skill-bx wow zoomIn">
-                        <h2>Frameworks</h2>
+                        <h2>Technology Stack</h2>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br></br> Lorem
                             Ipsum has been the industry's standard dummy text.</p>
                         <Carousel responsive={responsive} infinite={false}
