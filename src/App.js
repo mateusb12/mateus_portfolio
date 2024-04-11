@@ -13,7 +13,7 @@ function App() {
     return (
         <div className="App">
             <Routes>
-                <Route path="/" element={
+                <Route path="/mateus_portfolio" element={
                     <>
                         <NavBar/>
                         <div className="section shared-background">
