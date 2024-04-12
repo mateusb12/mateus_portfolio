@@ -78,8 +78,7 @@ export const Skills = () => {
                 <div className="col-12">
                     <div className="skill-bx wow zoomIn">
                         <h2>Key Skills</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br></br> Lorem
-                            Ipsum has been the industry's standard dummy text.</p>
+                        <p>Core competencies in software development</p>
                         <Carousel responsive={responsive} infinite={false}
                                   className="owl-carousel owl-theme skill-slider">
                             {skillsData.map((skill, index) => (
@@ -92,8 +91,7 @@ export const Skills = () => {
                     </div>
                     <div className="skill-bx wow zoomIn">
                         <h2>Programming Foundations</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br></br> Lorem
-                            Ipsum has been the industry's standard dummy text.</p>
+                        <p>Essential programming languages that serves as foundations for using the frameworks</p>
                         <Carousel responsive={responsive} infinite={false}
                                   className="owl-carousel owl-theme skill-slider">
                             {basicTechnologies.map((skill, index) => (
@@ -106,8 +104,7 @@ export const Skills = () => {
                     </div>
                     <div className="skill-bx wow zoomIn">
                         <h2>Technology Stack</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br></br> Lorem
-                            Ipsum has been the industry's standard dummy text.</p>
+                        <p>Main tools for modern development</p>
                         <Carousel responsive={responsive} infinite={false}
                                   className="owl-carousel owl-theme skill-slider">
                             {frameworks.map((skill, index) => (
