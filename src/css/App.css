@@ -260,7 +260,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 /************ Banner Css ************/
 .banner {
   margin-top: 0;
-  padding: 260px 0 100px;
+  padding: 260px 0 50px;
   background-size: cover;
   background: transparent no-repeat top center;
 }
@@ -433,15 +433,25 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     z-index: -1;
     transition: 0.3s ease-in-out;
 }
-.project .nav.nav-pills .nav-link.active::before {
-    width: 100% !important;
-}
 .project .nav.nav-pills .nav-link.active {
-    border: 1px solid rgba(255, 255, 255, 1);
+    border: 1px solid #fff !important;
+    z-index: 2;
+    position: relative;
+}
+.project .nav.nav-pills .nav-link.active::before {
+  width: 100% !important;
+  z-index: -1;
 }
 .nav-link#projects-tabs-tab-first {
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 55px 0px 0px 55px;
+  /*border: 1px solid rgba(255, 255, 255, 0.5);*/
+  border-radius: 55px 0 0 55px;
+}
+.nav-link#projects-tabs-tab-first.active{
+  border-radius: 55px 0 0 55px !important;
+  z-index: 2;
+}
+.nav-link#projects-tabs-tab-third.active{
+  border-radius: 0 55px 55px 0 !important;
 }
 .nav-link#projects-tabs-tab-second {
   border-top: 1px solid rgba(255, 255, 255, 0.5);
@@ -473,7 +483,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   border-radius: 0; /* No rounded corners */
 }
 .project .nav.nav-pills .nav-link#projects-tabs-tab-third:not(.active):hover::before {
-  border-radius: 0 25px 25px 0; /* Rounded corners on the right */
+  border-radius: 0 25px 25px 0;
 }
 .custom-nav-link {
   transition: background-color 0.3s, border-color 0.3s; /* Full width on hover */
@@ -539,7 +549,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   z-index: -4;
 }
 
-/************ Projects Css ************/
+/************ Contacts Css ************/
 .contact {
   background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
   padding: 60px 0 200px 0;

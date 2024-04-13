@@ -27,3 +27,4 @@ yarn-error.log*
 /project_utils/commit_changes_generator/commit_changes.diff
 
 /.idea
+/project_utils/project_structure_generator/directory_structure.json
