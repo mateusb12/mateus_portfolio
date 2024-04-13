@@ -23,6 +23,8 @@ import _react from "../assets/img//skills_icons/react.png";
 import postgres from "../assets/img//skills_icons/postgres.png";
 import docker from "../assets/img//skills_icons/docker.png";
 import jwt from "../assets/img//skills_icons/jwt.png";
+import aws from "../assets/img//skills_icons/aws.png";
+import google from "../assets/img//skills_icons/google-cloud-small.png";
 
 export const Skills = () => {
   const responsive = {
@@ -68,7 +70,9 @@ export const Skills = () => {
         { src: _react, title: "React" },
         { src: jwt, title: "JWT" },
         { src: postgres, title: "Postgres" },
-        { src: docker, title: "Docker" }
+        { src: docker, title: "Docker" },
+        { src: aws, title: "AWS" },
+        { src: google, title: "Google Cloud" },
     ];
 
   return (

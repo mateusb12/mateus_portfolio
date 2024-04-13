@@ -359,7 +359,8 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   position: relative;
 }
 .skill-slider .item img {
-  width: 50%;
+  width: 150px;
+  height: 150px;
   margin: 0 auto 15px auto;
 }
 .background-image-left {
@@ -449,6 +450,41 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 .nav-link#projects-tabs-tab-third {
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 0 55px 55px 0;
+}
+.project .nav.nav-pills .nav-link:not(.active):hover {
+  color: #fff; /* Full width on hover */
+  cursor: pointer;
+  text-decoration: none;
+}
+.project .nav.nav-pills .nav-link:not(.active):hover::before {
+  content: "";
+  position: absolute;
+  width: 100%; /* Full width on hover */
+  height: 100%; /* Full height on hover */
+  background-color: #666; /* New background color on hover */
+  z-index: -1;
+  border: 2px solid #fff; /* New border on hover */
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out, background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+.project .nav.nav-pills .nav-link#projects-tabs-tab-first:not(.active):hover::before {
+  border-radius: 25px 0 0 25px; /* Rounded corners on the left */
+}
+.project .nav.nav-pills .nav-link#projects-tabs-tab-second:not(.active):hover::before {
+  border-radius: 0; /* No rounded corners */
+}
+.project .nav.nav-pills .nav-link#projects-tabs-tab-third:not(.active):hover::before {
+  border-radius: 0 25px 25px 0; /* Rounded corners on the right */
+}
+.custom-nav-link {
+  transition: background-color 0.3s, border-color 0.3s; /* Full width on hover */
+}
+.custom-nav-link:hover {
+  cursor: pointer; /* Full width on hover */
+  background-color: #666;
+  border: 2px solid #fff;
+  border-radius: 0.25rem;
+  color: #007bff;
+  text-decoration: underline;
 }
 .proj-imgbx {
   position: relative;
