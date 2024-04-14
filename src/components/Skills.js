@@ -1,15 +1,10 @@
-import meter1 from "../assets/img/meter1.svg";
-import meter2 from "../assets/img/meter2.svg";
-import meter3 from "../assets/img/meter3.svg";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import arrow1 from "../assets/img/arrow1.svg";
-import arrow2 from "../assets/img/arrow2.svg";
-import colorSharp from "../assets/img/moon-bg2.jpg"
 import server from "../assets/img//skills_icons/server.png";
 import api from "../assets/img//skills_icons/api.png";
 import database from "../assets/img//skills_icons/database.png";
 import cloud from "../assets/img//skills_icons/cloud.png";
+import deploy from "../assets/img//skills_icons/deploy.png";
 import lock from "../assets/img//skills_icons/lock.png";
 import python from "../assets/img//skills_icons/python.png";
 import javascript from "../assets/img//skills_icons/javascript.png";
@@ -25,6 +20,7 @@ import docker from "../assets/img//skills_icons/docker.png";
 import jwt from "../assets/img//skills_icons/jwt.png";
 import aws from "../assets/img//skills_icons/aws.png";
 import google from "../assets/img//skills_icons/google-cloud-small.png";
+import sql from "../assets/img//skills_icons/sql.png";
 
 export const Skills = () => {
   const responsive = {
@@ -51,7 +47,8 @@ export const Skills = () => {
         { src: server, title: "Backend Development" },
         { src: api, title: "APIs" },
         { src: database, title: "Databases" },
-        { src: cloud, title: "DevOps, Cloud, CI/CD" },
+        { src: cloud, title: "Cloud"},
+        { src: deploy, title: "DevOps and CI/CD Pipelines" },
         { src: lock, title: "Security" },
     ];
 
@@ -60,6 +57,7 @@ export const Skills = () => {
         { src: javascript, title: "Javascript" },
         { src: csharp, title: "C#" },
         { src: java, title: "Java" },
+        { src: sql, title: "SQL" },
         { src: html, title: "HTML" },
         { src: css, title: "CSS" },
     ];

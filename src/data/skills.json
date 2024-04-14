@@ -1,0 +1,84 @@
+{
+  "english": {
+    "key": {
+      "title": "Key Skills",
+      "description": "Core competencies in software development",
+      "skillList": [
+        "Backend Development",
+        "APis",
+        "Databases",
+        "Cloud",
+        "DevOps and CI/CD Pipelines",
+        "Security"
+      ]
+    },
+    "foundations": {
+      "title": "Programming Foundations",
+      "description": "Essential programming languages that serves as foundations for using the frameworks",
+      "skillList": [
+        "Python",
+        "Javascript",
+        "C#",
+        "Java",
+        "SQL",
+        "HTML",
+        "CSS"
+      ]
+    },
+    "stack": {
+      "title": "Tech Stack",
+      "description": "Technologies that I have experience with",
+      "skillList": [
+        "GIT",
+        "Flask",
+        "React",
+        "JWT",
+        "Postgres",
+        "Docker",
+        "AWS",
+        "Google Cloud"
+      ]
+    }
+  },
+  "portuguese": {
+    "key": {
+      "title": "Habilidades Chave",
+      "description": "Competências principais em desenvolvimento de software",
+      "skillList": [
+        "Desenvolvimento de Backend",
+        "APis",
+        "Bancos de Dados",
+        "Cloud",
+        "DevOps e Pipelines CI/CD",
+        "Segurança"
+      ]
+    },
+    "foundations": {
+      "title": "Fundamentos de Programação",
+      "description": "Linguagens de programação essenciais que servem como base para o uso dos frameworks",
+      "skillList": [
+        "Python",
+        "Javascript",
+        "C#",
+        "Java",
+        "SQL",
+        "HTML",
+        "CSS"
+      ]
+    },
+    "stack": {
+      "title": "Tech Stack",
+      "description": "Tecnologias com as quais tenho experiência",
+      "skillList": [
+        "GIT",
+        "Flask",
+        "React",
+        "JWT",
+        "Postgres",
+        "Docker",
+        "AWS",
+        "Google Cloud"
+      ]
+    }
+  }
+}

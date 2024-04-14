@@ -13,6 +13,11 @@ export const NavBar = () => {
 
   const [activeLink, setActiveLink] = useState('home');
   const [scrolled, setScrolled] = useState(false);
+  const [selectedFlag, setSelectedFlag] = useState(null);
+
+  const selectFlag = (flag) => {
+    setSelectedFlag(flag);
+  }
 
   useEffect(() => {
     const onScroll = () => {
@@ -36,10 +41,12 @@ export const NavBar = () => {
       <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
         <Container>
           <Navbar.Brand href="/">
-            <img src={usa} alt="Logo" />
+            <img src={usa} alt="USA Flag" className={`flag ${selectedFlag === 'usa' ? 'selected-flag' : ''}`}
+                 onClick={() => selectFlag('usa')}/>
           </Navbar.Brand>
           <Navbar.Brand href="/">
-            <img src={brazil} alt="Logo" />
+            <img src={brazil} alt="Brazil Flag" className={`flag ${selectedFlag === 'brazil' ? 'selected-flag' : ''}`}
+                 onClick={() => selectFlag('brazil')}/>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav">
             <span className="navbar-toggler-icon"></span>
