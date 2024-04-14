@@ -60,7 +60,7 @@ export const Banner = () => {
                           My diverse background allows me to tackle complex challenges across the tech landscape, making me a versatile asset in
                           any software development team.
 
-                        I have a rich portfolio with amazing projects like the Book Analyzer, Flight Price Scrapper, Valorant Impact and the Pizzeria Chatbot. These
+                        I have a rich portfolio with amazing projects like the Book Analyzer, Flight Price Scrapper, Valorant Impact, among other amazing ones. These
                           projects have sharpened my skills in API Development, DevOps practices, and CI/CD pipelines. I am very proud of them, as they have expanded my proficiency across several technologies
                         </p>
                         <button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25}/>
