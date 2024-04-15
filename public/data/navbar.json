@@ -1,0 +1,18 @@
+{
+  "english": {
+    "buttons": [
+      "Homer",
+      "Skills",
+      "Projects",
+      "Let's Connect"
+    ]
+  },
+  "portuguese": {
+    "buttons": [
+      "Início",
+      "Habilidades",
+      "Projetos",
+      "Vamos Conectar"
+    ]
+  }
+}

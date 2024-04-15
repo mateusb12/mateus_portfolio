@@ -15,7 +15,7 @@ function App() {
     const [data, setData] = useState(null);
     useEffect(() => {
         const getData = async () => {
-            const res = await fetch("/manifest.json");
+            const res = await fetch("manifest.json");
             if (!res.ok) {
                 throw new Error(`HTTP error! status: ${res.status}`);
             }
