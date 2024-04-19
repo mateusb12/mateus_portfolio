@@ -8,21 +8,25 @@ import { Projects } from "./components/Projects";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
-import {useEffect, useState} from "react";
+import LanguageContext from './components/LanguageContext';
+import {useState} from "react";
 
 function App() {
+    const [selectedFlag, setSelectedFlag] = useState('english');
     return (
-        <div className="App">
-            <Routes>
-                <Route path="/mateus_portfolio/" element={<FullLayout/>} />
-                <Route path="/mateus_portfolio/navbar" element={<NavBar/>} />
-                <Route path="/mateus_portfolio/banner" element={<Banner/>} />
-                <Route path="/mateus_portfolio/skills" element={<Skills/>} />
-                <Route path="/mateus_portfolio/projects" element={<Projects/>} />
-                <Route path="/mateus_portfolio/contact" element={<Contact/>} />
-                <Route path="/mateus_portfolio/footer" element={<Footer/>} />
-            </Routes>
-        </div>
+        <LanguageContext.Provider value={{selectedFlag, setSelectedFlag}}>
+            <div className="App">
+                <Routes>
+                    <Route path="/mateus_portfolio/" element={<FullLayout/>}/>
+                    <Route path="/mateus_portfolio/navbar" element={<NavBar/>}/>
+                    <Route path="/mateus_portfolio/banner" element={<Banner/>}/>
+                    <Route path="/mateus_portfolio/skills" element={<Skills/>}/>
+                    <Route path="/mateus_portfolio/projects" element={<Projects/>}/>
+                    <Route path="/mateus_portfolio/contact" element={<Contact/>}/>
+                    <Route path="/mateus_portfolio/footer" element={<Footer/>}/>
+                </Routes>
+            </div>
+        </LanguageContext.Provider>
     );
 }
 

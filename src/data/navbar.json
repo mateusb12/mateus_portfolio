@@ -1,10 +1,10 @@
 {
   "english": {
     "buttons": [
-      "Home",
+      "Homer",
       "Skills",
       "Projects",
-      "Let's Connect"
+      "Connect"
     ]
   },
   "portuguese": {
@@ -12,7 +12,7 @@
       "Início",
       "Habilidades",
       "Projetos",
-      "Vamos Conectar"
+      "Conectar"
     ]
   }
 }

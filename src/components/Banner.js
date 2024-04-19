@@ -1,10 +1,15 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect, useContext} from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { ArrowRightCircle } from 'react-bootstrap-icons';
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
+import LanguageContext from './LanguageContext';
 
 export const Banner = () => {
+  const languageFile = require('../data/banner.json');
+  const { selectedFlag } = useContext(LanguageContext);
+  const [selectedLanguage, setSelectedLanguage] = useState('english');
+  const [bannerTexts, setBannerTexts] = useState(languageFile[selectedLanguage]);
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');
@@ -12,6 +17,12 @@ export const Banner = () => {
   const [index, setIndex] = useState(1);
   const toRotate = [ "Web Developer", "Web Designer", "UI/UX Designer" ];
   const period = 2000;
+
+  useEffect(() => {
+    const languageKey = selectedFlag === 'usa' ? 'english' : 'portuguese';
+    const bannerLabels = languageFile[languageKey];
+    setBannerTexts(bannerLabels);
+  }, [selectedFlag, languageFile]);
 
   useEffect(() => {
     let ticker = setInterval(() => {
@@ -47,29 +58,23 @@ export const Banner = () => {
   }
 
   return (
-        <section className="banner" id="home">
-          <Container>
-            <Row className="aligh-items-center">
-              <Col xs={12} md={6} xl={7} className="mx-auto">
-                <TrackVisibility>
-                  {({isVisible}) =>
-                      <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                        <span className="tagline">Welcome to my Portfolio</span>
-                        <h1>Hello! I am Mateus</h1>
-                        <p>I'm a  software developer with a rich experience in backend development, machine learning, and game development.
-                          My diverse background allows me to tackle complex challenges across the tech landscape, making me a versatile asset in
-                          any software development team.
-
-                        I have a rich portfolio with amazing projects like the Book Analyzer, Flight Price Scrapper, Valorant Impact, among other amazing ones. These
-                          projects have sharpened my skills in API Development, DevOps practices, and CI/CD pipelines. I am very proud of them, as they have expanded my proficiency across several technologies
-                        </p>
-                        <button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25}/>
-                        </button>
-                      </div>}
-                </TrackVisibility>
-              </Col>
-            </Row>
-          </Container>
-        </section>
+      <section className="banner" id="home">
+        <Container>
+          <Row className="aligh-items-center">
+            <Col xs={12} md={6} xl={7} className="mx-auto">
+              <TrackVisibility>
+                {({isVisible}) =>
+                    <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
+                      <span className="tagline">{bannerTexts.header}</span>
+                      <h1>{bannerTexts.title}</h1>
+                      <p>{bannerTexts.body}</p>
+                      <button onClick={() => console.log('connect')}>{bannerTexts.footer} <ArrowRightCircle size={25}/>
+                      </button>
+                    </div>}
+              </TrackVisibility>
+            </Col>
+          </Row>
+        </Container>
+      </section>
   )
 }

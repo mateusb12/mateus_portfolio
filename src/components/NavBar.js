@@ -1,5 +1,5 @@
 import '../css/NavBar.css';
-import { useState, useEffect } from "react";
+import {useState, useEffect, useContext} from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import usa from '../assets/img/usa.png';
 import brazil from '../assets/img/brazil.png';
@@ -7,13 +7,14 @@ import navIcon1 from '../assets/img/nav-icon1.svg';
 import navIcon2 from '../assets/img/nav-icon2.svg';
 import navIcon3 from '../assets/img/nav-icon3.svg';
 import { HashLink } from 'react-router-hash-link';
+import LanguageContext from './LanguageContext';
 
 export const NavBar = () => {
 
   const languageFile = require('../data/navbar.json');
   const [activeLink, setActiveLink] = useState('home');
   const [scrolled, setScrolled] = useState(false);
-  const [selectedFlag, setSelectedFlag] = useState('english');
+  const { selectedFlag, setSelectedFlag } = useContext(LanguageContext);
   const [buttonTexts, setButtonTexts] = useState(['Home', 'Skills', 'Projects', "Let's Connect"])
 
   useEffect(() => {
