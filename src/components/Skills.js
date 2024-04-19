@@ -109,7 +109,12 @@ export const Skills = () => {
     console.log(coreSkillsIcons)
 
     const translateSkill = (skillKey) => {
-        return languageFile[selectedLanguage]?.skills[skillKey] || skillKey;
+        if (languageFile[selectedLanguage] && languageFile[selectedLanguage].skills) {
+            return languageFile[selectedLanguage].skills[skillKey] || skillKey;
+        } else {
+            console.warn(`No skills found for language: ${selectedLanguage}`);
+            return skillKey;
+        }
     }
 
     const convertToRenderArray = (skillsIcons, skillMap) => {
