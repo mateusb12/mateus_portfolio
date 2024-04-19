@@ -19,9 +19,13 @@ nav.navbar.scrolled {
     object-fit: cover;
     display: inline-block;
     position: relative;
+    border: 0 solid #ccc;
+    border-radius: 4px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .selected-flag {
-    border: #bfbf02 2px solid;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 8px #005a9c;
 }
 .flag::after {
     content: '';
@@ -36,7 +40,8 @@ nav.navbar.scrolled {
     pointer-events: none;
 }
 .flag:hover {
-    box-shadow: 0 0 0 2px #fff;
+    transform: scale(1.05);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
 /***************************************/
 nav.navbar .navbar-nav .nav-link.navbar-link {

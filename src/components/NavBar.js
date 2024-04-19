@@ -10,10 +10,11 @@ import { HashLink } from 'react-router-hash-link';
 
 export const NavBar = () => {
 
+  const languageFile = require('../data/navbar.json');
   const [activeLink, setActiveLink] = useState('home');
   const [scrolled, setScrolled] = useState(false);
   const [selectedFlag, setSelectedFlag] = useState('english');
-  const [homeText, setHomeText] = useState('Home')
+  const [buttonTexts, setButtonTexts] = useState(['Home', 'Skills', 'Projects', "Let's Connect"])
 
   useEffect(() => {
     const onScroll = () => {
@@ -30,9 +31,7 @@ export const NavBar = () => {
   }, []);
 
   const selectFlag = (flag) => {
-    console.log("Before setting flag:", selectedFlag);
     setSelectedFlag(flag);
-    console.log("After setting flag:", flag);
   }
 
   const onUpdateActiveLink = (value) => {
@@ -41,26 +40,17 @@ export const NavBar = () => {
 
   useEffect(() => {
     const languageKey = selectedFlag === 'usa' ? 'english' : 'portuguese';
-
-    fetch('/data/navbar.json')
-        .then(response => {
-          return response.json();
-        })
-        .then(data => {
-          const homeButtonText = data[languageKey].buttons[0];
-          setHomeText(homeButtonText);
-        })
-  }, [selectedFlag]);
-
-
+    const buttonLabels = languageFile[languageKey].buttons;
+    setButtonTexts(buttonLabels);
+  }, [selectedFlag, languageFile]);
 
   return (
       <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
         <Container>
-          <Navbar.Brand href="#/" onClick={(e) => selectFlag('usa', e)}>
+          <Navbar.Brand href="#/" onClick={(e) => { e.preventDefault(); selectFlag('usa'); }}>
             <img src={usa} alt="USA Flag" className={`flag ${selectedFlag === 'usa' ? 'selected-flag' : ''}`}/>
           </Navbar.Brand>
-          <Navbar.Brand href="#/" onClick={(e) => selectFlag('brazil', e)}>
+          <Navbar.Brand href="#/" onClick={(e) => { e.preventDefault(); selectFlag('brazil'); }}>
             <img src={brazil} alt="Brazil Flag" className={`flag ${selectedFlag === 'brazil' ? 'selected-flag' : ''}`}/>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav">
@@ -68,9 +58,9 @@ export const NavBar = () => {
           </Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>{homeText}</Nav.Link>
-              <Nav.Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('skills')}>Skills</Nav.Link>
-              <Nav.Link href="#projects" className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('projects')}>Projects</Nav.Link>
+              <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>{buttonTexts[0]}</Nav.Link>
+              <Nav.Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('skills')}>{buttonTexts[1]}</Nav.Link>
+              <Nav.Link href="#projects" className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('projects')}>{buttonTexts[2]}</Nav.Link>
             </Nav>
             <span className="navbar-text">
             <div className="social-icon">
@@ -79,7 +69,7 @@ export const NavBar = () => {
               <a href="#"><img src={navIcon3} alt="" /></a>
             </div>
             <HashLink to='#connect'>
-              <button className="vvd"><span>Let’s Connect</span></button>
+              <button className="vvd"><span>{buttonTexts[3]}</span></button>
             </HashLink>
           </span>
           </Navbar.Collapse>
