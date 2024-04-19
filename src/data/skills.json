@@ -80,5 +80,92 @@
         "Google Cloud"
       ]
     }
+  },
+  "skillMap":
+  {
+    "Backend Development": {
+      "english": "Backend Development",
+      "portuguese": "Desenvolvimento de Backend"
+    },
+    "APis": {
+      "english": "APis",
+      "portuguese": "APis"
+    },
+    "Databases": {
+      "english": "Databases",
+      "portuguese": "Bancos de Dados"
+    },
+    "Cloud": {
+      "english": "Cloud",
+      "portuguese": "Cloud"
+    },
+    "DevOps and CI/CD Pipelines": {
+      "english": "DevOps and CI/CD Pipelines",
+      "portuguese": "DevOps e Pipelines CI/CD"
+    },
+    "Security": {
+      "english": "Security",
+      "portuguese": "Segurança"
+    },
+    "Python": {
+      "english": "Python",
+      "portuguese": "Python"
+    },
+    "Javascript": {
+      "english": "Javascript",
+      "portuguese": "Javascript"
+    },
+    "C#": {
+      "english": "C#",
+      "portuguese": "C#"
+    },
+    "Java": {
+      "english": "Java",
+      "portuguese": "Java"
+    },
+    "SQL": {
+      "english": "SQL",
+      "portuguese": "SQL"
+    },
+    "HTML": {
+      "english": "HTML",
+      "portuguese": "HTML"
+    },
+    "CSS": {
+      "english": "CSS",
+      "portuguese": "CSS"
+    },
+    "GIT": {
+      "english": "GIT",
+      "portuguese": "GIT"
+    },
+    "Flask": {
+      "english": "Flask",
+      "portuguese": "Flask"
+    },
+    "React": {
+      "english": "React",
+      "portuguese": "React"
+    },
+    "JWT": {
+      "english": "JWT",
+        "portuguese": "JWT"
+    },
+    "Postgres": {
+      "english": "Postgres",
+      "portuguese": "Postgres"
+    },
+    "Docker": {
+      "english": "Docker",
+      "portuguese": "Docker"
+    },
+    "AWS": {
+      "english": "AWS",
+      "portuguese": "AWS"
+    },
+    "Google Cloud": {
+      "english": "Google Cloud",
+      "portuguese": "Google Cloud"
+    }
   }
 }
