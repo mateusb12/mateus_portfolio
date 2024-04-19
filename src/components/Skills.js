@@ -12,15 +12,15 @@ import csharp from "../assets/img//skills_icons/csharp.png";
 import java from "../assets/img//skills_icons/java.png";
 import html from "../assets/img//skills_icons/html.png";
 import css from "../assets/img//skills_icons/css.png";
+import sql from "../assets/img//skills_icons/sql.png";
 import git from "../assets/img//skills_icons/git.png";
 import flask from "../assets/img//skills_icons/flask.png";
 import _react from "../assets/img//skills_icons/react.png";
+import jwt from "../assets/img//skills_icons/jwt.png";
 import postgres from "../assets/img//skills_icons/postgres.png";
 import docker from "../assets/img//skills_icons/docker.png";
-import jwt from "../assets/img//skills_icons/jwt.png";
 import aws from "../assets/img//skills_icons/aws.png";
 import google from "../assets/img//skills_icons/google-cloud-small.png";
-import sql from "../assets/img//skills_icons/sql.png";
 
 import LanguageContext from './LanguageContext';
 import {useContext, useEffect, useState} from "react";
@@ -56,55 +56,77 @@ export const Skills = () => {
         }
     };
 
-    const skillIcons = {
-        "Backend Development": server,
-        "APIs": api,
-        "Databases": database,
-        "Cloud": cloud,
-        "DevOps and CI/CD Pipelines": deploy,
-        "Security": lock,
-        "Python": python,
-        "Javascript": javascript,
-        "C#": csharp,
-        "Java": java,
-        "SQL": sql,
-        "HTML": html,
-        "CSS": css,
-        "GIT": git,
-        "Flask": flask,
-        "React": _react,
-        "JWT": jwt,
-        "Postgres": postgres,
-        "Docker": docker,
-        "AWS": aws,
-        "Google Cloud": google,
-    };
+    function mapSkillsToIcons(skillNames, skillMap, skillIcons) {
+        const icons = {};
+        skillNames.forEach((name) => {
+            // Find the key in the skillMap that corresponds to the name
+            const skillKey = Object.keys(skillMap).find(key => skillMap[key].toLowerCase() === name.toLowerCase());
 
-    const skillsDataList = languageFile[selectedLanguage].key.skillList;
-    console.log(skillsDataList)
-    const skillsData = Object.entries(skillIcons).map(([title, src]) => ({
-        title,
-        src
-    }));
-
-    const skillMap = languageFile.skillMap;
-    const translateSkill = (skill) => {
-        return skillMap[skill] ? skillMap[skill][selectedLanguage] : skill;
+            // If a corresponding key is found and an icon exists for that key, map it
+            if (skillKey && skillIcons[skillKey]) {
+                icons[skillKey] = skillIcons[skillKey];
+            } else {
+                // Optionally handle the case where no corresponding icon is found
+                console.warn(`No icon found for skill: ${name}`);
+            }
+        });
+        return icons;
     }
 
-    const basicTechnologiesList = languageFile[selectedLanguage].foundations.skillList;
-    const basicTechnologies = basicTechnologiesList.map((tech) => ({
-        title: tech,
-        src: skillIcons[tech]
-    }));
+    const skillIcons = {
+        "backend": server,
+        "api": api,
+        "database": database,
+        "cloud": cloud,
+        "deploy": deploy,
+        "lock": lock,
+        "python": python,
+        "javascript": javascript,
+        "csharp": csharp,
+        "java": java,
+        "html": html,
+        "css": css,
+        "sql": sql,
+        "git": git,
+        "flask": flask,
+        "react": _react,
+        "jwt": jwt,
+        "postgres": postgres,
+        "docker": docker,
+        "aws": aws,
+        "google-cloud": google,
+    };
 
-    const frameworksList = languageFile[selectedLanguage].stack.skillList;
-    const frameworks = frameworksList.map((framework) => ({
-        title: framework,
-        src: skillIcons[framework]
-    }));
+    const selectedLanguageMap = languageFile.skillMap[selectedLanguage];
+    const coreSkills = languageFile.skillMap[selectedLanguage].key;
+    const foundationSkills = languageFile[selectedLanguage].foundations.skillList;
+    const stackSkills = languageFile[selectedLanguage].stack.skillList;
 
-    const keySkillsTitle = languageFile[selectedLanguage].key.title;
+    const coreSkillsIcons = mapSkillsToIcons(languageFile[selectedLanguage].key.skillList, selectedLanguageMap.key, skillIcons);
+    const foundationSkillsIcons = mapSkillsToIcons(languageFile[selectedLanguage].foundations.skillList, selectedLanguageMap.foundations, skillIcons);
+    const stackSkillsIcons = mapSkillsToIcons(languageFile[selectedLanguage].stack.skillList, selectedLanguageMap.stack, skillIcons);
+
+    console.log(coreSkillsIcons)
+
+    const translateSkill = (skillKey) => {
+        return languageFile[selectedLanguage]?.skills[skillKey] || skillKey;
+    }
+
+    const convertToRenderArray = (skillsIcons, skillMap) => {
+        return Object.keys(skillsIcons).map((skillKey) => ({
+            title: skillMap[skillKey],
+            src: skillsIcons[skillKey]
+        }));
+    };
+
+    const keySkills = convertToRenderArray(coreSkillsIcons, selectedLanguageMap.key);
+    const basicTechnologies = convertToRenderArray(foundationSkillsIcons, selectedLanguageMap.foundations);
+    const frameworks = convertToRenderArray(stackSkillsIcons, selectedLanguageMap.stack);
+
+
+    const handleImageError = (errorEvent, skillName) => {
+        console.error(`Error loading image for skill: ${skillName}`, errorEvent);
+    }
 
     return (
         <section className="skill" id="skills">
@@ -116,11 +138,11 @@ export const Skills = () => {
                             <p>{languageFile[selectedLanguage].key.description}</p>
                             <Carousel responsive={responsive} infinite={false}
                                       className="owl-carousel owl-theme skill-slider">
-                                {skillsData.map((skill, index) => {
+                                {keySkills.map((skill, index) => {
                                     const translatedTitle = translateSkill(skill.title);
                                     return (
                                         <div className="item" key={index}>
-                                            <img src={skill.src} alt={translatedTitle}/>
+                                            <img src={skill.src} alt={translatedTitle} onError={(e) => handleImageError(e, translatedTitle)}/>
                                             <h5>{translatedTitle}</h5>
                                         </div>
                                     )
