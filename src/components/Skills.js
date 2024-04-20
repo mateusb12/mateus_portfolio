@@ -68,7 +68,6 @@ export const Skills = () => {
                 // Optionally handle the case where no corresponding icon is found
                 console.warn(`No icon found for skill: ${name}`);
             }
-            console.log(`Skill name: ${name}, Found key: ${skillKey}`);
         });
         return icons;
     }
@@ -102,13 +101,11 @@ export const Skills = () => {
     const foundationSkillsIcons = mapSkillsToIcons(languageFile[selectedLanguage].foundations.skillList, selectedLanguageMap.foundations, skillIcons);
     const stackSkillsIcons = mapSkillsToIcons(languageFile[selectedLanguage].stack.skillList, selectedLanguageMap.stack, skillIcons);
 
-    console.log(coreSkillsIcons)
-
     const translateSkill = (skillKey) => {
         if (languageFile[selectedLanguage] && languageFile[selectedLanguage].skills) {
             return languageFile[selectedLanguage].skills[skillKey] || skillKey;
         } else {
-            console.warn(`No skills found for language: ${selectedLanguage}`);
+            // console.warn(`No skills found for language: ${selectedLanguage}`);
             return skillKey;
         }
     }
