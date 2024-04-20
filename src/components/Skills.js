@@ -24,7 +24,6 @@ import google from "../assets/img//skills_icons/google-cloud-small.png";
 
 import LanguageContext from './LanguageContext';
 import {useContext, useEffect, useState} from "react";
-import languageFile from "../data/skills.json";
 
 export const Skills = () => {
     const languageFile = require('../data/skills.json');
