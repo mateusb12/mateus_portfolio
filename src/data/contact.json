@@ -1,0 +1,18 @@
+{
+  "english": {
+    "title": "Get in Touch",
+    "nameField": "First Name",
+    "surnameField": "Last Name",
+    "emailField": "Email address",
+    "phoneField": "Phone Number",
+    "messageField": "Message"
+  },
+  "portuguese": {
+    "title": "Entre em Contato",
+    "nameField": "Nome",
+    "surnameField": "Sobrenome",
+    "emailField": "Email",
+    "phoneField": "Telefone",
+    "messageField": "Mensagem"
+  }
+}

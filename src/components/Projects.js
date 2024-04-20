@@ -19,7 +19,6 @@ export const Projects = () => {
     const languageFile = require('../data/projects.json');
     const languageKey = selectedFlag === 'usa' ? 'english' : 'portuguese';
     const projectsData = languageFile[languageKey];
-    console.log(projectsData)
 
     const projectMetaData = [
         {
