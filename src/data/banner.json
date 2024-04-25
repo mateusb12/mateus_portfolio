@@ -2,13 +2,13 @@
   "english": {
     "header": "Welcome to my Portfolios!",
     "title": "Hello! I am Mateus",
-    "body": "I'm a software developer with a rich experience in backend development, machine learning, and game development. My diverse background allows me to tackle complex challenges across the tech landscape, making me a versatile asset in any software development team. I have a rich portfolio with amazing projects like the Book Analyzer, Flight Price Scrapper, Valorant Impact, among other amazing ones. These projects have sharpened my skills in API Development, DevOps practices, and CI/CD pipelines. I am very proud of them, as they have expanded my proficiency across several technologies",
+    "body": "I am a software developer with extensive experience in backend development, machine learning, and game dev. My diverse background allows me to tackle many challenges in the technology scene, and you can be sure that I am a very valuable resource on any software development team. Today I have an amazing portfolio with incredible projects like Book Analyzer, Flight Price Scrapper, Valorant Impact, among others. These projects have helped me to enhance my skills in API development, DevOps practices, and CI/CD pipelines. I am very proud of them.",
     "footer": "Let's connect!"
   },
   "portuguese": {
     "header": "Bem-vindo ao meu Portfólio",
     "title": "Olá! Eu sou o Mateus",
-    "body": "Sou um desenvolvedor de software com uma rica experiência em desenvolvimento backend, machine learning e game dev. Meu background diversificado me permite enfrentar desafios complexos no cenário da tecnologia, o que me torna um recurso versátil em qualquer equipe de desenvolvimento de software. Tenho um portfólio rico com projetos incríveis como o Book Analyzer, Flight Price Scrapper, Valorant Impact, entre outros incríveis. Esses projetos aprimoraram minhas habilidades em Desenvolvimento de API, práticas DevOps e pipelines CI/CD. Estou muito orgulhoso deles, pois expandiram minha proficiência em várias tecnologias",
+    "body": "Sou um desenvolvedor de software com uma rica experiência no desenvolvimento backend, machine learning e game dev. Meu background diverso permite com que eu consiga enfrentar muitos desafios no cenário da tecnologia, e pode ter certeza que eu sou um recurso muito valioso em qualquer equipe de desenvolvimento de software. Hoje eu tenho um portfólio muito massa com projetos incríveis como o Book Analyzer, Flight Price Scrapper, Valorant Impact, entre outros. Esses projetos me ajudaram a aprimorar minhas habilidades em desenvolvimento de APIs, práticas DevOps e pipelines CI/CD. Eu sou muito orgulhoso deles.",
     "footer": "Vamos conectar!"
   }
 }
