@@ -18,6 +18,7 @@ export const NavBar = () => {
   const [buttonTexts, setButtonTexts] = useState(['Home', 'Skills', 'Projects', "Let's Connect"])
 
   useEffect(() => {
+    setSelectedFlag('usa');
     const onScroll = () => {
       if (window.scrollY > 50) {
         setScrolled(true);
