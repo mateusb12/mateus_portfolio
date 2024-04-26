@@ -49,11 +49,17 @@ export const NavBar = () => {
   return (
       <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
         <Container>
-          <Navbar.Brand href="#/" onClick={(e) => { e.preventDefault(); selectFlag('usa'); }}>
-            <img src={usa} alt="USA Flag" className={`flag ${selectedFlag === 'usa' ? 'selected-flag' : ''}`}/>
+          <Navbar.Brand href="#/" onClick={(e) => {
+            e.preventDefault();
+            selectFlag('usa');
+          }}>
+            <img src={usa} alt="USA Flag" className={`flag usa ${selectedFlag === 'usa' ? 'selected-flag' : ''}`}/>
           </Navbar.Brand>
-          <Navbar.Brand href="#/" onClick={(e) => { e.preventDefault(); selectFlag('brazil'); }}>
-            <img src={brazil} alt="Brazil Flag" className={`flag ${selectedFlag === 'brazil' ? 'selected-flag' : ''}`}/>
+          <Navbar.Brand href="#/" onClick={(e) => {
+            e.preventDefault();
+            selectFlag('brazil');
+          }}>
+          <img src={brazil} alt="Brazil Flag" className={`flag ${selectedFlag === 'brazil' ? 'selected-flag' : ''}`}/>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav">
             <span className="navbar-toggler-icon"></span>

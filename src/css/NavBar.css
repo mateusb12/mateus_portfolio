@@ -22,6 +22,7 @@ nav.navbar.scrolled {
     border: 0 solid #ccc;
     border-radius: 4px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-right: 5px;
 }
 .selected-flag {
     border: 2px solid #ffffff;
@@ -44,6 +45,12 @@ nav.navbar.scrolled {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
 /***************************************/
+.navbar .container {
+    display: flex;
+    justify-content: start; /* Align to the start to avoid unwanted spacing */
+    align-items: center;
+    gap: 0px; /* Adjust the gap as needed */
+}
 nav.navbar .navbar-nav .nav-link.navbar-link {
     font-weight: 400;
     color: #fff !important;
@@ -182,4 +189,13 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
 }
 nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     border-color: transparent;
+}
+@media (max-width: 768px) {
+    .navbar .container .navbar-brand {
+        margin-right: 10px
+    }
+
+    .navbar .container .navbar-toggler {
+        margin-left: 150px
+    }
 }
