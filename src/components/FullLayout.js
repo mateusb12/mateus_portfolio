@@ -1,5 +1,5 @@
 import {NavBar} from "./NavBar";
-import {Banner} from "./Banner";
+import {Introduction} from "./Introduction";
 import {Skills} from "./Skills";
 import {Projects} from "./Projects";
 import {Contact} from "./Contact";
@@ -10,7 +10,7 @@ export function FullLayout() {
         <>
             <NavBar/>
             <div className="section shared-background">
-                <Banner/>
+                <Introduction/>
                 <Skills/>
             </div>
             <Projects/>

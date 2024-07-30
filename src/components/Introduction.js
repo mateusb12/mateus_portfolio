@@ -5,11 +5,11 @@ import 'animate.css';
 import TrackVisibility from 'react-on-screen';
 import LanguageContext from './LanguageContext';
 
-export const Banner = () => {
+export const Introduction = () => {
   const languageFile = require('../data/banner.json');
   const { selectedFlag } = useContext(LanguageContext);
   const [selectedLanguage, setSelectedLanguage] = useState('english');
-  const [bannerTexts, setBannerTexts] = useState(languageFile[selectedLanguage]);
+  const [introductionTexts, setIntroductionTexts] = useState(languageFile[selectedLanguage]);
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState('');
@@ -20,8 +20,8 @@ export const Banner = () => {
 
   useEffect(() => {
     const languageKey = selectedFlag === 'usa' ? 'english' : 'portuguese';
-    const bannerLabels = languageFile[languageKey];
-    setBannerTexts(bannerLabels);
+    const introductionLabels = languageFile[languageKey];
+    setIntroductionTexts(introductionLabels);
   }, [selectedFlag, languageFile]);
 
   useEffect(() => {
@@ -65,10 +65,10 @@ export const Banner = () => {
               <TrackVisibility>
                 {({isVisible}) =>
                     <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                      <span className="tagline">{bannerTexts.header}</span>
-                      <h1>{bannerTexts.title}</h1>
-                      <p>{bannerTexts.body}</p>
-                      <button onClick={() => console.log('connect')}>{bannerTexts.footer} <ArrowRightCircle size={25}/>
+                      <span className="tagline">{introductionTexts.header}</span>
+                      <h1>{introductionTexts.title}</h1>
+                      <p>{introductionTexts.body}</p>
+                      <button onClick={() => console.log('connect')}>{introductionTexts.footer} <ArrowRightCircle size={25}/>
                       </button>
                     </div>}
               </TrackVisibility>

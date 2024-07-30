@@ -2,7 +2,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FullLayout} from "./components/FullLayout";
 import { NavBar } from "./components/NavBar";
-import { Banner } from "./components/Banner";
+import { Introduction } from "./components/Introduction";
 import { Skills } from "./components/Skills";
 import { Projects } from "./components/Projects";
 import { Contact } from "./components/Contact";
@@ -19,7 +19,7 @@ function App() {
                 <Routes>
                     <Route path="/mateus_portfolio/" element={<FullLayout/>}/>
                     <Route path="/mateus_portfolio/navbar" element={<NavBar/>}/>
-                    <Route path="/mateus_portfolio/banner" element={<Banner/>}/>
+                    <Route path="/mateus_portfolio/banner" element={<Introduction/>}/>
                     <Route path="/mateus_portfolio/skills" element={<Skills/>}/>
                     <Route path="/mateus_portfolio/projects" element={<Projects/>}/>
                     <Route path="/mateus_portfolio/contact" element={<Contact/>}/>

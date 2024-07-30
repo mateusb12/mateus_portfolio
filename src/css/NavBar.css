@@ -61,6 +61,7 @@ nav.navbar .navbar-nav .nav-link.navbar-link {
     display: inline-block;
     transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out;
     border: 1px solid transparent;
+    text-align: right;
 }
 nav.navbar .navbar-nav .nav-link.navbar-link:hover {
     color: #fff;
@@ -196,6 +197,30 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     }
 
     .navbar .container .navbar-toggler {
-        margin-left: 150px
+        margin-left: auto;
+    }
+
+    span.navbar-text {
+        flex-direction: column;
+        padding-top: 1rem;
+        gap: 1rem;
+        justify-content: flex-end;
+        margin-left: auto;
+    }
+
+    #basic-navbar-nav {
+        display: flex; /* Make sure it's flex to properly control children */
+        flex-direction: column;
+        flex-wrap: wrap; /* Allows items to wrap if needed */
+        justify-content: flex-start; /* Aligns items to the start */
+        align-items: center; /* Vertically centers items */
+        width: auto; /* Ensure it only takes necessary space */
+    }
+
+    nav.navbar .navbar-nav .nav-link.navbar-link {
+        text-align: center;
+        flex: 0 1 auto;
+        display: inline-block;
+        white-space: nowrap;
     }
 }
