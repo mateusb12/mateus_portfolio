@@ -209,4 +209,13 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
         justify-content: center;
         align-items: flex-end;
     }
+
+    .ms-auto.navbar-nav {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-end;
+        width: auto;
+    }
 }
