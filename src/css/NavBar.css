@@ -53,7 +53,6 @@ nav.navbar.scrolled {
 }
 nav.navbar .navbar-nav .nav-link.navbar-link {
     font-weight: 400;
-    text-align: center;
     color: #fff !important;
     letter-spacing: 1px;
     padding: 18px 25px;
@@ -62,6 +61,7 @@ nav.navbar .navbar-nav .nav-link.navbar-link {
     display: inline-block;
     transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out;
     border: 1px solid transparent;
+    text-align: center;
 }
 nav.navbar .navbar-nav .nav-link.navbar-link:hover {
     color: #fff;
@@ -73,7 +73,10 @@ nav.navbar .navbar-nav a.nav-link.navbar-link.active {
 }
 span.navbar-text {
     display: flex;
+    padding-top: 1rem;
+    gap: 1rem;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
 }
 .social-icon {
@@ -202,10 +205,8 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     }
 
     span.navbar-text {
-        display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: flex-end;
-        padding-top: 1rem;
-        gap: 1rem;
     }
 }
