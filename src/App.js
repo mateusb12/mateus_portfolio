@@ -10,6 +10,7 @@ import { Footer } from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
 import LanguageContext from './components/LanguageContext';
 import {useState} from "react";
+import {ProjectCard} from "./components/ProjectCard";
 
 function App() {
     const [selectedFlag, setSelectedFlag] = useState('english');
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/mateus_portfolio/banner" element={<Introduction/>}/>
                     <Route path="/mateus_portfolio/skills" element={<Skills/>}/>
                     <Route path="/mateus_portfolio/projects" element={<Projects/>}/>
+                    <Route path="/mateus_portfolio/projectCard" element={<ProjectCard/>}/>
                     <Route path="/mateus_portfolio/contact" element={<Contact/>}/>
                     <Route path="/mateus_portfolio/footer" element={<Footer/>}/>
                 </Routes>

@@ -1,9 +1,15 @@
 import { Col } from "react-bootstrap";
+import witcher from "../assets/img/witcher_reading_book.png";
 
-export const ProjectCard = ({ title, description, imgUrl, githubUrl }) => {
+export const ProjectCard = (
+    {
+        title = 'Default Title',
+        description = 'Default Description',
+        imgUrl = witcher,
+        githubUrl = "https://github.com/mateusb12/WitcherAnalysis"
+    }) => {
     return (
         <Col size={12} sm={6} md={4}>
-            {/* Wrap the card content with an <a> tag */}
             <a href={githubUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div className="proj-imgbx">
                     <img src={imgUrl} alt={title} />

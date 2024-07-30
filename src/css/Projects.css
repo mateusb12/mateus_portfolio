@@ -41,7 +41,7 @@
 /* Base styles for all nav links */
 .project .nav.nav-pills .nav-link {
     background-color: transparent;
-    border: 1px solid #494949;
+    border: 2px solid #494949;
     padding: 17px 0;
     color: #fff;
     width: 100%;

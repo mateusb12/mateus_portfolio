@@ -26,12 +26,12 @@ export const Projects = () => {
             githubUrl: "https://github.com/mateusb12/WitcherAnalysis"
         },
         {
-            imgUrl: data_analysis,
-            githubUrl: "https://github.com/mateusb12/valorant_impact"
-        },
-        {
             imgUrl: flight,
             githubUrl: "https://github.com/mateusb12/TravelScrapper"
+        },
+        {
+            imgUrl: data_analysis,
+            githubUrl: "https://github.com/mateusb12/valorant_impact"
         },
         {
             imgUrl: quiz,
