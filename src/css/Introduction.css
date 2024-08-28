@@ -8,7 +8,7 @@
     justify-content: center;
     padding-right: 1rem;
     padding-left: 1rem;
-    transform: translateY(5%)
+    transform: translateY(7%)
 }
 
 .vertical-index::before {
@@ -25,7 +25,7 @@
     content: '';
     display: block;
     width: 10px;
-    height: 450px;
+    height: 390px;
     background: linear-gradient(to bottom, rgba(9, 247, 165, 1) 0%, rgba(60, 51, 80, 0) 100%);
     margin: 0 auto;
 }
@@ -44,4 +44,47 @@
 
 .debug{
     /*border: 1px deeppink solid;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10rem;
+    margin-bottom: 3rem;
+    padding: 0 23rem;
+}
+
+.introduction-banner h1{
+    font-size: 65px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    line-height: 1.1em;
+    margin-bottom: 20px;
+    display: block;
+    text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+}
+
+.introduction-banner p{
+    color: #FFFFFF;
+    font-size: 18px;
+    letter-spacing: 0.8px;
+    line-height: 1.5em;
+    width: 96%;
+    text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+}
+
+.introduction-banner button{
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 60px;
+    letter-spacing: 0.8px;
+    display: flex;
+    align-items: center;
+}
+
+.introduction-banner button svg {
+    font-size: 25px;
+    margin-left: 10px;
+    transition: 0.3s ease-in-out;
+    line-height: 1;
 }

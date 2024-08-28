@@ -17,7 +17,7 @@ export const Introduction = () => {
     },
     portuguese: {
       header: "Bem-vindo ao meu Portfólio",
-      title: "Olá! Eu sou o Mateus",
+      title: "Olá! Me chamo Mateus",
       body: "Sou um desenvolvedor de software com uma rica experiência no desenvolvimento backend, machine learning e game dev. Meu background diverso permite com que eu consiga enfrentar muitos desafios no cenário da tecnologia, e pode ter certeza que eu sou um recurso muito valioso em qualquer equipe de desenvolvimento de software. Hoje eu tenho um portfólio muito massa com projetos incríveis como o Book Analyzer, Flight Price Scrapper, Valorant Impact, entre outros. Esses projetos me ajudaram a aprimorar minhas habilidades em desenvolvimento de APIs, práticas DevOps e pipelines CI/CD. Eu sou muito orgulhoso deles.",
       footer: "Vamos conectar!"
     }
@@ -34,34 +34,34 @@ export const Introduction = () => {
   }, [selectedFlag]);
 
   return (
-      <section className="banner debug" id="home">
-        <Container>
-          <Row className="align-items-center">
-            <Col xs={12} md={6} xl={7} className="mx-auto">
-              <TrackVisibility partialVisibility>
-                {({isVisible: visible}) => {
-                  if (visible !== isVisible) {
-                    setIsVisible(visible);
-                  }
-                  return (
-                      <div className="main-container">
-                        <span className="vertical-index"></span>
-                        <div className={isVisible ? "animate__animated animate__fadeIn main-body" : ""}>
-                          {/*<span className="tagline">{introductionTexts.header}</span>*/}
-                          <h1>{introductionTexts.title}</h1>
-                          <p>{introductionTexts.body}</p>
-                          <button onClick={() => console.log('connect')}>{introductionTexts.footer} <ArrowRightCircle
-                              size={25}/>
-                          </button>
-                        </div>
+      <section className="introduction-banner debug" id="home">
+        <TrackVisibility partialVisibility>
+          {({isVisible: visible}) => {
+            if (visible !== isVisible) {
+              setIsVisible(visible);
+            }
+            return (
+                <div className="main-container">
+                  <span className="vertical-index"></span>
+                  <div className={isVisible ? "animate__animated animate__fadeIn main-body" : ""}>
+                    {/*<span className="tagline">{introductionTexts.header}</span>*/}
+                    <h1>{introductionTexts.title}</h1>
+                    <p>{introductionTexts.body}</p>
+                    <button onClick={() => console.log('connect')}>{introductionTexts.footer} <ArrowRightCircle
+                        size={25}/>
+                    </button>
+                  </div>
 
-                      </div>
-                  );
-                }}
-              </TrackVisibility>
-            </Col>
-          </Row>
-        </Container>
+                </div>
+            );
+          }}
+        </TrackVisibility>
+        {/*<Container>*/}
+        {/*  <Row className="align-items-center">*/}
+        {/*    <Col xs={12} md={6} xl={7} className="mx-auto">*/}
+        {/*    </Col>*/}
+        {/*  </Row>*/}
+        {/*</Container>*/}
       </section>
   );
 };
