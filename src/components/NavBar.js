@@ -1,5 +1,5 @@
 import '../css/NavBar.css';
-import {useState, useEffect, useContext} from "react";
+import { useState, useEffect, useContext } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import usa from '../assets/img/usa.png';
 import brazil from '../assets/img/brazil.png';
@@ -10,12 +10,20 @@ import { HashLink } from 'react-router-hash-link';
 import LanguageContext from './LanguageContext';
 
 export const NavBar = () => {
+  // Embedded language content
+  const languageContent = {
+    english: {
+      buttons: ["Home", "Skills", "Projects", "Connect"]
+    },
+    portuguese: {
+      buttons: ["Início", "Habilidades", "Projetos", "Conectar"]
+    }
+  };
 
-  const languageFile = require('../data/navbar.json');
   const [activeLink, setActiveLink] = useState('home');
   const [scrolled, setScrolled] = useState(false);
   const { selectedFlag, setSelectedFlag } = useContext(LanguageContext);
-  const [buttonTexts, setButtonTexts] = useState(['Home', 'Skills', 'Projects', "Let's Connect"])
+  const [buttonTexts, setButtonTexts] = useState(languageContent.english.buttons);  // Default to English
 
   useEffect(() => {
     setSelectedFlag('usa');
@@ -25,26 +33,25 @@ export const NavBar = () => {
       } else {
         setScrolled(false);
       }
-    }
+    };
 
     window.addEventListener("scroll", onScroll);
 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const languageKey = selectedFlag === 'usa' ? 'english' : 'portuguese';
+    setButtonTexts(languageContent[languageKey].buttons);
+  }, [selectedFlag]);
+
   const selectFlag = (flag) => {
     setSelectedFlag(flag);
-  }
+  };
 
   const onUpdateActiveLink = (value) => {
     setActiveLink(value);
-  }
-
-  useEffect(() => {
-    const languageKey = selectedFlag === 'usa' ? 'english' : 'portuguese';
-    const buttonLabels = languageFile[languageKey].buttons;
-    setButtonTexts(buttonLabels);
-  }, [selectedFlag, languageFile]);
+  };
 
   return (
       <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
@@ -53,13 +60,13 @@ export const NavBar = () => {
             e.preventDefault();
             selectFlag('usa');
           }}>
-            <img src={usa} alt="USA Flag" className={`flag usa ${selectedFlag === 'usa' ? 'selected-flag' : ''}`}/>
+            <img src={usa} alt="USA Flag" className={`flag usa ${selectedFlag === 'usa' ? 'selected-flag' : ''}`} />
           </Navbar.Brand>
           <Navbar.Brand href="#/" onClick={(e) => {
             e.preventDefault();
             selectFlag('brazil');
           }}>
-          <img src={brazil} alt="Brazil Flag" className={`flag ${selectedFlag === 'brazil' ? 'selected-flag' : ''}`}/>
+            <img src={brazil} alt="Brazil Flag" className={`flag ${selectedFlag === 'brazil' ? 'selected-flag' : ''}`} />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav">
             <span className="navbar-toggler-icon"></span>
@@ -84,4 +91,4 @@ export const NavBar = () => {
         </Container>
       </Navbar>
   );
-}
+};

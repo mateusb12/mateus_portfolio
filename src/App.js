@@ -20,7 +20,7 @@ function App() {
                 <Routes>
                     <Route path="/mateus_portfolio/" element={<FullLayout/>}/>
                     <Route path="/mateus_portfolio/navbar" element={<NavBar/>}/>
-                    <Route path="/mateus_portfolio/banner" element={<Introduction/>}/>
+                    <Route path="/mateus_portfolio/introduction" element={<Introduction/>}/>
                     <Route path="/mateus_portfolio/skills" element={<Skills/>}/>
                     <Route path="/mateus_portfolio/projects" element={<Projects/>}/>
                     <Route path="/mateus_portfolio/projectCard" element={<ProjectCard/>}/>
