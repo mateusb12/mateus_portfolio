@@ -1,0 +1,47 @@
+.vertical-index{
+    color: #09F7A5;
+    z-index: 1000;
+    /*border: 1px #09F7A5 solid;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    transform: translateY(5%)
+}
+
+.vertical-index::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: #09F7A5;
+    border-radius: 100px; /* Adjust to match the design */
+    margin: 1px auto -1px; /* Center the head and add spacing below */
+}
+
+.vertical-index::after {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 450px;
+    background: linear-gradient(to bottom, rgba(9, 247, 165, 1) 0%, rgba(60, 51, 80, 0) 100%);
+    margin: 0 auto;
+}
+
+.main-container{
+    /*border: 1px red solid;*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-body{
+    /*border: 1px yellow solid;*/
+}
+
+.debug{
+    /*border: 1px deeppink solid;*/
+}
