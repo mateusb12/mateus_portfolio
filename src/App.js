@@ -11,6 +11,7 @@ import { Routes, Route } from "react-router-dom";
 import LanguageContext from './components/LanguageContext';
 import {useState} from "react";
 import {ProjectCard} from "./components/ProjectCard";
+import NewProjectCard from "./components/NewProjectCard";
 
 function App() {
     const [selectedFlag, setSelectedFlag] = useState('english');
@@ -26,6 +27,7 @@ function App() {
                     <Route path="/mateus_portfolio/projectCard" element={<ProjectCard/>}/>
                     <Route path="/mateus_portfolio/contact" element={<Contact/>}/>
                     <Route path="/mateus_portfolio/footer" element={<Footer/>}/>
+                    <Route path='/mateus_portfolio/newprojectcard' element={<NewProjectCard/>}/>
                 </Routes>
             </div>
         </LanguageContext.Provider>

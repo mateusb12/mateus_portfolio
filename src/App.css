@@ -86,6 +86,22 @@ p.danger {
 	color: red;
 }
 
+/************ Shared styles ************/
+.portfolio-title {
+  letter-spacing: 1px;
+  /*line-height: 1.1em;*/
+  display: block;
+  text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+}
+
+.portfolio-p {
+  color: #FFFFFF;
+  font-size: 18px;
+  letter-spacing: 1px;
+  line-height: 1.5em;
+  width: 96%;
+  text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+}
 /************ Shared background Css ************/
 .section {
   padding: 100px 0;
