@@ -1,5 +1,5 @@
 .project-card {
-    width: 340px;
+    width: 420px;
     border: 1px solid #ccc;
     padding: 20px;
     border-radius: 10px;
@@ -17,6 +17,9 @@
 .project-card-header h2 {
     color: #09F7A5;
     font-size: 33px;
+    letter-spacing: 1px;
+    display: block;
+    text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
 }
 
 .project-card-header img {
@@ -52,6 +55,34 @@
 .project-card-skills-panel h3{
     color: #60AFFF;
     text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+}
+
+.skills-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.project-single-skill{
+    border: 1px red solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-skill-icon{
+    width: 45px;
+    text-align: center;
+    border: 1px #60AFFF solid;
+    border-radius: 5rem;
+}
+
+.project-skill-label{
+    padding: .35rem;
 }
 
 .project-card button {
