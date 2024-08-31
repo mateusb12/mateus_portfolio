@@ -1,94 +1,115 @@
-.project-card {
-    width: 420px;
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: rgba(18, 18, 18, 0.5);
+:root {
+    /* Define common colors, dimensions, and shadows to use throughout the project */
+    --primary-color: #09F7A5;
+    --secondary-color: #60AFFF;
+    --background-dark: rgba(18, 18, 18, 0.5);
+    --text-color: white;
+    --border-color: #ccc;
+    --button-bg-color: blue;
+    --border-radius-small: 5px;
+    --text-shadow-standard: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    --gap-standard: 1rem;
 }
 
+/* Project card container styles */
+.project-card {
+    width: 420px;
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    border-radius: var(--border-radius-small);
+    background-color: var(--background-dark);
+}
+
+/* Header styling for project card */
 .project-card-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: var(--gap-standard);
 }
 
 .project-card-header h2 {
-    color: #09F7A5;
+    color: var(--primary-color);
     font-size: 33px;
     letter-spacing: 1px;
-    display: block;
-    text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+    text-shadow: var(--text-shadow-standard);
 }
 
 .project-card-header img {
-    border: 1px solid #09F7A5;
+    border: 1px solid var(--primary-color);
     width: 100%;
     height: auto;
-    border-radius: 5px;
+    border-radius: var(--border-radius-small);
 }
 
 .project-card-header p {
-    color: white;
+    color: var(--text-color);
 }
 
+/* Footer styling for project card */
 .project-card-footer {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: var(--gap-standard);
+    margin-bottom: var(--gap-standard);
 }
 
+/* Panel styles within the card footer */
 .project-card-skills-panel {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
-    border: 1px solid #60AFFF;
-    padding: 6px;
-    border-radius: 5px;
+    gap: var(--gap-standard);
+    border: 1px solid var(--secondary-color);
+    padding: 8px;
+    border-radius: var(--border-radius-small);
 }
 
-.project-card-skills-panel h3{
-    color: #60AFFF;
-    text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+.project-card-skills-panel h3 {
+    color: var(--secondary-color);
+    text-shadow: var(--text-shadow-standard);
 }
 
-.skills-row{
+/* Skills row and individual skill container */
+.skills-row {
+    /*border: 1px aqua solid;*/
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: var(--gap-standard);
     flex-wrap: wrap;
 }
 
-.project-single-skill{
-    border: 1px red solid;
+.project-single-skill {
+    /*border: 1px solid red;*/
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex: 1 1 auto;
 }
 
-.project-skill-icon{
-    width: 45px;
-    text-align: center;
-    border: 1px #60AFFF solid;
-    border-radius: 5rem;
+/* Skill icon and label styling */
+.project-skill-icon {
+    width: 55px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 50%;  /* Makes the icon fully rounded */
 }
 
-.project-skill-label{
-    padding: .35rem;
+.project-skill-label {
+    padding: 0.35rem;
 }
 
+/* Button styling at the bottom of the card */
 .project-card button {
     width: 100%;
     padding: 10px;
-    background-color: blue;
-    color: white;
-    border-radius: 5px;
+    background-color: var(--button-bg-color);
+    color: var(--text-color);
+    border-radius: var(--border-radius-small);
 }

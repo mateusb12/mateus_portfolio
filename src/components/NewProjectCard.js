@@ -80,7 +80,9 @@ const NewProjectCard = (
                             <img className="project-skill-icon" src={pandas} alt="Server Icon"/>
                             <div className="project-skill-label">Pandas</div>
                         </span>
-                        <span className="project-single-skill">
+                    </div>
+                    <div className="skills-row">
+                            <span className="project-single-skill">
                             <img className="project-skill-icon" src={graphviz} alt="Server Icon"/>
                             <div className="project-skill-label">GraphViz</div>
                         </span>
