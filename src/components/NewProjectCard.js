@@ -20,6 +20,21 @@ const adjustSkillLabelFontSize = () => {
     });
 };
 
+
+const handleHoverEffects = () => {
+    const images = document.querySelectorAll('.project-card-header img');
+    images.forEach(img => {
+        img.addEventListener('mouseover', () => {
+            img.classList.add('hovered');
+        });
+
+        img.addEventListener('mouseout', () => {
+            img.classList.remove('hovered');
+        });
+    });
+};
+
+
 const renderSkillsRows = (skills, category) => {
     const categoryClass = `${category}-panel`; // Used for the row
     const borderClass = `${category}-border`; // Correct border class for each icon based on the category
@@ -78,13 +93,14 @@ const NewProjectCard = (
 ) => {
     useEffect(() => {
         adjustSkillLabelFontSize();
+        handleHoverEffects();
     }, []);
 
     return (
         <div className="project-card">
             <div className="project-card-header">
                 <h2>{title}</h2>
-                <img src={imageUrl} alt="Project thumbnail" style={{ borderColor: 'var(--primary-color)' }} />
+                <img src={imageUrl} alt="Project thumbnail"/>
                 <p>{description}</p>
             </div>
             <div className="project-card-footer">

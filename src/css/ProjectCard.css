@@ -57,6 +57,22 @@
     border-radius: var(--border-radius-small);
 }
 
+.project-card-header img.hovered {
+    border-width: 2px;
+    border-color: #FFFFFF;
+}
+
+/*@keyframes borderGlow {*/
+/*    from {*/
+/*        border-width: 1px;*/
+/*        border-color: var(--primary-color); !* Start with the original color *!*/
+/*    }*/
+/*    to {*/
+/*        border-width: 2px;*/
+/*        border-color: #FFFFFF; !* End with white color *!*/
+/*    }*/
+/*}*/
+
 .project-card-header p {
     color: var(--text-color);
 }
