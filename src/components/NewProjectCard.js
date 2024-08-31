@@ -20,15 +20,17 @@ const adjustSkillLabelFontSize = () => {
     });
 };
 
-const renderSkillsRows = (skills) => {
+const renderSkillsRows = (skills, category) => {
+    const categoryClass = `${category}-panel`; // Used for the row
+    const borderClass = `${category}-border`; // Correct border class for each icon based on the category
     const rows = [];
     for (let i = 0; i < skills.length; i += 3) {
         const rowSkills = skills.slice(i, i + 3);
         const row = (
-            <div className="skills-row" key={`row-${i}`}>
+            <div className={`skills-row ${categoryClass}`} key={`row-${i}`}>
                 {rowSkills.map(skill => (
                     <span className="project-single-skill" key={skill.label}>
-                        <img className="project-skill-icon" src={skillsIcons[skill.icon]} alt={`${skill.label} Icon`} />
+                        <img className={`project-skill-icon ${borderClass}`} src={skillsIcons[skill.icon]} alt={`${skill.label} Icon`} />
                         <div className="project-skill-label">{skill.label}</div>
                     </span>
                 ))}
@@ -38,6 +40,7 @@ const renderSkillsRows = (skills) => {
     }
     return rows;
 };
+
 
 const skillsIcons = {
     server,
@@ -81,21 +84,21 @@ const NewProjectCard = (
         <div className="project-card">
             <div className="project-card-header">
                 <h2>{title}</h2>
-                <img src={imageUrl} alt="Project thumbnail"/>
+                <img src={imageUrl} alt="Project thumbnail" style={{ borderColor: 'var(--primary-color)' }} />
                 <p>{description}</p>
             </div>
             <div className="project-card-footer">
-                <div className="project-card-skills-panel">
-                    <h3>Core Skills</h3>
-                    {renderSkillsRows(coreSkills)}
+                <div className={`project-card-skills-panel core-skills-border`} style={{ borderColor: 'var(--core-skills-color)' }}>
+                    <h3 style={{ color: 'var(--core-skills-color)' }}>Core Skills</h3>
+                    {renderSkillsRows(coreSkills, 'core-skills')}
                 </div>
-                <div className="project-card-skills-panel">
-                    <h3>Frameworks</h3>
-                    {renderSkillsRows(frameworks)}
+                <div className={`project-card-skills-panel frameworks-border`} style={{ borderColor: 'var(--frameworks-color)' }}>
+                    <h3 style={{ color: 'var(--frameworks-color)' }}>Frameworks</h3>
+                    {renderSkillsRows(frameworks, 'frameworks')}
                 </div>
-                <div className="project-card-skills-panel">
-                    <h3>Libraries</h3>
-                    {renderSkillsRows(libraries)}
+                <div className={`project-card-skills-panel libraries-border`} style={{ borderColor: 'var(--libraries-color)' }}>
+                    <h3 style={{ color: 'var(--libraries-color)' }}>Libraries</h3>
+                    {renderSkillsRows(libraries, 'libraries')}
                 </div>
             </div>
             <button>
