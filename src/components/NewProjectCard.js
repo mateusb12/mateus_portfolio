@@ -20,11 +20,57 @@ const adjustSkillLabelFontSize = () => {
     });
 };
 
+const renderSkillsRows = (skills) => {
+    const rows = [];
+    for (let i = 0; i < skills.length; i += 3) {
+        const rowSkills = skills.slice(i, i + 3);
+        const row = (
+            <div className="skills-row" key={`row-${i}`}>
+                {rowSkills.map(skill => (
+                    <span className="project-single-skill" key={skill.label}>
+                        <img className="project-skill-icon" src={skillsIcons[skill.icon]} alt={`${skill.label} Icon`} />
+                        <div className="project-skill-label">{skill.label}</div>
+                    </span>
+                ))}
+            </div>
+        );
+        rows.push(row);
+    }
+    return rows;
+};
+
+const skillsIcons = {
+    server,
+    api,
+    nlp,
+    django,
+    networkx,
+    numpy,
+    pandas,
+    graphviz,
+    spacy
+};
+
 const NewProjectCard = (
     {
         title = 'Witcher Network',
         description = 'Transform .txt book files into social media style graphs, similar to Instagram',
-        imageUrl = witcher
+        imageUrl = witcher,
+        coreSkills = [
+            { icon: 'server', label: 'Backend' },
+            { icon: 'api', label: 'APIs' },
+            { icon: 'nlp', label: 'NLP' }
+        ],
+        frameworks = [
+            { icon: 'django', label: 'Django' }
+        ],
+        libraries = [
+            { icon: 'numpy', label: 'Numpy' },
+            { icon: 'pandas', label: 'Pandas' },
+            { icon: 'networkx', label: 'Networkx' },
+            { icon: 'graphviz', label: 'GraphViz' },
+            { icon: 'spacy', label: 'Spacy' }
+        ]
     }
 ) => {
     useEffect(() => {
@@ -41,56 +87,15 @@ const NewProjectCard = (
             <div className="project-card-footer">
                 <div className="project-card-skills-panel">
                     <h3>Core Skills</h3>
-                    <div className="skills-row">
-                        <span className="project-single-skill">
-                            <img className="project-skill-icon" src={server} alt="Server Icon"/>
-                            <div className="project-skill-label">Backend</div>
-                        </span>
-                        <span className="project-single-skill">
-                            <img className="project-skill-icon" src={api} alt="Server Icon"/>
-                             <div className="project-skill-label">APIs</div>
-                        </span>
-                        <span className="project-single-skill">
-                            <img className="project-skill-icon" src={nlp} alt="Server Icon"/>
-                            <div className="project-skill-label">NLP</div>
-                        </span>
-                    </div>
+                    {renderSkillsRows(coreSkills)}
                 </div>
                 <div className="project-card-skills-panel">
                     <h3>Frameworks</h3>
-                    <div className="skills-row">
-                        <span className="project-single-skill">
-                            <img className="project-skill-icon" src={django} alt="Server Icon"/>
-                            <div className="project-skill-label">Django</div>
-                        </span>
-                    </div>
+                    {renderSkillsRows(frameworks)}
                 </div>
                 <div className="project-card-skills-panel">
                     <h3>Libraries</h3>
-                    <div className="skills-row">
-                        <span className="project-single-skill">
-                            <img className="project-skill-icon" src={networkx} alt="Server Icon"/>
-                            <div className="project-skill-label">Networkx</div>
-                        </span>
-                        <span className="project-single-skill">
-                            <img className="project-skill-icon" src={numpy} alt="Server Icon"/>
-                            <div className="project-skill-label">Numpy</div>
-                        </span>
-                        <span className="project-single-skill">
-                            <img className="project-skill-icon" src={pandas} alt="Server Icon"/>
-                            <div className="project-skill-label">Pandas</div>
-                        </span>
-                    </div>
-                    <div className="skills-row">
-                            <span className="project-single-skill">
-                            <img className="project-skill-icon" src={graphviz} alt="Server Icon"/>
-                            <div className="project-skill-label">GraphViz</div>
-                        </span>
-                        <span className="project-single-skill">
-                            <img className="project-skill-icon" src={spacy} alt="Server Icon"/>
-                            <div className="project-skill-label">Spacy</div>
-                        </span>
-                    </div>
+                    {renderSkillsRows(libraries)}
                 </div>
             </div>
             <button>
