@@ -45,9 +45,9 @@ const defaultSkills = [
 ];
 
 export const SkillPanel = ({
-                               skills = defaultSkills,       // Default value for skills prop
-                               title = "Default Skills",     // Default value for title prop
-                               color = "core-skills"         // Default value for color prop
+                               skills = defaultSkills,
+                               title = "Default Skills",
+                               color = "core-skills"
                            }) => {
     const [activeSkill, setActiveSkill] = useState(null);
 
@@ -61,20 +61,24 @@ export const SkillPanel = ({
 
     const renderSkills = () => skills.map(skill => (
         <span key={skill.label} className={`project-single-skill ${skill.icon === activeSkill?.icon ? 'selected' : ''}`} onClick={() => handleSkillClick(skill.icon)}>
-            <img src={skillsIcons[skill.icon]} alt={`${skill.label} Icon`} className="project-skill-icon" />
+            <img
+                src={skillsIcons[skill.icon]}
+                alt={`${skill.label} Icon`}
+                className={`project-skill-icon ${color}-border`} // Dynamically adding a border color class
+            />
             <div className="project-skill-label">{skill.label}</div>
         </span>
     ));
 
     return (
-        <div className="project-card-skills-panel" style={{border: `2px solid var(--${color}-color)`}}>
-            <h3 style={{color: `var(--${color}-color)`}}>{title}</h3>
+        <div className={`project-card-skills-panel ${color}-border`}>
+            <h3>{title}</h3>
             <div className="skills-row">
                 {renderSkills()}
             </div>
             {activeSkill && (
                 <div className="hidden-footer">
-                    <img src={activeSkill.icon} alt={activeSkill.title}/>
+                    <img src={activeSkill.icon} alt={activeSkill.title} />
                     <h3>{activeSkill.title}</h3>
                     <p>{activeSkill.description}</p>
                 </div>

@@ -23,13 +23,26 @@
     gap: var(--gap-standard);
     padding: 8px;
     border-radius: var(--border-radius-small);
-    border: 2px solid var(--border-color); /* Make sure to set the border-width and style */
+}
+
+/* Dynamic border color for the whole panel */
+.core-skills-border {
+    border: 2px solid var(--core-skills-color);
+}
+
+.frameworks-border {
+    border: 2px solid var(--frameworks-color);
+}
+
+.libraries-border {
+    border: 2px solid var(--libraries-color);
 }
 
 .project-card-skills-panel h3 {
     text-shadow: var(--text-shadow-standard);
 }
 
+/* Row of skills */
 .skills-row {
     display: flex;
     flex-direction: row;
@@ -47,24 +60,43 @@
     flex: 1 1 auto;
 }
 
+/* Dynamic border color for each icon */
+.core-skills-border .project-skill-icon {
+    border-color: var(--core-skills-color);
+}
+
+.frameworks-border .project-skill-icon {
+    border-color: var(--frameworks-color);
+}
+
+.libraries-border .project-skill-icon {
+    border-color: var(--libraries-color);
+}
+
+/* Default skill icon styles */
 .project-skill-icon {
     width: 55px;
     border-radius: 50%;
+    border: 2px solid var(--core-skills-color); /* Default border color */
+    transition: border-color 0.3s ease;
 }
 
+/* Hover effect */
 .project-skill-icon:hover {
     cursor: pointer;
     border-color: white;
 }
 
+/* Ensure the active skill has a white border */
 .project-skill-icon.selected {
-    border: 2px solid white;
+    border-color: white;
 }
 
 .project-skill-label {
     padding: 0.35rem;
 }
 
+/* Footer section for selected skill */
 .hidden-footer {
     margin-top: 1rem;
     text-align: center;
