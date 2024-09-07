@@ -42,19 +42,30 @@ const renderSkillsRows = (skills, category) => {
     for (let i = 0; i < skills.length; i += 3) {
         const rowSkills = skills.slice(i, i + 3);
         const row = (
-            <div className={`skills-row ${categoryClass}`} key={`row-${i}`}>
-                {rowSkills.map(skill => (
-                    <span className="project-single-skill" key={skill.label}>
-                        <img className={`project-skill-icon ${borderClass}`} src={skillsIcons[skill.icon]} alt={`${skill.label} Icon`} />
+            <div className="section-card">
+                <div className={`skills-row ${categoryClass}`} key={`row-${i}`}>
+                    {rowSkills.map(skill => (
+                        <span className="project-single-skill" key={skill.label}>
+                        <img className={`project-skill-icon ${borderClass}`} src={skillsIcons[skill.icon]}
+                             alt={`${skill.label} Icon`}/>
                         <div className="project-skill-label">{skill.label}</div>
                     </span>
-                ))}
+                    ))}
+                </div>
             </div>
         );
         rows.push(row);
     }
     return rows;
 };
+
+const SkillFooter = ({ icon, title, description }) => (
+    <div className="hidden-footer">
+        <img src={icon} alt={title} />
+        <h3>{title}</h3>
+        <p>{description}</p>
+    </div>
+);
 
 
 const skillsIcons = {
@@ -69,14 +80,32 @@ const skillsIcons = {
     spacy
 };
 
+const skillDetails = {
+    'backend': {
+        'title': 'Backend',
+        'description': 'Focuses on server-side logic, database management, and application integration, ensuring data is processed efficiently and securely for application functionality.',
+        'icon': server
+    },
+    'api': {
+        'title': 'APIs',
+        'description': 'Focuses on API design and implementation, providing a robust and efficient way to access and interact with data in a web application.',
+        'icon': api
+    },
+    'nlp': {
+        'title': 'NLP',
+        'description': 'Focuses on natural language processing, leveraging advanced machine learning algorithms to extract meaningful insights from text data.',
+        'icon': nlp
+    }
+}
+
 const NewProjectCard = (
     {
         title = 'Witcher Network',
         description = 'Transform .txt book files into social media style graphs, similar to Instagram',
         imageUrl = witcher,
         coreSkills = [
-            { icon: 'server', label: 'Backend' },
-            { icon: 'api', label: 'APIs' },
+            {icon: 'server', label: 'Backend'},
+            {icon: 'api', label: 'APIs' },
             { icon: 'nlp', label: 'NLP' }
         ],
         frameworks = [
@@ -107,6 +136,7 @@ const NewProjectCard = (
                 <div className={`project-card-skills-panel core-skills-border`} style={{ borderColor: 'var(--core-skills-color)' }}>
                     <h3 style={{ color: 'var(--core-skills-color)' }}>Core Skills</h3>
                     {renderSkillsRows(coreSkills, 'core-skills')}
+                    <SkillFooter {...skillDetails['backend']} />
                 </div>
                 <div className={`project-card-skills-panel frameworks-border`} style={{ borderColor: 'var(--frameworks-color)' }}>
                     <h3 style={{ color: 'var(--frameworks-color)' }}>Frameworks</h3>

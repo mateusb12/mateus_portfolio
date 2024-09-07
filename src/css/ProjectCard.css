@@ -61,6 +61,7 @@
 .project-card-header img.hovered {
     border-width: 2px;
     border-color: #FFFFFF;
+    cursor: pointer;
 }
 
 /*@keyframes borderGlow {*/
@@ -135,6 +136,11 @@
     border-radius: 50%;  /* Makes the icon fully rounded */
 }
 
+.project-skill-icon:hover{
+    cursor: pointer;
+    border: 2px solid white;
+}
+
 .project-skill-label {
     padding: 0.35rem;
 }
@@ -153,4 +159,17 @@
     background-color: var(--primary-color-hover);
     color: var(--text-color);
     border: 1px white solid;
+}
+
+.hidden-footer{
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.hidden-footer img{
+    width: 45%;
+}
+
+.hidden-footer h3{
+    color: white;
 }
