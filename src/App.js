@@ -12,6 +12,7 @@ import LanguageContext from './components/LanguageContext';
 import {useState} from "react";
 import {ProjectCard} from "./components/ProjectCard";
 import NewProjectCard from "./components/NewProjectCard";
+import {SkillPanel} from "./components/SkillPanel";
 
 function App() {
     const [selectedFlag, setSelectedFlag] = useState('english');
@@ -28,6 +29,7 @@ function App() {
                     <Route path="/mateus_portfolio/contact" element={<Contact/>}/>
                     <Route path="/mateus_portfolio/footer" element={<Footer/>}/>
                     <Route path='/mateus_portfolio/newprojectcard' element={<NewProjectCard/>}/>
+                    <Route path='/mateus_portfolio/skillpanel' element={<SkillPanel/>}/>
                 </Routes>
             </div>
         </LanguageContext.Provider>

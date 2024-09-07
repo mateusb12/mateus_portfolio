@@ -1,0 +1,79 @@
+:root {
+    /* Define common colors, dimensions, and shadows to use throughout the project */
+    --primary-color: #0AF7A4;
+    --primary-color-hover: #5c2eff;
+    --core-skills-color: #60AFFF;
+    --frameworks-color: #F77C0A;
+    --libraries-color: #F7E30A;
+    --background-dark: rgba(18, 18, 18, 0.5);
+    --text-color: white;
+    --border-color: #ccc;
+    --button-bg-color: #480AF7;
+    --border-radius-small: 5px;
+    --text-shadow-standard: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    --gap-standard: 1rem;
+}
+
+/* Skill panel-specific styles */
+.project-card-skills-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-standard);
+    padding: 8px;
+    border-radius: var(--border-radius-small);
+    border: 2px solid var(--border-color); /* Make sure to set the border-width and style */
+}
+
+.project-card-skills-panel h3 {
+    text-shadow: var(--text-shadow-standard);
+}
+
+.skills-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-standard);
+    flex-wrap: wrap;
+}
+
+.project-single-skill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 auto;
+}
+
+.project-skill-icon {
+    width: 55px;
+    border-radius: 50%;
+}
+
+.project-skill-icon:hover {
+    cursor: pointer;
+    border-color: white;
+}
+
+.project-skill-icon.selected {
+    border: 2px solid white;
+}
+
+.project-skill-label {
+    padding: 0.35rem;
+}
+
+.hidden-footer {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.hidden-footer img {
+    width: 45%;
+}
+
+.hidden-footer h3 {
+    color: white;
+}

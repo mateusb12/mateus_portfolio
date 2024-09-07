@@ -12,6 +12,7 @@ import numpy from "../assets/img/skills_icons/numpy.png";
 import pandas from "../assets/img/skills_icons/pandas.png";
 import graphviz from "../assets/img/skills_icons/graphviz.png";
 import spacy from "../assets/img/skills_icons/spacy.png";
+import {SkillPanel} from "./SkillPanel";
 
 const skillsIcons = {backend, api, nlp, django, networkx, numpy, pandas, graphviz, spacy};
 
@@ -139,11 +140,12 @@ const NewProjectCard = (
                 <p>{description}</p>
             </div>
             <div className="project-card-footer">
-                <div className={`project-card-skills-panel core-skills-border`} style={{ borderColor: 'var(--core-skills-color)' }}>
-                    <h3 style={{ color: 'var(--core-skills-color)' }}>Core Skills</h3>
-                    {renderSkillsRows(coreSkills, 'core-skills')}
-                    {selectedSkill && activeCoreSkill && (<SkillFooter key={activeCoreSkill.title} {...activeCoreSkill} />)}
-                </div>
+                {/*<div className={`project-card-skills-panel core-skills-border`} style={{ borderColor: 'var(--core-skills-color)' }}>*/}
+                {/*    <h3 style={{ color: 'var(--core-skills-color)' }}>Core Skills</h3>*/}
+                {/*    {renderSkillsRows(coreSkills, 'core-skills')}*/}
+                {/*    {selectedSkill && activeCoreSkill && (<SkillFooter key={activeCoreSkill.title} {...activeCoreSkill} />)}*/}
+                {/*</div>*/}
+                {<SkillPanel/>}
                 <div className={`project-card-skills-panel frameworks-border`} style={{ borderColor: 'var(--frameworks-color)' }}>
                     <h3 style={{ color: 'var(--frameworks-color)' }}>Frameworks</h3>
                     {renderSkillsRows(frameworks, 'frameworks')}
