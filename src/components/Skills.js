@@ -21,6 +21,8 @@ import postgres from "../assets/img//skills_icons/postgres.png";
 import docker from "../assets/img//skills_icons/docker.png";
 import aws from "../assets/img//skills_icons/aws.png";
 import google from "../assets/img//skills_icons/google-cloud-small.png";
+import frontend from "../assets/img//skills_icons/frontend_dev.png";
+import design from "../assets/img//skills_icons/design.png";
 
 import LanguageContext from './LanguageContext';
 import {useContext, useEffect, useState} from "react";
@@ -94,6 +96,8 @@ export const Skills = () => {
         "docker": docker,
         "aws": aws,
         "google-cloud": google,
+        "website": frontend,
+        "design": design
     };
 
     const selectedLanguageMap = languageFile.skillMap[selectedLanguage];

@@ -4,6 +4,8 @@
       "title": "Key Skills",
       "description": "Core competencies in software development",
       "skillList": [
+        "UI/UX Design",
+        "Website creation",
         "Backend Development",
         "APIs",
         "Databases",
@@ -45,6 +47,8 @@
       "title": "Habilidades Chave",
       "description": "Competências principais em desenvolvimento de software",
       "skillList": [
+        "Design UI/UX",
+        "Criação de websites",
         "Desenvolvimento Backend",
         "APIs",
         "Bancos de Dados",
@@ -85,6 +89,8 @@
   {
     "english": {
       "key": {
+        "design": "UI/UX Design",
+        "website": "Website creation",
         "backend": "Backend Development",
         "api": "APIs",
         "database": "Databases",
@@ -114,6 +120,8 @@
     },
     "portuguese": {
       "key": {
+        "design": "Design UI/UX",
+        "website": "Criação de websites",
         "backend": "Desenvolvimento Backend",
         "api": "APIs",
         "database": "Bancos de Dados",

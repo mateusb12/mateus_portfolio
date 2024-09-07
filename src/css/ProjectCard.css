@@ -1,13 +1,14 @@
 :root {
     /* Define common colors, dimensions, and shadows to use throughout the project */
-    --primary-color: #09F7A5;
+    --primary-color: #0AF7A4;
+    --primary-color-hover: #5c2eff;
     --core-skills-color: #60AFFF;
-    --frameworks-color: #FFAE00;
-    --libraries-color: #F709C3;
+    --frameworks-color: #F77C0A;
+    --libraries-color: #F7E30A;
     --background-dark: rgba(18, 18, 18, 0.5);
     --text-color: white;
     --border-color: #ccc;
-    --button-bg-color: blue;
+    --button-bg-color: #480AF7;
     --border-radius-small: 5px;
     --text-shadow-standard: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     --gap-standard: 1rem;
@@ -79,9 +80,10 @@
 
 /* Footer styling for project card */
 .project-card-footer {
+    /*border: 1px red solid;*/
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     gap: var(--gap-standard);
     margin-bottom: var(--gap-standard);
@@ -144,4 +146,11 @@
     background-color: var(--button-bg-color);
     color: var(--text-color);
     border-radius: var(--border-radius-small);
+    transition: background-color 300ms ease-in-out;
+}
+
+.project-card button:hover {
+    background-color: var(--primary-color-hover);
+    color: var(--text-color);
+    border: 1px white solid;
 }
