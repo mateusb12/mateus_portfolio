@@ -34,7 +34,6 @@ const skillDetails = {
 }
 
 const SkillFooter = ({ icon, title, description }) => {
-    console.log("Rendering SkillFooter with", title);
     return (
         <div className="hidden-footer">
             <img src={icon} alt={title} />
@@ -70,10 +69,15 @@ const NewProjectCard = (
     const [selectedSkill, setSelectedSkill] = useState(null);
 
     const handleSkillClick = (skillKey) => {
-        console.log("Clicked skill:", skillKey);
-        setSelectedSkill(skillKey);
-        setActiveSkill(skillDetails[skillKey]);
-        console.log("New active skill:", skillKey);
+        if (selectedSkill === skillKey) {
+            // If the skill is already selected, unselect it
+            setSelectedSkill(null);
+            setActiveSkill(null); // Assuming you want to hide the footer details too
+        } else {
+            // Select the new skill
+            setSelectedSkill(skillKey);
+            setActiveSkill(skillDetails[skillKey]);
+        }
     };
 
     const renderSkillsRows = (skills, category) => {
@@ -102,7 +106,6 @@ const NewProjectCard = (
 
 
     useEffect(() => {
-        console.log("Active skill updated to:", activeSkill);
         adjustSkillLabelFontSize();
         handleHoverEffects();
     }, [activeSkill]);
@@ -118,7 +121,9 @@ const NewProjectCard = (
                 <div className={`project-card-skills-panel core-skills-border`} style={{ borderColor: 'var(--core-skills-color)' }}>
                     <h3 style={{ color: 'var(--core-skills-color)' }}>Core Skills</h3>
                     {renderSkillsRows(coreSkills, 'core-skills')}
-                    <SkillFooter key={activeSkill.title} {...activeSkill} />
+                    {selectedSkill && (
+                        <SkillFooter key={activeSkill.title} {...activeSkill} />
+                    )}
                 </div>
                 <div className={`project-card-skills-panel frameworks-border`} style={{ borderColor: 'var(--frameworks-color)' }}>
                     <h3 style={{ color: 'var(--frameworks-color)' }}>Frameworks</h3>
