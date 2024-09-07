@@ -30,6 +30,11 @@ const skillDetails = {
         'title': 'NLP',
         'description': 'I am proficient in natural language processing, leveraging advanced machine learning algorithms to extract meaningful insights from text data.',
         'icon': nlp
+    },
+    'django': {
+        'title': 'Django',
+        'description': 'I excel at using Django, a high-level Python web framework, to craft robust web applications swiftly. My expertise includes harnessing Django’s model-view-template architecture to efficiently design, implement, and manage interactive, database-driven websites. This expertise extends to utilizing Django’s comprehensive ecosystem, such as its ORM, authentication support, and seamless third-party plugin integrations.',
+        'icon': django
     }
 }
 
@@ -65,18 +70,34 @@ const NewProjectCard = (
         ]
     }
 ) => {
-    const [activeSkill, setActiveSkill] = useState(skillDetails['backend']);
+    const [activeCoreSkill, setActiveCoreSkill] = useState(null);
+    const [activeFramework, setActiveFramework] = useState(null);
+    const [activeLibrary, setActiveLibrary] = useState(null);
     const [selectedSkill, setSelectedSkill] = useState(null);
 
-    const handleSkillClick = (skillKey) => {
+    const handleSkillClick = (skillKey, category) => {
         if (selectedSkill === skillKey) {
-            // If the skill is already selected, unselect it
             setSelectedSkill(null);
-            setActiveSkill(null); // Assuming you want to hide the footer details too
         } else {
-            // Select the new skill
             setSelectedSkill(skillKey);
-            setActiveSkill(skillDetails[skillKey]);
+        }
+
+        const setActive = {
+            'core-skills': setActiveCoreSkill,
+            'frameworks': setActiveFramework,
+            'libraries': setActiveLibrary
+        };
+
+        const currentActive = {
+            'core-skills': activeCoreSkill,
+            'frameworks': activeFramework,
+            'libraries': activeLibrary
+        };
+
+        if (currentActive[category]?.title === skillDetails[skillKey].title) {
+            setActive[category](null);
+        } else {
+            setActive[category](skillDetails[skillKey]);
         }
     };
 
@@ -90,7 +111,7 @@ const NewProjectCard = (
                 <div className="section-card">
                     <div className={`skills-row ${categoryClass}`} key={`row-${i}`}>
                         {rowSkills.map(skill => (
-                            <span className="project-single-skill" key={skill.label} onClick={() => handleSkillClick(skill.icon)}>
+                            <span className="project-single-skill" key={skill.label} onClick={() => handleSkillClick(skill.icon, category)}>
                             <img className={`project-skill-icon ${borderClass} ${skill.icon === selectedSkill ? 'selected' : ''}`} src={skillsIcons[skill.icon]}
                                  alt={`${skill.label} Icon`}/>
                             <div className="project-skill-label">{skill.label}</div>
@@ -108,7 +129,7 @@ const NewProjectCard = (
     useEffect(() => {
         adjustSkillLabelFontSize();
         handleHoverEffects();
-    }, [activeSkill]);
+    }, []);
 
     return (
         <div className="project-card">
@@ -121,13 +142,12 @@ const NewProjectCard = (
                 <div className={`project-card-skills-panel core-skills-border`} style={{ borderColor: 'var(--core-skills-color)' }}>
                     <h3 style={{ color: 'var(--core-skills-color)' }}>Core Skills</h3>
                     {renderSkillsRows(coreSkills, 'core-skills')}
-                    {selectedSkill && (
-                        <SkillFooter key={activeSkill.title} {...activeSkill} />
-                    )}
+                    {selectedSkill && activeCoreSkill && (<SkillFooter key={activeCoreSkill.title} {...activeCoreSkill} />)}
                 </div>
                 <div className={`project-card-skills-panel frameworks-border`} style={{ borderColor: 'var(--frameworks-color)' }}>
                     <h3 style={{ color: 'var(--frameworks-color)' }}>Frameworks</h3>
                     {renderSkillsRows(frameworks, 'frameworks')}
+                    {selectedSkill && activeFramework && (<SkillFooter key={activeFramework.title} {...activeFramework} />)}
                 </div>
                 <div className={`project-card-skills-panel libraries-border`} style={{ borderColor: 'var(--libraries-color)' }}>
                     <h3 style={{ color: 'var(--libraries-color)' }}>Libraries</h3>
