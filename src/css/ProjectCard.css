@@ -141,6 +141,10 @@
     border: 2px solid white;
 }
 
+.project-skill-icon.selected {
+    border: 2px solid white;  /* This keeps the hover effect visually */
+}
+
 .project-skill-label {
     padding: 0.35rem;
 }

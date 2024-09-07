@@ -1,5 +1,7 @@
 import '../css/ProjectCard.css';
 import React, {useEffect, useState} from 'react';
+
+// Asset imports
 import witcher from "../assets/img/witcher_reading_book.png";
 import backend from "../assets/img/skills_icons/server.png";
 import api from "../assets/img/skills_icons/api.png";
@@ -11,28 +13,25 @@ import pandas from "../assets/img/skills_icons/pandas.png";
 import graphviz from "../assets/img/skills_icons/graphviz.png";
 import spacy from "../assets/img/skills_icons/spacy.png";
 
+const skillsIcons = {backend, api, nlp, django, networkx, numpy, pandas, graphviz, spacy};
 
-const adjustSkillLabelFontSize = () => {
-    const skillLabels = document.querySelectorAll('.project-skill-label');
-    skillLabels.forEach(label => {
-        const length = label.textContent.length;
-        label.style.fontSize = length >= 7 ? '0.8rem' : '1rem';
-    });
-};
-
-
-const handleHoverEffects = () => {
-    const images = document.querySelectorAll('.project-card-header img');
-    images.forEach(img => {
-        img.addEventListener('mouseover', () => {
-            img.classList.add('hovered');
-        });
-
-        img.addEventListener('mouseout', () => {
-            img.classList.remove('hovered');
-        });
-    });
-};
+const skillDetails = {
+    'backend': {
+        'title': 'Backend',
+        'description': 'I am able to build and manage the server-side architecture of web applications, by implementing complex server logic, managing database interactions, and ensuring seamless integration of components.',
+        'icon': backend
+    },
+    'api': {
+        'title': 'APIs',
+        'description': 'I specialize in creating scalable APIs that support extensive data exchange and expand functionality while maintaining high security and performance standards.',
+        'icon': api
+    },
+    'nlp': {
+        'title': 'NLP',
+        'description': 'I am proficient in natural language processing, leveraging advanced machine learning algorithms to extract meaningful insights from text data.',
+        'icon': nlp
+    }
+}
 
 const SkillFooter = ({ icon, title, description }) => {
     console.log("Rendering SkillFooter with", title);
@@ -44,37 +43,6 @@ const SkillFooter = ({ icon, title, description }) => {
         </div>
     );
 };
-
-
-const skillsIcons = {
-    backend,
-    api,
-    nlp,
-    django,
-    networkx,
-    numpy,
-    pandas,
-    graphviz,
-    spacy
-};
-
-const skillDetails = {
-    'backend': {
-        'title': 'Backend',
-        'description': 'Focuses on server-side logic, database management, and application integration, ensuring data is processed efficiently and securely for application functionality.',
-        'icon': backend
-    },
-    'api': {
-        'title': 'APIs',
-        'description': 'Focuses on API design and implementation, providing a robust and efficient way to access and interact with data in a web application.',
-        'icon': api
-    },
-    'nlp': {
-        'title': 'NLP',
-        'description': 'Focuses on natural language processing, leveraging advanced machine learning algorithms to extract meaningful insights from text data.',
-        'icon': nlp
-    }
-}
 
 const NewProjectCard = (
     {
@@ -99,16 +67,18 @@ const NewProjectCard = (
     }
 ) => {
     const [activeSkill, setActiveSkill] = useState(skillDetails['backend']);
+    const [selectedSkill, setSelectedSkill] = useState(null);
 
     const handleSkillClick = (skillKey) => {
         console.log("Clicked skill:", skillKey);
+        setSelectedSkill(skillKey);
         setActiveSkill(skillDetails[skillKey]);
         console.log("New active skill:", skillKey);
     };
 
     const renderSkillsRows = (skills, category) => {
-        const categoryClass = `${category}-panel`; // Used for the row
-        const borderClass = `${category}-border`; // Correct border class for each icon based on the category
+        const categoryClass = `${category}-panel`;
+        const borderClass = `${category}-border`;
         const rows = [];
         for (let i = 0; i < skills.length; i += 3) {
             const rowSkills = skills.slice(i, i + 3);
@@ -117,10 +87,10 @@ const NewProjectCard = (
                     <div className={`skills-row ${categoryClass}`} key={`row-${i}`}>
                         {rowSkills.map(skill => (
                             <span className="project-single-skill" key={skill.label} onClick={() => handleSkillClick(skill.icon)}>
-                        <img className={`project-skill-icon ${borderClass}`} src={skillsIcons[skill.icon]}
-                             alt={`${skill.label} Icon`}/>
-                        <div className="project-skill-label">{skill.label}</div>
-                    </span>
+                            <img className={`project-skill-icon ${borderClass} ${skill.icon === selectedSkill ? 'selected' : ''}`} src={skillsIcons[skill.icon]}
+                                 alt={`${skill.label} Icon`}/>
+                            <div className="project-skill-label">{skill.label}</div>
+                        </span>
                         ))}
                     </div>
                 </div>
@@ -165,5 +135,27 @@ const NewProjectCard = (
         </div>
     );
 }
+
+const adjustSkillLabelFontSize = () => {
+    const skillLabels = document.querySelectorAll('.project-skill-label');
+    skillLabels.forEach(label => {
+        const length = label.textContent.length;
+        label.style.fontSize = length >= 7 ? '0.8rem' : '1rem';
+    });
+};
+
+
+const handleHoverEffects = () => {
+    const images = document.querySelectorAll('.project-card-header img');
+    images.forEach(img => {
+        img.addEventListener('mouseover', () => {
+            img.classList.add('hovered');
+        });
+
+        img.addEventListener('mouseout', () => {
+            img.classList.remove('hovered');
+        });
+    });
+};
 
 export default NewProjectCard;
