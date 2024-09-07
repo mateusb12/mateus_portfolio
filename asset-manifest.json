@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/mateus_portfolio/static/css/main.eca61d55.css",
-    "main.js": "/mateus_portfolio/static/js/main.9a0ce4f1.js",
+    "main.css": "/mateus_portfolio/static/css/main.2a01e0bb.css",
+    "main.js": "/mateus_portfolio/static/js/main.7a1dcc82.js",
     "static/js/787.684ca70a.chunk.js": "/mateus_portfolio/static/js/787.684ca70a.chunk.js",
     "static/media/color-sharp2.png": "/mateus_portfolio/static/media/color-sharp2.c87586c6c2f549cb4aa6.png",
     "static/media/witcher_reading_book.png": "/mateus_portfolio/static/media/witcher_reading_book.7baad9c4ca98f608293b.png",
@@ -11,6 +11,7 @@
     "static/media/CentraNo2-Book.ttf": "/mateus_portfolio/static/media/CentraNo2-Book.2b143fa4b734a3584043.ttf",
     "static/media/aws.png": "/mateus_portfolio/static/media/aws.87d1387fac0c932e4f2b.png",
     "static/media/footer-bg.png": "/mateus_portfolio/static/media/footer-bg.7bd67c0f73571d0acc02.png",
+    "static/media/spacy.png": "/mateus_portfolio/static/media/spacy.edcdac162b7daf4b95ef.png",
     "static/media/project-img2.png": "/mateus_portfolio/static/media/project-img2.2e52097c417f9f1134b0.png",
     "static/media/postgres.png": "/mateus_portfolio/static/media/postgres.a7fa39912c91e079e90b.png",
     "static/media/deploy.png": "/mateus_portfolio/static/media/deploy.f270c17f7bf9c88c5587.png",
@@ -27,14 +28,20 @@
     "static/media/data_analysis.jpg": "/mateus_portfolio/static/media/data_analysis.9a0fa6e03f8dcd0f0801.jpg",
     "static/media/csharp.png": "/mateus_portfolio/static/media/csharp.4a32f53d425c7ad4cb05.png",
     "static/media/jwt.png": "/mateus_portfolio/static/media/jwt.290e88d3b5b90a7126ee.png",
+    "static/media/django.png": "/mateus_portfolio/static/media/django.4c399895f677cd3bfbc8.png",
     "static/media/brazil.png": "/mateus_portfolio/static/media/brazil.27703b254c83ddc2ebc6.png",
+    "static/media/nlp.png": "/mateus_portfolio/static/media/nlp.7612033ae3817f388423.png",
     "static/media/cloud.png": "/mateus_portfolio/static/media/cloud.b9a187440c6c127890af.png",
     "static/media/flask.png": "/mateus_portfolio/static/media/flask.f29a1cc4b273dec8e999.png",
+    "static/media/frontend_dev.png": "/mateus_portfolio/static/media/frontend_dev.d347a70aacc51edab66c.png",
     "static/media/lock.png": "/mateus_portfolio/static/media/lock.153d4ba86e7125131412.png",
+    "static/media/networkx.png": "/mateus_portfolio/static/media/networkx.a2e941948fad7adbd129.png",
     "static/media/css.png": "/mateus_portfolio/static/media/css.d1a3c1e59ca82dbdf815.png",
     "static/media/docker.png": "/mateus_portfolio/static/media/docker.c1f953a3ead577c05d04.png",
     "static/media/java.png": "/mateus_portfolio/static/media/java.f5dd86c3ef6ef3f85acf.png",
+    "static/media/design.png": "/mateus_portfolio/static/media/design.5977739ad78a4a1cc4c2.png",
     "static/media/flight.jpg": "/mateus_portfolio/static/media/flight.fbe1279b64d450c8b458.jpg",
+    "static/media/numpy.png": "/mateus_portfolio/static/media/numpy.ad6ce4268be9e06f8cb4.png",
     "static/media/revicons.eot": "/mateus_portfolio/static/media/revicons.a77de540a38981833f9e.eot",
     "static/media/revicons.ttf": "/mateus_portfolio/static/media/revicons.57fd05d4ae650374c8de.ttf",
     "static/media/usa.png": "/mateus_portfolio/static/media/usa.e926a47c8090a6b9c494.png",
@@ -45,12 +52,12 @@
     "index.html": "/mateus_portfolio/index.html",
     "static/media/nav-icon1.svg": "/mateus_portfolio/static/media/nav-icon1.721d5414c26365f117e71d46b6641cb2.svg",
     "static/media/nav-icon2.svg": "/mateus_portfolio/static/media/nav-icon2.178f497aa17b70c42df2a1a8c926ed01.svg",
-    "main.eca61d55.css.map": "/mateus_portfolio/static/css/main.eca61d55.css.map",
-    "main.9a0ce4f1.js.map": "/mateus_portfolio/static/js/main.9a0ce4f1.js.map",
+    "main.2a01e0bb.css.map": "/mateus_portfolio/static/css/main.2a01e0bb.css.map",
+    "main.7a1dcc82.js.map": "/mateus_portfolio/static/js/main.7a1dcc82.js.map",
     "787.684ca70a.chunk.js.map": "/mateus_portfolio/static/js/787.684ca70a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.eca61d55.css",
-    "static/js/main.9a0ce4f1.js"
+    "static/css/main.2a01e0bb.css",
+    "static/js/main.7a1dcc82.js"
   ]
 }
