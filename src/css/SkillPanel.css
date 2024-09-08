@@ -109,3 +109,15 @@
 .hidden-footer h3 {
     color: white;
 }
+
+.core-skills-title {
+    color: var(--core-skills-color);
+}
+
+.frameworks-title {
+    color: var(--frameworks-color);
+}
+
+.libraries-title {
+    color: var(--libraries-color);
+}

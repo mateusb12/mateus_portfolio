@@ -72,9 +72,9 @@ export const SkillPanel = ({
 
     return (
         <div className={`project-card-skills-panel ${color}-border`}>
-            <h3>{title}</h3>
+            <h3 className={`${color}-title`}>{title}</h3>
             <div className="skills-row">
-                {renderSkills()}
+            {renderSkills()}
             </div>
             {activeSkill && (
                 <div className="hidden-footer">
