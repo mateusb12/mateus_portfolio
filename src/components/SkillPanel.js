@@ -38,10 +38,15 @@ const skillDetails = {
 }
 
 const defaultSkills = [
-    { icon: 'backend', label: 'Backend' },
-    { icon: 'api', label: 'APIs' },
-    { icon: 'nlp', label: 'NLP' },
-    // Add more default skills as needed
+    {icon: 'backend', label: 'Backend'},
+    {icon: 'api', label: 'APIs'},
+    {icon: 'nlp', label: 'NLP'},
+    {icon: 'django', label: 'Django'},
+    {icon: 'networkx', label: 'NetworkX'},
+    {icon: 'numpy', label: 'Numpy'},
+    {icon: 'pandas', label: 'Pandas'},
+    {icon: 'graphviz', label: 'Graphviz'},
+    {icon: 'spacy', label: 'Spacy'}
 ];
 
 export const SkillPanel = ({
@@ -59,26 +64,41 @@ export const SkillPanel = ({
         }
     };
 
-    const renderSkills = () => skills.map(skill => (
-        <span key={skill.label} className={`project-single-skill ${skill.icon === activeSkill?.icon ? 'selected' : ''}`} onClick={() => handleSkillClick(skill.icon)}>
-            <img
-                src={skillsIcons[skill.icon]}
-                alt={`${skill.label} Icon`}
-                className={`project-skill-icon ${color}-border`} // Dynamically adding a border color class
-            />
-            <div className="project-skill-label">{skill.label}</div>
-        </span>
-    ));
+    const chunkArray = (arr, chunkSize) => {
+        const result = [];
+        for (let i = 0; i < arr.length; i += chunkSize) {
+            result.push(arr.slice(i, i + chunkSize));
+        }
+        return result;
+    };
+
+    const renderSkills = () => {
+        const skillChunks = chunkArray(skills, 3); // Split skills into chunks of 3
+        return skillChunks.map((chunk, rowIndex) => (
+            <div key={rowIndex} className="skills-row">
+                {chunk.map(skill => (
+                    <span key={skill.label}
+                          className={`project-single-skill ${skill.icon === activeSkill?.icon ? 'selected' : ''}`}
+                          onClick={() => handleSkillClick(skill.icon)}>
+                        <img
+                            src={skillsIcons[skill.icon]}
+                            alt={`${skill.label} Icon`}
+                            className={`project-skill-icon ${color}-border`} // Dynamically adding a border color class
+                        />
+                        <div className="project-skill-label">{skill.label}</div>
+                    </span>
+                ))}
+            </div>
+        ));
+    };
 
     return (
         <div className={`project-card-skills-panel ${color}-border`}>
             <h3 className={`${color}-title`}>{title}</h3>
-            <div className="skills-row">
             {renderSkills()}
-            </div>
             {activeSkill && (
                 <div className="hidden-footer">
-                    <img src={activeSkill.icon} alt={activeSkill.title} />
+                    <img src={activeSkill.icon} alt={activeSkill.title}/>
                     <h3>{activeSkill.title}</h3>
                     <p>{activeSkill.description}</p>
                 </div>

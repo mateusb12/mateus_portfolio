@@ -142,10 +142,7 @@ const NewProjectCard = (
             <div className="project-card-footer">
                 {<SkillPanel title='Core Skills' color='core-skills' skills={coreSkills}/>}
                 {<SkillPanel title='Frameworks' color='frameworks' skills={frameworks}/>}
-                <div className={`project-card-skills-panel libraries-border`} style={{ borderColor: 'var(--libraries-color)' }}>
-                    <h3 style={{ color: 'var(--libraries-color)' }}>Libraries</h3>
-                    {renderSkillsRows(libraries, 'libraries')}
-                </div>
+                {<SkillPanel title='Libraries' color='libraries' skills={libraries}/>}
             </div>
             <button>
                 Open Project
