@@ -78,7 +78,11 @@
     width: 55px;
     border-radius: 50%;
     border: 2px solid var(--core-skills-color); /* Default border color */
-    transition: border-color 0.3s ease;
+    /*transition: border-color 0.3s ease;*/
+}
+
+.project-card-skills-panel .project-skill-icon.selected {
+    border: 2px solid white;
 }
 
 /* Hover effect */
@@ -88,9 +92,6 @@
 }
 
 /* Ensure the active skill has a white border */
-.project-skill-icon.selected {
-    border-color: white;
-}
 
 .project-skill-label {
     padding: 0.35rem;

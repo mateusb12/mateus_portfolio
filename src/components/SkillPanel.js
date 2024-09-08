@@ -32,8 +32,33 @@ const skillDetails = {
     },
     'django': {
         'title': 'Django',
-        'description': 'I excel at using Django, a high-level Python web framework, to craft robust web applications swiftly. My expertise includes harnessing Django’s model-view-template architecture to efficiently design, implement, and manage interactive, database-driven websites. This expertise extends to utilizing Django’s comprehensive ecosystem, such as its ORM, authentication support, and seamless third-party plugin integrations.',
+        'description': 'Django is a high-level Python web framework. I use it to build scalable, database-driven applications with clean architecture and efficient development practices.',
         'icon': django
+    },
+    'numpy': {
+        'title': 'Numpy',
+        'description': 'I am familiar with the NumPy library. It is a tool for scientific computing and linear algebra.',
+        'icon': numpy
+    },
+    'pandas': {
+        'title': 'Pandas',
+        'description': 'I am familiar with the Pandas library. It is a tool for sheet manipulation and data organization.',
+        'icon': pandas
+    },
+    'networkx': {
+        'title': 'NetworkX',
+        'description': 'I am familiar with the NetworkX library. It is a tool for creating and manipulating graphs.',
+        'icon': networkx
+    },
+    'graphviz': {
+        'title': 'Graphviz',
+        'description': 'I am familiar with the Graphviz library. It is a tool for graph visualization.',
+        'icon': graphviz
+    },
+    'spacy': {
+        'title': 'Spacy',
+        'description': 'I am familiar with the Spacy library. It is a tool for natural language processing.',
+        'icon': spacy
     }
 }
 
@@ -57,9 +82,16 @@ export const SkillPanel = ({
     const [activeSkill, setActiveSkill] = useState(null);
 
     const handleSkillClick = (skillKey) => {
-        if (activeSkill && activeSkill.title === skillDetails[skillKey].title) {
+        console.log('Clicked skill:', skillKey); // Log which skill was clicked
+        console.log('Current activeSkill:', activeSkill); // Log current state of activeSkill
+        console.log('Skill icon from click:', skillsIcons[skillKey]); // Log the icon clicked
+        console.log('Active Skill Icon:', activeSkill?.icon); // Log the active skill icon
+
+        if (activeSkill && activeSkill.icon === skillsIcons[skillKey]) {
+            console.log('Unselecting:', skillDetails[skillKey].title); // Log unselect action
             setActiveSkill(null);
         } else {
+            console.log('Selecting:', skillDetails[skillKey].title); // Log select action
             setActiveSkill(skillDetails[skillKey]);
         }
     };
@@ -78,22 +110,22 @@ export const SkillPanel = ({
             <div key={rowIndex} className="skills-row">
                 {chunk.map(skill => (
                     <span key={skill.label}
-                          className={`project-single-skill ${skill.icon === activeSkill?.icon ? 'selected' : ''}`}
+                          className="project-single-skill"
                           onClick={() => handleSkillClick(skill.icon)}>
-                        <img
-                            src={skillsIcons[skill.icon]}
-                            alt={`${skill.label} Icon`}
-                            className={`project-skill-icon ${color}-border`} // Dynamically adding a border color class
-                        />
-                        <div className="project-skill-label">{skill.label}</div>
-                    </span>
+            <img
+                src={skillsIcons[skill.icon]}
+                alt={`${skill.label} Icon`}
+                className={`project-skill-icon ${skill.icon === activeSkill?.icon ? 'selected' : ''} ${color}-border`} // Apply 'selected' to the img element
+            />
+            <div className="project-skill-label">{skill.label}</div>
+            </span>
                 ))}
             </div>
         ));
     };
 
     return (
-        <div className={`project-card-skills-panel ${color}-border`}>
+        <div key={activeSkill?.icon} className={`project-card-skills-panel ${color}-border`}>
             <h3 className={`${color}-title`}>{title}</h3>
             {renderSkills()}
             {activeSkill && (
