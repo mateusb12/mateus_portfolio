@@ -16,56 +16,19 @@ import LanguageContext from "./LanguageContext";
 
 const skillsIcons = {backend, api, nlp, django, networkx, numpy, pandas, graphviz, spacy};
 
-const skillDetails = {
-    'backend': {
-        'title': 'Backend',
-        'description': 'I am able to build and manage the server-side architecture of web applications, by implementing complex server logic, managing database interactions, and ensuring seamless integration of components.',
-        'icon': backend
-    },
-    'api': {
-        'title': 'APIs',
-        'description': 'I specialize in creating scalable APIs that support extensive data exchange and expand functionality while maintaining high security and performance standards.',
-        'icon': api
-    },
-    'nlp': {
-        'title': 'NLP',
-        'description': 'I am proficient in natural language processing, leveraging advanced machine learning algorithms to extract meaningful insights from text data.',
-        'icon': nlp
-    },
-    'django': {
-        'title': 'Django',
-        'description': 'Django is a high-level Python web framework. I use it to build scalable, database-driven applications with clean architecture and efficient development practices.',
-        'icon': django
-    },
-    'numpy': {
-        'title': 'Numpy',
-        'description': 'I am familiar with the NumPy library. It is a tool for scientific computing and linear algebra.',
-        'icon': numpy
-    },
-    'pandas': {
-        'title': 'Pandas',
-        'description': 'I am familiar with the Pandas library. It is a tool for sheet manipulation and data organization.',
-        'icon': pandas
-    },
-    'networkx': {
-        'title': 'NetworkX',
-        'description': 'I am familiar with the NetworkX library. It is a tool for creating and manipulating graphs.',
-        'icon': networkx
-    },
-    'graphviz': {
-        'title': 'Graphviz',
-        'description': 'I am familiar with the Graphviz library. It is a tool for graph visualization.',
-        'icon': graphviz
-    },
-    'spacy': {
-        'title': 'Spacy',
-        'description': 'I am familiar with the Spacy library. It is a tool for natural language processing.',
-        'icon': spacy
-    }
+const skillIconRetriever = {
+    'backend': backend,
+    'api': api,
+    'nlp': nlp,
+    'django': django,
+    'networkx': networkx,
+    'numpy': numpy,
+    'pandas': pandas,
+    'graphviz': graphviz,
+    'spacy': spacy
 }
 
-
-const newSkillDetails = skillsData.english.skillsList['english'];
+const newSkillDetails = skillsData.english.skillsList;
 
 const defaultSkills = [
     {icon: 'backend', label: 'Backend'},
@@ -91,12 +54,9 @@ export const SkillPanel = ({
         if (activeSkill && activeSkill.icon === skillsIcons[skillKey]) {
             setActiveSkill(null);
         } else {
-            let test = (JSON.stringify(skillDetails) === JSON.stringify(newSkillDetails));
-            if(!test){
-                console.log('Not the same thing.')
-            }
-            let activeSkillByFind = Object.entries(skillDetails).find(([key, value]) => key === skillKey)[1];
-            setActiveSkill(activeSkillByFind);
+            const dynamicSkill = newSkillDetails.find(entry => entry.key === skillKey);
+            dynamicSkill.icon = skillIconRetriever[skillKey];
+            setActiveSkill(dynamicSkill);
         }
     };
 
@@ -148,3 +108,5 @@ function importAll(r) {
     r.keys().forEach((item, index) => { images[item.replace('./', '')] = r(item); });
     return images;
 }
+
+
