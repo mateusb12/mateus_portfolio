@@ -28,8 +28,6 @@ const skillIconRetriever = {
     'spacy': spacy
 }
 
-const newSkillDetails = skillsData.english.skillsList;
-
 const defaultSkills = [
     {icon: 'backend', label: 'Backend'},
     {icon: 'api', label: 'APIs'},
@@ -47,16 +45,18 @@ export const SkillPanel = ({
                                title = "Default Skills",
                                color = "core-skills"
                            }) => {
-    const { language } = useContext(LanguageContext);
+    const { selectedFlag } = useContext(LanguageContext);
     const [activeSkill, setActiveSkill] = useState(null);
 
     const handleSkillClick = (skillKey) => {
         if (activeSkill && activeSkill.icon === skillsIcons[skillKey]) {
             setActiveSkill(null);
         } else {
-            const dynamicSkill = newSkillDetails.find(entry => entry.key === skillKey);
-            dynamicSkill.icon = skillIconRetriever[skillKey];
-            setActiveSkill(dynamicSkill);
+            console.log("Language is: " + selectedFlag);
+            const allSkills = skillsData[selectedFlag].skillsList;
+            const skillContent = allSkills.find(entry => entry.key === skillKey);
+            skillContent.icon = skillIconRetriever[skillKey];
+            setActiveSkill(skillContent);
         }
     };
 
