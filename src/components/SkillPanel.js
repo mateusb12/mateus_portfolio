@@ -49,10 +49,13 @@ export const SkillPanel = ({
     const [activeSkill, setActiveSkill] = useState(null);
 
     const handleSkillClick = (skillKey) => {
+        const translationMap = {"usa": "english", "brazil": "portuguese"};
+        const language = translationMap[selectedFlag];
+
         if (activeSkill && activeSkill.key === skillKey) {
             setActiveSkill(null); // Toggle off if the same skill is clicked again
         } else {
-            const allSkills = skillsData[selectedFlag].skillsList;
+            const allSkills = skillsData[language].skillsList;
             const skillContent = allSkills.find(entry => entry.key === skillKey);
             skillContent.imageUrl = skillIconRetriever[skillKey]; // maintain image URL separately
             setActiveSkill({...skillContent, active: skillKey}); // Use a new `active` property to determine selected state
