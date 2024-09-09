@@ -49,14 +49,13 @@ export const SkillPanel = ({
     const [activeSkill, setActiveSkill] = useState(null);
 
     const handleSkillClick = (skillKey) => {
-        if (activeSkill && activeSkill.icon === skillsIcons[skillKey]) {
-            setActiveSkill(null);
+        if (activeSkill && activeSkill.key === skillKey) {
+            setActiveSkill(null); // Toggle off if the same skill is clicked again
         } else {
-            console.log("Language is: " + selectedFlag);
             const allSkills = skillsData[selectedFlag].skillsList;
             const skillContent = allSkills.find(entry => entry.key === skillKey);
-            skillContent.icon = skillIconRetriever[skillKey];
-            setActiveSkill(skillContent);
+            skillContent.imageUrl = skillIconRetriever[skillKey]; // maintain image URL separately
+            setActiveSkill({...skillContent, active: skillKey}); // Use a new `active` property to determine selected state
         }
     };
 
@@ -69,32 +68,32 @@ export const SkillPanel = ({
     };
 
     const renderSkills = () => {
-        const skillChunks = chunkArray(skills, 3); // Split skills into chunks of 3
+        const skillChunks = chunkArray(skills, 3);
         return skillChunks.map((chunk, rowIndex) => (
             <div key={rowIndex} className="skills-row">
                 {chunk.map(skill => (
                     <span key={skill.label}
                           className="project-single-skill"
                           onClick={() => handleSkillClick(skill.icon)}>
-            <img
-                src={skillsIcons[skill.icon]}
-                alt={`${skill.label} Icon`}
-                className={`project-skill-icon ${skill.icon === activeSkill?.icon ? 'selected' : ''} ${color}-border`} // Apply 'selected' to the img element
-            />
-            <div className="project-skill-label">{skill.label}</div>
-            </span>
+                        <img
+                            src={skillsIcons[skill.icon]}
+                            alt={`${skill.label} Icon`}
+                            className={`project-skill-icon ${skill.icon === activeSkill?.active ? 'selected' : ''} ${color}-border`}
+                        />
+                        <div className="project-skill-label">{skill.label}</div>
+                    </span>
                 ))}
             </div>
         ));
     };
 
     return (
-        <div key={activeSkill?.icon} className={`project-card-skills-panel ${color}-border`}>
+        <div key={activeSkill?.key} className={`project-card-skills-panel ${color}-border`}>
             <h3 className={`${color}-title`}>{title}</h3>
             {renderSkills()}
             {activeSkill && (
                 <div className="hidden-footer">
-                    <img src={activeSkill.icon} alt={activeSkill.title}/>
+                    <img src={activeSkill.imageUrl} alt={activeSkill.title}/>
                     <h3>{activeSkill.title}</h3>
                     <p>{activeSkill.description}</p>
                 </div>
@@ -102,6 +101,7 @@ export const SkillPanel = ({
         </div>
     );
 };
+
 
 function importAll(r) {
     let images = {};
