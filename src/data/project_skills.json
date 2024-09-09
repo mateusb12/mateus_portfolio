@@ -1,0 +1,120 @@
+{
+  "english": {
+    "title": "Skills",
+    "skillsList": [
+      {
+        "key": "backend",
+        "label": "Backend",
+        "description": "I am able to build and manage the server-side architecture of web applications, by implementing complex server logic, managing database interactions, and ensuring seamless integration of components.",
+        "icon": "server.png"
+      },
+      {
+        "key": "api",
+        "label": "APIs",
+        "description": "I specialize in creating scalable APIs that support extensive data exchange and expand functionality while maintaining high security and performance standards.",
+        "icon": "api.png"
+      },
+      {
+        "key": "nlp",
+        "label": "NLP",
+        "description": "I am proficient in natural language processing, leveraging advanced machine learning algorithms to extract meaningful insights from text data.",
+        "icon": "nlp.png"
+      },
+      {
+        "key": "django",
+        "label": "Django",
+        "description": "Django is a high-level Python web framework. I use it to build scalable, database-driven applications with clean architecture and efficient development practices.",
+        "icon": "django.png"
+      },
+      {
+        "key": "networkx",
+        "label": "NetworkX",
+        "description": "I am familiar with the NetworkX library. It is a tool for creating and manipulating graphs.",
+        "icon": "networkx.png"
+      },
+      {
+        "key": "numpy",
+        "label": "Numpy",
+        "description": "I am familiar with the NumPy library. It is a tool for scientific computing and linear algebra.",
+        "icon": "numpy.png"
+      },
+      {
+        "key": "pandas",
+        "label": "Pandas",
+        "description": "I am familiar with the Pandas library. It is a tool for sheet manipulation and data organization.",
+        "icon": "pandas.png"
+      },
+      {
+        "key": "graphviz",
+        "label": "Graphviz",
+        "description": "I am familiar with the Graphviz library. It is a tool for graph visualization.",
+        "icon": "graphviz.png"
+      },
+      {
+        "key": "spacy",
+        "label": "Spacy",
+        "description": "I am familiar with the Spacy library. It is a tool for natural language processing.",
+        "icon": "spacy.png"
+      }
+    ]
+  },
+  "portuguese": {
+    "title": "Habilidades",
+    "skillsList": [
+      {
+        "key": "backend",
+        "label": "Backend",
+        "description": "Sou capaz de construir e gerenciar a arquitetura do lado do servidor de aplicações web, implementando lógica complexa de servidor, gerenciando interações com o banco de dados e garantindo a integração perfeita dos componentes.",
+        "icon": "server.png"
+      },
+      {
+        "key": "api",
+        "label": "APIs",
+        "description": "Eu me especializo em criar APIs escaláveis que suportam ampla troca de dados e expandem funcionalidades, mantendo altos padrões de segurança e desempenho.",
+        "icon": "api.png"
+      },
+      {
+        "key": "nlp",
+        "label": "Processamento de Linguagem Natural",
+        "description": "Tenho proficiência em processamento de linguagem natural, aproveitando algoritmos avançados de aprendizado de máquina para extrair insights significativos de dados textuais.",
+        "icon": "nlp.png"
+      },
+      {
+        "key": "django",
+        "label": "Django",
+        "description": "Django é uma framework web de alto nível em Python. Uso-o para construir aplicações escaláveis orientadas a banco de dados com arquitetura limpa e práticas eficientes de desenvolvimento.",
+        "icon": "django.png"
+      },
+      {
+        "key": "networkx",
+        "label": "NetworkX",
+        "description": "Sou familiarizado com a biblioteca NetworkX. É uma ferramenta para criar e manipular grafos.",
+        "icon": "networkx.png"
+      },
+      {
+        "key": "numpy",
+        "label": "Numpy",
+        "description": "Sou familiarizado com a biblioteca NumPy. É uma ferramenta para computação científica e álgebra linear.",
+        "icon": "numpy.png"
+      },
+      {
+        "key": "pandas",
+        "label": "Pandas",
+        "description": "Sou familiarizado com a biblioteca Pandas. É uma ferramenta para manipulação e organização de dados em tabelas.",
+        "icon": "pandas.png"
+      },
+      {
+        "key": "graphviz",
+        "label": "Graphviz",
+        "description": "Sou familiarizado com a biblioteca Graphviz. É uma ferramenta para visualização de grafos.",
+        "icon": "graphviz.png"
+      },
+      {
+        "key": "spacy",
+        "label": "Spacy",
+        "description": "Sou familiarizado com a biblioteca Spacy. É uma ferramenta para processamento de linguagem natural.",
+        "icon": "spacy.png"
+      }
+    ]
+  }
+}

@@ -1,5 +1,6 @@
 import '../css/SkillPanel.css';
-import React, {useState} from "react";
+import skillsData from '../data/project_skills.json';
+import React, {useContext, useState} from "react";
 
 // Asset imports
 import backend from "../assets/img/skills_icons/server.png";
@@ -11,6 +12,7 @@ import numpy from "../assets/img/skills_icons/numpy.png";
 import pandas from "../assets/img/skills_icons/pandas.png";
 import graphviz from "../assets/img/skills_icons/graphviz.png";
 import spacy from "../assets/img/skills_icons/spacy.png";
+import LanguageContext from "./LanguageContext";
 
 const skillsIcons = {backend, api, nlp, django, networkx, numpy, pandas, graphviz, spacy};
 
@@ -62,6 +64,9 @@ const skillDetails = {
     }
 }
 
+
+const newSkillDetails = skillsData.english.skillsList['english'];
+
 const defaultSkills = [
     {icon: 'backend', label: 'Backend'},
     {icon: 'api', label: 'APIs'},
@@ -79,20 +84,19 @@ export const SkillPanel = ({
                                title = "Default Skills",
                                color = "core-skills"
                            }) => {
+    const { language } = useContext(LanguageContext);
     const [activeSkill, setActiveSkill] = useState(null);
 
     const handleSkillClick = (skillKey) => {
-        console.log('Clicked skill:', skillKey); // Log which skill was clicked
-        console.log('Current activeSkill:', activeSkill); // Log current state of activeSkill
-        console.log('Skill icon from click:', skillsIcons[skillKey]); // Log the icon clicked
-        console.log('Active Skill Icon:', activeSkill?.icon); // Log the active skill icon
-
         if (activeSkill && activeSkill.icon === skillsIcons[skillKey]) {
-            console.log('Unselecting:', skillDetails[skillKey].title); // Log unselect action
             setActiveSkill(null);
         } else {
-            console.log('Selecting:', skillDetails[skillKey].title); // Log select action
-            setActiveSkill(skillDetails[skillKey]);
+            let test = (JSON.stringify(skillDetails) === JSON.stringify(newSkillDetails));
+            if(!test){
+                console.log('Not the same thing.')
+            }
+            let activeSkillByFind = Object.entries(skillDetails).find(([key, value]) => key === skillKey)[1];
+            setActiveSkill(activeSkillByFind);
         }
     };
 
@@ -138,3 +142,9 @@ export const SkillPanel = ({
         </div>
     );
 };
+
+function importAll(r) {
+    let images = {};
+    r.keys().forEach((item, index) => { images[item.replace('./', '')] = r(item); });
+    return images;
+}
