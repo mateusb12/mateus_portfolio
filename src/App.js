@@ -15,9 +15,10 @@ import NewProjectCard from "./components/NewProjectCard";
 import {SkillPanel} from "./components/SkillPanel";
 
 function App() {
-    const [selectedFlag, setSelectedFlag] = useState('english');
+    const [language, setLanguage] = useState('english');
+    const [selectedFlag, setSelectedFlag] = useState('usa');
     return (
-        <LanguageContext.Provider value={{selectedFlag, setSelectedFlag}}>
+        <LanguageContext.Provider value={{selectedFlag, setSelectedFlag, language, setLanguage}}>
             <div className="App">
                 <Routes>
                     <Route path="/mateus_portfolio/" element={<FullLayout/>}/>

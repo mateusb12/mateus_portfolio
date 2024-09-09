@@ -1,6 +1,6 @@
 import '../css/SkillPanel.css';
 import skillsData from '../data/project_skills.json';
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 
 // Asset imports
 import backend from "../assets/img/skills_icons/server.png";
@@ -14,9 +14,7 @@ import graphviz from "../assets/img/skills_icons/graphviz.png";
 import spacy from "../assets/img/skills_icons/spacy.png";
 import LanguageContext from "./LanguageContext";
 
-const skillsIcons = {backend, api, nlp, django, networkx, numpy, pandas, graphviz, spacy};
-
-const skillIconRetriever = {
+const skillsIcons = {
     'backend': backend,
     'api': api,
     'nlp': nlp,
@@ -45,8 +43,25 @@ export const SkillPanel = ({
                                title = "Default Skills",
                                color = "core-skills"
                            }) => {
-    const { selectedFlag } = useContext(LanguageContext);
+    const { selectedFlag, language } = useContext(LanguageContext);
+    const [currentSkills, setCurrentSkills] = useState(skills);
     const [activeSkill, setActiveSkill] = useState(null);
+
+    function showSkillContent(language, skillKey) {
+        console.log("Skill clicked:", skillKey);
+        const allSkills = skillsData[language].skillsList;
+        if (!allSkills) {
+            console.warn(`No skills found for language: ${language}`);
+            return;
+        }
+        const skillContent = allSkills.find(entry => entry.key === skillKey);
+        if (!skillContent) {
+            console.warn(`Skill not found for key: ${skillKey}`);
+            return;
+        }
+        skillContent.imageUrl = skillsIcons[skillKey]; // maintain image URL separately
+        setActiveSkill({...skillContent, active: skillKey}); // Use a new `active` property to determine selected state
+    }
 
     const handleSkillClick = (skillKey) => {
         const translationMap = {"usa": "english", "brazil": "portuguese"};
@@ -55,10 +70,7 @@ export const SkillPanel = ({
         if (activeSkill && activeSkill.key === skillKey) {
             setActiveSkill(null); // Toggle off if the same skill is clicked again
         } else {
-            const allSkills = skillsData[language].skillsList;
-            const skillContent = allSkills.find(entry => entry.key === skillKey);
-            skillContent.imageUrl = skillIconRetriever[skillKey]; // maintain image URL separately
-            setActiveSkill({...skillContent, active: skillKey}); // Use a new `active` property to determine selected state
+            showSkillContent(language, skillKey);
         }
     };
 
@@ -71,24 +83,43 @@ export const SkillPanel = ({
     };
 
     const renderSkills = () => {
-        const skillChunks = chunkArray(skills, 3);
+        const skillChunks = chunkArray(currentSkills, 3);  // Use `currentSkills` to display updated skills
         return skillChunks.map((chunk, rowIndex) => (
             <div key={rowIndex} className="skills-row">
                 {chunk.map(skill => (
                     <span key={skill.label}
                           className="project-single-skill"
                           onClick={() => handleSkillClick(skill.icon)}>
-                        <img
-                            src={skillsIcons[skill.icon]}
-                            alt={`${skill.label} Icon`}
-                            className={`project-skill-icon ${skill.icon === activeSkill?.active ? 'selected' : ''} ${color}-border`}
-                        />
-                        <div className="project-skill-label">{skill.label}</div>
-                    </span>
+                    <img
+                        src={skillsIcons[skill.icon]}
+                        alt={`${skill.label} Icon`}
+                        className={`project-skill-icon ${skill.icon === activeSkill?.active ? 'selected' : ''} ${color}-border`}
+                    />
+                    <div className="project-skill-label">{skill.label}</div>
+                </span>
                 ))}
             </div>
         ));
     };
+
+    useEffect(() => {
+        // Calculate the language mapping outside of the effect but it's used inside.
+        const translationMap = {"usa": "english", "brazil": "portuguese"};
+        const currentLanguage = translationMap[selectedFlag];
+
+        const updatedSkills = skillsData[currentLanguage]?.skillsList.map(skill => ({
+            ...skill,
+            imageUrl: skillsIcons[skill.key],
+            label: skill.label // Assume you have labels in your skills data
+        }));
+
+        if (updatedSkills) {
+            console.log(updatedSkills)
+            // setCurrentSkills(updatedSkills);
+        }
+    }, [selectedFlag]);  // Depend on selectedFlag since it drives the language changes
+
+
 
     return (
         <div key={activeSkill?.key} className={`project-card-skills-panel ${color}-border`}>
