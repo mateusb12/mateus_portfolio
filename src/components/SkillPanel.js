@@ -46,9 +46,9 @@ export const SkillPanel = ({
     const { selectedFlag, language } = useContext(LanguageContext);
     const [currentSkills, setCurrentSkills] = useState(skills);
     const [activeSkill, setActiveSkill] = useState(null);
+    const [translatedTitle, setTranslatedTitle] = useState(title);
 
     function showSkillContent(language, skillKey) {
-        console.log("Skill clicked:", skillKey);
         const allSkills = skillsData[language].skillsList;
         if (!allSkills) {
             console.warn(`No skills found for language: ${language}`);
@@ -61,7 +61,6 @@ export const SkillPanel = ({
         }
         skillContent.imageUrl = skillsIcons[skillKey]; // maintain image URL separately
         setActiveSkill({...skillContent, active: skillKey}); // Use a new `active` property to determine selected state
-        console.log("New active skill is :", skillContent);
     }
 
     const handleSkillClick = (skillKey) => {
@@ -95,21 +94,45 @@ export const SkillPanel = ({
         ));
     };
 
-    useEffect(() => {
-        if(!activeSkill){
-            return
+    function translateTitle(currentTitle, currentLanguage) {
+        const skillTitleTranslationMap = {
+            'Core Skills': 'Habilidades chave',
+            'Frameworks': 'Frameworks',
+            'Libraries': 'Bibliotecas'
         }
-        // Calculate the language mapping outside of the effect but it's used inside.
+
+        if (currentLanguage === "english") {
+            // Looking for English title, reverse lookup if the current title is in Portuguese
+            const reverseMap = Object.entries(skillTitleTranslationMap).reduce((acc, [key, value]) => {
+                acc[value] = key; // Reverse the key-value pairs
+                return acc;
+            }, {});
+
+            return reverseMap[currentTitle] || currentTitle; // Default to the original if no translation is found
+        } else {
+            // Portuguese translation as before
+            return skillTitleTranslationMap[currentTitle] || currentTitle; // Default to the original if no translation is found
+        }
+    }
+
+
+    useEffect(() => {
+        // Calculate the language mapping outside the effect, but it's used inside.
         const translationMap = {"usa": "english", "brazil": "portuguese"};
         const currentLanguage = translationMap[selectedFlag];
-        showSkillContent(currentLanguage, activeSkill.key);
-    }, [selectedFlag]);  // Depend on selectedFlag since it drives the language changes
+        const newTitle = translateTitle(title, currentLanguage);
+        console.log("Translating title to:", newTitle);
+        setTranslatedTitle(newTitle);
+        if(activeSkill){
+            showSkillContent(currentLanguage, activeSkill.key);
+        }
+    }, [selectedFlag, title]);
 
 
 
     return (
         <div key={activeSkill?.key} className={`project-card-skills-panel ${color}-border`}>
-            <h3 className={`${color}-title`}>{title}</h3>
+            <h3 className={`${color}-title`}>{translatedTitle}</h3>
             {renderSkills()}
             {activeSkill && (
                 <div className="hidden-footer">
