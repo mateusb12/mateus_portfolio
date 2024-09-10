@@ -61,6 +61,7 @@ export const SkillPanel = ({
         }
         skillContent.imageUrl = skillsIcons[skillKey]; // maintain image URL separately
         setActiveSkill({...skillContent, active: skillKey}); // Use a new `active` property to determine selected state
+        console.log("New active skill is :", skillContent);
     }
 
     const handleSkillClick = (skillKey) => {
@@ -72,14 +73,6 @@ export const SkillPanel = ({
         } else {
             showSkillContent(language, skillKey);
         }
-    };
-
-    const chunkArray = (arr, chunkSize) => {
-        const result = [];
-        for (let i = 0; i < arr.length; i += chunkSize) {
-            result.push(arr.slice(i, i + chunkSize));
-        }
-        return result;
     };
 
     const renderSkills = () => {
@@ -103,20 +96,13 @@ export const SkillPanel = ({
     };
 
     useEffect(() => {
+        if(!activeSkill){
+            return
+        }
         // Calculate the language mapping outside of the effect but it's used inside.
         const translationMap = {"usa": "english", "brazil": "portuguese"};
         const currentLanguage = translationMap[selectedFlag];
-
-        const updatedSkills = skillsData[currentLanguage]?.skillsList.map(skill => ({
-            ...skill,
-            imageUrl: skillsIcons[skill.key],
-            label: skill.label // Assume you have labels in your skills data
-        }));
-
-        if (updatedSkills) {
-            console.log(updatedSkills)
-            // setCurrentSkills(updatedSkills);
-        }
+        showSkillContent(currentLanguage, activeSkill.key);
     }, [selectedFlag]);  // Depend on selectedFlag since it drives the language changes
 
 
@@ -134,6 +120,14 @@ export const SkillPanel = ({
             )}
         </div>
     );
+};
+
+const chunkArray = (arr, chunkSize) => {
+    const result = [];
+    for (let i = 0; i < arr.length; i += chunkSize) {
+        result.push(arr.slice(i, i + chunkSize));
+    }
+    return result;
 };
 
 
