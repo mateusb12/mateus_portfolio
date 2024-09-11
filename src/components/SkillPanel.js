@@ -121,7 +121,6 @@ export const SkillPanel = ({
         const translationMap = {"usa": "english", "brazil": "portuguese"};
         const currentLanguage = translationMap[selectedFlag];
         const newTitle = translateTitle(title, currentLanguage);
-        console.log("Translating title to:", newTitle);
         setTranslatedTitle(newTitle);
         if(activeSkill){
             showSkillContent(currentLanguage, activeSkill.key);

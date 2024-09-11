@@ -1,0 +1,50 @@
+{
+  "english": {
+    "projectList": [
+      {
+        "title": "Witcher Network",
+        "description": "Transform .txt book files into social media style graphs, similar to Instagram",
+        "image": "witcher_reading_book.png",
+        "coreSkills": [
+          { "icon": "backend", "label": "Backend" },
+          { "icon": "api", "label": "APIs" },
+          { "icon": "nlp", "label": "NLP" }
+        ],
+        "frameworks": [
+          { "icon": "django", "label": "Django" }
+        ],
+        "libraries": [
+          { "icon": "numpy", "label": "Numpy" },
+          { "icon": "pandas", "label": "Pandas" },
+          { "icon": "networkx", "label": "Networkx" },
+          { "icon": "graphviz", "label": "GraphViz" },
+          { "icon": "spacy", "label": "Spacy" }
+        ]
+      }
+    ]
+  },
+  "portuguese": {
+    "projectList": [
+      {
+        "title": "Rede Witcher",
+        "description": "Transforma arquivos de livro .txt em gráficos ao estilo de redes sociais, similar ao Instagram",
+        "image": "witcher_reading_book.png",
+        "coreSkills": [
+          { "icon": "backend", "label": "Backend" },
+          { "icon": "api", "label": "APIs" },
+          { "icon": "nlp", "label": "PNL" }
+        ],
+        "frameworks": [
+          { "icon": "django", "label": "Django" }
+        ],
+        "libraries": [
+          { "icon": "numpy", "label": "Numpy" },
+          { "icon": "pandas", "label": "Pandas" },
+          { "icon": "networkx", "label": "Networkx" },
+          { "icon": "graphviz", "label": "GraphViz" },
+          { "icon": "spacy", "label": "Spacy" }
+        ]
+      }
+    ]
+  }
+}
