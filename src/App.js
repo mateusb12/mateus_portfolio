@@ -10,8 +10,8 @@ import { Footer } from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
 import LanguageContext from './components/LanguageContext';
 import {useState} from "react";
-import {ProjectCard} from "./components/ProjectCard";
-import NewProjectCard from "./components/NewProjectCard";
+import {OldProjectCard} from "./components/OldProjectCard";
+import ProjectCard from "./components/ProjectCard";
 import {SkillPanel} from "./components/SkillPanel";
 
 function App() {
@@ -26,10 +26,10 @@ function App() {
                     <Route path="/mateus_portfolio/introduction" element={<Introduction/>}/>
                     <Route path="/mateus_portfolio/skills" element={<Skills/>}/>
                     <Route path="/mateus_portfolio/projects" element={<Projects/>}/>
-                    <Route path="/mateus_portfolio/projectCard" element={<ProjectCard/>}/>
+                    <Route path="/mateus_portfolio/projectCard" element={<OldProjectCard/>}/>
                     <Route path="/mateus_portfolio/contact" element={<Contact/>}/>
                     <Route path="/mateus_portfolio/footer" element={<Footer/>}/>
-                    <Route path='/mateus_portfolio/newprojectcard' element={<NewProjectCard/>}/>
+                    <Route path='/mateus_portfolio/newprojectcard' element={<ProjectCard/>}/>
                     <Route path='/mateus_portfolio/skillpanel' element={<SkillPanel/>}/>
                 </Routes>
             </div>

@@ -1,6 +1,6 @@
 import '../css/Projects.css';
 import {Container, Row, Col, Tab, Nav} from "react-bootstrap";
-import {ProjectCard} from "./ProjectCard";
+import {OldProjectCard} from "./OldProjectCard";
 import projImg2 from "../assets/img/project-img2.png";
 import projImg3 from "../assets/img/project-img3.png";
 import witcher from "../assets/img/witcher_reading_book.png";
@@ -16,7 +16,7 @@ import {useContext} from "react";
 export const Projects = () => {
 
     const {selectedFlag, setSelectedFlag} = useContext(LanguageContext);
-    const languageFile = require('../data/projects.json');
+    const languageFile = require('../data/old_projects.json');
     const languageKey = selectedFlag === 'usa' ? 'english' : 'portuguese';
     const projectsData = languageFile[languageKey];
 
@@ -80,7 +80,7 @@ export const Projects = () => {
                                                     {
                                                         projects.map((project, index) => {
                                                             return (
-                                                                <ProjectCard
+                                                                <OldProjectCard
                                                                     key={index}
                                                                     {...project}
                                                                 />

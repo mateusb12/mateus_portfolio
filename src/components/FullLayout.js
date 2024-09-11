@@ -4,7 +4,7 @@ import {Skills} from "./Skills";
 import {Projects} from "./Projects";
 import {Contact} from "./Contact";
 import {Footer} from "./Footer";
-import NewProjectCard from "./NewProjectCard";
+import ProjectCard from "./ProjectCard";
 
 export function FullLayout() {
     return (
@@ -15,7 +15,7 @@ export function FullLayout() {
                 <Skills/>
             </div>
             <Projects/>
-            <NewProjectCard/>
+            <ProjectCard/>
             <Contact/>
             <Footer/>
         </>)
