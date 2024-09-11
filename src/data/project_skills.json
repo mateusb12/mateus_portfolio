@@ -1,16 +1,5 @@
 {
   "skills": {
-    "backend": {
-      "icon": "server.png",
-      "english": {
-        "label": "Backend",
-        "description": "I am able to build and manage the server-side architecture of web applications, by implementing complex server logic, managing database interactions, and ensuring seamless integration of components."
-      },
-      "portuguese": {
-        "label": "Backend",
-        "description": "Sou capaz de construir e gerenciar a arquitetura do lado do servidor de aplicações web, implementando lógica complexa de servidor, gerenciando interações com o banco de dados e garantindo a integração perfeita dos componentes."
-      }
-    },
     "api": {
       "icon": "api.png",
       "english": {
@@ -22,15 +11,15 @@
         "description": "Eu me especializo em criar APIs escaláveis que suportam ampla troca de dados e expandem funcionalidades, mantendo altos padrões de segurança e desempenho."
       }
     },
-    "nlp": {
-      "icon": "nlp.png",
+    "backend": {
+      "icon": "server.png",
       "english": {
-        "label": "NLP",
-        "description": "I am proficient in natural language processing, leveraging advanced machine learning algorithms to extract meaningful insights from text data."
+        "label": "Backend",
+        "description": "I am able to build and manage the server-side architecture of web applications, by implementing complex server logic, managing database interactions, and ensuring seamless integration of components."
       },
       "portuguese": {
-        "label": "Processamento de Linguagem Natural",
-        "description": "Tenho proficiência em processamento de linguagem natural, aproveitando algoritmos avançados de aprendizado de máquina para extrair insights significativos de dados textuais."
+        "label": "Backend",
+        "description": "Sou capaz de construir e gerenciar a arquitetura do lado do servidor de aplicações web, implementando lógica complexa de servidor, gerenciando interações com o banco de dados e garantindo a integração perfeita dos componentes."
       }
     },
     "django": {
@@ -44,6 +33,29 @@
         "description": "Django é uma framework web de alto nível em Python. Uso-o para construir aplicações escaláveis orientadas a banco de dados com arquitetura limpa e práticas eficientes de desenvolvimento."
       }
     },
+    "flask": {
+      "icon": "flask.png",
+      "english": {
+        "label": "Flask",
+        "description": "Flask is a micro web framework written in Python. I use it to build scalable, database-driven applications with clean architecture and efficient development practices."
+      },
+      "portuguese": {
+        "label": "Flask",
+        "description": "Flask é um framework web micro em Python. Uso-o para construir aplicações escaláveis orientadas a banco de dados com arquitetura limpa e práticas eficientes de desenvolvimento."
+      }
+    },
+
+    "graphviz": {
+      "icon": "graphviz.png",
+      "english": {
+        "label": "Graphviz",
+        "description": "I am familiar with the Graphviz library. It is a tool for graph visualization."
+      },
+      "portuguese": {
+        "label": "Graphviz",
+        "description": "Sou familiarizado com a biblioteca Graphviz. É uma ferramenta para visualização de grafos."
+      }
+    },
     "networkx": {
       "icon": "networkx.png",
       "english": {
@@ -53,6 +65,17 @@
       "portuguese": {
         "label": "NetworkX",
         "description": "Sou familiarizado com a biblioteca NetworkX. É uma ferramenta para criar e manipular grafos."
+      }
+    },
+    "nlp": {
+      "icon": "nlp.png",
+      "english": {
+        "label": "NLP",
+        "description": "I am proficient in natural language processing, leveraging advanced machine learning algorithms to extract meaningful insights from text data."
+      },
+      "portuguese": {
+        "label": "Processamento de Linguagem Natural",
+        "description": "Tenho proficiência em processamento de linguagem natural, aproveitando algoritmos avançados de aprendizado de máquina para extrair insights significativos de dados textuais."
       }
     },
     "numpy": {
@@ -75,17 +98,6 @@
       "portuguese": {
         "label": "Pandas",
         "description": "Sou familiarizado com a biblioteca Pandas. É uma ferramenta para manipulação e organização de dados em tabelas."
-      }
-    },
-    "graphviz": {
-      "icon": "graphviz.png",
-      "english": {
-        "label": "Graphviz",
-        "description": "I am familiar with the Graphviz library. It is a tool for graph visualization."
-      },
-      "portuguese": {
-        "label": "Graphviz",
-        "description": "Sou familiarizado com a biblioteca Graphviz. É uma ferramenta para visualização de grafos."
       }
     },
     "spacy": {

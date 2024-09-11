@@ -59,7 +59,6 @@ const ProjectCard = (
                 <SkillPanel title="Frameworks" color="frameworks" skills={currentProjectData.frameworks} />
                 <SkillPanel title="Libraries" color="libraries" skills={currentProjectData.libraries} />
             </div>
-            <button>Open Project</button>
         </div>
     );
 }

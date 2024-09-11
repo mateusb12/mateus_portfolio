@@ -35,7 +35,7 @@
         { "icon": "api", "label": "APIs" }
       ],
       "frameworks": [
-        { "icon": "django", "label": "Django" }
+        { "icon": "flask", "label": "Flask" }
       ],
       "libraries": [],
       "translations": {

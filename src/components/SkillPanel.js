@@ -12,6 +12,7 @@ import numpy from "../assets/img/skills_icons/numpy.png";
 import pandas from "../assets/img/skills_icons/pandas.png";
 import graphviz from "../assets/img/skills_icons/graphviz.png";
 import spacy from "../assets/img/skills_icons/spacy.png";
+import flask from "../assets/img/skills_icons/flask.png";
 import LanguageContext from "./LanguageContext";
 
 const skillsIcons = {
@@ -23,7 +24,8 @@ const skillsIcons = {
     'numpy': numpy,
     'pandas': pandas,
     'graphviz': graphviz,
-    'spacy': spacy
+    'spacy': spacy,
+    'flask': flask
 }
 
 const defaultSkills = [
@@ -78,21 +80,27 @@ export const SkillPanel = ({
         const skillChunks = chunkArray(currentSkills, 3);  // Use `currentSkills` to display updated skills
         return skillChunks.map((chunk, rowIndex) => (
             <div key={rowIndex} className="skills-row">
-                {chunk.map(skill => (
-                    <span key={skill.label}
-                          className="project-single-skill"
-                          onClick={() => handleSkillClick(skill.icon)}>
-                    <img
-                        src={skillsIcons[skill.icon]}
-                        alt={`${skill.label} Icon`}
-                        className={`project-skill-icon ${skill.icon === activeSkill?.active ? 'selected' : ''} ${color}-border`}
-                    />
-                    <div className="project-skill-label">{skill.label}</div>
-                </span>
-                ))}
+                {chunk.map(skill => {
+                    // Log the source URL of each skill icon
+                    // console.log(`Loading icon for ${skill.label}:`, skillsIcons[skill.icon]);
+                    return (
+                        <span key={skill.label}
+                              className="project-single-skill"
+                              onClick={() => handleSkillClick(skill.icon)}>
+                        <img
+                            src={skillsIcons[skill.icon]}
+                            alt={`${skill.label} Icon`}
+                            onError={() => console.error(`Failed to load image for ${skill.label}, path: ${skillsIcons[skill.icon]}`)}
+                            className={`project-skill-icon ${skill.icon === activeSkill?.active ? 'selected' : ''} ${color}-border`}
+                        />
+                        <div className="project-skill-label">{skill.label}</div>
+                    </span>
+                    );
+                })}
             </div>
         ));
     };
+
 
     function translateTitle(currentTitle, currentLanguage) {
         const skillTitleTranslationMap = {
