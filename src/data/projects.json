@@ -2,6 +2,7 @@
   "english": {
     "projectList": [
       {
+        "id": "witcher",
         "title": "Witcher Network",
         "description": "Transform .txt book files into social media style graphs, similar to Instagram",
         "image": "witcher_reading_book.png",
@@ -26,6 +27,7 @@
   "portuguese": {
     "projectList": [
       {
+        "id": "Witcher",
         "title": "Rede Witcher",
         "description": "Transforma arquivos de livro .txt em gráficos ao estilo de redes sociais, similar ao Instagram",
         "image": "witcher_reading_book.png",

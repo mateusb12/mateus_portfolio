@@ -2,14 +2,13 @@ import '../css/ProjectCard.css';
 import React, {useContext, useEffect, useState} from 'react';
 
 // Asset imports
-import witcher from "../assets/img/witcher_reading_book.png";
 import {SkillPanel} from "./SkillPanel";
 import LanguageContext from "./LanguageContext";
 import projectJsonData from '../data/projects.json';
 
 const ProjectCard = (
     {
-        imageUrl = witcher
+        projectId = "witcher"
     }
 ) => {
     const { selectedFlag } = useContext(LanguageContext);
@@ -35,15 +34,17 @@ const ProjectCard = (
             return;
         }
 
-        const projectContent = projectLanguageData.projectList;
-        if (!projectContent) {
+        const allProjects = projectLanguageData.projectList;
+        if (!allProjects) {
             console.error(`Project list for "${language}" (selectedFlag: "${selectedFlag}") is missing.`);
             setIsLoading(false);
             return;
         }
 
+        const currentProject = allProjects.find(item => item.id === projectId);
+
         // If all checks are valid, set the project data
-        setCurrentProjectData(projectContent);
+        setCurrentProjectData(currentProject);
         setIsLoading(false);  // Stop loading once data is fetched
     }, [selectedFlag]);
 
@@ -55,14 +56,14 @@ const ProjectCard = (
     return (
         <div className="project-card">
             <div className="project-card-header">
-                <h2>{currentProjectData[0].title}</h2>
-                <img src={require(`../assets/img/${currentProjectData[0].image}`)} alt="Project thumbnail"/>
-                <p>{currentProjectData[0].description}</p>
+                <h2>{currentProjectData.title}</h2>
+                <img src={require(`../assets/img/${currentProjectData.image}`)} alt="Project thumbnail"/>
+                <p>{currentProjectData.description}</p>
             </div>
             <div className="project-card-footer">
-                <SkillPanel title="Core Skills" color="core-skills" skills={currentProjectData[0].coreSkills} />
-                <SkillPanel title="Frameworks" color="frameworks" skills={currentProjectData[0].frameworks} />
-                <SkillPanel title="Libraries" color="libraries" skills={currentProjectData[0].libraries} />
+                <SkillPanel title="Core Skills" color="core-skills" skills={currentProjectData.coreSkills} />
+                <SkillPanel title="Frameworks" color="frameworks" skills={currentProjectData.frameworks} />
+                <SkillPanel title="Libraries" color="libraries" skills={currentProjectData.libraries} />
             </div>
             <button>Open Project</button>
         </div>

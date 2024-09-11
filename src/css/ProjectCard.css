@@ -30,7 +30,7 @@
     border-radius: var(--border-radius-small);
 }
 
-.project-card-header img.hovered {
+.project-card-header img:hover {
     border-width: 2px;
     border-color: #FFFFFF;
     cursor: pointer;
