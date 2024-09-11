@@ -25,7 +25,7 @@ const ProjectCarousel = () => {
     };
 
     // Generate an array with three "witcher" entries
-    const witcherCards = ["witcher", "witcher", "witcher", "witcher", "witcher", "witcher"];
+    const witcherCards = ["witcher", "flight-scraper", "witcher", "witcher", "witcher", "witcher"];
 
     return (
         <Carousel

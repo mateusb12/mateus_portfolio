@@ -49,18 +49,18 @@ export const SkillPanel = ({
     const [translatedTitle, setTranslatedTitle] = useState(title);
 
     function showSkillContent(language, skillKey) {
-        const allSkills = skillsData[language].skillsList;
-        if (!allSkills) {
-            console.warn(`No skills found for language: ${language}`);
+        const skillData = skillsData.skills[skillKey];
+        if (!skillData) {
+            console.warn(`Skill data not found for key: ${skillKey}`);
             return;
         }
-        const skillContent = allSkills.find(entry => entry.key === skillKey);
+        const skillContent = skillData[language];
         if (!skillContent) {
-            console.warn(`Skill not found for key: ${skillKey}`);
+            console.warn(`Skill content not found for language: ${language}`);
             return;
         }
-        skillContent.imageUrl = skillsIcons[skillKey]; // maintain image URL separately
-        setActiveSkill({...skillContent, active: skillKey}); // Use a new `active` property to determine selected state
+        skillContent.imageUrl = skillsIcons[skillKey]; // Keep image URL handling
+        setActiveSkill({...skillContent, key: skillKey, active: skillKey}); // Add `key` property for consistent access
     }
 
     const handleSkillClick = (skillKey) => {
