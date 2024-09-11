@@ -1,5 +1,4 @@
-import { useState, useEffect, useContext } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { useContext } from "react";
 import { ArrowRightCircle } from 'react-bootstrap-icons';
 import 'animate.css';
 import '../css/Introduction.css';
@@ -8,6 +7,7 @@ import LanguageContext from './LanguageContext';
 
 export const Introduction = () => {
   const { selectedFlag } = useContext(LanguageContext);
+
   const languageContent = {
     english: {
       header: "Welcome to my Portfolio!",
@@ -23,45 +23,24 @@ export const Introduction = () => {
     }
   };
 
-  const [selectedLanguage, setSelectedLanguage] = useState('english');
-  const [introductionTexts, setIntroductionTexts] = useState(languageContent[selectedLanguage]);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const languageKey = selectedFlag === 'usa' ? 'english' : 'portuguese';
-    setIntroductionTexts(languageContent[languageKey]);
-    setSelectedLanguage(languageKey);
-  }, [selectedFlag]);
+  // Mapping flag to language key
+  const languageKey = selectedFlag === 'usa' ? 'english' : 'portuguese';
+  const introductionTexts = languageContent[languageKey];
 
   return (
       <section className="introduction-banner debug" id="home">
         <TrackVisibility partialVisibility>
-          {({isVisible: visible}) => {
-            if (visible !== isVisible) {
-              setIsVisible(visible);
-            }
-            return (
-                <div className="main-container">
-                  <span className="vertical-index"></span>
-                  <div className={isVisible ? "animate__animated animate__fadeIn main-body" : ""}>
-                    {/*<span className="tagline">{introductionTexts.header}</span>*/}
-                    <h1>{introductionTexts.title}</h1>
-                    <p>{introductionTexts.body}</p>
-                    <button onClick={() => console.log('connect')}>{introductionTexts.footer} <ArrowRightCircle
-                        size={25}/>
-                    </button>
-                  </div>
-
+          {({ isVisible }) => (
+              <div className="main-container">
+                <span className="vertical-index"></span>
+                <div className={isVisible ? "animate__animated animate__fadeIn main-body" : ""}>
+                  <h1>{introductionTexts.title}</h1>
+                  <p>{introductionTexts.body}</p>
+                  <button onClick={() => console.log('connect')}>{introductionTexts.footer} <ArrowRightCircle size={25}/></button>
                 </div>
-            );
-          }}
+              </div>
+          )}
         </TrackVisibility>
-        {/*<Container>*/}
-        {/*  <Row className="align-items-center">*/}
-        {/*    <Col xs={12} md={6} xl={7} className="mx-auto">*/}
-        {/*    </Col>*/}
-        {/*  </Row>*/}
-        {/*</Container>*/}
       </section>
   );
 };
