@@ -2,7 +2,6 @@ import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import ProjectCard from './ProjectCard';
-import projectJsonData from '../data/projects.json';
 
 const ProjectCarousel = () => {
     const responsive = {
@@ -24,6 +23,9 @@ const ProjectCarousel = () => {
         }
     };
 
+    // Generate an array with three "witcher" entries
+    const witcherCards = ["witcher", "witcher", "witcher"];
+
     return (
         <Carousel
             swipeable={true}
@@ -42,8 +44,8 @@ const ProjectCarousel = () => {
             dotListClass="custom-dot-list-style"
             itemClass="carousel-item-padding-40-px"
         >
-            {projectJsonData.english.projectList.map((project, index) => (
-                <ProjectCard key={index} {...project} />
+            {witcherCards.map((projectId, index) => (
+                <ProjectCard key={index} projectId={projectId} />
             ))}
         </Carousel>
     );
