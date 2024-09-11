@@ -16,37 +16,31 @@ const ProjectCard = (
     const [isLoading, setIsLoading] = useState(true);  // Add a loading state
 
     useEffect(() => {
-        const languageMap = {"usa": "english", "brazil": "portuguese"};
+        const languageMap = { "usa": "english", "brazil": "portuguese" };
         const language = languageMap[selectedFlag];
 
-        // Early return for invalid language
         if (!language) {
             console.error(`selectedFlag "${selectedFlag}" does not map to any valid language in languageMap.`);
-            setIsLoading(false);  // Stop loading even if there's an error
-            return;
-        }
-
-        // Early return for missing language data
-        const projectLanguageData = projectJsonData[language];
-        if (!projectLanguageData) {
-            console.error(`Language data for "${language}" (selectedFlag: "${selectedFlag}") not found in projectJsonData.`);
             setIsLoading(false);
             return;
         }
 
-        const allProjects = projectLanguageData.projectList;
-        if (!allProjects) {
-            console.error(`Project list for "${language}" (selectedFlag: "${selectedFlag}") is missing.`);
+        const project = projectJsonData.projects[projectId];
+        if (!project) {
+            console.error(`Project data for ID "${projectId}" is missing.`);
             setIsLoading(false);
             return;
         }
 
-        const currentProject = allProjects.find(item => item.id === projectId);
+        // Merge project data with language-specific translations
+        const currentProject = {
+            ...project,
+            ...project.translations[language]
+        };
 
-        // If all checks are valid, set the project data
         setCurrentProjectData(currentProject);
-        setIsLoading(false);  // Stop loading once data is fetched
-    }, [selectedFlag]);
+        setIsLoading(false);
+    }, [selectedFlag, projectId]);
 
     if (isLoading) {
         // Render a loading message or spinner while data is loading
@@ -57,7 +51,7 @@ const ProjectCard = (
         <div className="project-card">
             <div className="project-card-header">
                 <h2>{currentProjectData.title}</h2>
-                <img src={require(`../assets/img/${currentProjectData.image}`)} alt="Project thumbnail"/>
+                <img src={require(`../assets/img/${currentProjectData.image}`)} alt="Project thumbnail" />
                 <p>{currentProjectData.description}</p>
             </div>
             <div className="project-card-footer">
