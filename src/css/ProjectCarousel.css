@@ -1,4 +1,8 @@
-.carousel-item-padding {
-    padding-right: 2px; /* Adjust the right padding to reduce the gap */
-    padding-left: 2px; /* Adjust the left padding if necessary */
+.skill-bx{
+    margin-top: 1rem;
+    border: 1px white solid;
+}
+
+.react-multi-carousel-item {
+    margin: 2rem;
 }
