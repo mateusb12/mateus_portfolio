@@ -1,47 +1,47 @@
 /* Use the smaller css for common variables and shared styles */
 
 .project-card {
-    width: 420px;
-    border: 1px solid var(--border-color);
-    padding: 20px;
-    border-radius: var(--border-radius-small);
-    background-color: var(--background-dark);
+  width: 390px;
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  border-radius: var(--border-radius-small);
+  background-color: var(--background-dark);
 }
 
 /* Header styling */
 .project-card-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--gap-standard);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-standard);
 }
 
 .project-card-header h2 {
-    color: var(--primary-color);
-    font-size: 33px;
-    letter-spacing: 1px;
+  color: var(--primary-color);
+  font-size: 33px;
+  letter-spacing: 1px;
 }
 
 .project-card-header img {
-    border: 1px solid var(--primary-color);
-    width: 100%;
-    height: auto;
-    border-radius: var(--border-radius-small);
+  border: 1px solid var(--primary-color);
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-small);
 }
 
 .project-card-header img:hover {
-    border-width: 2px;
-    border-color: #FFFFFF;
-    cursor: pointer;
+  border-width: 2px;
+  border-color: #ffffff;
+  cursor: pointer;
 }
 
 /* Footer section */
 .project-card-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-    gap: var(--gap-standard);
-    margin-bottom: var(--gap-standard);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--gap-standard);
+  margin-bottom: var(--gap-standard);
 }
