@@ -1,25 +1,25 @@
 .skill-bx {
-  margin-top: 1rem;
-  border: 1px white solid;
-  //padding: 2rem; /* Ajuste o padding conforme necessário */
-  text-align: center; /* Centraliza o texto */
+    margin-top: 1rem;
+    border: 1px white solid;
+//padding: 2rem; /* Ajuste o padding conforme necessário */
+    text-align: center; /* Centraliza o texto */
 }
 
 .react-multi-carousel-item {
-  display: flex;
-  justify-content: center; /* Centraliza os itens dentro do carrossel */
-  align-items: center;
+    display: flex;
+    justify-content: center; /* Centraliza os itens dentro do carrossel */
+    align-items: center;
 }
 
 .item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  //padding: 1rem;
-  /* Ajuste o tamanho do item conforme necessário */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+//padding: 1rem;
+    /* Ajuste o tamanho do item conforme necessário */
 }
 
 .item h5 {
-  margin-top: 0.5rem;
+    margin-top: 0.5rem;
 }
