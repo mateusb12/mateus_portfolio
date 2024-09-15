@@ -22,6 +22,17 @@
         "description": "Sou capaz de construir e gerenciar a arquitetura do lado do servidor de aplicações web, implementando lógica complexa de servidor, gerenciando interações com o banco de dados e garantindo a integração perfeita dos componentes."
       }
     },
+    "data-analysis": {
+      "icon": "data_analysis.png",
+      "english": {
+        "label": "Data Analysis",
+        "description": "I am proficient in extracting, cleaning, and interpreting data to uncover meaningful insights. This includes performing statistical analysis, creating data visualizations, and utilizing various tools and techniques to support data-driven decision making."
+      },
+      "portuguese": {
+        "label": "Análise de Dados",
+        "description": "Sou proficiente em extrair, limpar e interpretar dados para descobrir insights significativos. Isso inclui realizar análises estatísticas, criar visualizações de dados e utilizar diversas ferramentas e técnicas para apoiar a tomada de decisões baseada em dados."
+      }
+    },
     "django": {
       "icon": "django.png",
       "english": {
@@ -53,6 +64,28 @@
       "portuguese": {
         "label": "Graphviz",
         "description": "Sou familiarizado com a biblioteca Graphviz. É uma ferramenta para visualização de grafos."
+      }
+    },
+    "lightgbm": {
+      "icon": "lightgbm.png",
+      "english": {
+        "label": "LightGBM",
+        "description": "Using LightGBM, I develop high-performance gradient boosting models by managing data preprocessing, feature engineering, hyperparameter tuning, model training, and evaluation to ensure precise and efficient predictions."
+      },
+      "portuguese": {
+        "label": "LightGBM",
+        "description": "Utilizando o LightGBM, desenvolvo modelos de gradient boosting de alto desempenho, realizando pré-processamento de dados, engenharia de características, ajuste de hiperparâmetros, treinamento e avaliação para garantir previsões precisas e eficientes."
+      }
+    },
+    "machine-learning": {
+      "icon": "machine_learning.png",
+      "english": {
+        "label": "Machine Learning",
+        "description": "I am capable of designing, developing, and deploying machine learning models by handling data preprocessing, feature engineering, model training, and evaluation to enable systems to learn from data and make accurate predictions or decisions."
+      },
+      "portuguese": {
+        "label": "Aprendizado de Máquina",
+        "description": "Sou capaz de projetar, desenvolver e implantar modelos de aprendizado de máquina, realizando pré-processamento de dados, engenharia de características, treinamento e avaliação de modelos para permitir que os sistemas aprendam a partir dos dados e façam previsões ou decisões precisas."
       }
     },
     "networkx": {
@@ -88,6 +121,17 @@
         "description": "Sou familiarizado com a biblioteca NumPy. É uma ferramenta para computação científica e álgebra linear."
       }
     },
+    "optuna": {
+      "icon": "optuna.png",
+      "english": {
+        "label": "Optuna",
+        "description": "Leveraging Optuna, I perform efficient hyperparameter optimization for machine learning models by defining search spaces, configuring algorithms, conducting experiments, and analyzing outcomes to boost model accuracy."
+      },
+      "portuguese": {
+        "label": "Optuna",
+        "description": "Aproveitando o Optuna, realizo otimização eficiente de hiperparâmetros para modelos de aprendizado de máquina, definindo espaços de busca, configurando algoritmos, conduzindo experimentos e analisando resultados para aumentar a precisão do modelo."
+      }
+    },
     "pandas": {
       "icon": "pandas.png",
       "english": {
@@ -99,6 +143,17 @@
         "description": "Sou familiarizado com a biblioteca Pandas. É uma ferramenta para manipulação e organização de dados em tabelas."
       }
     },
+    "seaborn": {
+      "icon": "seaborn.png",
+      "english": {
+        "label": "Seaborn",
+        "description": "Skilled in Seaborn, I design informative and visually appealing statistical graphics, including heatmaps, violin plots, and pair plots, while customizing visualizations for clarity and integrating them with other data analysis tools."
+      },
+      "portuguese": {
+        "label": "Seaborn",
+        "description": "Habilidoso em Seaborn, crio gráficos estatísticos informativos e visualmente atraentes, incluindo heatmaps, violin plots e pair plots, personalizando visualizações para maior clareza e integrando-as com outras ferramentas de análise de dados."
+      }
+    },
     "spacy": {
       "icon": "spacy.png",
       "english": {
@@ -108,6 +163,28 @@
       "portuguese": {
         "label": "SpaCy",
         "description": "Sou familiarizado com a biblioteca SpaCy. É uma ferramenta para processamento de linguagem natural."
+      }
+    },
+    "scikit-learn": {
+      "icon": "scikit_learn.png",
+      "english": {
+        "label": "Scikit-Learn",
+        "description": "Expertise in Scikit-Learn enables me to develop and deploy machine learning models, covering data preprocessing, feature selection, model training, evaluation, and tuning with a diverse set of algorithms for robust predictive solutions."
+      },
+      "portuguese": {
+        "label": "Scikit-Learn",
+        "description": "Com expertise em Scikit-Learn, desenvolvo e implanto modelos de aprendizado de máquina, abrangendo pré-processamento de dados, seleção de características, treinamento de modelos, avaliação e ajuste com uma variedade de algoritmos para soluções preditivas robustas."
+      }
+    },
+    "scipy": {
+      "icon": "scipy.png",
+      "english": {
+        "label": "SciPy",
+        "description": "Utilizing SciPy, I perform advanced scientific and numerical computations, including complex mathematical operations, optimization, signal processing, and statistical analysis to create effective solutions for scientific and engineering challenges."
+      },
+      "portuguese": {
+        "label": "SciPy",
+        "description": "Utilizando o SciPy, realizo cálculos científicos e numéricos avançados, incluindo operações matemáticas complexas, otimização, processamento de sinais e análise estatística para criar soluções eficazes para desafios científicos e de engenharia."
       }
     },
     "firebase": {
@@ -125,11 +202,11 @@
       "icon": "matplotlib.png",
       "english": {
         "label": "Matplotlib",
-        "description": "I am familiar with Matplotlib, a comprehensive library for creating static, animated, and interactive visualizations in Python."
+        "description": "Proficient in Matplotlib, I create static, animated, and interactive visualizations in Python, enhancing data representation and insight communication."
       },
       "portuguese": {
         "label": "Matplotlib",
-        "description": "Sou familiarizado com o Matplotlib, uma biblioteca abrangente para criar visualizações estáticas, animadas e interativas em Python."
+        "description": "Proficiente em Matplotlib, crio visualizações estáticas, animadas e interativas em Python, aprimorando a representação de dados e a comunicação de insights."
       }
     },
     "selenium": {
