@@ -51,7 +51,7 @@ const ProjectCard = ({ projectId = 'witcher', isActive = false }) => {
     }
 
     return (
-        <div className="project-card">
+        <div className={`project-card ${isExpanded ? 'expanded' : ''}`}>
             <div className="project-card-header">
                 <h2>{currentProjectData.title}</h2>
                 <img src={require(`../assets/img/${currentProjectData.image}`)} alt="Project thumbnail" />

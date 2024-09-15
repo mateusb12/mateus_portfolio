@@ -6,7 +6,7 @@ import ProjectCard from "./ProjectCard";
 
 const ProjectCarousel = () => {
     const projectIds = ["witcher", "flight-scraper", "valorant-impact"];
-    const [currentVisibleIndex, setCurrentVisibleIndex] = useState(0); // Track only the current visible index
+    const [currentVisibleIndex, setCurrentVisibleIndex] = useState(1); // Track only the current visible index
 
     const responsive = {
         superLargeDesktop: { breakpoint: { max: 4000, min: 3000 }, items: 3 },
@@ -17,13 +17,13 @@ const ProjectCarousel = () => {
 
     useEffect(() => {
         // Initially set to the first item as visible
-        setCurrentVisibleIndex(0);
+        setCurrentVisibleIndex(1);
     }, []);
 
-    const afterChangeHandler = (previousSlide, state) => {
-        console.log(`Debugging state:`, state); // Add this to see all the data in the state
-        setCurrentVisibleIndex(state.currentSlide);
-        console.log(`Carousel changed: prevSlide = ${previousSlide}, currentSlide = ${state.currentSlide}`);
+    const afterChangeHandler = (newSlide) => {
+        console.log(`Carousel changed: currentSlide = ${newSlide}`);
+        let newIndex = (newSlide % projectIds.length) - 1;
+        setCurrentVisibleIndex(newIndex);
     };
 
     return (
@@ -40,6 +40,7 @@ const ProjectCarousel = () => {
                                 responsive={responsive}
                                 infinite={true}
                                 afterChange={afterChangeHandler}
+                                // Optionally, add other props like arrows, swipe, etc.
                             >
                                 {projectIds.map((projectId, index) => (
                                     <div className="item" key={index}>
