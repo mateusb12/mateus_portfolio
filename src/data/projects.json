@@ -38,11 +38,11 @@
         { "icon": "flask", "label": "Flask" }
       ],
       "libraries": [
-        { "icon": "firebase", "label": "Firebase"},
-        { "icon": "matplotlib", "label": "Matplotlib"},
-        { "icon": "pandas", "label": "Pandas"},
-        { "icon": "selenium", "label": "Selenium"},
-        { "icon": "telegram", "label": "Telegram Bot"}
+        { "icon": "firebase", "label": "Firebase" },
+        { "icon": "matplotlib", "label": "Matplotlib" },
+        { "icon": "pandas", "label": "Pandas" },
+        { "icon": "selenium", "label": "Selenium" },
+        { "icon": "telegram", "label": "Telegram Bot" }
       ],
       "translations": {
         "english": {
@@ -52,6 +52,36 @@
         "portuguese": {
           "title": "Raspador de Voos",
           "description": "Alimentado pela API Kiwi Tequilla, esse projeto coleta dados de voo da API e os exibe de forma amigável ao usuário. O foco principal é criar alertas para o usuário quando o preço de algum voo cair."
+        }
+      }
+    },
+    "valorant-impact": {
+      "image": "data_analysis.jpg",
+      "coreSkills": [
+        { "icon": "backend", "label": "Backend" },
+        { "icon": "machine-learning", "label": "Machine Learning" },
+        { "icon": "data-analysis", "label": "Data Analysis" }
+      ],
+      "frameworks": [
+        { "icon": "flask", "label": "Flask" }
+      ],
+      "libraries": [
+        { "icon": "lightgbm", "label": "LightGBM" },
+        { "icon": "matplotlib", "label": "Matplotlib" },
+        { "icon": "optuna", "label": "Optuna" },
+        { "icon": "pandas", "label": "Pandas" },
+        { "icon": "scikit-learn", "label": "Scikit-learn" },
+        { "icon": "scipy", "label": "Scipy" },
+        { "icon": "seaborn", "label": "Seaborn" }
+      ],
+      "translations": {
+        "english": {
+          "title": "Valorant Impact",
+          "description": "A tool that quantifies how much player actions can shift the odds of winning a Valorant round. By analyzing kills, weapon choices, economy and strategic moves, it reveals the real-time impact on victory chances."
+        },
+        "portuguese": {
+          "title": "Impacto no Valorant",
+          "description": "Uma ferramenta que quantifica quanto as ações dos jogadores podem mudar as chances de ganhar uma rodada no Valorant. Ao analisar mortes, escolhas de armas, economia e movimentos estratégicos, revela o impacto em tempo real nas chances de vitória."
         }
       }
     }

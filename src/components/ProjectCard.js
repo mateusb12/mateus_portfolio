@@ -4,15 +4,11 @@ import { SkillPanel } from './SkillPanel';
 import LanguageContext from './LanguageContext';
 import projectJsonData from '../data/projects.json';
 
-const ProjectCard = ({ projectId = 'witcher', isSelected = false, onSelect = () => {} }) => {
+const ProjectCard = ({ projectId = 'witcher', isActive = false }) => {
     const { selectedFlag } = useContext(LanguageContext);
     const [currentProjectData, setCurrentProjectData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [isSelectedState, setIsSelectedState] = useState(false);
-
-    const handleSelect = () => {
-        setIsSelectedState(prevState => !prevState); // Use functional update
-    };
+    const [isExpanded, setIsExpanded] = useState(false);
 
     useEffect(() => {
         const languageMap = { usa: 'english', brazil: 'portuguese' };
@@ -41,6 +37,15 @@ const ProjectCard = ({ projectId = 'witcher', isSelected = false, onSelect = () 
         setIsLoading(false);
     }, [selectedFlag, projectId]);
 
+    useEffect(() => {
+        // Reset isExpanded when isActive changes
+        setIsExpanded(isActive);
+    }, [isActive]);
+
+    const handleSelect = () => {
+        setIsExpanded((prev) => !prev);
+    };
+
     if (isLoading) {
         return <div>Loading project data...</div>;
     }
@@ -57,22 +62,22 @@ const ProjectCard = ({ projectId = 'witcher', isSelected = false, onSelect = () 
                     title="Core Skills"
                     color="core-skills"
                     skills={currentProjectData.coreSkills}
-                    isExpanded={isSelectedState}
+                    isExpanded={isExpanded}
                 />
                 <SkillPanel
                     title="Frameworks"
                     color="frameworks"
                     skills={currentProjectData.frameworks}
-                    isExpanded={isSelectedState}
+                    isExpanded={isExpanded}
                 />
                 <SkillPanel
                     title="Libraries"
                     color="libraries"
                     skills={currentProjectData.libraries}
-                    isExpanded={isSelectedState}
+                    isExpanded={isExpanded}
                 />
                 <button className="project-card-button" onClick={handleSelect}>
-                    {isSelectedState ? 'Collapse' : 'Expand'}
+                    {isExpanded ? 'Collapse' : 'Expand'}
                 </button>
             </div>
         </div>
