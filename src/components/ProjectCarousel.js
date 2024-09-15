@@ -1,18 +1,4 @@
 import React, { useState } from "react";
-import { AiFillHtml5 } from "react-icons/ai";
-import { IoLogoCss3 } from "react-icons/io5";
-import { IoLogoJavascript } from "react-icons/io";
-import { BsWordpress } from "react-icons/bs";
-import { FiFigma } from "react-icons/fi";
-import { FaReact, FaSass, FaBootstrap, FaGit } from "react-icons/fa";
-import {
-    SiTypescript,
-    SiMui,
-    SiNextdotjs,
-    SiVite,
-    SiStyledcomponents,
-    SiStorybook,
-} from "react-icons/si";
 import "react-multi-carousel/lib/styles.css";
 import Carousel from "react-multi-carousel";
 import "../css/ProjectCarousel.css";
