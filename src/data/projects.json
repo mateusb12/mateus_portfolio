@@ -23,8 +23,8 @@
           "description": "Transform .txt book files into social media style graphs, similar to Instagram"
         },
         "portuguese": {
-          "title": "Rede Witcher",
-          "description": "Transforma arquivos de livro .txt em gráficos ao estilo de redes sociais, similar ao Instagram"
+          "title": "Analisador de Livros",
+          "description": "Transforma arquivos de livro .txt em grafos ao estilo das redes sociais, similares ao Instagram"
         }
       }
     },
@@ -37,7 +37,9 @@
       "frameworks": [
         { "icon": "flask", "label": "Flask" }
       ],
-      "libraries": [],
+      "libraries": [
+        { "icon": "firebase", "label": "Firebase" }
+      ],
       "translations": {
         "english": {
           "title": "Flight Scraper",
@@ -45,7 +47,7 @@
         },
         "portuguese": {
           "title": "Raspador de Voos",
-          "description": "Alimentado pela API Kiwi Tequilla, este projeto coleta dados de voo da API e os exibe de forma amigável ao usuário. O foco principal é criar alertas para o usuário quando o preço de um voo cair."
+          "description": "Alimentado pela API Kiwi Tequilla, esse projeto coleta dados de voo da API e os exibe de forma amigável ao usuário. O foco principal é criar alertas para o usuário quando o preço de algum voo cair."
         }
       }
     }

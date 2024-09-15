@@ -3,30 +3,20 @@ import skillsData from '../data/project_skills.json';
 import React, {useContext, useEffect, useState} from "react";
 
 // Asset imports
-import backend from "../assets/img/skills_icons/server.png";
-import api from "../assets/img/skills_icons/api.png";
-import nlp from "../assets/img/skills_icons/nlp.png";
-import django from "../assets/img/skills_icons/django.png";
-import networkx from "../assets/img/skills_icons/networkx.png";
-import numpy from "../assets/img/skills_icons/numpy.png";
-import pandas from "../assets/img/skills_icons/pandas.png";
-import graphviz from "../assets/img/skills_icons/graphviz.png";
-import spacy from "../assets/img/skills_icons/spacy.png";
-import flask from "../assets/img/skills_icons/flask.png";
 import LanguageContext from "./LanguageContext";
 
-const skillsIcons = {
-    'backend': backend,
-    'api': api,
-    'nlp': nlp,
-    'django': django,
-    'networkx': networkx,
-    'numpy': numpy,
-    'pandas': pandas,
-    'graphviz': graphviz,
-    'spacy': spacy,
-    'flask': flask
-}
+const importAll = (r) => {
+    let images = {};
+    r.keys().forEach((item) => {
+        // Extract the icon name from the file path
+        const iconName = item.replace('./', '').replace('.png', '');
+        images[iconName] = r(item);
+    });
+    return images;
+};
+
+const skillsIcons = importAll(require.context('../assets/img/skills_icons', false, /\.png$/));
+
 
 const defaultSkills = [
     {icon: 'backend', label: 'Backend'},
