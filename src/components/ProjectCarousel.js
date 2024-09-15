@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "react-multi-carousel/lib/styles.css";
 import Carousel from "react-multi-carousel";
 import "../css/ProjectCarousel.css";
 import ProjectCard from "./ProjectCard";
 
 const ProjectCarousel = () => {
-    const projectIds = ["witcher", "flight-scraper", "valorant-impact"];
-    const [currentVisibleIndex, setCurrentVisibleIndex] = useState(1); // Track only the current visible index
+    const projectIds = ["witcher", "flight-scraper", "valorant-impact", "witcher"];
+    const [currentVisibleIndex, setCurrentVisibleIndex] = useState(1); // Track the center index
 
     const responsive = {
         superLargeDesktop: { breakpoint: { max: 4000, min: 3000 }, items: 3 },
@@ -16,15 +16,41 @@ const ProjectCarousel = () => {
     };
 
     useEffect(() => {
-        // Initially set to the first item as visible
         setCurrentVisibleIndex(1);
+        console.log("=== Initial State ===");
+        console.log(`Initial Current Visible Index: 1`);
+        console.log(`Initial Current Visible Project: ${projectIds[1]}`);
+        console.log("======================");
     }, []);
 
-    const afterChangeHandler = (newSlide) => {
-        console.log(`Carousel changed: currentSlide = ${newSlide}`);
-        let newIndex = (newSlide % projectIds.length) - 1;
-        setCurrentVisibleIndex(newIndex);
+    useEffect(() => {
+        console.log("=== State Update ===");
+        console.log(`Updated Current Visible Index: ${currentVisibleIndex}`);
+        console.log(`Updated Current Visible Project: ${projectIds[currentVisibleIndex]}`);
+        console.log("=====================");
+    }, [currentVisibleIndex]);
+
+    const afterChangeHandler = (currentSlide) => {
+        const itemsToShow = 3; // Adjust based on your responsive setting
+        const centerOffset = Math.floor(itemsToShow / 2);
+
+        // Calculate the center index based on the current slide
+        const centerIndex = (currentSlide + centerOffset) % projectIds.length;
+
+        // Enhanced logging for debugging
+        console.log("=== Carousel Slide Change ===");
+        console.log(`Current Slide: ${currentSlide}`);
+        console.log(`Items to Show: ${itemsToShow}`);
+        console.log(`Center Offset: ${centerOffset}`);
+        console.log(`Calculated Center Index: ${centerIndex}`);
+        console.log(`Current Visible Project: ${projectIds[centerIndex]}`);
+        console.log(`Total Projects: ${projectIds.length}`);
+        console.log(`Project IDs Array: ${JSON.stringify(projectIds)}`);
+        console.log("==============================");
+
+        setCurrentVisibleIndex(centerIndex+1);
     };
+
 
     return (
         <section className="skill" id="skills">
@@ -36,11 +62,13 @@ const ProjectCarousel = () => {
                             <p className="skill-bx-p" style={{ color: "#FFFFFF" }}>
                                 Take a look at some tools I've worked with.
                             </p>
+                            <div style={{ marginBottom: "20px", color: "#FFFFFF", textAlign: "center" }}>
+                                Current Project: <strong>{projectIds[currentVisibleIndex]}</strong>
+                            </div>
                             <Carousel
                                 responsive={responsive}
                                 infinite={true}
                                 afterChange={afterChangeHandler}
-                                // Optionally, add other props like arrows, swipe, etc.
                             >
                                 {projectIds.map((projectId, index) => (
                                     <div className="item" key={index}>

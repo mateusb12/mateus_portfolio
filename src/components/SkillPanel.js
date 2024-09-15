@@ -14,8 +14,6 @@ const importAll = (r) => {
 
 const skillsIcons = importAll(require.context('../assets/img/skills_icons', false, /\.png$/));
 
-console.log(skillsIcons);
-
 const defaultSkills = [
     { icon: 'backend', label: 'Backend' },
     { icon: 'api', label: 'APIs' },
