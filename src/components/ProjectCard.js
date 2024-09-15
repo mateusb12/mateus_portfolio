@@ -1,24 +1,21 @@
 import '../css/ProjectCard.css';
-import React, {useContext, useEffect, useState} from 'react';
-
-// Asset imports
-import {SkillPanel} from "./SkillPanel";
-import LanguageContext from "./LanguageContext";
+import React, { useContext, useEffect, useState } from 'react';
+import { SkillPanel } from './SkillPanel';
+import LanguageContext from './LanguageContext';
 import projectJsonData from '../data/projects.json';
 
-const ProjectCard = (
-    {
-        projectId = "witcher",
-        isSelected = false,
-        onSelect = () => {},
-    }
-) => {
+const ProjectCard = ({ projectId = 'witcher', isSelected = false, onSelect = () => {} }) => {
     const { selectedFlag } = useContext(LanguageContext);
     const [currentProjectData, setCurrentProjectData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);  // Add a loading state
+    const [isLoading, setIsLoading] = useState(true);
+    const [isSelectedState, setIsSelectedState] = useState(false);
+
+    const handleSelect = () => {
+        setIsSelectedState(prevState => !prevState); // Use functional update
+    };
 
     useEffect(() => {
-        const languageMap = { "usa": "english", "brazil": "portuguese" };
+        const languageMap = { usa: 'english', brazil: 'portuguese' };
         const language = languageMap[selectedFlag];
 
         if (!language) {
@@ -37,7 +34,7 @@ const ProjectCard = (
         // Merge project data with language-specific translations
         const currentProject = {
             ...project,
-            ...project.translations[language]
+            ...project.translations[language],
         };
 
         setCurrentProjectData(currentProject);
@@ -45,7 +42,6 @@ const ProjectCard = (
     }, [selectedFlag, projectId]);
 
     if (isLoading) {
-        // Render a loading message or spinner while data is loading
         return <div>Loading project data...</div>;
     }
 
@@ -57,12 +53,30 @@ const ProjectCard = (
                 <p>{currentProjectData.description}</p>
             </div>
             <div className="project-card-footer">
-                <SkillPanel title="Core Skills" color="core-skills" skills={currentProjectData.coreSkills} isExpanded={isSelected}/>
-                <SkillPanel title="Frameworks" color="frameworks" skills={currentProjectData.frameworks} isExpanded={isSelected}/>
-                <SkillPanel title="Libraries" color="libraries" skills={currentProjectData.libraries} isExpanded={isSelected}/>
+                <SkillPanel
+                    title="Core Skills"
+                    color="core-skills"
+                    skills={currentProjectData.coreSkills}
+                    isExpanded={isSelectedState}
+                />
+                <SkillPanel
+                    title="Frameworks"
+                    color="frameworks"
+                    skills={currentProjectData.frameworks}
+                    isExpanded={isSelectedState}
+                />
+                <SkillPanel
+                    title="Libraries"
+                    color="libraries"
+                    skills={currentProjectData.libraries}
+                    isExpanded={isSelectedState}
+                />
+                <button className="project-card-button" onClick={handleSelect}>
+                    {isSelectedState ? 'Collapse' : 'Expand'}
+                </button>
             </div>
         </div>
     );
-}
+};
 
 export default ProjectCard;

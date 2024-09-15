@@ -30,15 +30,13 @@ export const SkillPanel = ({
                                skills = defaultSkills,
                                title = "Default Skills",
                                color = "core-skills",
-                               isExpanded: isExpandedProp, // External control
+                               isExpanded: isActiveProp, // External control
                            }) => {
     const { selectedFlag } = useContext(LanguageContext);
     const [activeSkill, setActiveSkill] = useState(null);
     const [translatedTitle, setTranslatedTitle] = useState(title);
-    const [isExpandedState, setIsExpandedState] = useState(isExpandedProp || false);
 
-    // Compute the effective isExpanded value
-    const isExpanded = isExpandedState;
+    const isExpanded = isActiveProp;
 
     const translationMap = { "usa": "english", "brazil": "portuguese" };
     const currentLanguage = translationMap[selectedFlag];
@@ -61,10 +59,8 @@ export const SkillPanel = ({
     const handleSkillClick = (skillKey) => {
         if (activeSkill && activeSkill.key === skillKey) {
             setActiveSkill(null);
-            setIsExpandedState(false);
         } else {
             showSkillContent(skillKey);
-            setIsExpandedState(true);
         }
     };
 
@@ -78,14 +74,14 @@ export const SkillPanel = ({
                         className="project-single-skill"
                         onClick={() => handleSkillClick(skill.icon)}
                     >
-            <img
-                src={skillsIcons[skill.icon]}
-                alt={`${skill.label} Icon`}
-                onError={() => console.error(`Failed to load image for ${skill.label}`)}
-                className={`project-skill-icon ${skill.icon === activeSkill?.active ? 'selected' : ''} ${color}-border`}
-            />
-            <div className="project-skill-label">{skill.label}</div>
-          </span>
+                        <img
+                            src={skillsIcons[skill.icon]}
+                            alt={`${skill.label} Icon`}
+                            onError={() => console.error(`Failed to load image for ${skill.label}`)}
+                            className={`project-skill-icon ${skill.icon === activeSkill?.active ? 'selected' : ''} ${color}-border`}
+                        />
+                        <div className="project-skill-label">{skill.label}</div>
+                    </span>
                 ))}
             </div>
         ));
@@ -115,37 +111,29 @@ export const SkillPanel = ({
         if (activeSkill) {
             showSkillContent(activeSkill.key);
         }
-        // Do not update isExpandedState here
     }, [selectedFlag, title]);
 
-    // Update isExpandedState when isExpandedProp changes
+    // Clear activeSkill when isExpanded becomes false
     useEffect(() => {
-        if (isExpandedProp !== undefined) {
-            setIsExpandedState(isExpandedProp);
-        }
-    }, [isExpandedProp]);
-
-    // Synchronize activeSkill with isExpanded changes
-    useEffect(() => {
-        if (isExpanded && !activeSkill && skills.length > 0) {
-            // If expanded and no activeSkill, show the first skill
-            showSkillContent(skills[0].icon);
-        } else if (!isExpanded && activeSkill) {
-            // If collapsed, clear activeSkill
+        if (!isExpanded && activeSkill) {
             setActiveSkill(null);
         }
-    }, [isExpanded, activeSkill, skills]);
+    }, [isExpanded, activeSkill]);
 
     return (
         <div className={`project-card-skills-panel ${color}-border`}>
             <h3 className={`${color}-title`}>{translatedTitle}</h3>
-            {renderSkills()}
-            {isExpanded && activeSkill && (
-                <div className="hidden-footer">
-                    <img src={activeSkill.imageUrl} alt={activeSkill.title} />
-                    <h3>{activeSkill.title}</h3>
-                    <p>{activeSkill.description}</p>
-                </div>
+            {isExpanded && (
+                <>
+                    {renderSkills()}
+                    {activeSkill && (
+                        <div className="hidden-footer">
+                            <img src={activeSkill.imageUrl} alt={activeSkill.title} />
+                            <h3>{activeSkill.title}</h3>
+                            <p>{activeSkill.description}</p>
+                        </div>
+                    )}
+                </>
             )}
         </div>
     );
