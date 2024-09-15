@@ -14,6 +14,8 @@ const importAll = (r) => {
 
 const skillsIcons = importAll(require.context('../assets/img/skills_icons', false, /\.png$/));
 
+console.log(skillsIcons);
+
 const defaultSkills = [
     { icon: 'backend', label: 'Backend' },
     { icon: 'api', label: 'APIs' },
@@ -76,7 +78,7 @@ export const SkillPanel = ({
                     >
                         <img
                             src={skillsIcons[skill.icon]}
-                            alt={`${skill.label} Icon`}
+                            alt={`${skillsIcons[skill.icon]} Icon`}
                             onError={() => console.error(`Failed to load image for ${skill.label}`)}
                             className={`project-skill-icon ${skill.icon === activeSkill?.active ? 'selected' : ''} ${color}-border`}
                         />
