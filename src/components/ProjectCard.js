@@ -8,7 +8,9 @@ import projectJsonData from '../data/projects.json';
 
 const ProjectCard = (
     {
-        projectId = "witcher"
+        projectId = "witcher",
+        isSelected = false,
+        onSelect = () => {},
     }
 ) => {
     const { selectedFlag } = useContext(LanguageContext);
@@ -55,9 +57,9 @@ const ProjectCard = (
                 <p>{currentProjectData.description}</p>
             </div>
             <div className="project-card-footer">
-                <SkillPanel title="Core Skills" color="core-skills" skills={currentProjectData.coreSkills} />
-                <SkillPanel title="Frameworks" color="frameworks" skills={currentProjectData.frameworks} />
-                <SkillPanel title="Libraries" color="libraries" skills={currentProjectData.libraries} />
+                <SkillPanel title="Core Skills" color="core-skills" skills={currentProjectData.coreSkills} isExpanded={isSelected}/>
+                <SkillPanel title="Frameworks" color="frameworks" skills={currentProjectData.frameworks} isExpanded={isSelected}/>
+                <SkillPanel title="Libraries" color="libraries" skills={currentProjectData.libraries} isExpanded={isSelected}/>
             </div>
         </div>
     );

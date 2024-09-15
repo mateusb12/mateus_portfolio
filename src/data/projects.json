@@ -38,7 +38,11 @@
         { "icon": "flask", "label": "Flask" }
       ],
       "libraries": [
-        { "icon": "firebase", "label": "Firebase" }
+        { "icon": "firebase", "label": "Firebase"},
+        { "icon": "matplotlib", "label": "Matplotlib"},
+        { "icon": "pandas", "label": "Pandas"},
+        { "icon": "selenium", "label": "Selenium"},
+        { "icon": "telegram", "label": "Telegram Bot"}
       ],
       "translations": {
         "english": {

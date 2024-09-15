@@ -44,7 +44,6 @@
         "description": "Flask é um framework web micro em Python. Uso-o para construir aplicações escaláveis orientadas a banco de dados com arquitetura limpa e práticas eficientes de desenvolvimento."
       }
     },
-
     "graphviz": {
       "icon": "graphviz.png",
       "english": {
@@ -81,11 +80,11 @@
     "numpy": {
       "icon": "numpy.png",
       "english": {
-        "label": "Numpy",
+        "label": "NumPy",
         "description": "I am familiar with the NumPy library. It is a tool for scientific computing and linear algebra."
       },
       "portuguese": {
-        "label": "Numpy",
+        "label": "NumPy",
         "description": "Sou familiarizado com a biblioteca NumPy. É uma ferramenta para computação científica e álgebra linear."
       }
     },
@@ -103,12 +102,56 @@
     "spacy": {
       "icon": "spacy.png",
       "english": {
-        "label": "Spacy",
-        "description": "I am familiar with the Spacy library. It is a tool for natural language processing."
+        "label": "SpaCy",
+        "description": "I am familiar with the SpaCy library. It is a tool for natural language processing."
       },
       "portuguese": {
-        "label": "Spacy",
-        "description": "Sou familiarizado com a biblioteca Spacy. É uma ferramenta para processamento de linguagem natural."
+        "label": "SpaCy",
+        "description": "Sou familiarizado com a biblioteca SpaCy. É uma ferramenta para processamento de linguagem natural."
+      }
+    },
+    "firebase": {
+      "icon": "firebase.png",
+      "english": {
+        "label": "Firebase",
+        "description": "I am familiar with Firebase, a comprehensive development platform by Google for building and scaling web and mobile applications, providing real-time database, authentication, cloud functions, and hosting services."
+      },
+      "portuguese": {
+        "label": "Firebase",
+        "description": "Sou familiarizado com o Firebase, uma plataforma de desenvolvimento abrangente do Google para construir e escalar aplicações web e móveis, oferecendo banco de dados em tempo real, autenticação, funções em nuvem e serviços de hospedagem."
+      }
+    },
+    "matplotlib": {
+      "icon": "matplotlib.png",
+      "english": {
+        "label": "Matplotlib",
+        "description": "I am familiar with Matplotlib, a comprehensive library for creating static, animated, and interactive visualizations in Python."
+      },
+      "portuguese": {
+        "label": "Matplotlib",
+        "description": "Sou familiarizado com o Matplotlib, uma biblioteca abrangente para criar visualizações estáticas, animadas e interativas em Python."
+      }
+    },
+    "selenium": {
+      "icon": "selenium.png",
+      "english": {
+        "label": "Selenium",
+        "description": "I have experience using Selenium, a tool for automating web browsers, useful for testing and scraping web applications."
+      },
+      "portuguese": {
+        "label": "Selenium",
+        "description": "Tenho experiência em usar o Selenium, uma ferramenta para automatizar navegadores web, útil para testar e extrair dados de aplicações web."
+      }
+    },
+    "telegram": {
+      "icon": "telegram.png",
+      "english": {
+        "label": "Telegram Bot API",
+        "description": "I have experience working with the Telegram Bot API, allowing me to create bots that interact with users via Telegram, automating tasks and sending notifications using Python."
+      },
+      "portuguese": {
+        "label": "API do Bot do Telegram",
+        "description": "Tenho experiência em trabalhar com a API do Bot do Telegram, permitindo-me criar bots que interagem com usuários via Telegram, automatizando tarefas e enviando notificações usando Python."
       }
     }
   }
