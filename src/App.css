@@ -104,7 +104,7 @@ p.danger {
 }
 /************ Shared background Css ************/
 .section {
-  padding: 100px 0;
+  padding: 10px 0;
   position: relative;
   overflow: hidden;
 }

@@ -26,6 +26,7 @@ import design from "../assets/img//skills_icons/design.png";
 
 import LanguageContext from './LanguageContext';
 import {useContext, useEffect, useState} from "react";
+import languageFile from "../data/skills.json";
 
 export const Skills = () => {
     const languageFile = require('../data/skills.json');
@@ -130,13 +131,23 @@ export const Skills = () => {
         console.error(`Error loading image for skill: ${skillName}`, errorEvent);
     }
 
+    const getDynamicFontSize = (title) => {
+        const baseSize = 45; // Base font size in pixels
+        const longTitleSize = 35; // Reduced font size for longer titles
+        return {
+            fontSize: title.length > 15 ? `${longTitleSize}px` : `${baseSize}px`
+        };
+    };
+
+    console.log("Dynamically calculated font sizes: ", keySkills.map(skill => getDynamicFontSize(translateSkill(skill.title))))
+
     return (
         <section className="skill" id="skills">
             <div className="container">
                 <div className="row">
                     <div className="col-12">
                         <div className="skill-bx wow zoomIn">
-                            <h2>{languageFile[selectedLanguage].key.title}</h2>
+                            <h2 style={getDynamicFontSize(languageFile[selectedLanguage].key.title)}>{languageFile[selectedLanguage].key.title}</h2>
                             <p>{languageFile[selectedLanguage].key.description}</p>
                             <Carousel responsive={responsive} infinite={false}
                                       className="owl-carousel owl-theme skill-slider">
@@ -144,7 +155,8 @@ export const Skills = () => {
                                     const translatedTitle = translateSkill(skill.title);
                                     return (
                                         <div className="item" key={index}>
-                                            <img src={skill.src} alt={translatedTitle} onError={(e) => handleImageError(e, translatedTitle)}/>
+                                            <img src={skill.src} alt={translatedTitle}
+                                                 onError={(e) => handleImageError(e, translatedTitle)}/>
                                             <h5>{translatedTitle}</h5>
                                         </div>
                                     )
@@ -152,7 +164,7 @@ export const Skills = () => {
                             </Carousel>
                         </div>
                         <div className="skill-bx wow zoomIn">
-                            <h2>{languageFile[selectedLanguage].foundations.title}</h2>
+                            <h2 style={getDynamicFontSize(languageFile[selectedLanguage].foundations.title)}>{languageFile[selectedLanguage].foundations.title}</h2>
                             <p>{languageFile[selectedLanguage].foundations.description}</p>
                             <Carousel responsive={responsive} infinite={false}
                                       className="owl-carousel owl-theme skill-slider">
@@ -168,7 +180,7 @@ export const Skills = () => {
                             </Carousel>
                         </div>
                         <div className="skill-bx wow zoomIn">
-                            <h2>{languageFile[selectedLanguage].stack.title}</h2>
+                            <h2 style={getDynamicFontSize(languageFile[selectedLanguage].stack.title)}>{languageFile[selectedLanguage].stack.title}</h2>
                             <p>{languageFile[selectedLanguage].stack.description}</p>
                             <Carousel responsive={responsive} infinite={false}
                                       className="owl-carousel owl-theme skill-slider">

@@ -17,17 +17,17 @@ const ProjectCarousel = () => {
 
     useEffect(() => {
         setCurrentVisibleIndex(1);
-        console.log("=== Initial State ===");
-        console.log(`Initial Current Visible Index: 1`);
-        console.log(`Initial Current Visible Project: ${projectIds[1]}`);
-        console.log("======================");
+        // console.log("=== Initial State ===");
+        // console.log(`Initial Current Visible Index: 1`);
+        // console.log(`Initial Current Visible Project: ${projectIds[1]}`);
+        // console.log("======================");
     }, []);
 
     useEffect(() => {
-        console.log("=== State Update ===");
-        console.log(`Updated Current Visible Index: ${currentVisibleIndex}`);
-        console.log(`Updated Current Visible Project: ${projectIds[currentVisibleIndex]}`);
-        console.log("=====================");
+        // console.log("=== State Update ===");
+        // console.log(`Updated Current Visible Index: ${currentVisibleIndex}`);
+        // console.log(`Updated Current Visible Project: ${projectIds[currentVisibleIndex]}`);
+        // console.log("=====================");
     }, [currentVisibleIndex]);
 
     const afterChangeHandler = (currentSlide) => {
@@ -38,15 +38,15 @@ const ProjectCarousel = () => {
         const centerIndex = (currentSlide + centerOffset) % projectIds.length;
 
         // Enhanced logging for debugging
-        console.log("=== Carousel Slide Change ===");
-        console.log(`Current Slide: ${currentSlide}`);
-        console.log(`Items to Show: ${itemsToShow}`);
-        console.log(`Center Offset: ${centerOffset}`);
-        console.log(`Calculated Center Index: ${centerIndex}`);
-        console.log(`Current Visible Project: ${projectIds[centerIndex]}`);
-        console.log(`Total Projects: ${projectIds.length}`);
-        console.log(`Project IDs Array: ${JSON.stringify(projectIds)}`);
-        console.log("==============================");
+        // console.log("=== Carousel Slide Change ===");
+        // console.log(`Current Slide: ${currentSlide}`);
+        // console.log(`Items to Show: ${itemsToShow}`);
+        // console.log(`Center Offset: ${centerOffset}`);
+        // console.log(`Calculated Center Index: ${centerIndex}`);
+        // console.log(`Current Visible Project: ${projectIds[centerIndex]}`);
+        // console.log(`Total Projects: ${projectIds.length}`);
+        // console.log(`Project IDs Array: ${JSON.stringify(projectIds)}`);
+        // console.log("==============================");
 
         setCurrentVisibleIndex(centerIndex+1);
     };
@@ -57,7 +57,7 @@ const ProjectCarousel = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-12">
-                        <div className="skill-bx">
+                        <div className="skill-bx" id="carousel-container">
                             <h2>Skills</h2>
                             <p className="skill-bx-p" style={{ color: "#FFFFFF" }}>
                                 Take a look at some tools I've worked with.

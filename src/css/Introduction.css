@@ -132,6 +132,7 @@
     }
 
     .introduction-banner {
+        margin-top: 5rem;
         padding: 1rem; /* Padding around the banner */
         box-sizing: border-box; /* Includes padding and border in the element's total width and height */
     }
