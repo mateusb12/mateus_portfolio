@@ -49,7 +49,7 @@
     align-items: center;
     justify-content: center;
     margin-top: 10rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     padding: 0 23rem;
 }
 
@@ -88,3 +88,53 @@
     transition: 0.3s ease-in-out;
     line-height: 1;
 }
+
+.introduction-banner{
+    /*border: 1px red solid;*/
+    /*text-align: left;*/
+}
+
+@media (max-width: 768px) {
+    .vertical-index {
+        display: none; /* Hides the vertical index on small screens */
+    }
+
+    .debug {
+        padding: 0 1rem; /* Less padding on smaller screens */
+        margin-top: 2rem; /* Reduced margin on smaller screens */
+    }
+
+    .introduction-banner h1 {
+        font-size: 32px; /* Smaller font size for smaller screens */
+    }
+
+    .introduction-banner p {
+        font-size: 14px; /* Smaller font size for text */
+    }
+
+    .introduction-banner button {
+        font-size: 16px; /* Smaller font size for button */
+        margin-top: 20px; /* Reduced margin top */
+    }
+
+    .main-container {
+        flex-direction: column; /* Stack vertically on small screens */
+        align-items: flex-start; /* Align items to the start */
+    }
+
+    .main-body {
+        max-width: 600px; /* Limit content width */
+        margin: 0 auto; /* Center the content within the main container */
+    }
+
+    .vertical-index::after {
+        height: 200px; /* Shorter line on smaller devices */
+    }
+
+    .introduction-banner {
+        padding: 1rem; /* Padding around the banner */
+        box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+    }
+}
+
+
