@@ -28,6 +28,8 @@ import LanguageContext from './LanguageContext';
 import {useContext, useEffect, useState} from "react";
 import languageFile from "../data/skills.json";
 
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 export const Skills = () => {
     const languageFile = require('../data/skills.json');
     const { selectedFlag } = useContext(LanguageContext);
@@ -141,6 +143,30 @@ export const Skills = () => {
 
     console.log("Dynamically calculated font sizes: ", keySkills.map(skill => getDynamicFontSize(translateSkill(skill.title))))
 
+    const CustomLeftArrow = ({ onClick, ...rest }) => {
+        return (
+            <button
+                className="custom-arrow custom-left-arrow"
+                onClick={onClick}
+                {...rest}
+            >
+                <i className="fas fa-chevron-left"></i>
+            </button>
+        );
+    };
+
+    const CustomRightArrow = ({ onClick, ...rest }) => {
+        return (
+            <button
+                className="custom-arrow custom-right-arrow"
+                onClick={onClick}
+                {...rest}
+            >
+                <i className="fas fa-chevron-right"></i>
+            </button>
+        );
+    };
+
     return (
         <section className="skill" id="skills">
             <div className="container">
@@ -150,6 +176,8 @@ export const Skills = () => {
                             <h2 style={getDynamicFontSize(languageFile[selectedLanguage].key.title)}>{languageFile[selectedLanguage].key.title}</h2>
                             <p>{languageFile[selectedLanguage].key.description}</p>
                             <Carousel responsive={responsive} infinite={false}
+                                      customLeftArrow={<CustomLeftArrow />}
+                                      customRightArrow={<CustomRightArrow />}
                                       className="owl-carousel owl-theme skill-slider">
                                 {keySkills.map((skill, index) => {
                                     const translatedTitle = translateSkill(skill.title);

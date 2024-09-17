@@ -217,6 +217,7 @@ p.danger {
   width: 80%;
   margin: 0 auto;
   position: relative;
+  overflow: visible;
 }
 .skill-slider .item img {
   width: 150px;
@@ -236,6 +237,41 @@ p.danger {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: left bottom;
+}
+
+.custom-arrow {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+}
+
+.custom-left-arrow {
+  /*left: -50px; !* Adjust as needed *!*/
+  border: 1px red solid;
+  position: absolute;
+  left: 1%;
+  top: 40%;
+}
+
+.custom-right-arrow {
+  border: 1px red solid;
+  position: absolute;
+  right: 1%;
+  top: 40%;
+
+  @media (max-width: 768px) {
+    border: 1px yellow solid;
+    right: -3%;
+  }
+}
+
+.react-multi-carousel-item{
+  border: 1px deeppink solid;
 }
 
 /************ Contacts Css ************/

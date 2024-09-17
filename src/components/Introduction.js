@@ -12,13 +12,13 @@ export const Introduction = () => {
     english: {
       header: "Welcome to my Portfolio!",
       title: "Hello! I am Mateus",
-      body: "I am a software developer with extensive experience in backend development, machine learning, and game dev. My diverse background allows me to tackle many challenges in the technology scene, and you can be sure that I am a very valuable resource on any software development team. Today I have an amazing portfolio with incredible projects like Book Analyzer, Flight Price Scrapper, Valorant Impact, among others. These projects have helped me to enhance my skills in API development, DevOps practices, and CI/CD pipelines. I am very proud of them.",
+      body: "\\pI'm a software developer with rich experience in backend development, machine learning, and game development. My diverse background allows me to tackle many challenges in the technology landscape. Today, I have an impressive portfolio with amazing projects like the Book Analyzer, Flight Price Scraper, Valorant Impact, among others. \\n\\n\\pThese projects have helped me refine my skills in API development, DevOps practices, and CI/CD pipelines, and I am very proud of them. You can be sure that I am a valuable asset to any software development team.",
       footer: "Let's connect!"
     },
     portuguese: {
       header: "Bem-vindo ao meu Portfólio",
       title: "Olá! Me chamo Mateus",
-      body: "Sou um desenvolvedor de software com uma rica experiência no desenvolvimento backend, machine learning e game dev. Meu background diverso permite com que eu consiga enfrentar muitos desafios no cenário da tecnologia, e pode ter certeza que eu sou um recurso muito valioso em qualquer equipe de desenvolvimento de software. Hoje eu tenho um portfólio muito massa com projetos incríveis como o Book Analyzer, Flight Price Scrapper, Valorant Impact, entre outros. Esses projetos me ajudaram a aprimorar minhas habilidades em desenvolvimento de APIs, práticas DevOps e pipelines CI/CD. Eu sou muito orgulhoso deles.",
+      body: "\\pSou um desenvolvedor de software com uma experiência rica no desenvolvimento backend. Meu background diversificado me permite enfrentar muitos desafios no cenário da tecnologia. Hoje eu tenho um portfólio muito massa com projetos incríveis como o Book Analyzer, Flight Price Scrapper, Valorant Impact, entre outros. \\n\\n\\pEsses projetos me ajudaram a aprimorar minhas habilidades em desenvolvimento de APIs, práticas DevOps e pipelines CI/CD, e eu sou muito orgulhoso deles. Pode ter certeza que eu sou um recurso muito valioso em qualquer equipe de desenvolvimento de software",
       footer: "Vamos conectar!"
     }
   };
@@ -26,6 +26,11 @@ export const Introduction = () => {
   // Mapping flag to language key
   const languageKey = selectedFlag === 'usa' ? 'english' : 'portuguese';
   const introductionTexts = languageContent[languageKey];
+
+  // Replace \p with four non-breaking spaces and \n with <br />
+  const formattedBody = introductionTexts.body
+      .replace(/\\p/g, '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;') // Replace \p with four &nbsp;
+      .replace(/\\n/g, '<br />');                  // Replace \n with <br />
 
   return (
       <section className="introduction-banner debug" id="home">
@@ -35,8 +40,10 @@ export const Introduction = () => {
                 <span className="vertical-index"></span>
                 <div className={isVisible ? "animate__animated animate__fadeIn main-body" : ""}>
                   <h1>{introductionTexts.title}</h1>
-                  <p>{introductionTexts.body}</p>
-                  <button onClick={() => console.log('connect')}>{introductionTexts.footer} <ArrowRightCircle size={25}/></button>
+                  <p dangerouslySetInnerHTML={{ __html: formattedBody }}></p>
+                  <button onClick={() => console.log('connect')}>
+                    {introductionTexts.footer} <ArrowRightCircle size={25}/>
+                  </button>
                 </div>
               </div>
           )}

@@ -48,8 +48,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 10rem;
-    margin-bottom: 1rem;
     padding: 0 23rem;
 }
 
@@ -90,6 +88,8 @@
 }
 
 .introduction-banner{
+    margin-top: 10rem;
+    margin-bottom: 10rem;
     /*border: 1px red solid;*/
     /*text-align: left;*/
 }
@@ -102,6 +102,10 @@
     .debug {
         padding: 0 1rem; /* Less padding on smaller screens */
         margin-top: 2rem; /* Reduced margin on smaller screens */
+    }
+
+    .introduction-banner{
+        margin-bottom: 3rem;
     }
 
     .introduction-banner h1 {
