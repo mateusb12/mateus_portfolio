@@ -1,11 +1,11 @@
-import {NavBar} from "./NavBar";
-import {Introduction} from "./Introduction";
-import {Skills} from "./Skills";
-import {Projects} from "./Projects";
-import {Contact} from "./Contact";
-import {Footer} from "./Footer";
-import ProjectCard from "./ProjectCard";
-import ProjectCarousel from "./ProjectCarousel";
+import {NavBar} from "./NavBar/NavBar";
+import {Introduction} from "./Introduction/Introduction";
+import {Skills} from "./Skills/Skills";
+import {Projects} from "./Projects/Projects";
+import {Contact} from "./Contact/Contact";
+import {Footer} from "./Footer/Footer";
+import ProjectCard from "./Projects/ProjectCard";
+import ProjectCarousel from "./Projects/ProjectCarousel";
 
 export function FullLayout() {
     return (
@@ -16,6 +16,7 @@ export function FullLayout() {
                 <Skills/>
             </div>
             <Projects/>
+            <ProjectCard/>
             <ProjectCarousel/>
             <Contact/>
             <Footer/>

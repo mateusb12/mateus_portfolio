@@ -1,37 +1,37 @@
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import server from "../assets/img//skills_icons/server.png";
-import api from "../assets/img//skills_icons/api.png";
-import database from "../assets/img//skills_icons/database.png";
-import cloud from "../assets/img//skills_icons/cloud.png";
-import deploy from "../assets/img//skills_icons/deploy.png";
-import lock from "../assets/img//skills_icons/lock.png";
-import python from "../assets/img//skills_icons/python.png";
-import javascript from "../assets/img//skills_icons/javascript.png";
-import csharp from "../assets/img//skills_icons/csharp.png";
-import java from "../assets/img//skills_icons/java.png";
-import html from "../assets/img//skills_icons/html.png";
-import css from "../assets/img//skills_icons/css.png";
-import sql from "../assets/img//skills_icons/sql.png";
-import git from "../assets/img//skills_icons/git.png";
-import flask from "../assets/img//skills_icons/flask.png";
-import _react from "../assets/img//skills_icons/react.png";
-import jwt from "../assets/img//skills_icons/jwt.png";
-import postgres from "../assets/img//skills_icons/postgres.png";
-import docker from "../assets/img//skills_icons/docker.png";
-import aws from "../assets/img//skills_icons/aws.png";
-import google from "../assets/img//skills_icons/google-cloud-small.png";
-import frontend from "../assets/img//skills_icons/frontend_dev.png";
-import design from "../assets/img//skills_icons/design.png";
+import server from "../../assets/img/skills_icons/server.png";
+import api from "../../assets/img/skills_icons/api.png";
+import database from "../../assets/img/skills_icons/database.png";
+import cloud from "../../assets/img/skills_icons/cloud.png";
+import deploy from "../../assets/img/skills_icons/deploy.png";
+import lock from "../../assets/img/skills_icons/lock.png";
+import python from "../../assets/img/skills_icons/python.png";
+import javascript from "../../assets/img/skills_icons/javascript.png";
+import csharp from "../../assets/img/skills_icons/csharp.png";
+import java from "../../assets/img/skills_icons/java.png";
+import html from "../../assets/img/skills_icons/html.png";
+import css from "../../assets/img/skills_icons/css.png";
+import sql from "../../assets/img/skills_icons/sql.png";
+import git from "../../assets/img/skills_icons/git.png";
+import flask from "../../assets/img/skills_icons/flask.png";
+import _react from "../../assets/img/skills_icons/react.png";
+import jwt from "../../assets/img/skills_icons/jwt.png";
+import postgres from "../../assets/img/skills_icons/postgres.png";
+import docker from "../../assets/img/skills_icons/docker.png";
+import aws from "../../assets/img/skills_icons/aws.png";
+import google from "../../assets/img/skills_icons/google-cloud-small.png";
+import frontend from "../../assets/img/skills_icons/frontend_dev.png";
+import design from "../../assets/img/skills_icons/design.png";
 
-import LanguageContext from './LanguageContext';
+import LanguageContext from '../LanguageContext';
 import {useContext, useEffect, useState} from "react";
-import languageFile from "../data/skills.json";
+import languageFile from "../../data/skills.json";
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export const Skills = () => {
-    const languageFile = require('../data/skills.json');
+    const languageFile = require('../../data/skills.json');
     const { selectedFlag } = useContext(LanguageContext);
     const [selectedLanguage, setSelectedLanguage] = useState('english');
 

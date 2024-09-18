@@ -1,7 +1,7 @@
-import '../css/SkillPanel.css';
-import skillsData from '../data/project_skills.json';
+import './SkillPanel.css';
+import skillsData from '../../data/project_skills.json';
 import React, { useContext, useEffect, useState } from "react";
-import LanguageContext from "./LanguageContext";
+import LanguageContext from "../LanguageContext";
 
 const importAll = (r) => {
     let images = {};
@@ -12,7 +12,7 @@ const importAll = (r) => {
     return images;
 };
 
-const skillsIcons = importAll(require.context('../assets/img/skills_icons', false, /\.png$/));
+const skillsIcons = importAll(require.context('../../assets/img/skills_icons', false, /\.png$/));
 
 const defaultSkills = [
     { icon: 'backend', label: 'Backend' },

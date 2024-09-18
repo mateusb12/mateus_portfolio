@@ -1,8 +1,8 @@
-import '../css/ProjectCard.css';
+import './ProjectCard.css';
 import React, { useContext, useEffect, useState } from 'react';
-import { SkillPanel } from './SkillPanel';
-import LanguageContext from './LanguageContext';
-import projectJsonData from '../data/projects.json';
+import { SkillPanel } from '../Skills/SkillPanel';
+import LanguageContext from '../LanguageContext';
+import projectJsonData from '../../data/projects.json';
 
 const ProjectCard = ({ projectId = 'witcher', isActive = false }) => {
     const { selectedFlag } = useContext(LanguageContext);
@@ -54,7 +54,7 @@ const ProjectCard = ({ projectId = 'witcher', isActive = false }) => {
         <div className={`project-card ${isExpanded ? 'expanded' : ''}`}>
             <div className="project-card-header">
                 <h2>{currentProjectData.title}</h2>
-                <img src={require(`../assets/img/${currentProjectData.image}`)} alt="Project thumbnail" />
+                <img src={require(`../../assets/img/${currentProjectData.image}`)} alt="Project thumbnail" />
                 <p>{currentProjectData.description}</p>
             </div>
             <div className="project-card-footer">

@@ -1,19 +1,19 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FullLayout} from "./components/FullLayout";
-import { NavBar } from "./components/NavBar";
-import { Introduction } from "./components/Introduction";
-import { Skills } from "./components/Skills";
-import { Projects } from "./components/Projects";
-import { Contact } from "./components/Contact";
-import { Footer } from "./components/Footer";
+import { NavBar } from "./components/NavBar/NavBar";
+import { Introduction } from "./components/Introduction/Introduction";
+import { Skills } from "./components/Skills/Skills";
+import { Projects } from "./components/Projects/Projects";
+import { Contact } from "./components/Contact/Contact";
+import { Footer } from "./components/Footer/Footer";
 import { Routes, Route } from "react-router-dom";
 import LanguageContext from './components/LanguageContext';
 import {useState} from "react";
-import {OldProjectCard} from "./components/OldProjectCard";
-import ProjectCard from "./components/ProjectCard";
-import {SkillPanel} from "./components/SkillPanel";
-import ProjectCarousel from "./components/ProjectCarousel";
+import {OldProjectCard} from "./components/Projects/OldProjectCard";
+import ProjectCard from "./components/Projects/ProjectCard";
+import {SkillPanel} from "./components/Skills/SkillPanel";
+import ProjectCarousel from "./components/Projects/ProjectCarousel";
 
 function App() {
     const [language, setLanguage] = useState('english');

@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { ArrowRightCircle } from 'react-bootstrap-icons';
 import 'animate.css';
-import '../css/Introduction.css';
+import './Introduction.css';
 import TrackVisibility from 'react-on-screen';
-import LanguageContext from './LanguageContext';
+import LanguageContext from '../LanguageContext';
 
 export const Introduction = () => {
   const { selectedFlag } = useContext(LanguageContext);

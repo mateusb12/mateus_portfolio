@@ -1,22 +1,22 @@
-import '../css/Projects.css';
+import './Projects.css';
 import {Container, Row, Col, Tab, Nav} from "react-bootstrap";
 import {OldProjectCard} from "./OldProjectCard";
-import projImg2 from "../assets/img/project-img2.png";
-import projImg3 from "../assets/img/project-img3.png";
-import witcher from "../assets/img/witcher_reading_book.png";
-import data_analysis from "../assets/img/data_analysis.jpg";
-import flight from "../assets/img/flight.jpg";
-import quiz from "../assets/img/quiz.jpg";
-import colorSharp2 from "../assets/img/color-sharp2.png";
+import projImg2 from "../../assets/img/project-img2.png";
+import projImg3 from "../../assets/img/project-img3.png";
+import witcher from "../../assets/img/witcher_reading_book.png";
+import data_analysis from "../../assets/img/data_analysis.jpg";
+import flight from "../../assets/img/flight.jpg";
+import quiz from "../../assets/img/quiz.jpg";
+import colorSharp2 from "../../assets/img/color-sharp2.png";
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
-import LanguageContext from './LanguageContext';
+import LanguageContext from '../LanguageContext';
 import {useContext} from "react";
 
 export const Projects = () => {
 
     const {selectedFlag, setSelectedFlag} = useContext(LanguageContext);
-    const languageFile = require('../data/old_projects.json');
+    const languageFile = require('../../data/old_projects.json');
     const languageKey = selectedFlag === 'usa' ? 'english' : 'portuguese';
     const projectsData = languageFile[languageKey];
 

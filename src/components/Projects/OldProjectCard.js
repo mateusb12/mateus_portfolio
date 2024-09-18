@@ -1,5 +1,5 @@
 import { Col } from "react-bootstrap";
-import witcher from "../assets/img/witcher_reading_book.png";
+import witcher from "../../assets/img/witcher_reading_book.png";
 
 export const OldProjectCard = (
     {
