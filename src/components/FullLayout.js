@@ -6,6 +6,7 @@ import {Contact} from "./Contact/Contact";
 import {Footer} from "./Footer/Footer";
 import ProjectCard from "./Projects/ProjectCard";
 import ProjectCarousel from "./Projects/ProjectCarousel";
+import CustomCarousel from "./Projects/CustomCarousel";
 
 export function FullLayout() {
     return (
@@ -16,7 +17,7 @@ export function FullLayout() {
                 <Skills/>
             </div>
             <Projects/>
-            <ProjectCard/>
+            <CustomCarousel/>
             <ProjectCarousel/>
             <Contact/>
             <Footer/>

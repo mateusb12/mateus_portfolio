@@ -14,6 +14,7 @@ import {OldProjectCard} from "./components/Projects/OldProjectCard";
 import ProjectCard from "./components/Projects/ProjectCard";
 import {SkillPanel} from "./components/Skills/SkillPanel";
 import ProjectCarousel from "./components/Projects/ProjectCarousel";
+import CustomCarousel from "./components/Projects/CustomCarousel";
 
 function App() {
     const [language, setLanguage] = useState('english');
@@ -26,6 +27,7 @@ function App() {
                     <Route path="/mateus_portfolio/navbar" element={<NavBar/>}/>
                     <Route path="/mateus_portfolio/introduction" element={<Introduction/>}/>
                     <Route path="/mateus_portfolio/skills" element={<Skills/>}/>
+                    <Route path="/mateus_portfolio/customcarousel" element={<CustomCarousel/>}/>
                     <Route path="/mateus_portfolio/projects" element={<Projects/>}/>
                     <Route path="/mateus_portfolio/oldprojectCard" element={<OldProjectCard/>}/>
                     <Route path="/mateus_portfolio/contact" element={<Contact/>}/>
