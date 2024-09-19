@@ -31,6 +31,7 @@ const data = [
 const CustomCarousel = () => {
 
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [touchPosition, setTouchPosition] = useState(null)
 
     const prevSlide = () => {
         const isFirstSlide = currentIndex === 0;
@@ -44,38 +45,72 @@ const CustomCarousel = () => {
         setCurrentIndex(newIndex);
     };
 
+    const handleTouchStart = (e) => {
+        const touchDown = e.touches[0].clientX;
+        setTouchPosition(touchDown);
+    };
+
+    const handleTouchMove = (e) => {
+        const touchDown = touchPosition;
+
+        if (touchDown === null) {
+            return;
+        }
+
+        const currentTouch = e.touches[0].clientX;
+        const diff = touchDown - currentTouch;
+
+        if (diff > 5) {
+            // Swiped left
+            nextSlide();
+        }
+
+        if (diff < -5) {
+            // Swiped right
+            prevSlide();
+        }
+
+        setTouchPosition(null);
+    };
+
     return (
         <div className="custom-carousel">
             <div className="carousel-wrapper">
-                <div className="carousel-inner">
-                    <div className="carousel-content">
-                        <div className="carousel-image-container">
-                            <img
-                                src={data[currentIndex].img}
-                                alt={data[currentIndex].name}
-                                className="carousel-image"
-                            />
-                        </div>
-
-                        <div className="carousel-text">
-                            <p className="carousel-title">{data[currentIndex].name}</p>
-                            <p className="carousel-review">{data[currentIndex].review}</p>
-                            <button className="carousel-readmore-button">
-                                Read more
-                            </button>
-                        </div>
+                <div
+                    className="carousel-inner"
+                    onTouchStart={handleTouchStart} // Add touch start handler
+                    onTouchMove={handleTouchMove}   // Add touch move handler
+                >
+                    <div
+                        className="carousel-track"
+                        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                    >
+                        {data.map((item, index) => (
+                            <div className="carousel-slide" key={index}>
+                                <div className="carousel-content">
+                                    <div className="carousel-image-container">
+                                        <img
+                                            src={item.img}
+                                            alt={item.name}
+                                            className="carousel-image"
+                                        />
+                                    </div>
+                                    <div className="carousel-text">
+                                        <p className="carousel-title">{item.name}</p>
+                                        <p className="carousel-review">{item.review}</p>
+                                        <button className="carousel-readmore-button">
+                                            Read more
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                     <div className="carousel-navigation">
-                        <button
-                            onClick={prevSlide}
-                            className="carousel-nav-button"
-                        >
+                        <button onClick={prevSlide} className="carousel-nav-button">
                             Previous
                         </button>
-                        <button
-                            onClick={nextSlide}
-                            className="carousel-nav-button"
-                        >
+                        <button onClick={nextSlide} className="carousel-nav-button">
                             Next
                         </button>
                     </div>

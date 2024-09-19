@@ -1,15 +1,3 @@
-/*@tailwind base;*/
-/*@tailwind components;*/
-/*@tailwind utilities;*/
-
-/*@layer base {*/
-/*    .custom-carousel {*/
-/*        background-color: red;*/
-/*    }*/
-/*}*/
-
-
-
 /* Root Container */
 .custom-carousel {
     /* Add any specific styles for the carousel container if needed */
@@ -21,15 +9,28 @@
     margin: 0 auto;
 }
 
-/* Inner container with top margin */
+/* Carousel Inner */
 .carousel-inner {
+    overflow: hidden;
+    position: relative;
     margin-top: 5rem;
+}
+
+/* Carousel Track */
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Carousel Slide */
+.carousel-slide {
+    min-width: 100%;
+    box-sizing: border-box;
 }
 
 /* Content box styling */
 .carousel-content {
     background-color: #ffffff;
-    height: 450px;
     color: #000000;
     border-radius: 12px;
     display: flex;
