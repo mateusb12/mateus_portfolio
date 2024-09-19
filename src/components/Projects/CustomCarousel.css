@@ -26,6 +26,10 @@
 .carousel-slide {
     min-width: 100%;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Content box styling */

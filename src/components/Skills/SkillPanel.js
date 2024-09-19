@@ -16,13 +16,11 @@ const skillsIcons = importAll(require.context('../../assets/img/skills_icons', f
 
 const formatLabel = (label) => {
     const words = label.split(' ');
-    console.log(words);
     // Check if there are at least two words
     if (words.length >= 2) {
         // Check if each word has more than 8 characters
         const allWordsLong = words.every(word => word.length >= 7);
         if (allWordsLong) {
-            console.log('All words have at least 8 characters');
             // Insert <br> between words
             return words.reduce((acc, word, index) => {
                 if (index === 0) return [word];
@@ -85,7 +83,7 @@ export const SkillPanel = ({
     };
 
     const renderSkills = () => {
-        const skillChunks = chunkArray(skills, 3);
+        const skillChunks = chunkArray(skills, 0);
         return skillChunks.map((chunk, rowIndex) => (
             <div key={rowIndex} className="skills-row">
                 {chunk.map(skill => (
@@ -159,10 +157,30 @@ export const SkillPanel = ({
     );
 };
 
-const chunkArray = (arr, chunkSize) => {
-    const result = [];
-    for (let i = 0; i < arr.length; i += chunkSize) {
-        result.push(arr.slice(i, i + chunkSize));
+const chunkArray = (arr, minimumSize = 0) => {
+    // If minimumSize is 0 and the array length is less than or equal to 3, return a single array
+    if (minimumSize === 0 && arr.length <= 3) {
+        return [arr];  // Return all elements in a single array
     }
+
+    const result = [[], [], []]; // Prepare 3 arrays
+    let i = 0;
+
+    // Step 1: Fill each chunk with the minimumSize first, if minimumSize > 0
+    for (let j = 0; j < result.length && i < arr.length; j++) {
+        result[j] = arr.slice(i, i + minimumSize);
+        i += minimumSize;
+    }
+
+    // Step 2: Distribute the remaining elements as evenly as possible
+    for (let j = 0; i < arr.length; i++, j = (j + 1) % 3) {
+        result[j].push(arr[i]);
+    }
+
+    // Filter out any empty arrays, only if minimumSize is 0
+    if (minimumSize === 0) {
+        return result.filter(chunk => chunk.length > 0);
+    }
+
     return result;
 };

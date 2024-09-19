@@ -141,8 +141,6 @@ export const Skills = () => {
         };
     };
 
-    console.log("Dynamically calculated font sizes: ", keySkills.map(skill => getDynamicFontSize(translateSkill(skill.title))))
-
     const CustomLeftArrow = ({ onClick, ...rest }) => {
         return (
             <button
