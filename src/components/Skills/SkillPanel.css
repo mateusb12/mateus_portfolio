@@ -123,3 +123,13 @@
 .libraries-title {
     color: var(--libraries-color);
 }
+
+.formatted-label {
+    display: inline-block;
+    /* Any other styles you need */
+}
+
+.small-font {
+    font-size: 0.85em; /* Adjust the value as needed */
+    line-height: 1.2;
+}

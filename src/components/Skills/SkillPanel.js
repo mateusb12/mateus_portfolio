@@ -18,18 +18,23 @@ const formatLabel = (label) => {
     const words = label.split(' ');
     // Check if there are at least two words
     if (words.length >= 2) {
-        // Check if each word has more than 8 characters
-        const allWordsLong = words.every(word => word.length >= 7);
+        // Check if each word has more than 7 characters
+        const allWordsLong = words.some(word => word.length >= 7);
         if (allWordsLong) {
-            // Insert <br> between words
-            return words.reduce((acc, word, index) => {
-                if (index === 0) return [word];
-                return [...acc, <br key={index} />, word];
-            }, []);
+            return (
+                <span className="formatted-label small-font">
+                    {words.map((word, index) => (
+                        <React.Fragment key={index}>
+                            {index > 0 && <br />}
+                            {word}
+                        </React.Fragment>
+                    ))}
+                </span>
+            );
         }
     }
-    // If conditions not met, return the label as is
-    return label;
+    // If conditions not met, return the label with normal font size
+    return <span className="formatted-label">{label}</span>;
 };
 
 const defaultSkills = [
@@ -83,7 +88,9 @@ export const SkillPanel = ({
     };
 
     const renderSkills = () => {
-        const skillChunks = chunkArray(skills, 0);
+        // Determine minimumSize based on the title
+        const minimumSize = title === 'Libraries' ? 1 : 0;
+        const skillChunks = chunkArray(skills, minimumSize);
         return skillChunks.map((chunk, rowIndex) => (
             <div key={rowIndex} className="skills-row">
                 {chunk.map(skill => (
@@ -94,7 +101,7 @@ export const SkillPanel = ({
                     >
                         <img
                             src={skillsIcons[skill.icon]}
-                            alt={`${skillsIcons[skill.icon]} Icon`}
+                            alt={`${skill.label} Icon`}
                             onError={() => console.error(`Failed to load image for ${skill.label}`)}
                             className={`project-skill-icon ${skill.icon === activeSkill?.active ? 'selected' : ''} ${color}-border`}
                         />
