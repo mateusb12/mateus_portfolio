@@ -4,6 +4,7 @@ import flask from "../../assets/img/skills_icons/old-flask.png";
 import pandas from "../../assets/img/skills_icons/pandas.png";
 import java from "../../assets/img/skills_icons/java.png";
 import React, { useState } from 'react';
+import ProjectCard from "./ProjectCard";
 
 const CustomCarousel = ({ children }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -123,11 +124,15 @@ const data = [
 
 // Main Component that uses CustomCarousel and Card
 const CarouselWithCards = () => {
+    const cards = data.map((item, index) => (
+        <Card key={index} item={item} />
+    ));
+
     return (
         <CustomCarousel>
-            {data.map((item, index) => (
-                <Card key={index} item={item} />
-            ))}
+            <ProjectCard projectId="witcher" isActive={true}/>
+            <ProjectCard projectId="flight-scraper" isActive={true}/>
+            <ProjectCard projectId="valorant-impact" isActive={true}/>
         </CustomCarousel>
     );
 };

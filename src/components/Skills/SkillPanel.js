@@ -14,6 +14,26 @@ const importAll = (r) => {
 
 const skillsIcons = importAll(require.context('../../assets/img/skills_icons', false, /\.png$/));
 
+const formatLabel = (label) => {
+    const words = label.split(' ');
+    console.log(words);
+    // Check if there are at least two words
+    if (words.length >= 2) {
+        // Check if each word has more than 8 characters
+        const allWordsLong = words.every(word => word.length >= 7);
+        if (allWordsLong) {
+            console.log('All words have at least 8 characters');
+            // Insert <br> between words
+            return words.reduce((acc, word, index) => {
+                if (index === 0) return [word];
+                return [...acc, <br key={index} />, word];
+            }, []);
+        }
+    }
+    // If conditions not met, return the label as is
+    return label;
+};
+
 const defaultSkills = [
     { icon: 'backend', label: 'Backend' },
     { icon: 'api', label: 'APIs' },
@@ -80,7 +100,7 @@ export const SkillPanel = ({
                             onError={() => console.error(`Failed to load image for ${skill.label}`)}
                             className={`project-skill-icon ${skill.icon === activeSkill?.active ? 'selected' : ''} ${color}-border`}
                         />
-                        <div className="project-skill-label">{skill.label}</div>
+                        <div className="project-skill-label">{formatLabel(skill.label)}</div>
                     </span>
                 ))}
             </div>

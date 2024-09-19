@@ -94,6 +94,7 @@
 /* Ensure the active skill has a white border */
 
 .project-skill-label {
+    font-size: .971rem;
     padding: 0.35rem;
 }
 

@@ -32,7 +32,7 @@ function App() {
                     <Route path="/mateus_portfolio/oldprojectCard" element={<OldProjectCard/>}/>
                     <Route path="/mateus_portfolio/contact" element={<Contact/>}/>
                     <Route path="/mateus_portfolio/footer" element={<Footer/>}/>
-                    <Route path='/mateus_portfolio/newprojectcard' element={<ProjectCard/>}/>
+                    <Route path='/mateus_portfolio/newprojectcard' element={<ProjectCard projectId="valorant-impact"/>}/>
                     <Route path='/mateus_portfolio/carousel' element={<ProjectCarousel/>}/>
                 </Routes>
             </div>
