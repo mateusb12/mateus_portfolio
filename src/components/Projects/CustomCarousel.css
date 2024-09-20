@@ -5,30 +5,37 @@
 
 /* Wrapper to center the carousel and set width */
 .carousel-wrapper {
-    width: 75%;
-    margin: 0 auto;
+    /*width: 100%;*/
+    /*margin: 0 auto;*/
 }
 
 /* Carousel Inner */
 .carousel-inner {
+    width: 25%;
+    border: 1px orange solid;
     overflow: hidden;
     position: relative;
-    margin-top: 5rem;
+    margin-top: 1rem;
 }
 
 /* Carousel Track */
 .carousel-track {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
     transition: transform 0.5s ease-in-out;
 }
 
 /* Carousel Slide */
 .carousel-slide {
-    min-width: 100%;
+    /*width: 100%;*/
+    border: 1px solid deeppink;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    /*align-items: center;*/
     justify-content: center;
 }
 
@@ -106,8 +113,9 @@
 
 /* Navigation Buttons Container */
 .carousel-navigation {
+    border: 1px solid deepskyblue;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 1rem;
 }
 

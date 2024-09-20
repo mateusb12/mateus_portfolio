@@ -12,15 +12,19 @@ const CustomCarousel = ({ children }) => {
 
     const totalSlides = React.Children.count(children);
 
+    const translationMap = {0: '-90%', 1: '0%', 2: '+90%'}
+
     const prevSlide = () => {
         const isFirstSlide = currentIndex === 0;
         const newIndex = isFirstSlide ? totalSlides - 1 : currentIndex - 1;
+        console.log("Previous index", newIndex);
         setCurrentIndex(newIndex);
     };
 
     const nextSlide = () => {
         const isLastSlide = currentIndex === totalSlides - 1;
         const newIndex = isLastSlide ? 0 : currentIndex + 1;
+        console.log("Next index", newIndex);
         setCurrentIndex(newIndex);
     };
 
@@ -55,15 +59,8 @@ const CustomCarousel = ({ children }) => {
     return (
         <div className="custom-carousel">
             <div className="carousel-wrapper">
-                <div
-                    className="carousel-inner"
-                    onTouchStart={handleTouchStart}
-                    onTouchMove={handleTouchMove}
-                >
-                    <div
-                        className="carousel-track"
-                        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-                    >
+                <div className="carousel-inner" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove}>
+                    <div className="carousel-track" style={{ transform: `translateX(-${currentIndex * 90}%)` }}>
                         {React.Children.map(children, (child, index) => (
                             <div className="carousel-slide" key={index}>
                                 {child}
@@ -71,12 +68,8 @@ const CustomCarousel = ({ children }) => {
                         ))}
                     </div>
                     <div className="carousel-navigation">
-                        <button onClick={prevSlide} className="carousel-nav-button">
-                            Previous
-                        </button>
-                        <button onClick={nextSlide} className="carousel-nav-button">
-                            Next
-                        </button>
+                        <button onClick={prevSlide} className="carousel-nav-button">Previous</button>
+                        <button onClick={nextSlide} className="carousel-nav-button">Next</button>
                     </div>
                 </div>
             </div>
@@ -130,9 +123,9 @@ const CarouselWithCards = () => {
 
     return (
         <CustomCarousel>
-            <ProjectCard projectId="witcher" isActive={true}/>
+            <ProjectCard projectId="witcher" isActive={false}/>
             <ProjectCard projectId="flight-scraper" isActive={true}/>
-            <ProjectCard projectId="valorant-impact" isActive={true}/>
+            <ProjectCard projectId="valorant-impact" isActive={false}/>
         </CustomCarousel>
     );
 };

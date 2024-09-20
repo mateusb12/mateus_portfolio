@@ -3,7 +3,7 @@
 .project-card {
     width: 330px;
     border: 1px solid var(--border-color);
-    padding: 20px;
+    padding: 50px;
     border-radius: var(--border-radius-small);
     background-color: var(--background-dark);
 }
@@ -19,8 +19,9 @@
 
 .project-card-header h2 {
     color: var(--primary-color);
-    font-size: 33px;
+    font-size: 2rem;
     letter-spacing: 1px;
+    text-align: center;
 }
 
 .project-card-header img {
@@ -34,6 +35,10 @@
     border-width: 2px;
     border-color: #ffffff;
     cursor: pointer;
+}
+
+.project-card-header p{
+
 }
 
 /* Footer section */
