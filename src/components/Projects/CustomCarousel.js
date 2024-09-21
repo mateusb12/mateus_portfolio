@@ -3,7 +3,7 @@ import database from "../../assets/img/skills_icons/database.png";
 import flask from "../../assets/img/skills_icons/old-flask.png";
 import pandas from "../../assets/img/skills_icons/pandas.png";
 import java from "../../assets/img/skills_icons/java.png";
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import ProjectCard from "./ProjectCard";
 
 const CustomCarousel = ({ children }) => {
@@ -12,19 +12,27 @@ const CustomCarousel = ({ children }) => {
 
     const totalSlides = React.Children.count(children);
 
-    const translationMap = {0: '-90%', 1: '0%', 2: '+90%'}
+    const translationMap = {};
+    for (let i = 0; i < totalSlides; i++) {
+        translationMap[i] = `${-(1 - i) * 90}%`;
+    }
+
+    useEffect(() => {
+        const currentProject = children[currentIndex]?.props?.projectId || "unknown";
+        const translationValue = translationMap[currentIndex];
+        console.log(`Current project: ${currentProject}, Current index: ${currentIndex}, Translation value: ${translationValue}`);
+    }, [currentIndex, children]);
+
 
     const prevSlide = () => {
-        const isFirstSlide = currentIndex === 0;
-        const newIndex = isFirstSlide ? totalSlides - 1 : currentIndex - 1;
-        console.log("Previous index", newIndex);
+        const isLastSlide = currentIndex === totalSlides - 1;
+        const newIndex = isLastSlide ? 0 : currentIndex + 1;
         setCurrentIndex(newIndex);
     };
 
     const nextSlide = () => {
-        const isLastSlide = currentIndex === totalSlides - 1;
-        const newIndex = isLastSlide ? 0 : currentIndex + 1;
-        console.log("Next index", newIndex);
+        const isFirstSlide = currentIndex === 0;
+        const newIndex = isFirstSlide ? totalSlides - 1 : currentIndex - 1;
         setCurrentIndex(newIndex);
     };
 
@@ -60,7 +68,7 @@ const CustomCarousel = ({ children }) => {
         <div className="custom-carousel">
             <div className="carousel-wrapper">
                 <div className="carousel-inner" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove}>
-                    <div className="carousel-track" style={{ transform: `translateX(-${currentIndex * 90}%)` }}>
+                    <div className="carousel-track" style={{transform: `translateX(${translationMap[currentIndex]})`}}>
                         {React.Children.map(children, (child, index) => (
                             <div className="carousel-slide" key={index}>
                                 {child}
@@ -123,9 +131,9 @@ const CarouselWithCards = () => {
 
     return (
         <CustomCarousel>
-            <ProjectCard projectId="witcher" isActive={false}/>
+            <ProjectCard projectId="witcher" isActive={true}/>
             <ProjectCard projectId="flight-scraper" isActive={true}/>
-            <ProjectCard projectId="valorant-impact" isActive={false}/>
+            <ProjectCard projectId="valorant-impact" isActive={true}/>
         </CustomCarousel>
     );
 };
