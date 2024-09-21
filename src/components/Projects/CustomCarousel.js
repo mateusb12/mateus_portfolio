@@ -102,17 +102,18 @@ const CustomCarousel = ({ children }) => {
     return (
         <div className="custom-carousel">
             <div className="carousel-wrapper">
-                <div className="carousel-inner" style={getStyleForCarouselInner()} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove}>
+                <div className="carousel-inner" style={getStyleForCarouselInner()} onTouchStart={handleTouchStart}
+                     onTouchMove={handleTouchMove}>
+                    <div className="carousel-navigation">
+                        <button onClick={prevSlide} className="carousel-nav-button">Previous</button>
+                        <button onClick={nextSlide} className="carousel-nav-button">Next</button>
+                    </div>
                     <div className="carousel-track" style={{transform: `translateX(${translationMap[currentIndex]})`}}>
                         {React.Children.map(children, (child, index) => (
                             <div className="carousel-slide" key={index}>
                                 {child}
                             </div>
                         ))}
-                    </div>
-                    <div className="carousel-navigation">
-                        <button onClick={prevSlide} className="carousel-nav-button">Previous</button>
-                        <button onClick={nextSlide} className="carousel-nav-button">Next</button>
                     </div>
                 </div>
             </div>
@@ -121,10 +122,10 @@ const CustomCarousel = ({ children }) => {
 };
 
 // Card Component Logic
-const Card = ({ item }) => (
+const Card = ({item}) => (
     <div className="carousel-content">
         <div className="carousel-image-container">
-            <img src={item.img} alt={item.name} className="carousel-image" />
+            <img src={item.img} alt={item.name} className="carousel-image"/>
         </div>
         <div className="carousel-text">
             <p className="carousel-title">{item.name}</p>
