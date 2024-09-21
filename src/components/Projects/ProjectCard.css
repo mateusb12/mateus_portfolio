@@ -1,9 +1,10 @@
 /* Use the smaller css for common variables and shared styles */
 
 .project-card {
-    width: 330px;
+    margin: auto;
+    width: 327px;
     border: 1px solid var(--border-color);
-    padding: 15px;
+    padding: 10px;
     border-radius: var(--border-radius-small);
     background-color: var(--background-dark);
 }

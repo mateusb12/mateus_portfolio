@@ -30,9 +30,9 @@ const CustomCarousel = ({ children }) => {
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth <= 700) {
-                setBaseOffset(111);
+                setBaseOffset(110);
             } else {
-                setBaseOffset(90);
+                setBaseOffset(93);
             }
         };
 
