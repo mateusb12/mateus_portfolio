@@ -1,9 +1,10 @@
-import { useContext, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import contactImg from "../../assets/img/contact-img.svg";
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
 import LanguageContext from "../LanguageContext";
+import { FaWhatsapp } from 'react-icons/fa';
 
 export const Contact = () => {
   const { selectedFlag, setSelectedFlag } = useContext(LanguageContext);
@@ -16,7 +17,8 @@ export const Contact = () => {
       surnameField: "Last Name",
       emailField: "Email address",
       phoneField: "Phone Number",
-      messageField: "Message"
+      messageField: "Message",
+      messageContent: "Hello, Mateus. I am interested in your projects. I am looking forward to work with you."
     },
     portuguese: {
       title: "Entre em Contato",
@@ -24,7 +26,8 @@ export const Contact = () => {
       surnameField: "Sobrenome",
       emailField: "Email",
       phoneField: "Telefone",
-      messageField: "Mensagem"
+      messageField: "Mensagem",
+      messageContent: "Olá, Mateus. Estou interessado nos seus projetos. Estou à disposição para trabalhar com você."
     }
   };
 
@@ -35,7 +38,7 @@ export const Contact = () => {
     lastName: '',
     email: '',
     phone: '',
-    message: ''
+    message: textData.messageContent
   };
   const [formDetails, setFormDetails] = useState(formInitialDetails);
   const [buttonText, setButtonText] = useState('Send');
@@ -48,24 +51,41 @@ export const Contact = () => {
     })
   };
 
-  const handleSubmit = async (e) => {
+  // UseEffect to update the message field when the language changes
+  useEffect(() => {
+    setFormDetails(prevDetails => ({
+      ...prevDetails,
+      message: textData.messageContent // Update the message field based on language
+    }));
+  }, [selectedFlag]);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     setButtonText("Sending...");
-    let response = await fetch("http://localhost:5000/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify(formDetails),
-    });
+
+    // Replace 'YOUR_PHONE_NUMBER' with your actual phone number in international format without '+' or '00'
+    const phoneNumber = '5585999171902'; // e.g., '1234567890'
+
+    // Construct the message
+    const message = formDetails.message;
+
+    // Encode the message for use in a URL
+    const encodedMessage = encodeURIComponent(message);
+
+    // Construct the WhatsApp Click-to-Chat URL
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+    // Open WhatsApp Web in a new tab
+    window.open(whatsappURL, '_blank');
+
+    // Reset the button text
     setButtonText("Send");
-    let result = await response.json();
+
+    // Optionally, reset the form
     setFormDetails(formInitialDetails);
-    if (result.code === 200) {
-      setStatus({ success: true, message: 'Message sent successfully'});
-    } else {
-      setStatus({ success: false, message: 'Something went wrong, please try again later.'});
-    }
+
+    // Optionally, set a status message
+    setStatus({ success: true, message: 'WhatsApp is opening...' });
   };
 
   return (
@@ -79,21 +99,24 @@ export const Contact = () => {
                       <h2>{textData.title}</h2>
                       <form onSubmit={handleSubmit}>
                         <Row>
-                          <Col size={12} sm={6} className="px-1">
-                            <input type="text" value={formDetails.firstName} placeholder={textData.nameField} onChange={(e) => onFormUpdate('firstName', e.target.value)} />
-                          </Col>
-                          <Col size={12} sm={6} className="px-1">
-                            <input type="text" value={formDetails.lastName} placeholder={textData.surnameField} onChange={(e) => onFormUpdate('lastName', e.target.value)}/>
-                          </Col>
-                          <Col size={12} sm={6} className="px-1">
-                            <input type="email" value={formDetails.email} placeholder={textData.emailField} onChange={(e) => onFormUpdate('email', e.target.value)} />
-                          </Col>
-                          <Col size={12} sm={6} className="px-1">
-                            <input type="tel" value={formDetails.phone} placeholder={textData.phoneField} onChange={(e) => onFormUpdate('phone', e.target.value)}/>
-                          </Col>
+                          {/*<Col size={12} sm={6} className="px-1">*/}
+                          {/*  <input type="text" value={formDetails.firstName} placeholder={textData.nameField} onChange={(e) => onFormUpdate('firstName', e.target.value)} />*/}
+                          {/*</Col>*/}
+                          {/*<Col size={12} sm={6} className="px-1">*/}
+                          {/*  <input type="text" value={formDetails.lastName} placeholder={textData.surnameField} onChange={(e) => onFormUpdate('lastName', e.target.value)}/>*/}
+                          {/*</Col>*/}
+                          {/*<Col size={12} sm={6} className="px-1">*/}
+                          {/*  <input type="email" value={formDetails.email} placeholder={textData.emailField} onChange={(e) => onFormUpdate('email', e.target.value)} />*/}
+                          {/*</Col>*/}
+                          {/*<Col size={12} sm={6} className="px-1">*/}
+                          {/*  <input type="tel" value={formDetails.phone} placeholder={textData.phoneField} onChange={(e) => onFormUpdate('phone', e.target.value)}/>*/}
+                          {/*</Col>*/}
                           <Col size={12} className="px-1">
                             <textarea rows="6" value={formDetails.message} placeholder={textData.messageField} onChange={(e) => onFormUpdate('message', e.target.value)}></textarea>
-                            <button type="submit"><span>{buttonText}</span></button>
+                            <button type="submit" className="whatsapp-button">
+                              <FaWhatsapp style={{ marginRight: '8px', width: "1.5em", height: "1.5em"}} />
+                              <span>{buttonText}</span>
+                            </button>
                           </Col>
                           {
                               status.message &&

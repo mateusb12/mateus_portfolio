@@ -15,7 +15,7 @@ export function FullLayout() {
                 <Introduction/>
                 <Skills/>
             </div>
-            <Projects/>
+            {/*<Projects/>*/}
             <CustomCarousel/>
             <Contact/>
             <Footer/>
