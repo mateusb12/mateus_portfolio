@@ -12,16 +12,41 @@ const CustomCarousel = ({ children }) => {
 
     const totalSlides = React.Children.count(children);
 
-    const translationMap = {};
-    for (let i = 0; i < totalSlides; i++) {
-        translationMap[i] = `${-(1 - i) * 90}%`;
-    }
+    const [baseOffset, setBaseOffset] = useState(90);
+    const translationMap = React.useMemo(() => {
+        const map = {};
+        for (let i = 0; i < totalSlides; i++) {
+            map[i] = `${-(1 - i) * baseOffset}%`;
+        }
+        return map;
+    }, [totalSlides, baseOffset]);
 
     useEffect(() => {
         const currentProject = children[currentIndex]?.props?.projectId || "unknown";
         const translationValue = translationMap[currentIndex];
         console.log(`Current project: ${currentProject}, Current index: ${currentIndex}, Translation value: ${translationValue}`);
     }, [currentIndex, children]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth <= 700) {
+                setBaseOffset(111);
+            } else {
+                setBaseOffset(90);
+            }
+        };
+
+        // Add event listener
+        window.addEventListener('resize', handleResize);
+
+        // Call handler right away so state gets updated with initial window size
+        handleResize();
+
+        // Remove event listener on cleanup
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
 
     const prevSlide = () => {

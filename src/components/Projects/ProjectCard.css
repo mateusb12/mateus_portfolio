@@ -3,7 +3,7 @@
 .project-card {
     width: 330px;
     border: 1px solid var(--border-color);
-    padding: 10px;
+    padding: 15px;
     border-radius: var(--border-radius-small);
     background-color: var(--background-dark);
 }

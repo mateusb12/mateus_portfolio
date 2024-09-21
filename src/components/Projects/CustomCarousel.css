@@ -1,18 +1,14 @@
 /* Root Container */
 .custom-carousel {
-    /* Add any specific styles for the carousel container if needed */
 }
 
-/* Wrapper to center the carousel and set width */
 .carousel-wrapper {
-    /*width: 100%;*/
-    /*margin: 0 auto;*/
 }
 
 /* Carousel Inner */
 .carousel-inner {
+    /*border: 1px orange solid;*/
     width: 25%;
-    border: 1px orange solid;
     overflow: hidden;
     position: relative;
     margin-top: 1rem;
@@ -30,12 +26,10 @@
 
 /* Carousel Slide */
 .carousel-slide {
-    /*width: 100%;*/
-    border: 1px solid deeppink;
+    /*border: 1px solid deeppink;*/
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    /*align-items: center;*/
     justify-content: center;
 }
 
@@ -63,10 +57,10 @@
 
 /* Image Styling */
 .carousel-image {
+    border: 2px solid #EAB308;
     height: 176px;
     width: 176px;
     border-radius: 9999px;
-    border: 2px solid #EAB308;
     object-fit: cover;
 }
 
@@ -115,7 +109,7 @@
 .carousel-navigation {
     border: 1px solid deepskyblue;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin-top: 1rem;
 }
 
