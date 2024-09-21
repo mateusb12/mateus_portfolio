@@ -2,6 +2,7 @@
   "projects": {
     "witcher": {
       "image": "witcher_reading_book.png",
+      "link": "https://github.com/mateusb12/WitcherAnalysis",
       "coreSkills": [
         { "icon": "backend", "label": "Backend" },
         { "icon": "api", "label": "APIs" },
@@ -30,6 +31,7 @@
     },
     "flight-scraper": {
       "image": "flight.jpg",
+      "link": "https://github.com/mateusb12/TravelScrapper",
       "coreSkills": [
         { "icon": "backend", "label": "Backend" },
         { "icon": "api", "label": "APIs" }
@@ -50,13 +52,14 @@
           "description": "Powered by Kiwi Tequilla API, this project scrapes flight data from the API and displays it in a user-friendly way. The main focus is to create alerts for the user when the price of a flight drops."
         },
         "portuguese": {
-          "title": "Raspador de Voos",
-          "description": "Alimentado pela API Kiwi Tequilla, esse projeto coleta dados de voo da API e os exibe de forma amigável ao usuário. O foco principal é criar alertas para o usuário quando o preço de algum voo cair."
+          "title": "Pesquisador Automático de Voos",
+          "description": "Alimentado pela API Kiwi Tequilla, esse projeto coleta dados de voo e os exibe de uma forma amigável ao usuário. O objetivo desse projeto é criar alertas para o usuário quando o preço de algum voo cair."
         }
       }
     },
     "valorant-impact": {
       "image": "data_analysis.jpg",
+      "link": "https://github.com/mateusb12/valorant_impact",
       "coreSkills": [
         { "icon": "backend", "label": "Backend" },
         { "icon": "machine-learning", "label": "Machine Learning" },
@@ -80,8 +83,8 @@
           "description": "A tool that quantifies how much player actions can shift the odds of winning a Valorant round. By analyzing kills, weapon choices, economy and strategic moves, it reveals the real-time impact on victory chances."
         },
         "portuguese": {
-          "title": "Impacto no Valorant",
-          "description": "Uma ferramenta que quantifica quanto as ações dos jogadores podem mudar as chances de ganhar uma rodada no Valorant. Ao analisar mortes, escolhas de armas, economia e movimentos estratégicos, revela o impacto em tempo real nas chances de vitória."
+          "title": "Valorant Impact",
+          "description": "Uma ferramenta que calucla o quanto as ações dos jogadores podem mudar as chances de vitória em um round no Valorant. Ao analisar mortes, escolhas de armas, economia e movimentos estratégicos, o algoritmo é capaz de revelar o impacto em tempo real nas chances de vitória."
         }
       }
     }

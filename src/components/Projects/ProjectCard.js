@@ -1,17 +1,18 @@
 import './ProjectCard.css';
-import React, { useContext, useEffect, useState } from 'react';
-import { SkillPanel } from '../Skills/SkillPanel';
+import React, {useContext, useEffect, useState} from 'react';
+import {SkillPanel} from '../Skills/SkillPanel';
 import LanguageContext from '../LanguageContext';
 import projectJsonData from '../../data/projects.json';
+import {Link} from "react-router-dom";
 
-const ProjectCard = ({ projectId = 'witcher', isActive = false }) => {
-    const { selectedFlag } = useContext(LanguageContext);
+const ProjectCard = ({projectId = 'witcher', isActive = false}) => {
+    const {selectedFlag} = useContext(LanguageContext);
     const [currentProjectData, setCurrentProjectData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isExpanded, setIsExpanded] = useState(false);
 
     useEffect(() => {
-        const languageMap = { usa: 'english', brazil: 'portuguese' };
+        const languageMap = {usa: 'english', brazil: 'portuguese'};
         const language = languageMap[selectedFlag];
 
         if (!language) {
@@ -54,7 +55,15 @@ const ProjectCard = ({ projectId = 'witcher', isActive = false }) => {
         <div className={`project-card ${isExpanded ? 'expanded' : ''}`}>
             <div className="project-card-header">
                 <h2>{currentProjectData.title}</h2>
-                <img src={require(`../../assets/img/${currentProjectData.image}`)} alt="Project thumbnail" />
+                <a
+                    href={currentProjectData.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{textDecoration: 'none'}} // Optional: Removes underline from the link
+                >
+                    <img src={require(`../../assets/img/${currentProjectData.image}`)}
+                         alt="Project thumbnail"/>
+                </a>
                 <p>{currentProjectData.description}</p>
             </div>
             <div className="project-card-footer">
