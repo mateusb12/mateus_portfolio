@@ -5,7 +5,6 @@ import {Projects} from "./Projects/Projects";
 import {Contact} from "./Contact/Contact";
 import {Footer} from "./Footer/Footer";
 import ProjectCard from "./Projects/ProjectCard";
-import ProjectCarousel from "./Projects/ProjectCarousel";
 import CustomCarousel from "./Projects/CustomCarousel";
 
 export function FullLayout() {
@@ -18,7 +17,6 @@ export function FullLayout() {
             </div>
             <Projects/>
             <CustomCarousel/>
-            <ProjectCarousel/>
             <Contact/>
             <Footer/>
         </>)

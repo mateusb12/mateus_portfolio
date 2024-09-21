@@ -13,7 +13,6 @@ import {useState} from "react";
 import {OldProjectCard} from "./components/Projects/OldProjectCard";
 import ProjectCard from "./components/Projects/ProjectCard";
 import {SkillPanel} from "./components/Skills/SkillPanel";
-import ProjectCarousel from "./components/Projects/ProjectCarousel";
 import CustomCarousel from "./components/Projects/CustomCarousel";
 
 function App() {
@@ -33,7 +32,6 @@ function App() {
                     <Route path="/mateus_portfolio/contact" element={<Contact/>}/>
                     <Route path="/mateus_portfolio/footer" element={<Footer/>}/>
                     <Route path='/mateus_portfolio/newprojectcard' element={<ProjectCard projectId="valorant-impact"/>}/>
-                    <Route path='/mateus_portfolio/carousel' element={<ProjectCarousel/>}/>
                 </Routes>
             </div>
         </LanguageContext.Provider>

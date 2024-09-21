@@ -174,8 +174,6 @@ export const Skills = () => {
                             <h2 style={getDynamicFontSize(languageFile[selectedLanguage].key.title)}>{languageFile[selectedLanguage].key.title}</h2>
                             <p>{languageFile[selectedLanguage].key.description}</p>
                             <Carousel responsive={responsive} infinite={false}
-                                      customLeftArrow={<CustomLeftArrow />}
-                                      customRightArrow={<CustomRightArrow />}
                                       className="owl-carousel owl-theme skill-slider">
                                 {keySkills.map((skill, index) => {
                                     const translatedTitle = translateSkill(skill.title);
