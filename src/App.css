@@ -315,7 +315,7 @@ p.danger {
 }
 .contact form button {
   font-weight: 700;
-  color: #000;
+  color: #1DA851;
   background-color: #fff;
   padding: 14px 48px;
   font-size: 18px;
@@ -333,7 +333,7 @@ p.danger {
 }
 .contact form button::before {
   content: "";
-  background: #121212;
+  background: #1DA851;
   width: 0;
   height: 100%;
   position: absolute;
