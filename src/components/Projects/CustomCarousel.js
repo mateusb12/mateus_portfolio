@@ -9,6 +9,7 @@ import ProjectCard from "./ProjectCard";
 const CustomCarousel = ({ children }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [touchPosition, setTouchPosition] = useState(null);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     const totalSlides = React.Children.count(children);
 
@@ -29,6 +30,7 @@ const CustomCarousel = ({ children }) => {
 
     useEffect(() => {
         const handleResize = () => {
+            setWindowWidth(window.innerWidth);
             if (window.innerWidth <= 700) {
                 setBaseOffset(110);
             } else {
@@ -89,10 +91,18 @@ const CustomCarousel = ({ children }) => {
         setTouchPosition(null);
     };
 
+    const getStyleForCarouselInner = () => {
+        if (windowWidth <= 700) {
+            return { width: '100%' };
+        } else {
+            return {};
+        }
+    };
+
     return (
         <div className="custom-carousel">
             <div className="carousel-wrapper">
-                <div className="carousel-inner" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove}>
+                <div className="carousel-inner" style={getStyleForCarouselInner()} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove}>
                     <div className="carousel-track" style={{transform: `translateX(${translationMap[currentIndex]})`}}>
                         {React.Children.map(children, (child, index) => (
                             <div className="carousel-slide" key={index}>
