@@ -39,8 +39,8 @@ const ProjectCard = ({projectId = 'witcher', isActive = false}) => {
     }, [selectedFlag, projectId]);
 
     useEffect(() => {
-        // Reset isExpanded when isActive changes
         setIsExpanded(isActive);
+        console.log(`isExpanded: ${isExpanded}`);
     }, [isActive]);
 
     const handleSelect = () => {
@@ -52,7 +52,8 @@ const ProjectCard = ({projectId = 'witcher', isActive = false}) => {
     }
 
     return (
-        <div className={`project-card ${isExpanded ? 'expanded' : ''}`}>
+        <div className={`project-card ${isExpanded ? 'expanded' : ''}`}
+             style={{opacity: isActive ? 1.0 : 0.3}}>
             <div className="project-card-header">
                 <h2>{currentProjectData.title}</h2>
                 <a
