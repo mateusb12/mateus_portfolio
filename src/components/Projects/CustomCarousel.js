@@ -28,6 +28,14 @@ const CustomCarousel = ({ children }) => {
         console.log(`Current project: ${currentProject}, Current index: ${currentIndex}, Translation value: ${translationValue}`);
     }, [currentIndex, children]);
 
+    const getStyleForCarouselInner = () => {
+        if (windowWidth <= 700) {
+            return { width: '100%' };
+        } else {
+            return { width: '50%' };
+        }
+    };
+
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
@@ -91,14 +99,6 @@ const CustomCarousel = ({ children }) => {
         setTouchPosition(null);
     };
 
-    const getStyleForCarouselInner = () => {
-        if (windowWidth <= 700) {
-            return { width: '100%' };
-        } else {
-            return {width: '50%'};
-        }
-    };
-
     return (
         <div className="custom-carousel">
             <div className="carousel-wrapper">
@@ -111,7 +111,7 @@ const CustomCarousel = ({ children }) => {
                     <div className="carousel-track" style={{transform: `translateX(${translationMap[currentIndex]})`}}>
                         {React.Children.map(children, (child, index) => (
                             <div className="carousel-slide" key={index}>
-                                {React.cloneElement(child, {isActive: index === currentIndex})}
+                                {child}
                             </div>
                         ))}
                     </div>
@@ -167,9 +167,9 @@ const CarouselWithCards = () => {
 
     return (
         <CustomCarousel>
-            <ProjectCard projectId="witcher"/>
-            <ProjectCard projectId="flight-scraper"/>
-            <ProjectCard projectId="valorant-impact"/>
+            <ProjectCard projectId="witcher" isActive={true}/>
+            <ProjectCard projectId="flight-scraper" isActive={true}/>
+            <ProjectCard projectId="valorant-impact" isActive={true}/>
         </CustomCarousel>
     );
 };

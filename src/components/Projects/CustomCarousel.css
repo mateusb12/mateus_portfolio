@@ -6,12 +6,11 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
 }
 
 /* Carousel Inner */
 .carousel-inner {
-    border: 1px orange solid;
+    /*border: 1px orange solid;*/
     overflow: hidden;
     position: relative;
     margin-top: 1rem;
@@ -23,13 +22,13 @@
     flex-direction: row;
     justify-content: center;
     /*align-items: center;*/
-    gap: 2.3rem;
+    gap: 2.2rem;
     transition: transform 0.5s ease-in-out;
 }
 
 /* Carousel Slide */
 .carousel-slide {
-    border: 1px solid deeppink;
+    /*border: 1px solid deeppink;*/
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -110,11 +109,10 @@
 
 /* Navigation Buttons Container */
 .carousel-navigation {
-    /*border: 1px solid deepskyblue;*/
+    border: 1px solid deepskyblue;
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
-    margin-bottom: 1rem;
 }
 
 /* Individual Navigation Buttons */
