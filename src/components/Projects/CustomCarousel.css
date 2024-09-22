@@ -11,8 +11,7 @@
 
 /* Carousel Inner */
 .carousel-inner {
-    /*border: 1px orange solid;*/
-    width: 25%;
+    border: 1px orange solid;
     overflow: hidden;
     position: relative;
     margin-top: 1rem;
@@ -30,7 +29,7 @@
 
 /* Carousel Slide */
 .carousel-slide {
-    /*border: 1px solid deeppink;*/
+    border: 1px solid deeppink;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;

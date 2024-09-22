@@ -34,7 +34,7 @@ const CustomCarousel = ({ children }) => {
             if (window.innerWidth <= 700) {
                 setBaseOffset(110);
             } else {
-                setBaseOffset(93);
+                setBaseOffset(40);
             }
         };
 
@@ -95,7 +95,7 @@ const CustomCarousel = ({ children }) => {
         if (windowWidth <= 700) {
             return { width: '100%' };
         } else {
-            return {};
+            return {width: '50%'};
         }
     };
 
@@ -111,7 +111,7 @@ const CustomCarousel = ({ children }) => {
                     <div className="carousel-track" style={{transform: `translateX(${translationMap[currentIndex]})`}}>
                         {React.Children.map(children, (child, index) => (
                             <div className="carousel-slide" key={index}>
-                                {child}
+                                {React.cloneElement(child, {isActive: index === currentIndex})}
                             </div>
                         ))}
                     </div>
@@ -167,9 +167,9 @@ const CarouselWithCards = () => {
 
     return (
         <CustomCarousel>
-            <ProjectCard projectId="witcher" isActive={true}/>
-            <ProjectCard projectId="flight-scraper" isActive={true}/>
-            <ProjectCard projectId="valorant-impact" isActive={true}/>
+            <ProjectCard projectId="witcher"/>
+            <ProjectCard projectId="flight-scraper"/>
+            <ProjectCard projectId="valorant-impact"/>
         </CustomCarousel>
     );
 };
