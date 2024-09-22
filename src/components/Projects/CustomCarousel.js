@@ -167,9 +167,9 @@ const CarouselWithCards = () => {
 
     return (
         <CustomCarousel>
-            <ProjectCard projectId="witcher" isActive={true}/>
+            <ProjectCard projectId="witcher" isActive={false}/>
             <ProjectCard projectId="flight-scraper" isActive={true}/>
-            <ProjectCard projectId="valorant-impact" isActive={true}/>
+            <ProjectCard projectId="valorant-impact" isActive={false}/>
         </CustomCarousel>
     );
 };

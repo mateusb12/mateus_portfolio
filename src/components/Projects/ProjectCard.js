@@ -9,7 +9,7 @@ const ProjectCard = ({projectId = 'witcher', isActive = false}) => {
     const {selectedFlag} = useContext(LanguageContext);
     const [currentProjectData, setCurrentProjectData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(true);
 
     useEffect(() => {
         const languageMap = {usa: 'english', brazil: 'portuguese'};
@@ -52,8 +52,7 @@ const ProjectCard = ({projectId = 'witcher', isActive = false}) => {
     }
 
     return (
-        <div className={`project-card ${isExpanded ? 'expanded' : ''}`}
-             style={{opacity: isActive ? 1.0 : 0.3}}>
+        <div className={`project-card ${isExpanded ? 'expanded' : 'collapsed'} ${isActive ? 'active' : 'inactive'}`}>
             <div className="project-card-header">
                 <h2>{currentProjectData.title}</h2>
                 <a
