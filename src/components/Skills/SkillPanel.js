@@ -53,7 +53,8 @@ export const SkillPanel = ({
                                skills = defaultSkills,
                                title = "Default Skills",
                                color = "core-skills",
-                               isExpanded: isActiveProp, // External control
+                               isExpanded: isActiveProp,
+                               startExpanded = null
                            }) => {
     const { selectedFlag } = useContext(LanguageContext);
     const [activeSkill, setActiveSkill] = useState(null);
@@ -144,6 +145,13 @@ export const SkillPanel = ({
             setActiveSkill(null);
         }
     }, [isExpanded, activeSkill]);
+
+    useEffect(() => {
+        if(startExpanded){
+            console.log("startExpanded:", startExpanded);
+            showSkillContent(startExpanded);
+        }
+    })
 
     return (
         <div className={`project-card-skills-panel ${color}-border`}>

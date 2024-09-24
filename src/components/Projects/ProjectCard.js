@@ -5,7 +5,7 @@ import LanguageContext from '../LanguageContext';
 import projectJsonData from '../../data/projects.json';
 import {Link} from "react-router-dom";
 
-const ProjectCard = ({projectId = 'witcher', isActive = false}) => {
+const ProjectCard = ({projectId = 'witcher', isActive = false, startExpanded = 'backend'}) => {
     const {selectedFlag} = useContext(LanguageContext);
     const [currentProjectData, setCurrentProjectData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -76,6 +76,7 @@ const ProjectCard = ({projectId = 'witcher', isActive = false}) => {
                     color="core-skills"
                     skills={currentProjectData.coreSkills}
                     isExpanded={isExpanded}
+                    startExpanded='backend'
                 />
                 <SkillPanel
                     title="Frameworks"
