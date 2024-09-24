@@ -17,7 +17,7 @@ const CustomCarousel = ({ children }) => {
     const translationMap = React.useMemo(() => {
         const map = {};
         for (let i = 0; i < totalSlides; i++) {
-            map[i] = `${-(1 - i) * baseOffset}%`;
+            map[i] = `${(1 - i) * baseOffset}%`;
         }
         return map;
     }, [totalSlides, baseOffset]);
@@ -25,6 +25,7 @@ const CustomCarousel = ({ children }) => {
     useEffect(() => {
         const currentProject = children[currentIndex]?.props?.projectId || "unknown";
         const translationValue = translationMap[currentIndex];
+        console.log('Translation map: ', translationMap);
         console.log(`Current project: ${currentProject}, Current index: ${currentIndex}, Translation value: ${translationValue}`);
     }, [currentIndex, children]);
 
@@ -59,15 +60,13 @@ const CustomCarousel = ({ children }) => {
     }, []);
 
 
-    const prevSlide = () => {
-        const isLastSlide = currentIndex === totalSlides - 1;
-        const newIndex = isLastSlide ? 0 : currentIndex + 1;
+    const nextSlide = () => {
+        const newIndex = (currentIndex + 1) % totalSlides;
         setCurrentIndex(newIndex);
     };
 
-    const nextSlide = () => {
-        const isFirstSlide = currentIndex === 0;
-        const newIndex = isFirstSlide ? totalSlides - 1 : currentIndex - 1;
+    const prevSlide = () => {
+        const newIndex = (currentIndex - 1 + totalSlides) % totalSlides;
         setCurrentIndex(newIndex);
     };
 
@@ -111,7 +110,7 @@ const CustomCarousel = ({ children }) => {
                     <div className="carousel-track" style={{transform: `translateX(${translationMap[currentIndex]})`}}>
                         {React.Children.map(children, (child, index) => (
                             <div className="carousel-slide" key={index}>
-                                {child}
+                                {React.cloneElement(child, { isActive: index === currentIndex })}
                             </div>
                         ))}
                     </div>
@@ -168,7 +167,7 @@ const CarouselWithCards = () => {
     return (
         <CustomCarousel>
             <ProjectCard projectId="witcher" isActive={false}/>
-            <ProjectCard projectId="flight-scraper" isActive={true}/>
+            <ProjectCard projectId="flight-scraper" isActive={false}/>
             <ProjectCard projectId="valorant-impact" isActive={false}/>
         </CustomCarousel>
     );

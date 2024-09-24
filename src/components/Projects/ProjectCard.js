@@ -10,6 +10,11 @@ const ProjectCard = ({projectId = 'witcher', isActive = false}) => {
     const [currentProjectData, setCurrentProjectData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isExpanded, setIsExpanded] = useState(true);
+    const [active, setActive] = useState(isActive);
+
+    useEffect(() => {
+        setActive(isActive); // Sync state with prop changes
+    }, [isActive]);
 
     useEffect(() => {
         const languageMap = {usa: 'english', brazil: 'portuguese'};
@@ -39,8 +44,7 @@ const ProjectCard = ({projectId = 'witcher', isActive = false}) => {
     }, [selectedFlag, projectId]);
 
     useEffect(() => {
-        setIsExpanded(isActive);
-        console.log(`isExpanded: ${isExpanded}`);
+        setIsExpanded(isExpanded);
     }, [isActive]);
 
     const handleSelect = () => {
