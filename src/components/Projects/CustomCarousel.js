@@ -32,19 +32,40 @@ const CustomCarousel = ({ children }) => {
     const getStyleForCarouselInner = () => {
         if (windowWidth <= 700) {
             return { width: '100%' };
+        } else if (windowWidth === 375) {
+            return { width: '75%' };
         } else {
             return { width: '50%' };
         }
     };
 
     useEffect(() => {
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-            if (window.innerWidth <= 700) {
-                setBaseOffset(110);
+        const getBaseOffset = (windowWidth) => {
+            const breakpoints = [360, 375, 384, 390, 412, 428, 810, 1440];
+            const baseOffsets = [101, 97, 95, 91, 85, 86, 91, 40];
+
+            if (windowWidth <= breakpoints[0]) {
+                return baseOffsets[0];
+            } else if (windowWidth >= breakpoints[breakpoints.length - 1]) {
+                return baseOffsets[baseOffsets.length - 1];
             } else {
-                setBaseOffset(40);
+                for (let i = 0; i < breakpoints.length - 1; i++) {
+                    if (windowWidth >= breakpoints[i] && windowWidth <= breakpoints[i + 1]) {
+                        // Perform linear interpolation
+                        const x0 = breakpoints[i];
+                        const x1 = breakpoints[i + 1];
+                        const y0 = baseOffsets[i];
+                        const y1 = baseOffsets[i + 1];
+
+                        return y0 + ((y1 - y0) * (windowWidth - x0)) / (x1 - x0);
+                    }
+                }
             }
+        };
+        const handleResize = () => {
+            const width = window.innerWidth;
+            setWindowWidth(width);
+            setBaseOffset(getBaseOffset(width));
         };
 
         // Add event listener
