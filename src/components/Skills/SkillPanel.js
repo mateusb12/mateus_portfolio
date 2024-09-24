@@ -1,6 +1,6 @@
 import './SkillPanel.css';
 import skillsData from '../../data/project_skills.json';
-import React, { useContext, useEffect, useState } from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import LanguageContext from "../LanguageContext";
 
 const importAll = (r) => {
@@ -54,7 +54,7 @@ export const SkillPanel = ({
                                title = "Default Skills",
                                color = "core-skills",
                                isExpanded: isActiveProp,
-                               initialSelectedSkill = null
+                               selectRandomSkill = false
                            }) => {
     const { selectedFlag } = useContext(LanguageContext);
     const [activeSkill, setActiveSkill] = useState(null);
@@ -64,6 +64,8 @@ export const SkillPanel = ({
 
     const translationMap = { "usa": "english", "brazil": "portuguese" };
     const currentLanguage = translationMap[selectedFlag];
+
+    const hasInitialized = useRef(false);
 
     function showSkillContent(skillKey) {
         const skillData = skillsData.skills[skillKey];
@@ -147,11 +149,14 @@ export const SkillPanel = ({
     }, [isExpanded, activeSkill]);
 
     useEffect(() => {
-        if(initialSelectedSkill && !activeSkill){
-            console.log("startExpanded:", initialSelectedSkill);
-            showSkillContent(initialSelectedSkill);
+        if (selectRandomSkill && !hasInitialized.current) {
+            const randomSkillIndex = Math.floor(Math.random() * skills.length); // Pick a random index
+            const randomSkillKey = skills[randomSkillIndex].icon; // Assume your skill key is stored in the icon property
+            showSkillContent(randomSkillKey);
+            console.log(`Initial selected skill: ${randomSkillKey}`);
+            hasInitialized.current = true;
         }
-    })
+    }, [selectRandomSkill, skills]);
 
     return (
         <div className={`project-card-skills-panel ${color}-border`}>
