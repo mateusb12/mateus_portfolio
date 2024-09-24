@@ -54,7 +54,7 @@ export const SkillPanel = ({
                                title = "Default Skills",
                                color = "core-skills",
                                isExpanded: isActiveProp,
-                               startExpanded = null
+                               initialSelectedSkill = null
                            }) => {
     const { selectedFlag } = useContext(LanguageContext);
     const [activeSkill, setActiveSkill] = useState(null);
@@ -147,9 +147,9 @@ export const SkillPanel = ({
     }, [isExpanded, activeSkill]);
 
     useEffect(() => {
-        if(startExpanded){
-            console.log("startExpanded:", startExpanded);
-            showSkillContent(startExpanded);
+        if(initialSelectedSkill && !activeSkill){
+            console.log("startExpanded:", initialSelectedSkill);
+            showSkillContent(initialSelectedSkill);
         }
     })
 

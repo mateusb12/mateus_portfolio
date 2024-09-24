@@ -76,7 +76,7 @@ const ProjectCard = ({projectId = 'witcher', isActive = false, startExpanded = '
                     color="core-skills"
                     skills={currentProjectData.coreSkills}
                     isExpanded={isExpanded}
-                    startExpanded='backend'
+                    initialSelectedSkill='backend'
                 />
                 <SkillPanel
                     title="Frameworks"
