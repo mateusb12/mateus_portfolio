@@ -107,10 +107,16 @@ const CustomCarousel = ({ children }) => {
                         <button onClick={prevSlide} className="carousel-nav-button">Previous</button>
                         <button onClick={nextSlide} className="carousel-nav-button">Next</button>
                     </div>
+                    <div className="carousel-progress-bar">
+                        {Array.from({length: totalSlides}).map((_, index) => (
+                            <span key={index}
+                                  className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}></span>
+                        ))}
+                    </div>
                     <div className="carousel-track" style={{transform: `translateX(${translationMap[currentIndex]})`}}>
                         {React.Children.map(children, (child, index) => (
                             <div className="carousel-slide" key={index}>
-                                {React.cloneElement(child, { isActive: index === currentIndex })}
+                                {React.cloneElement(child, {isActive: index === currentIndex})}
                             </div>
                         ))}
                     </div>

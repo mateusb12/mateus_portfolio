@@ -135,3 +135,22 @@
 /*        width: 100%;*/
 /*    }*/
 /*}*/
+
+.carousel-progress-bar {
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.carousel-dot {
+    height: 10px;
+    width: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.carousel-dot.active {
+    background-color: #0AF7A4; /* Active dot color */
+}
