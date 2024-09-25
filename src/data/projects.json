@@ -84,7 +84,7 @@
         },
         "portuguese": {
           "title": "Valorant Impact",
-          "description": "Uma ferramenta que calucla o quanto as ações dos jogadores podem mudar as chances de vitória em um round no Valorant. Ao analisar mortes, escolhas de armas, economia e movimentos estratégicos, o algoritmo é capaz de revelar o impacto em tempo real nas chances de vitória."
+          "description": "Uma ferramenta que calcula o quanto as ações dos jogadores podem mudar as chances de vitória em um round no Valorant. Ao analisar mortes, escolhas de armas, economia e movimentos estratégicos, o algoritmo é capaz de revelar o impacto em tempo real nas chances de vitória."
         }
       }
     }

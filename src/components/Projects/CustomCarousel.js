@@ -4,6 +4,7 @@ import flask from "../../assets/img/skills_icons/old-flask.png";
 import pandas from "../../assets/img/skills_icons/pandas.png";
 import java from "../../assets/img/skills_icons/java.png";
 import React, {useEffect, useState} from 'react';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import ProjectCard from "./ProjectCard";
 
 const CustomCarousel = ({ children }) => {
@@ -126,8 +127,12 @@ const CustomCarousel = ({ children }) => {
                 <div className="carousel-inner" style={getStyleForCarouselInner()} onTouchStart={handleTouchStart}
                      onTouchMove={handleTouchMove}>
                     <div className="carousel-navigation">
-                        <button onClick={prevSlide} className="carousel-nav-button">Previous</button>
-                        <button onClick={nextSlide} className="carousel-nav-button">Next</button>
+                        <button onClick={prevSlide} className="carousel-nav-button">
+                            <FaArrowLeft />
+                        </button>
+                        <button onClick={nextSlide} className="carousel-nav-button">
+                            <FaArrowRight />
+                        </button>
                     </div>
                     <div className="carousel-progress-bar">
                         {Array.from({length: totalSlides}).map((_, index) => (

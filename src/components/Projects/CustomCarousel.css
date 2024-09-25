@@ -109,9 +109,10 @@
 
 /* Navigation Buttons Container */
 .carousel-navigation {
-    border: 1px solid deepskyblue;
+    /*border: 1px solid deepskyblue;*/
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 10rem;
     margin-top: 1rem;
 }
 
@@ -120,14 +121,15 @@
     background-color: #6B7280;
     color: #ffffff;
     padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 4px;
+    border: 2px solid #121212;
+    border-radius: .7rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .carousel-nav-button:hover {
     background-color: #4B5563;
+    border: 1px solid white;
 }
 
 /*@media (max-width: 700px) {*/
