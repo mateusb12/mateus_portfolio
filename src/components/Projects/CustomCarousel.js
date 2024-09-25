@@ -7,7 +7,7 @@ import React, {useEffect, useState} from 'react';
 import ProjectCard from "./ProjectCard";
 
 const CustomCarousel = ({ children }) => {
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(1);
     const [touchPosition, setTouchPosition] = useState(null);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -35,7 +35,7 @@ const CustomCarousel = ({ children }) => {
         } else if (windowWidth === 375) {
             return { width: '75%' };
         } else {
-            return { width: '50%' };
+            return { width: '80%' };
         }
     };
 
@@ -62,6 +62,7 @@ const CustomCarousel = ({ children }) => {
                 }
             }
         };
+
         const handleResize = () => {
             const width = window.innerWidth;
             setWindowWidth(width);
@@ -130,8 +131,9 @@ const CustomCarousel = ({ children }) => {
                     </div>
                     <div className="carousel-progress-bar">
                         {Array.from({length: totalSlides}).map((_, index) => (
-                            <span key={index}
-                                  className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}></span>
+                            <button key={index} onClick={() => setCurrentIndex(index)} className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}>
+
+                            </button>
                         ))}
                     </div>
                     <div className="carousel-track" style={{transform: `translateX(${translationMap[currentIndex]})`}}>

@@ -338,6 +338,40 @@ p.danger {
   padding-right: 0.25rem !important;
 }
 
+/* Contact CSS */
+
+/* Container to center content and provide horizontal padding */
+.container {
+  width: 100%;
+  max-width: 1140px; /* Similar to Bootstrap's container max-width */
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+/* Row equivalent with flexbox */
+.contact-row {
+  display: flex;
+  align-items: center; /* Vertically center items */
+  justify-content: center; /* Horizontally center items */
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  margin: 0 -15px; /* To offset the padding in columns */
+}
+
+/* Column equivalent */
+.contact-column {
+  width: 100%;
+  padding: 15px; /* Similar to Bootstrap's px-1 */
+  box-sizing: border-box;
+}
+
+/* Responsive behavior: 50% width on medium and larger screens */
+@media (min-width: 768px) {
+  .contact-column {
+    width: 50%; /* Equivalent to col-md-6 */
+  }
+}
+
 .contact .container .row .col textarea {
   width: 95%;
 }

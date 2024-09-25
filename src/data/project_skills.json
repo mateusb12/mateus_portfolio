@@ -4,11 +4,11 @@
       "icon": "api.png",
       "english": {
         "label": "APIs",
-        "description": "I develop scalable APIs that enable seamless data exchange and extend application functionality with robust security and optimal performance."
+        "description": "I develop RESTful APIs that support communication between different systems in a scalable way. Use security practices like OAuth authentication and rate limiting to protect data and ensure performance, even under high demand. Integrate APIs with SQL and NoSQL databases for efficient data retrieval and use of caching techniques to reduce latency and increase response speed."
       },
       "portuguese": {
         "label": "APIs",
-        "description": "Desenvolvo APIs escaláveis que possibilitam a troca de dados sem interrupções e expandem a funcionalidade das aplicações com segurança robusta e desempenho ideal."
+        "description": "Desenvolvo APIs RESTful que suportam a comunicação entre diferentes sistemas. Utilizo práticas de segurança como autenticação OAuth e rate limiting para proteger os dados e garantir o desempenho, mesmo sob alta demanda. Integro as APIs com bancos de dados SQL e NoSQL para uma recuperação eficiente dos dados e emprego técnicas de caching para reduzir a latência e aumentar a rapidez das respostas."
       }
     },
     "backend": {
@@ -19,7 +19,7 @@
       },
       "portuguese": {
         "label": "Backend",
-        "description": "Projeto e gerencio arquiteturas do lado do servidor, implementando lógica complexa, lidando com interações com bancos de dados e garantindo a integração perfeita dos componentes."
+        "description": "Projeto e gerencio arquiteturas do lado do servidor, implementando a lógica das regras de negócio, programando interações com bancos de dados e garantindo a integração perfeita de todos os componentes."
       }
     },
     "data-analysis": {
@@ -52,7 +52,7 @@
       },
       "portuguese": {
         "label": "Firebase",
-        "description": "Utilizo o Firebase para construir e escalar aplicações web e móveis, aproveitando bancos de dados em tempo real, autenticação, funções em nuvem e serviços de hospedagem."
+        "description": "Utilizo o Firebase para construir aplicações web e mobile, aproveitando o realtime database, autenticação, cloud functions e serviços de hospedagem."
       }
     },
     "flask": {
@@ -70,11 +70,11 @@
       "icon": "graphviz.png",
       "english": {
         "label": "Graphviz",
-        "description": "I create detailed graph structures for visualizing complex networks and hierarchies using the Graphviz library."
+        "description": "Using the Graphviz library I create detailed graph structures for visualizing complex networks and hierarchies using the Graphviz library."
       },
       "portuguese": {
         "label": "Graphviz",
-        "description": "Crio estruturas de grafos detalhadas para visualizar redes complexas e hierarquias utilizando a biblioteca Graphviz."
+        "description": "Com o GraphViz eu crio estruturas de grafos detalhadas para visualizar redes complexas e hierarquias"
       }
     },
     "lightgbm": {
@@ -92,11 +92,11 @@
       "icon": "machine_learning.png",
       "english": {
         "label": "Machine Learning",
-        "description": "I design and deploy machine learning models using advanced algorithms to solve complex problems and enhance predictive accuracy."
+        "description": "I design and implement machine learning models, from data collection and preparation to the final choice of models, using cross-validation and hyperparameter tuning to optimize performance and predictive accuracy.\n\n"
       },
       "portuguese": {
         "label": "Aprendizado de Máquina",
-        "description": "Projeto e implanto modelos de aprendizado de máquina utilizando algoritmos avançados para resolver problemas complexos e aprimorar a precisão preditiva."
+        "description": "Projeto e implemento modelos de machine learning, desde a coleta e preparação de dados até a escolha final dos modelos, utilizando validação cruzada e ajuste de hiperparâmetros para otimizar desempenho e precisão preditiva."
       }
     },
     "matplotlib": {
@@ -129,18 +129,18 @@
       },
       "portuguese": {
         "label": "Processamento de Linguagem Natural",
-        "description": "Aproveito técnicas de processamento de linguagem natural e algoritmos de aprendizado de máquina para extrair insights significativos de dados textuais."
+        "description": "Utilizo técnicas de processamento de linguagem natural e algoritmos de aprendizado de máquina para extrair insights significativos de dados textuais."
       }
     },
     "numpy": {
       "icon": "numpy.png",
       "english": {
         "label": "NumPy",
-        "description": "I perform efficient numerical computations and scientific calculations using the NumPy library."
+        "description": "I have experience with numerical calculations and matrix/tensor computations using the NumPy library."
       },
       "portuguese": {
         "label": "NumPy",
-        "description": "Realizo cálculos numéricos eficientes e computações científicas utilizando a biblioteca NumPy."
+        "description": "Tenho experiência com os cálculos numéricos e computações de matrizes/tensores utilizando a biblioteca NumPy."
       }
     },
     "optuna": {
@@ -162,7 +162,7 @@
       },
       "portuguese": {
         "label": "Pandas",
-        "description": "Manipulo e organizo dados em tabelas utilizando Pandas para preparação e análise de dados eficazes."
+        "description": "Manipulo e organizo dados em tabelas utilizando Pandas para preparação e análise de dados."
       }
     },
     "seaborn": {
@@ -184,7 +184,7 @@
       },
       "portuguese": {
         "label": "Selenium",
-        "description": "Automatizo navegadores web com Selenium para testes eficientes e extração de dados de aplicações web."
+        "description": "Consigo fazer automações em navegadores web com Selenium para realizar testes e raspagem de dados de aplicações web."
       }
     },
     "scikit-learn": {

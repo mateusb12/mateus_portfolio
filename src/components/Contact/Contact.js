@@ -91,36 +91,43 @@ export const Contact = () => {
   return (
       <section className="contact" id="connect">
         <div className="container">
-          <div className="row align-items-center">
-            <div className="col-12 col-md-6 mx-auto">
+          <div className="contact-row">
+            <div className="contact-column">
               <TrackVisibility>
                 {({ isVisible }) =>
-                    <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
+                    <div className={isVisible ? "animate__animated animate__fadeIn" : "void-div"}>
                       <h2>{textData.title}</h2>
                       <form onSubmit={handleSubmit}>
-                        <div className="row">
-                          {/*<div className="col-12 col-sm-6 px-1">*/}
-                          {/*  <input type="text" value={formDetails.firstName} placeholder={textData.nameField} onChange={(e) => onFormUpdate('firstName', e.target.value)} />*/}
-                          {/*</div>*/}
-                          {/*<div className="col-12 col-sm-6 px-1">*/}
-                          {/*  <input type="text" value={formDetails.lastName} placeholder={textData.surnameField} onChange={(e) => onFormUpdate('lastName', e.target.value)}/>*/}
-                          {/*</div>*/}
-                          {/*<div className="col-12 col-sm-6 px-1">*/}
-                          {/*  <input type="email" value={formDetails.email} placeholder={textData.emailField} onChange={(e) => onFormUpdate('email', e.target.value)} />*/}
-                          {/*</div>*/}
-                          {/*<div className="col-12 col-sm-6 px-1">*/}
-                          {/*  <input type="tel" value={formDetails.phone} placeholder={textData.phoneField} onChange={(e) => onFormUpdate('phone', e.target.value)}/>*/}
-                          {/*</div>*/}
-                          <div className="col-12 px-1">
-                            <textarea rows="6" value={formDetails.message} placeholder={textData.messageField} onChange={(e) => onFormUpdate('message', e.target.value)}></textarea>
+                        <div className="form-row">
+                          {/*
+                      <div className="form-group">
+                        <input type="text" value={formDetails.firstName} placeholder={textData.nameField} onChange={(e) => onFormUpdate('firstName', e.target.value)} />
+                      </div>
+                      <div className="form-group">
+                        <input type="text" value={formDetails.lastName} placeholder={textData.surnameField} onChange={(e) => onFormUpdate('lastName', e.target.value)} />
+                      </div>
+                      <div className="form-group">
+                        <input type="email" value={formDetails.email} placeholder={textData.emailField} onChange={(e) => onFormUpdate('email', e.target.value)} />
+                      </div>
+                      <div className="form-group">
+                        <input type="tel" value={formDetails.phone} placeholder={textData.phoneField} onChange={(e) => onFormUpdate('phone', e.target.value)} />
+                      </div>
+                      */}
+                          <div className="form-group full-width">
+                        <textarea
+                            rows="6"
+                            value={formDetails.message}
+                            placeholder={textData.messageField}
+                            onChange={(e) => onFormUpdate('message', e.target.value)}
+                        ></textarea>
                             <button type="submit" className="whatsapp-button">
-                              <FaWhatsapp style={{ marginRight: '8px', width: "1.5em", height: "1.5em"}} />
+                              <FaWhatsapp className="whatsapp-icon" />
                               <span>{buttonText}</span>
                             </button>
                           </div>
                           {
                               status.message &&
-                              <div className="col">
+                              <div className="status-message">
                                 <p className={status.success ? "success" : "danger"}>{status.message}</p>
                               </div>
                           }
