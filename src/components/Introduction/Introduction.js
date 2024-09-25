@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { ArrowRightCircle } from 'react-bootstrap-icons';
 import 'animate.css';
 import './Introduction.css';
+import { HashLink } from 'react-router-hash-link';
 import TrackVisibility from 'react-on-screen';
 import LanguageContext from '../LanguageContext';
 
@@ -41,9 +42,11 @@ export const Introduction = () => {
                 <div className={isVisible ? "animate__animated animate__fadeIn main-body" : ""}>
                   <h1>{introductionTexts.title}</h1>
                   <p dangerouslySetInnerHTML={{ __html: formattedBody }}></p>
-                  <button onClick={() => console.log('connect')}>
-                    {introductionTexts.footer} <ArrowRightCircle size={25}/>
-                  </button>
+                  <HashLink to='#connect'>
+                    <button>
+                      {introductionTexts.footer} <ArrowRightCircle size={25}/>
+                    </button>
+                  </HashLink>
                 </div>
               </div>
           )}
