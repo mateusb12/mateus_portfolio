@@ -467,6 +467,7 @@ p.danger {
   display: flex;
   align-items: center;
   border-radius: 5px;
+  gap: .75rem;
 }
 
 .whatsapp-button:hover {
@@ -476,7 +477,7 @@ p.danger {
 
 /************ Footer Css ************/
 .footer {
-  padding: 0 0 50px 0;
+  padding: 2rem 0 50px 0;
   background-image: url('./assets/img/footer-bg.png');
   background-position: center center;
   background-size: cover;

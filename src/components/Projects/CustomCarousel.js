@@ -122,35 +122,39 @@ const CustomCarousel = ({ children }) => {
     };
 
     return (
-        <div className="custom-carousel">
-            <div className="carousel-wrapper">
-                <div className="carousel-inner" style={getStyleForCarouselInner()} onTouchStart={handleTouchStart}
-                     onTouchMove={handleTouchMove}>
-                    <div className="carousel-navigation">
-                        <button onClick={prevSlide} className="carousel-nav-button">
-                            <FaArrowLeft />
-                        </button>
-                        <button onClick={nextSlide} className="carousel-nav-button">
-                            <FaArrowRight />
-                        </button>
-                    </div>
-                    <div className="carousel-progress-bar">
-                        {Array.from({length: totalSlides}).map((_, index) => (
-                            <button key={index} onClick={() => setCurrentIndex(index)} className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}>
-
+        <section className="projects" id="projects">
+            <div className="custom-carousel">
+                <div className="carousel-wrapper">
+                    <div className="carousel-inner" style={getStyleForCarouselInner()} onTouchStart={handleTouchStart}
+                         onTouchMove={handleTouchMove}>
+                        <div className="carousel-navigation">
+                            <button onClick={prevSlide} className="carousel-nav-button">
+                                <FaArrowLeft/>
                             </button>
-                        ))}
-                    </div>
-                    <div className="carousel-track" style={{transform: `translateX(${translationMap[currentIndex]})`}}>
-                        {React.Children.map(children, (child, index) => (
-                            <div className="carousel-slide" key={index}>
-                                {React.cloneElement(child, {isActive: index === currentIndex})}
-                            </div>
-                        ))}
+                            <button onClick={nextSlide} className="carousel-nav-button">
+                                <FaArrowRight/>
+                            </button>
+                        </div>
+                        <div className="carousel-progress-bar">
+                            {Array.from({length: totalSlides}).map((_, index) => (
+                                <button key={index} onClick={() => setCurrentIndex(index)}
+                                        className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}>
+
+                                </button>
+                            ))}
+                        </div>
+                        <div className="carousel-track"
+                             style={{transform: `translateX(${translationMap[currentIndex]})`}}>
+                            {React.Children.map(children, (child, index) => (
+                                <div className="carousel-slide" key={index}>
+                                    {React.cloneElement(child, {isActive: index === currentIndex})}
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 
@@ -195,8 +199,10 @@ const data = [
 // Main Component that uses CustomCarousel and Card
 const CarouselWithCards = () => {
     const cards = data.map((item, index) => (
-        <Card key={index} item={item} />
-    ));
+                <Card key={index} item={item}/>
+            )
+        )
+    ;
 
     return (
         <CustomCarousel>
