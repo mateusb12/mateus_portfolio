@@ -87,7 +87,7 @@ export const NavBar = () => {
     <a href={linkedinURL} target="_blank" rel="noopener noreferrer">
       <img src={linkedinIcon} alt="LinkedIn"/>
     </a>
-    <a href={githubIcon} target="_blank" rel="noopener noreferrer">
+    <a href={githubURL} target="_blank" rel="noopener noreferrer">
       <img src={githubIcon} alt="Github"/>
     </a>
     <a href={instagramURL} target="_blank" rel="noopener noreferrer">
