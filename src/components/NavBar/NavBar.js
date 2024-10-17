@@ -3,11 +3,16 @@ import { useState, useEffect, useContext } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import usa from '../../assets/img/usa.png';
 import brazil from '../../assets/img/brazil.png';
-import navIcon1 from '../../assets/img/nav-icon1.svg';
-import navIcon2 from '../../assets/img/nav-icon2.svg';
-import navIcon3 from '../../assets/img/nav-icon3.svg';
+import linkedinIcon from '../../assets/img/nav-icon1.svg';
+import facebookIcon from '../../assets/img/nav-icon2.svg';
+import instagramIcon from '../../assets/img/nav-icon3.svg';
+import githubIcon from '../../assets/img/nav-icon4.svg';
 import { HashLink } from 'react-router-hash-link';
 import LanguageContext from '../LanguageContext';
+
+const linkedinURL = "https://www.linkedin.com/in/mateus-bessa-a89b07247/";
+const instagramURL = "https://www.instagram.com/matbessa/"
+const githubURL = "https://github.com/mateusb12";
 
 export const NavBar = () => {
   // Embedded language content
@@ -78,15 +83,21 @@ export const NavBar = () => {
               <Nav.Link href="#projects" className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('projects')}>{buttonTexts[2]}</Nav.Link>
             </Nav>
             <span className="navbar-text">
-            <div className="social-icon">
-              <a href="#"><img src={navIcon1} alt="" /></a>
-              <a href="#"><img src={navIcon2} alt="" /></a>
-              <a href="#"><img src={navIcon3} alt="" /></a>
-            </div>
-            <HashLink to='#connect'>
-              <button className="vvd"><span>{buttonTexts[3]}</span></button>
-            </HashLink>
-          </span>
+  <div className="social-icon">
+    <a href={linkedinURL} target="_blank" rel="noopener noreferrer">
+      <img src={linkedinIcon} alt="LinkedIn"/>
+    </a>
+    <a href={githubIcon} target="_blank" rel="noopener noreferrer">
+      <img src={githubIcon} alt="Github"/>
+    </a>
+    <a href={instagramURL} target="_blank" rel="noopener noreferrer">
+      <img src={instagramIcon} alt="Instagram"/>
+    </a>
+  </div>
+  <HashLink to='#connect'>
+    <button className="vvd"><span>{buttonTexts[3]}</span></button>
+  </HashLink>
+</span>
           </Navbar.Collapse>
         </Container>
       </Navbar>
