@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/mateus_portfolio/static/css/main.c4f76d60.css",
-    "main.js": "/mateus_portfolio/static/js/main.3e514c87.js",
+    "main.js": "/mateus_portfolio/static/js/main.679524c3.js",
     "static/js/787.b1762be3.chunk.js": "/mateus_portfolio/static/js/787.b1762be3.chunk.js",
     "static/media/color-sharp.png": "/mateus_portfolio/static/media/color-sharp.bea361cfef80fefc2d1e.png",
     "static/media/color-sharp2.png": "/mateus_portfolio/static/media/color-sharp2.c87586c6c2f549cb4aa6.png",
@@ -86,17 +86,18 @@
     "static/media/meter3.svg": "/mateus_portfolio/static/media/meter3.2201f7e4df22bc4b0818.svg",
     "static/media/nav-icon3.svg": "/mateus_portfolio/static/media/nav-icon3.08b285abb8e118b52637efa5d65c5367.svg",
     "static/media/logo.svg": "/mateus_portfolio/static/media/logo.eaf3c0bc058e0ed6471ba20dc0af6da2.svg",
+    "static/media/nav-icon4.svg": "/mateus_portfolio/static/media/nav-icon4.97ed8e7eef60d61ca469881dd6f34511.svg",
     "index.html": "/mateus_portfolio/index.html",
     "static/media/nav-icon1.svg": "/mateus_portfolio/static/media/nav-icon1.721d5414c26365f117e71d46b6641cb2.svg",
     "static/media/arrow2.svg": "/mateus_portfolio/static/media/arrow2.3d9522b6fd8f2464b720.svg",
     "static/media/arrow1.svg": "/mateus_portfolio/static/media/arrow1.0c89b5b635adf255c282.svg",
     "static/media/nav-icon2.svg": "/mateus_portfolio/static/media/nav-icon2.178f497aa17b70c42df2a1a8c926ed01.svg",
     "main.c4f76d60.css.map": "/mateus_portfolio/static/css/main.c4f76d60.css.map",
-    "main.3e514c87.js.map": "/mateus_portfolio/static/js/main.3e514c87.js.map",
+    "main.679524c3.js.map": "/mateus_portfolio/static/js/main.679524c3.js.map",
     "787.b1762be3.chunk.js.map": "/mateus_portfolio/static/js/787.b1762be3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c4f76d60.css",
-    "static/js/main.3e514c87.js"
+    "static/js/main.679524c3.js"
   ]
 }
