@@ -35,10 +35,13 @@ const CustomCarousel = ({ children }) => {
             return { width: '100%' };
         } else if (windowWidth === 375) {
             return { width: '75%' };
+        } else if (windowWidth <= 1521) {
+            return { width: '60%' };
         } else {
-            return { width: '80%' };
+            return { width: '47%' };
         }
     };
+
 
     useEffect(() => {
         const getBaseOffset = (windowWidth) => {
