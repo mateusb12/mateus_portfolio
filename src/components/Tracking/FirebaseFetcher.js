@@ -36,6 +36,7 @@ export const logVisitByIp = async (eventData) => {
         // Update lastVisit
         data.lastVisit = {
             timestamp: eventData.timestamp,
+            formattedTimestamp: eventData.formattedTimestamp,
             timeSpent: eventData.timeSpent,
             page: eventData.page,
             referrer: eventData.referrer,
@@ -49,6 +50,7 @@ export const logVisitByIp = async (eventData) => {
         }
         data.visitList.push({
             timestamp: eventData.timestamp,
+            formattedTimestamp: eventData.formattedTimestamp,
             timeSpent: eventData.timeSpent,
             page: eventData.page,
             referrer: eventData.referrer,

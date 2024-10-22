@@ -15,8 +15,6 @@ const formatTimestamp = (date) => {
     return `${day}-${months[monthIndex]}-${year} at ${hours}:${minutes}`;
 };
 
-con
-
 const VisitorTracking = () => {
     const startTimeRef = useRef(Date.now());
     const ipAddressRef = useRef(null);
