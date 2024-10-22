@@ -1,7 +1,7 @@
 // src/VisitorTracking.js
 
 import React, { useEffect, useRef } from 'react';
-import { logEvent, checkIfIpExists } from './FirebaseFetcher';
+import { logVisitByIp } from './FirebaseFetcher';
 import { v4 as uuidv4 } from 'uuid';
 
 const VisitorTracking = () => {
@@ -54,23 +54,17 @@ const VisitorTracking = () => {
                     userAgent: navigator.userAgent,
                 };
 
-                // Create an async function to handle the async calls
-                const logIfNewIp = async () => {
+                // Log the visit by IP
+                const logVisit = async () => {
                     try {
-                        const ipExists = await checkIfIpExists('pageVisit', ipAddressRef.current);
-                        if (ipExists) {
-                            console.log('UID already exists in Firebase. Not logging again.');
-                        } else {
-                            // Log the event
-                            await logEvent('pageVisit', eventData, false);
-                            console.log('Visitor data successfully sent.');
-                        }
+                        await logVisitByIp(eventData);
+                        console.log('Visitor data successfully sent.');
                     } catch (error) {
-                        console.error('Failed to check or log page visit:', error);
+                        console.error('Failed to log page visit:', error);
                     }
                 };
 
-                logIfNewIp();
+                logVisit();
             }
         };
 
