@@ -59,11 +59,11 @@ const VisitorTracking = () => {
                     try {
                         const ipExists = await checkIfIpExists('pageVisit', ipAddressRef.current);
                         if (ipExists) {
-                            // console.log('IP address already exists in Firebase. Not logging again.');
+                            console.log('UID already exists in Firebase. Not logging again.');
                         } else {
                             // Log the event
                             await logEvent('pageVisit', eventData, false);
-                            // console.log('Visitor data successfully sent.');
+                            console.log('Visitor data successfully sent.');
                         }
                     } catch (error) {
                         console.error('Failed to check or log page visit:', error);
