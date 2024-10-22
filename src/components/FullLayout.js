@@ -6,7 +6,7 @@ import {Contact} from "./Contact/Contact";
 import {Footer} from "./Footer/Footer";
 import ProjectCard from "./Projects/ProjectCard";
 import CustomCarousel from "./Projects/CustomCarousel";
-import VisitorTracking from "./Tracking/AxiosTracking";
+import VisitorTracking from "./Tracking/VisitorTracking";
 
 export function FullLayout() {
     return (

@@ -14,10 +14,7 @@ const FIREBASE_DB_URL = 'https://mateusautomation-75c5d-default-rtdb.firebaseio.
  * @returns {Promise<object|undefined>} - The Firebase response data or undefined if using sendBeacon.
  */
 export const logEvent = async (eventType, eventData, useBeacon = false) => {
-    const { userId } = eventData; // Extract userId from eventData
-
-    // Adjust the URL to include the userId
-    const url = `${FIREBASE_DB_URL}/portfolio/logs/${eventType}/${userId}.json`;
+    const url = `${FIREBASE_DB_URL}portfolio/logs2/${eventType}.json`;
 
     if (useBeacon && navigator.sendBeacon) {
         try {
@@ -68,4 +65,34 @@ export const logEvent = async (eventType, eventData, useBeacon = false) => {
  */
 export const logError = async (errorData, useBeacon = false) => {
     await logEvent('error', errorData, useBeacon);
+};
+
+/**
+ * Checks if an IP address already exists in the event logs.
+ *
+ * @param {string} eventType - The type of event (e.g., 'pageVisit').
+ * @param {string} ipAddress - The IP address to check.
+ * @returns {Promise<boolean>} - True if the IP address exists, false otherwise.
+ */
+export const checkIfIpExists = async (eventType, ipAddress) => {
+    // Encode the query parameters
+    const url = `${FIREBASE_DB_URL}portfolio/logs2/${eventType}.json?` +
+        `orderBy=${encodeURIComponent('"ipAddress"')}&` +
+        `equalTo=${encodeURIComponent(`"${ipAddress}"`)}`;
+
+    console.log(`GET ${url}`);
+
+    try {
+        const response = await axios.get(url);
+        const data = response.data;
+        // If data is not empty, the IP address exists
+        if (data && Object.keys(data).length > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.error(`Error checking IP address "${ipAddress}":`, error);
+        throw error;
+    }
 };
