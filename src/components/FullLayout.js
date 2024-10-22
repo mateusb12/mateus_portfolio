@@ -6,10 +6,12 @@ import {Contact} from "./Contact/Contact";
 import {Footer} from "./Footer/Footer";
 import ProjectCard from "./Projects/ProjectCard";
 import CustomCarousel from "./Projects/CustomCarousel";
+import VisitorTracking from "./Tracking/AxiosTracking";
 
 export function FullLayout() {
     return (
         <>
+            <VisitorTracking />
             <NavBar/>
             <div className="section shared-background">
                 <Introduction/>
