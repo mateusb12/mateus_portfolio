@@ -4,6 +4,19 @@ import React, { useEffect, useRef } from 'react';
 import { logVisitByIp } from './FirebaseFetcher';
 import { v4 as uuidv4 } from 'uuid';
 
+const formatTimestamp = (date) => {
+    const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+    const day = date.getDate();
+    const monthIndex = date.getMonth();
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+
+    return `${day}-${months[monthIndex]}-${year} at ${hours}:${minutes}`;
+};
+
+con
+
 const VisitorTracking = () => {
     const startTimeRef = useRef(Date.now());
     const ipAddressRef = useRef(null);
@@ -49,6 +62,7 @@ const VisitorTracking = () => {
                     ipAddress: ipAddressRef.current || 'Unavailable',
                     timeSpent: timeSpent,
                     timestamp: new Date().toISOString(),
+                    formattedTimestamp: formatTimestamp(new Date()),
                     page: window.location.pathname,
                     referrer: document.referrer || 'Direct',
                     userAgent: navigator.userAgent,
@@ -77,5 +91,7 @@ const VisitorTracking = () => {
 
     return null;
 };
+
+
 
 export default VisitorTracking;
