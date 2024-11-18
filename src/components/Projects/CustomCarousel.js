@@ -3,7 +3,7 @@ import database from "../../assets/img/skills_icons/database.png";
 import flask from "../../assets/img/skills_icons/old-flask.png";
 import pandas from "../../assets/img/skills_icons/pandas.png";
 import java from "../../assets/img/skills_icons/java.png";
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import ProjectCard from "./ProjectCard";
 
@@ -14,21 +14,50 @@ const CustomCarousel = ({ children }) => {
 
     const totalSlides = React.Children.count(children);
 
-    const [baseOffset, setBaseOffset] = useState(90);
+    const getMaximumOffset = (windowWidth, totalSlides) => {
+        if (windowWidth > 700) {
+            if (totalSlides === 5) {
+                return 100;
+            } else if (totalSlides === 4) {
+                return 75;
+            } else if (totalSlides === 3) {
+                return 55;
+            }
+        } else {
+            if (totalSlides === 5) {
+                return 97;
+            } else if (totalSlides === 4) {
+                return 145;
+            } else if (totalSlides === 3) {
+                return 95;
+            }
+        }
+        return 100; // Default value
+    };
+
     const translationMap = React.useMemo(() => {
+        const centerIndex = (totalSlides - 1) / 2;
+        const maximumOffset = getMaximumOffset(windowWidth, totalSlides);
+        const step = maximumOffset / centerIndex;
         const map = {};
         for (let i = 0; i < totalSlides; i++) {
-            map[i] = `${(1 - i) * baseOffset}%`;
+            map[i] = `${(centerIndex - i) * step}%`;
         }
         return map;
-    }, [totalSlides, baseOffset]);
+    }, [totalSlides, windowWidth]);
 
     useEffect(() => {
-        const currentProject = children[currentIndex]?.props?.projectId || "unknown";
-        const translationValue = translationMap[currentIndex];
-        console.log('Translation map: ', translationMap);
-        console.log(`Current project: ${currentProject}, Current index: ${currentIndex}, Translation value: ${translationValue}`);
-    }, [currentIndex, children]);
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     const getStyleForCarouselInner = () => {
         if (windowWidth <= 700) {
@@ -36,55 +65,11 @@ const CustomCarousel = ({ children }) => {
         } else if (windowWidth === 375) {
             return { width: '75%' };
         } else if (windowWidth <= 1521) {
-            return { width: '60%' };
+            return { width: '50%' };
         } else {
             return { width: '47%' };
         }
     };
-
-
-    useEffect(() => {
-        const getBaseOffset = (windowWidth) => {
-            const breakpoints = [360, 375, 384, 390, 412, 428, 810, 1440];
-            const baseOffsets = [101, 97, 95, 91, 85, 86, 91, 40];
-
-            if (windowWidth <= breakpoints[0]) {
-                return baseOffsets[0];
-            } else if (windowWidth >= breakpoints[breakpoints.length - 1]) {
-                return baseOffsets[baseOffsets.length - 1];
-            } else {
-                for (let i = 0; i < breakpoints.length - 1; i++) {
-                    if (windowWidth >= breakpoints[i] && windowWidth <= breakpoints[i + 1]) {
-                        // Perform linear interpolation
-                        const x0 = breakpoints[i];
-                        const x1 = breakpoints[i + 1];
-                        const y0 = baseOffsets[i];
-                        const y1 = baseOffsets[i + 1];
-
-                        return y0 + ((y1 - y0) * (windowWidth - x0)) / (x1 - x0);
-                    }
-                }
-            }
-        };
-
-        const handleResize = () => {
-            const width = window.innerWidth;
-            setWindowWidth(width);
-            setBaseOffset(getBaseOffset(width));
-        };
-
-        // Add event listener
-        window.addEventListener('resize', handleResize);
-
-        // Call handler right away so state gets updated with initial window size
-        handleResize();
-
-        // Remove event listener on cleanup
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
 
     const nextSlide = () => {
         const newIndex = (currentIndex + 1) % totalSlides;
@@ -112,12 +97,10 @@ const CustomCarousel = ({ children }) => {
         const diff = touchDown - currentTouch;
 
         if (diff > 5) {
-            // Swiped left
             nextSlide();
         }
 
         if (diff < -5) {
-            // Swiped right
             prevSlide();
         }
 
@@ -128,29 +111,36 @@ const CustomCarousel = ({ children }) => {
         <section className="projects" id="projects">
             <div className="custom-carousel">
                 <div className="carousel-wrapper">
-                    <div className="carousel-inner" style={getStyleForCarouselInner()} onTouchStart={handleTouchStart}
-                         onTouchMove={handleTouchMove}>
+                    <div
+                        className="carousel-inner"
+                        style={getStyleForCarouselInner()}
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                    >
                         <div className="carousel-navigation">
                             <button onClick={prevSlide} className="carousel-nav-button">
-                                <FaArrowLeft/>
+                                <FaArrowLeft />
                             </button>
                             <button onClick={nextSlide} className="carousel-nav-button">
-                                <FaArrowRight/>
+                                <FaArrowRight />
                             </button>
                         </div>
                         <div className="carousel-progress-bar">
-                            {Array.from({length: totalSlides}).map((_, index) => (
-                                <button key={index} onClick={() => setCurrentIndex(index)}
-                                        className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}>
-
-                                </button>
+                            {Array.from({ length: totalSlides }).map((_, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => setCurrentIndex(index)}
+                                    className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}
+                                ></button>
                             ))}
                         </div>
-                        <div className="carousel-track"
-                             style={{transform: `translateX(${translationMap[currentIndex]})`}}>
+                        <div
+                            className="carousel-track"
+                            style={{ transform: `translateX(${translationMap[currentIndex]})` }}
+                        >
                             {React.Children.map(children, (child, index) => (
                                 <div className="carousel-slide" key={index}>
-                                    {React.cloneElement(child, {isActive: index === currentIndex})}
+                                    {React.cloneElement(child, { isActive: index === currentIndex })}
                                 </div>
                             ))}
                         </div>
@@ -162,10 +152,10 @@ const CustomCarousel = ({ children }) => {
 };
 
 // Card Component Logic
-const Card = ({item}) => (
+const Card = ({ item }) => (
     <div className="carousel-content">
         <div className="carousel-image-container">
-            <img src={item.img} alt={item.name} className="carousel-image"/>
+            <img src={item.img} alt={item.name} className="carousel-image" />
         </div>
         <div className="carousel-text">
             <p className="carousel-title">{item.name}</p>
@@ -201,18 +191,15 @@ const data = [
 
 // Main Component that uses CustomCarousel and Card
 const CarouselWithCards = () => {
-    const cards = data.map((item, index) => (
-                <Card key={index} item={item}/>
-            )
-        )
-    ;
+    const cards = data.map((item, index) => <Card key={index} item={item} />);
 
     return (
         <CustomCarousel>
-            <ProjectCard projectId="witcher" isActive={false}/>
-            <ProjectCard projectId="flight-scraper" isActive={false}/>
-            <ProjectCard projectId="valorant-impact" isActive={false}/>
-            <ProjectCard projectId="linkedin-tracker" isActive={false}/>
+            <ProjectCard projectId="witcher" isActive={false} />
+            <ProjectCard projectId="flight-scraper" isActive={false} />
+            <ProjectCard projectId="valorant-impact" isActive={false} />
+            <ProjectCard projectId="linkedin-tracker" isActive={false} />
+            {/*<ProjectCard projectId="linkedin-tracker" isActive={false} />*/}
         </CustomCarousel>
     );
 };
