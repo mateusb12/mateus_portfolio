@@ -44,7 +44,7 @@
         "description": "Utilizando o robusto framework Django, construo aplicações web escaláveis com interfaces administrativas integradas e sistemas de autenticação seguros."
       }
     },
-    "ejs-templates": {
+    "ejs": {
       "icon": "ejs.png",
       "english": {
         "label": "EJS Templates",
@@ -88,7 +88,7 @@
         "description": "Especializo-me na criação de interfaces de usuário dinâmicas e responsivas usando HTML, CSS e JavaScript. Habilidoso em frameworks como React e Angular, garanto desempenho ótimo e experiência do usuário empregando as melhores práticas em padrões web, acessibilidade e otimização de SEO."
       }
     },
-    "gmail-api": {
+    "gmail": {
       "icon": "gmail.png",
       "english": {
         "label": "Gmail API",
@@ -176,7 +176,7 @@
         "description": "Desenvolvo aplicações server-side escaláveis utilizando Node.js, aproveitando sua arquitetura orientada a eventos e I/O não bloqueante para alto desempenho."
       }
     },
-    "node-express": {
+    "express": {
       "icon": "express.png",
       "english": {
         "label": "Express.js",
@@ -199,7 +199,7 @@
       }
     },
     "oauth2": {
-      "icon": "auth.png",
+      "icon": "oauth2.png",
       "english": {
         "label": "OAuth 2.0",
         "description": "I implement OAuth 2.0 for secure authentication and authorization, enabling users to grant applications access to their resources without exposing credentials."

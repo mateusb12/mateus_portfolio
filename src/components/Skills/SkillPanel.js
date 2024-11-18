@@ -91,26 +91,31 @@ export const SkillPanel = ({
     };
 
     const renderSkills = () => {
-        // Determine minimumSize based on the title
         const minimumSize = title === 'Libraries' ? 1 : 0;
         const skillChunks = chunkArray(skills, minimumSize);
         return skillChunks.map((chunk, rowIndex) => (
             <div key={rowIndex} className="skills-row">
-                {chunk.map(skill => (
-                    <span
-                        key={skill.label}
-                        className="project-single-skill"
-                        onClick={() => handleSkillClick(skill.icon)}
-                    >
-                        <img
-                            src={skillsIcons[skill.icon]}
-                            alt={`${skill.label} Icon`}
-                            onError={() => console.error(`Failed to load image for ${skill.label}`)}
-                            className={`project-skill-icon ${skill.icon === activeSkill?.active ? 'selected' : ''} ${color}-border`}
-                        />
-                        <div className="project-skill-label">{formatLabel(skill.label)}</div>
-                    </span>
-                ))}
+                {chunk.map(skill => {
+                    const iconSrc = skillsIcons[skill.icon];
+                    return (
+                        <span
+                            key={skill.label}
+                            className="project-single-skill"
+                            onClick={() => handleSkillClick(skill.icon)}
+                        >
+                            <img
+                                src={iconSrc}
+                                alt={`${skill.label} Icon`}
+                                onError={() => {
+                                    console.error(`Failed to load image for ${skill.label}. Expected path: ${iconSrc}`);
+                                    console.log(`Placeholder image displayed for ${skill.label}.`);
+                                }}
+                                className={`project-skill-icon ${skill.icon === activeSkill?.active ? 'selected' : ''} ${color}-border`}
+                            />
+                            <div className="project-skill-label">{formatLabel(skill.label)}</div>
+                        </span>
+                    );
+                })}
             </div>
         ));
     };
@@ -178,12 +183,22 @@ export const SkillPanel = ({
 };
 
 const chunkArray = (arr, minimumSize = 0) => {
-    // If minimumSize is 0 and the array length is less than or equal to 3, return a single array
-    if (minimumSize === 0 && arr.length <= 3) {
-        return [arr];  // Return all elements in a single array
+    // If array length is 2 or less, return a single row
+    if (arr.length <= 2) {
+        return [arr];
+    }
+    
+    // If array length is 3 or 4, split into 2 rows
+    if (arr.length <= 4) {
+        const midpoint = Math.ceil(arr.length / 2);
+        return [
+            arr.slice(0, midpoint),
+            arr.slice(midpoint)
+        ].filter(chunk => chunk.length > 0);
     }
 
-    const result = [[], [], []]; // Prepare 3 arrays
+    // For larger arrays, keep the existing logic with 3 rows
+    const result = [[], [], []];
     let i = 0;
 
     // Step 1: Fill each chunk with the minimumSize first, if minimumSize > 0
@@ -197,10 +212,6 @@ const chunkArray = (arr, minimumSize = 0) => {
         result[j].push(arr[i]);
     }
 
-    // Filter out any empty arrays, only if minimumSize is 0
-    if (minimumSize === 0) {
-        return result.filter(chunk => chunk.length > 0);
-    }
-
-    return result;
+    // Filter out any empty arrays
+    return result.filter(chunk => chunk.length > 0);
 };
