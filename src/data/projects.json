@@ -87,6 +87,35 @@
           "description": "Uma ferramenta que calcula o quanto as ações dos jogadores podem mudar as chances de vitória em um round no Valorant. Ao analisar mortes, escolhas de armas, economia e movimentos estratégicos, o algoritmo é capaz de revelar o impacto em tempo real nas chances de vitória."
         }
       }
+    },
+    "linkedin-tracker": {
+      "image": "linkedin_tracker.png",
+      "link": "https://github.com/mateusb12/LinkedIn-Application-Tracker",
+      "coreSkills": [
+        { "icon": "backend", "label": "Backend" },
+        { "icon": "frontend", "label": "Frontend" },
+        { "icon": "api", "label": "APIs" }
+      ],
+      "frameworks": [
+        { "icon": "nodejs", "label": "Node.js" },
+        { "icon": "express", "label": "Express" }
+      ],
+      "libraries": [
+        { "icon": "selenium", "label": "Selenium" },
+        { "icon": "gmail", "label": "Gmail API" },
+        { "icon": "oauth2", "label": "OAuth 2.0" },
+        { "icon": "ejs", "label": "EJS Templates" }
+      ],
+      "translations": {
+        "english": {
+          "title": "LinkedIn Application Tracker",
+          "description": "A web application that helps you monitor your LinkedIn job applications by analyzing your Gmail inbox and scraping your LinkedIn saved jobs."
+        },
+        "portuguese": {
+          "title": "Rastreador de Aplicações do LinkedIn",
+          "description": "Uma aplicação web que ajuda você a monitorar suas candidaturas de emprego no LinkedIn, analisando sua caixa de entrada do Gmail e raspando suas vagas salvas no LinkedIn."
+        }
+      }
     }
   }
 }

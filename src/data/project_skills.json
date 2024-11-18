@@ -44,6 +44,17 @@
         "description": "Utilizando o robusto framework Django, construo aplicações web escaláveis com interfaces administrativas integradas e sistemas de autenticação seguros."
       }
     },
+    "ejs-templates": {
+      "icon": "ejs.png",
+      "english": {
+        "label": "EJS Templates",
+        "description": "I create dynamic and reusable HTML templates with EJS, enabling efficient server-side rendering and seamless integration with Node.js applications."
+      },
+      "portuguese": {
+        "label": "Templates EJS",
+        "description": "Crio templates HTML dinâmicos e reutilizáveis com EJS, permitindo renderização eficiente no server-side e integração perfeita com aplicações Node.js."
+      }
+    },
     "firebase": {
       "icon": "firebase.png",
       "english": {
@@ -64,6 +75,28 @@
       "portuguese": {
         "label": "Flask",
         "description": "Utilizando o framework leve Flask, crio serviços web personalizados adaptados a requisitos específicos de projetos com arquitetura limpa."
+      }
+    },
+    "frontend": {
+      "icon": "frontend.png",
+      "english": {
+        "label": "Frontend Development",
+        "description": "I specialize in crafting dynamic and responsive user interfaces using HTML, CSS, and JavaScript. Skilled in frameworks like React and Angular, I ensure optimal performance and user experience by employing best practices in web standards, accessibility, and SEO optimization."
+      },
+      "portuguese": {
+        "label": "Desenvolvimento Frontend",
+        "description": "Especializo-me na criação de interfaces de usuário dinâmicas e responsivas usando HTML, CSS e JavaScript. Habilidoso em frameworks como React e Angular, garanto desempenho ótimo e experiência do usuário empregando as melhores práticas em padrões web, acessibilidade e otimização de SEO."
+      }
+    },
+    "gmail-api": {
+      "icon": "gmail.png",
+      "english": {
+        "label": "Gmail API",
+        "description": "I integrate the Gmail API to manage email functionalities, including sending, receiving, and organizing emails programmatically within applications."
+      },
+      "portuguese": {
+        "label": "Gmail API",
+        "description": "Integro a Gmail API para gerenciar funcionalidades de e-mail, incluindo envio, recebimento e organização de e-mails programaticamente em aplicações."
       }
     },
     "graphviz": {
@@ -132,6 +165,28 @@
         "description": "Utilizo técnicas de processamento de linguagem natural e algoritmos de aprendizado de máquina para extrair insights significativos de dados textuais."
       }
     },
+    "nodejs": {
+      "icon": "nodejs.png",
+      "english": {
+        "label": "Node.js",
+        "description": "I develop scalable server-side applications using Node.js, leveraging its event-driven architecture and non-blocking I/O for high performance."
+      },
+      "portuguese": {
+        "label": "Node.js",
+        "description": "Desenvolvo aplicações server-side escaláveis utilizando Node.js, aproveitando sua arquitetura orientada a eventos e I/O não bloqueante para alto desempenho."
+      }
+    },
+    "node-express": {
+      "icon": "express.png",
+      "english": {
+        "label": "Express.js",
+        "description": "I build robust web applications and APIs with Express.js, utilizing its minimalist framework to streamline development and enhance flexibility."
+      },
+      "portuguese": {
+        "label": "Express.js",
+        "description": "Construo aplicações web e APIs robustas com Express.js, utilizando seu framework minimalista para agilizar o desenvolvimento e aumentar a flexibilidade."
+      }
+    },
     "numpy": {
       "icon": "numpy.png",
       "english": {
@@ -141,6 +196,17 @@
       "portuguese": {
         "label": "NumPy",
         "description": "Tenho experiência com os cálculos numéricos e computações de matrizes/tensores utilizando a biblioteca NumPy."
+      }
+    },
+    "oauth2": {
+      "icon": "auth.png",
+      "english": {
+        "label": "OAuth 2.0",
+        "description": "I implement OAuth 2.0 for secure authentication and authorization, enabling users to grant applications access to their resources without exposing credentials."
+      },
+      "portuguese": {
+        "label": "OAuth 2.0",
+        "description": "Implemento OAuth 2.0 para autenticação e autorização seguras, permitindo que usuários concedam acesso a recursos de aplicações sem expor suas credenciais."
       }
     },
     "optuna": {

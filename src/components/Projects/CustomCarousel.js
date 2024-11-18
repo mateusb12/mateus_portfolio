@@ -212,6 +212,7 @@ const CarouselWithCards = () => {
             <ProjectCard projectId="witcher" isActive={false}/>
             <ProjectCard projectId="flight-scraper" isActive={false}/>
             <ProjectCard projectId="valorant-impact" isActive={false}/>
+            <ProjectCard projectId="linkedin-tracker" isActive={false}/>
         </CustomCarousel>
     );
 };
