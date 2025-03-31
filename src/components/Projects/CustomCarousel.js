@@ -3,117 +3,78 @@ import database from "../../assets/img/skills_icons/database.png";
 import flask from "../../assets/img/skills_icons/old-flask.png";
 import pandas from "../../assets/img/skills_icons/pandas.png";
 import java from "../../assets/img/skills_icons/java.png";
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import ProjectCard from "./ProjectCard";
 
+
 const CustomCarousel = ({ children }) => {
-    const [currentIndex, setCurrentIndex] = useState(1);
-    const [touchPosition, setTouchPosition] = useState(null);
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
+    const containerRef = useRef(null);
+    // Store a ref for every slide so we can measure its offset.
+    const slideRefs = useRef([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [offset, setOffset] = useState(0);
     const totalSlides = React.Children.count(children);
+    const [touchPosition, setTouchPosition] = useState(null);
 
-    const getMaximumOffset = (windowWidth, totalSlides) => {
-        if (windowWidth > 700) {
-            if (totalSlides === 5) {
-                return 100;
-            } else if (totalSlides === 4) {
-                return 75;
-            } else if (totalSlides === 3) {
-                return 55;
-            }
-        } else {
-            if (totalSlides === 5) {
-                return 97;
-            } else if (totalSlides === 4) {
-                return 145;
-            } else if (totalSlides === 3) {
-                return 95;
-            }
+    // Compute offset to center active slide based on its offsetLeft from the track.
+    const computeOffset = () => {
+        if (containerRef.current && slideRefs.current[currentIndex]) {
+            const containerWidth = containerRef.current.offsetWidth;
+            const activeSlide = slideRefs.current[currentIndex];
+            // The formula below calculates the translation needed so that:
+            // activeSlide.offsetLeft is shifted by (containerWidth/2 - activeSlide.offsetWidth/2)
+            // This effectively centers the active slide within the container.
+            const newOffset =
+                -(activeSlide.offsetLeft - (containerWidth / 2 - activeSlide.offsetWidth / 2));
+            setOffset(newOffset);
         }
-        return 100; // Default value
     };
 
-    const translationMap = React.useMemo(() => {
-        const centerIndex = (totalSlides - 1) / 2;
-        const maximumOffset = getMaximumOffset(windowWidth, totalSlides);
-        const step = maximumOffset / centerIndex;
-        const map = {};
-        for (let i = 0; i < totalSlides; i++) {
-            map[i] = `${(centerIndex - i) * step}%`;
-        }
-        return map;
-    }, [totalSlides, windowWidth]);
+    useEffect(() => {
+        computeOffset();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentIndex, children]);
 
     useEffect(() => {
         const handleResize = () => {
-            setWindowWidth(window.innerWidth);
+            computeOffset();
         };
-
         window.addEventListener('resize', handleResize);
-
-        // Cleanup
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
+        handleResize();
+        return () => window.removeEventListener('resize', handleResize);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const getStyleForCarouselInner = () => {
-        if (windowWidth <= 700) {
-            return { width: '100%' };
-        } else if (windowWidth === 375) {
-            return { width: '75%' };
-        } else if (windowWidth <= 1521) {
-            return { width: '50%' };
-        } else {
-            return { width: '47%' };
-        }
-    };
-
     const nextSlide = () => {
-        const newIndex = (currentIndex + 1) % totalSlides;
-        setCurrentIndex(newIndex);
+        setCurrentIndex((prev) => (prev + 1) % totalSlides);
     };
 
     const prevSlide = () => {
-        const newIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-        setCurrentIndex(newIndex);
+        setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
     };
 
     const handleTouchStart = (e) => {
-        const touchDown = e.touches[0].clientX;
-        setTouchPosition(touchDown);
+        setTouchPosition(e.touches[0].clientX);
     };
 
     const handleTouchMove = (e) => {
-        const touchDown = touchPosition;
-
-        if (touchDown === null) {
-            return;
-        }
-
-        const currentTouch = e.touches[0].clientX;
-        const diff = touchDown - currentTouch;
-
+        if (touchPosition === null) return;
+        const diff = touchPosition - e.touches[0].clientX;
         if (diff > 5) {
             nextSlide();
-        }
-
-        if (diff < -5) {
+        } else if (diff < -5) {
             prevSlide();
         }
-
         setTouchPosition(null);
     };
 
     return (
         <section className="projects" id="projects">
-            <div className="custom-carousel">
+            <div className="custom-carousel" ref={containerRef}>
                 <div className="carousel-wrapper">
                     <div
                         className="carousel-inner"
-                        style={getStyleForCarouselInner()}
                         onTouchStart={handleTouchStart}
                         onTouchMove={handleTouchMove}
                     >
@@ -136,10 +97,19 @@ const CustomCarousel = ({ children }) => {
                         </div>
                         <div
                             className="carousel-track"
-                            style={{ transform: `translateX(${translationMap[currentIndex]})` }}
+                            style={{
+                                display: 'flex',
+                                transition: 'transform 0.3s ease',
+                                transform: `translateX(${offset}px)`,
+                            }}
                         >
                             {React.Children.map(children, (child, index) => (
-                                <div className="carousel-slide" key={index}>
+                                <div
+                                    className="carousel-slide"
+                                    // Save a ref for each slide for measurement.
+                                    ref={(el) => (slideRefs.current[index] = el)}
+                                    data-index={index}
+                                >
                                     {React.cloneElement(child, { isActive: index === currentIndex })}
                                 </div>
                             ))}
@@ -151,7 +121,7 @@ const CustomCarousel = ({ children }) => {
     );
 };
 
-// Card Component Logic
+
 const Card = ({ item }) => (
     <div className="carousel-content">
         <div className="carousel-image-container">
@@ -165,7 +135,6 @@ const Card = ({ item }) => (
     </div>
 );
 
-// Sample data
 const data = [
     {
         name: 'Placeholder Database',
@@ -189,7 +158,6 @@ const data = [
     },
 ];
 
-// Main Component that uses CustomCarousel and Card
 const CarouselWithCards = () => {
     const cards = data.map((item, index) => <Card key={index} item={item} />);
 
