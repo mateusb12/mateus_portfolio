@@ -1,8 +1,9 @@
 {
   "files": {
     "main.css": "/mateus_portfolio/static/css/main.c4f76d60.css",
-    "main.js": "/mateus_portfolio/static/js/main.a3ca3f2d.js",
+    "main.js": "/mateus_portfolio/static/js/main.70362336.js",
     "static/js/787.b1762be3.chunk.js": "/mateus_portfolio/static/js/787.b1762be3.chunk.js",
+    "static/media/predicting-numbers.png": "/mateus_portfolio/static/media/predicting-numbers.1295ee037ff2225e6875.png",
     "static/media/color-sharp.png": "/mateus_portfolio/static/media/color-sharp.bea361cfef80fefc2d1e.png",
     "static/media/color-sharp2.png": "/mateus_portfolio/static/media/color-sharp2.c87586c6c2f549cb4aa6.png",
     "static/media/fa-solid-900.ttf": "/mateus_portfolio/static/media/fa-solid-900.07ed6d5fa32c1d54af0f.ttf",
@@ -40,6 +41,8 @@
     "static/media/server.png": "/mateus_portfolio/static/media/server.56ec56b65cd1b3fa5cb1.png",
     "static/media/project-img3.png": "/mateus_portfolio/static/media/project-img3.675b30d2f975a1bc1d09.png",
     "static/media/react.png": "/mateus_portfolio/static/media/react.17e5cb984343d1346ebd.png",
+    "static/media/reverse-engineering.png": "/mateus_portfolio/static/media/reverse-engineering.ab404ed46f03f0d2c94a.png",
+    "static/media/z3.png": "/mateus_portfolio/static/media/z3.a446ec74a014be10917a.png",
     "static/media/api.png": "/mateus_portfolio/static/media/api.aceeff496910c356de58.png",
     "static/media/contact-img.svg": "/mateus_portfolio/static/media/contact-img.87eac2b29352fa01abb2f9510ef6ac7e.svg",
     "static/media/selenium.png": "/mateus_portfolio/static/media/selenium.db2137ca9ae8fe1da347.png",
@@ -51,6 +54,7 @@
     "static/media/http.png": "/mateus_portfolio/static/media/http.97f9aafc6bf4ff934838.png",
     "static/media/quiz.jpg": "/mateus_portfolio/static/media/quiz.833ec7c6dce10aa7ddf1.jpg",
     "static/media/analysis.png": "/mateus_portfolio/static/media/analysis.4b3f2c0756ddfc391fec.png",
+    "static/media/security.png": "/mateus_portfolio/static/media/security.b38b0bd368c6b56c42a5.png",
     "static/media/chatbot.png": "/mateus_portfolio/static/media/chatbot.b5c23d318263d886eb10.png",
     "static/media/python.png": "/mateus_portfolio/static/media/python.07a98139a3638f2a224b.png",
     "static/media/gmail.png": "/mateus_portfolio/static/media/gmail.d292ad232bcab5b374c6.png",
@@ -97,11 +101,11 @@
     "static/media/arrow1.svg": "/mateus_portfolio/static/media/arrow1.0c89b5b635adf255c282.svg",
     "static/media/nav-icon2.svg": "/mateus_portfolio/static/media/nav-icon2.178f497aa17b70c42df2a1a8c926ed01.svg",
     "main.c4f76d60.css.map": "/mateus_portfolio/static/css/main.c4f76d60.css.map",
-    "main.a3ca3f2d.js.map": "/mateus_portfolio/static/js/main.a3ca3f2d.js.map",
+    "main.70362336.js.map": "/mateus_portfolio/static/js/main.70362336.js.map",
     "787.b1762be3.chunk.js.map": "/mateus_portfolio/static/js/787.b1762be3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c4f76d60.css",
-    "static/js/main.a3ca3f2d.js"
+    "static/js/main.70362336.js"
   ]
 }
