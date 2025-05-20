@@ -70,7 +70,7 @@ export const SkillPanel = ({
     function showSkillContent(skillKey) {
         const skillData = skillsData.skills[skillKey];
         if (!skillData) {
-            console.warn(`Skill data not found for key: ${skillKey}`);
+            console.warn(`Skill data not found for key: ${skillKey}. Expected file path: ${skillsIcons[skillKey]}`);
             return;
         }
         const skillContent = skillData[currentLanguage];

@@ -296,6 +296,39 @@
         "label": "API do Bot do Telegram",
         "description": "Crio bots interativos para Telegram utilizando a API do Bot do Telegram, automatizando tarefas e entregando notificações de forma eficaz com Python."
       }
+    },
+    "z3": {
+      "icon": "z3.png",
+      "english": {
+        "label": "Z3 Solver",
+        "description": "I use the Z3 theorem prover for solving complex logical puzzles, symbolic execution, and constraint satisfaction problems in reverse engineering and security research."
+      },
+      "portuguese": {
+        "label": "Z3 Solver",
+        "description": "Utilizo o solucionador Z3 para resolver problemas lógicos complexos, execução simbólica e problemas de satisfação de restrições em engenharia reversa e pesquisa de segurança."
+      }
+    },
+    "reverse-engineering": {
+      "icon": "reverse-engineering.png",
+      "english": {
+        "label": "Reverse Engineering",
+        "description": "I analyze and deconstruct software or algorithms to understand their inner workings, recover lost information, or identify vulnerabilities."
+      },
+      "portuguese": {
+        "label": "Engenharia Reversa",
+        "description": "Analiso e desmonto softwares ou algoritmos para entender seu funcionamento interno, recuperar informações ou identificar vulnerabilidades."
+      }
+    },
+    "security": {
+      "icon": "security.png",
+      "english": {
+        "label": "Security",
+        "description": "I apply security best practices to protect systems and data, including vulnerability assessment, secure coding, and penetration testing."
+      },
+      "portuguese": {
+        "label": "Segurança",
+        "description": "Aplico boas práticas de segurança para proteger sistemas e dados, incluindo avaliação de vulnerabilidades, codificação segura e testes de penetração."
+      }
     }
   }
 }

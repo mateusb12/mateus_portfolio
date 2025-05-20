@@ -116,6 +116,30 @@
           "description": "Uma aplicação web que ajuda você a monitorar suas candidaturas de emprego no LinkedIn, analisando sua caixa de entrada do Gmail e raspando suas vagas salvas no LinkedIn."
         }
       }
+    },
+    "random-number-predictor": {
+      "image": "predicting-numbers.png",
+      "link": "https://github.com/mateusb12/randomNumberGeneratorPredictor/",
+      "coreSkills": [
+        { "icon": "backend", "label": "Backend" },
+        { "icon": "security", "label": "Security" },
+        { "icon": "reverse-engineering", "label": "Reverse Engineering" }
+      ],
+      "frameworks": [],
+      "libraries": [
+        { "icon": "z3", "label": "puzzle" },
+        { "icon": "numpy", "label": "NumPy" }
+      ],
+      "translations": {
+        "english": {
+          "title": "Predicting Random Numbers",
+          "description": "V8 XorShift128+ Seed State Solver. Reverse-engineers the internal seed state of Chrome's V8 engine XorShift128+ PRNG from a sequence of Math.random() outputs and predicts the next float or integer."
+        },
+        "portuguese": {
+          "title": "Prevendo Números Aleatórios",
+          "description": "Solucionador do Estado de Semente V8 XorShift128+. Reverte o estado interno da semente do PRNG XorShift128+ do motor V8 do Chrome a partir de uma sequência de resultados de Math.random() e prevê o próximo valor (float ou inteiro)."
+        }
+      }
     }
   }
 }
