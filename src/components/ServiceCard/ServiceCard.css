@@ -22,15 +22,14 @@
 }
 
 .icon-circle {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    /* fundo escuro com degradê radial sutil no centro */
     background: radial-gradient(circle at center, rgba(11,36,36,0.8), #041414);
-    /* sombra interna e externa para o “glow” */
+    /* sombra interna + externa para o glow discreto */
     box-shadow:
             inset 0 0 8px rgba(35,181,181,0.5),
-            0 4px 8px rgba(35,181,181,0.3);
+            0 4px 12px rgba(35,181,181,0.3);
     display: flex;
     align-items: center;
     justify-content: center;

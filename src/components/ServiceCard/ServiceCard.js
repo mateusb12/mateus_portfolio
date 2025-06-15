@@ -1,10 +1,10 @@
+// ServiceCard.js
 import React from 'react'
-import { FaReact } from 'react-icons/fa'
-import whatsapp from '../../assets/img/zap.svg'
+import { ReactComponent as WhatsappIcon } from '../../assets/img/zap.svg'
 import './ServiceCard.css'
 
 const ServiceCard = ({
-                         Icon = FaReact,
+                         Icon = WhatsappIcon,
                          title = 'Serviço',
                          size = 48,
                          width = 220,
@@ -15,12 +15,16 @@ const ServiceCard = ({
         style={{ width: `${width}px`, height: `${height}px` }}
     >
         <div className="icon-circle">
-            <Icon
-                size={size}
-                className="text-[#23B5B5] drop-shadow-lg drop-shadow-[#23B5B5]/50"
-            />
+            <div className="drop-shadow-[0_0_10px_rgba(35,181,181,0.7)]">
+                <Icon
+                    width={size}
+                    height={size}
+                    style={{ fill: 'rgba(255, 255, 255, 0.7)' }}
+                />
+            </div>
         </div>
-        <div className="title">{title}</div>
+
+        <div className="title mt-4">{title}</div>
     </div>
 )
 
