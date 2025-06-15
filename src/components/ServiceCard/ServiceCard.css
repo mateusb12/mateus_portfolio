@@ -1,10 +1,52 @@
 .black-gradient {
     background: #000000;
-    /* fallback for old browsers */
     background: -webkit-linear-gradient( to right, #434343, #000000);
-    /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient( to right, #434343, #000000);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.gradient-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+
+    border-radius: 20px;
+    border: 2px solid transparent;
+
+    background-image:
+            linear-gradient(#031010, #031010),
+            linear-gradient(to bottom, #1b3d3d 1.9%, #23b5b5 97.5%);
+
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+}
+
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    /* fundo escuro com degradê radial sutil no centro */
+    background: radial-gradient(circle at center, rgba(11,36,36,0.8), #041414);
+    /* sombra interna e externa para o “glow” */
+    box-shadow:
+            inset 0 0 8px rgba(35,181,181,0.5),
+            0 4px 8px rgba(35,181,181,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-circle svg {
+    /* quanto maior o blur, mais suave o halo */
+    filter: drop-shadow(0 0 6px rgba(35,181,181,0.7));
+}
+
+.title {
+    margin-top: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
 }
 
 .blue-gradient {
