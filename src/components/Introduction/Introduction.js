@@ -20,7 +20,7 @@ export const Introduction = () => {
       header: "Bem-vindo ao meu Portfólio",
       title: "Olá! Me chamo Mateus",
       body: "\\pSou um desenvolvedor de software com uma experiência rica no desenvolvimento backend. Meu background diversificado me permite enfrentar muitos desafios no cenário da tecnologia. Hoje eu tenho um portfólio muito massa com projetos incríveis como o Book Analyzer, Flight Price Scrapper, Valorant Impact, entre outros. \\n\\n\\pEsses projetos me ajudaram a aprimorar minhas habilidades em desenvolvimento de APIs, práticas DevOps e pipelines CI/CD, e eu sou muito orgulhoso deles. Pode ter certeza que eu sou um recurso muito valioso em qualquer equipe de desenvolvimento de software",
-      footer: "Vamos conectar!"
+      footer: "Entre em contato"
     }
   };
 

@@ -13,6 +13,7 @@ export const Contact = () => {
   const languageContent = {
     english: {
       title: "Get in Touch",
+      sendButton: "Send",
       nameField: "First Name",
       surnameField: "Last Name",
       emailField: "Email address",
@@ -22,12 +23,13 @@ export const Contact = () => {
     },
     portuguese: {
       title: "Entre em Contato",
+      sendButton: "Enviar",
       nameField: "Nome",
       surnameField: "Sobrenome",
       emailField: "Email",
       phoneField: "Telefone",
       messageField: "Mensagem",
-      messageContent: "Olá, Mateus. Estou interessado nos seus projetos. Estou à disposição para trabalhar com você."
+      messageContent: "Olá, Mateus. Tenho interesse no seu trabalho e gostaria de saber mais sobre possíveis parcerias"
     }
   };
 
@@ -57,11 +59,12 @@ export const Contact = () => {
       ...prevDetails,
       message: textData.messageContent // Update the message field based on language
     }));
+    setButtonText(textData.sendButton);
   }, [selectedFlag]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setButtonText("Sending...");
+    setButtonText(textData.sendButton + "...");
 
     // Replace 'YOUR_PHONE_NUMBER' with your actual phone number in international format without '+' or '00'
     const phoneNumber = '5585999171902'; // e.g., '1234567890'
@@ -79,7 +82,7 @@ export const Contact = () => {
     window.open(whatsappURL, '_blank');
 
     // Reset the button text
-    setButtonText("Send");
+    setButtonText(textData.sendButton);
 
     // Optionally, reset the form
     setFormDetails(formInitialDetails);
