@@ -5,7 +5,6 @@ import { HashLink } from 'react-router-hash-link';
 import TrackVisibility from 'react-on-screen';
 import LanguageContext from '../LanguageContext';
 import {Whatsapp, WindowStack} from "react-bootstrap-icons";
-import ServiceCard from "../ServiceCard/ServiceCard";
 
 export const Introduction = () => {
   const { selectedFlag } = useContext(LanguageContext);
@@ -56,7 +55,6 @@ export const Introduction = () => {
                         <Whatsapp size={32} />
                       </button>
                     </HashLink>
-                    <ServiceCard />
                   </div>
                 </div>
               </div>

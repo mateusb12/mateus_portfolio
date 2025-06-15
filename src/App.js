@@ -14,7 +14,7 @@ import { OldProjectCard } from "./components/Projects/OldProjectCard";
 import ProjectCard from "./components/Projects/ProjectCard";
 import { SkillPanel } from "./components/Skills/SkillPanel";
 import CustomCarousel from "./components/Projects/CustomCarousel";
-import ServiceCard from "./components/ServiceCard/ServiceCard";
+import ServiceCard from "./components/SingleServiceCard/ServiceCard";
 
 function App() {
     const [language, setLanguage] = useState('english');

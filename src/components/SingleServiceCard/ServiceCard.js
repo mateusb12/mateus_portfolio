@@ -1,17 +1,17 @@
 // ServiceCard.js
 import React from 'react'
-import { ReactComponent as WhatsappIcon } from '../../assets/img/zap.svg'
+import { ReactComponent as Robotic } from '../../assets/img/robotic.svg'
 import './ServiceCard.css'
 
 const ServiceCard = ({
-                         Icon = WhatsappIcon,
-                         title = 'Serviço',
+                         Icon = Robotic,
+                         title = 'Automação de websites',
                          size = 48,
-                         width = 220,
+                         width = 180,
                          height = 220,
                      }) => (
     <div
-        className="gradient-card"
+        className="gradient-card flex-col items-center justify-center"
         style={{ width: `${width}px`, height: `${height}px` }}
     >
         <div className="icon-circle">
@@ -23,8 +23,7 @@ const ServiceCard = ({
                 />
             </div>
         </div>
-
-        <div className="title mt-4">{title}</div>
+        <div className="title mt-4 text-[#09F7A5]">{title}</div>
     </div>
 )
 
