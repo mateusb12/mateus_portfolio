@@ -36,7 +36,9 @@
   },
   "scripts": {
     "run": "npm run start",
-    "start": "react-scripts start",
+    "start": "npm run update-browserslist && node measure-start.js",
+    "start:raw": "react-scripts start",
+    "update-browserslist": "npx update-browserslist-db@latest",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
