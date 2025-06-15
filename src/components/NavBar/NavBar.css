@@ -12,6 +12,11 @@ nav.navbar.scrolled {
     padding: 0 0;
     background-color: #121212;
 }
+@media (max-width: 767.98px) {
+      nav.navbar {
+        background-color: #121212 !important;
+      }
+}
 /***************************************/
 .flag {
     width: 60px;
