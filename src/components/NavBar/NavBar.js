@@ -1,8 +1,8 @@
 import './NavBar.css';
 import { useState, useEffect, useContext } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import usa from '../../assets/img/usa.png';
-import brazil from '../../assets/img/brazil.png';
+import usa from '../../assets/img/usa.svg';
+import brazil from '../../assets/img/brazil.svg';
 import linkedinIcon from '../../assets/img/nav-icon1.svg';
 import facebookIcon from '../../assets/img/nav-icon2.svg';
 import instagramIcon from '../../assets/img/nav-icon3.svg';
