@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { ArrowRightCircle } from 'react-bootstrap-icons';
 import 'animate.css';
 import './Introduction.css';
 import { HashLink } from 'react-router-hash-link';
 import TrackVisibility from 'react-on-screen';
 import LanguageContext from '../LanguageContext';
+import {Whatsapp, WindowStack} from "react-bootstrap-icons";
 
 export const Introduction = () => {
   const { selectedFlag } = useContext(LanguageContext);
@@ -42,11 +42,20 @@ export const Introduction = () => {
                 <div className={isVisible ? "animate__animated animate__fadeIn main-body" : ""}>
                   <h1>{introductionTexts.title}</h1>
                   <p dangerouslySetInnerHTML={{ __html: formattedBody }}></p>
-                  <HashLink to='#connect'>
-                    <button>
-                      {introductionTexts.footer} <ArrowRightCircle size={25}/>
-                    </button>
-                  </HashLink>
+                  <div className="button-group">
+                    <HashLink to="#projects">
+                      <button className="custom-button">
+                        {languageKey === 'english' ? 'MY WORK' : 'MEU TRABALHO'}
+                        <WindowStack size={32} />
+                      </button>
+                    </HashLink>
+                    <a href="https://wa.me/5599999999999" target="_blank" rel="noopener noreferrer">
+                      <button className="custom-button">
+                        {languageKey === 'english' ? 'CONTACT ME' : 'FALE COMIGO'}
+                        <Whatsapp size={32} />
+                      </button>
+                    </a>
+                  </div>
                 </div>
               </div>
           )}

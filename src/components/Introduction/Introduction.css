@@ -90,18 +90,63 @@
 .introduction-banner{
     margin-top: 10rem;
     margin-bottom: 10rem;
-    /*border: 1px red solid;*/
-    /*text-align: left;*/
+}
+.button-group {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.button-group a {
+    text-decoration: none;
+}
+
+.custom-button {
+    background-color: rgba(18, 18, 18, 0.5);
+    border: 2px solid #09F7A5;
+    border-radius: 20px;
+    color: #09F7A5 !important;
+    font-family: 'Centra No2', sans-serif;
+    font-weight: bold;
+    font-size: 35px;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.custom-button span {
+    color: inherit;
+}
+
+.custom-button svg {
+    color: #09F7A5;
+    font-size: 32px;
+    transition: color 0.3s ease;
+}
+
+.custom-button:hover {
+    background-color: #09F7A5;
+    color: #121212 !important;
+}
+
+.custom-button:hover svg {
+    color: #121212;
 }
 
 @media (max-width: 768px) {
     .vertical-index {
-        display: none; /* Hides the vertical index on small screens */
+        display: none;
     }
 
     .debug {
-        padding: 0 1rem; /* Less padding on smaller screens */
-        margin-top: 2rem; /* Reduced margin on smaller screens */
+        padding: 0 1rem;
+        margin-top: 2rem;
     }
 
     .introduction-banner{
@@ -109,36 +154,36 @@
     }
 
     .introduction-banner h1 {
-        font-size: 32px; /* Smaller font size for smaller screens */
+        font-size: 32px;
     }
 
     .introduction-banner p {
-        font-size: 14px; /* Smaller font size for text */
+        font-size: 14px;
     }
 
     .introduction-banner button {
-        font-size: 16px; /* Smaller font size for button */
-        margin-top: 20px; /* Reduced margin top */
+        font-size: 16px;
+        margin-top: 20px;
     }
 
     .main-container {
-        flex-direction: column; /* Stack vertically on small screens */
-        align-items: flex-start; /* Align items to the start */
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .main-body {
-        max-width: 600px; /* Limit content width */
-        margin: 0 auto; /* Center the content within the main container */
+        max-width: 600px;
+        margin: 0 auto;
     }
 
     .vertical-index::after {
-        height: 200px; /* Shorter line on smaller devices */
+        height: 200px;
     }
 
     .introduction-banner {
         margin-top: 5rem;
-        padding: 1rem; /* Padding around the banner */
-        box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+        padding: 1rem;
+        box-sizing: border-box;
     }
 }
 
