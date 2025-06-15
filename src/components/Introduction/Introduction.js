@@ -49,12 +49,12 @@ export const Introduction = () => {
                         <WindowStack size={32} />
                       </button>
                     </HashLink>
-                    <a href="https://wa.me/5599999999999" target="_blank" rel="noopener noreferrer">
+                    <HashLink smooth to="#connect">
                       <button className="custom-button">
                         {languageKey === 'english' ? 'CONTACT ME' : 'FALE COMIGO'}
                         <Whatsapp size={32} />
                       </button>
-                    </a>
+                    </HashLink>
                   </div>
                 </div>
               </div>
