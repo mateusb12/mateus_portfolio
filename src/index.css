@@ -77,3 +77,9 @@ body {
     align-items: center;
     margin-top: 6rem;
 }
+
+@media (max-width: 639px) {
+    .shared-background {
+        margin-top: 5rem;
+    }
+}

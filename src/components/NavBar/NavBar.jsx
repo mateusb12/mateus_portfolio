@@ -54,7 +54,7 @@ const NavBar = () => {
             {/* 1. Centered “container” */}
             <div className="max-w-7xl mx-auto flex items-center justify-between">
                 {/* ‣ Flags */}
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2  ml-4">
                     <button onClick={() => toggleFlag('usa')}>
                         <img
                             src={usaFlag} alt="USA"
@@ -121,7 +121,7 @@ border border-transparent hover:border-white
 
                 {/* ‣ Mobile burger (hidden on md+) */}
                 <button
-                    className="md:hidden text-white focus:outline-none"
+                    className="md:hidden text-white focus:outline-none mr-4"
                     onClick={() => setMenuOpen(o => !o)}
                 >
                     <div className="space-y-1">
