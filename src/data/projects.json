@@ -1,0 +1,145 @@
+{
+  "projects": {
+    "witcher": {
+      "image": "witcher_reading_book.png",
+      "link": "https://github.com/mateusb12/WitcherAnalysis",
+      "coreSkills": [
+        { "icon": "backend", "label": "Backend" },
+        { "icon": "api", "label": "APIs" },
+        { "icon": "nlp", "label": "NLP" }
+      ],
+      "frameworks": [
+        { "icon": "django", "label": "Django" }
+      ],
+      "libraries": [
+        { "icon": "numpy", "label": "Numpy" },
+        { "icon": "pandas", "label": "Pandas" },
+        { "icon": "networkx", "label": "Networkx" },
+        { "icon": "graphviz", "label": "GraphViz" },
+        { "icon": "spacy", "label": "Spacy" }
+      ],
+      "translations": {
+        "english": {
+          "title": "Witcher Network",
+          "description": "Transform .txt book files into social media style graphs, similar to Instagram"
+        },
+        "portuguese": {
+          "title": "Analisador de Livros",
+          "description": "Transforma arquivos de livro .txt em grafos ao estilo das redes sociais, similares ao Instagram"
+        }
+      }
+    },
+    "flight-scraper": {
+      "image": "flight.jpg",
+      "link": "https://github.com/mateusb12/TravelScrapper",
+      "coreSkills": [
+        { "icon": "backend", "label": "Backend" },
+        { "icon": "api", "label": "APIs" }
+      ],
+      "frameworks": [
+        { "icon": "flask", "label": "Flask" }
+      ],
+      "libraries": [
+        { "icon": "firebase", "label": "Firebase" },
+        { "icon": "matplotlib", "label": "Matplotlib" },
+        { "icon": "pandas", "label": "Pandas" },
+        { "icon": "selenium", "label": "Selenium" },
+        { "icon": "telegram", "label": "Telegram Bot" }
+      ],
+      "translations": {
+        "english": {
+          "title": "Flight Scraper",
+          "description": "Powered by Kiwi Tequilla API, this project scrapes flight data from the API and displays it in a user-friendly way. The main focus is to create alerts for the user when the price of a flight drops."
+        },
+        "portuguese": {
+          "title": "Pesquisador Automático de Voos",
+          "description": "Alimentado pela API Kiwi Tequilla, esse projeto coleta dados de voo e os exibe de uma forma amigável ao usuário. O objetivo desse projeto é criar alertas para o usuário quando o preço de algum voo cair."
+        }
+      }
+    },
+    "valorant-impact": {
+      "image": "data_analysis.jpg",
+      "link": "https://github.com/mateusb12/valorant_impact",
+      "coreSkills": [
+        { "icon": "backend", "label": "Backend" },
+        { "icon": "machine-learning", "label": "Machine Learning" },
+        { "icon": "data-analysis", "label": "Data Analysis" }
+      ],
+      "frameworks": [
+        { "icon": "flask", "label": "Flask" }
+      ],
+      "libraries": [
+        { "icon": "lightgbm", "label": "LightGBM" },
+        { "icon": "matplotlib", "label": "Matplotlib" },
+        { "icon": "optuna", "label": "Optuna" },
+        { "icon": "pandas", "label": "Pandas" },
+        { "icon": "scikit-learn", "label": "Scikit-learn" },
+        { "icon": "scipy", "label": "Scipy" },
+        { "icon": "seaborn", "label": "Seaborn" }
+      ],
+      "translations": {
+        "english": {
+          "title": "Valorant Impact",
+          "description": "A tool that quantifies how much player actions can shift the odds of winning a Valorant round. By analyzing kills, weapon choices, economy and strategic moves, it reveals the real-time impact on victory chances."
+        },
+        "portuguese": {
+          "title": "Valorant Impact",
+          "description": "Uma ferramenta que calcula o quanto as ações dos jogadores podem mudar as chances de vitória em um round no Valorant. Ao analisar mortes, escolhas de armas, economia e movimentos estratégicos, o algoritmo é capaz de revelar o impacto em tempo real nas chances de vitória."
+        }
+      }
+    },
+    "linkedin-tracker": {
+      "image": "linkedin_tracker.png",
+      "link": "https://github.com/mateusb12/LinkedIn-Application-Tracker",
+      "coreSkills": [
+        { "icon": "backend", "label": "Backend" },
+        { "icon": "frontend", "label": "Frontend" },
+        { "icon": "api", "label": "APIs" }
+      ],
+      "frameworks": [
+        { "icon": "nodejs", "label": "Node.js" },
+        { "icon": "express", "label": "Express" }
+      ],
+      "libraries": [
+        { "icon": "selenium", "label": "Selenium" },
+        { "icon": "gmail", "label": "Gmail API" },
+        { "icon": "oauth2", "label": "OAuth 2.0" },
+        { "icon": "ejs", "label": "EJS Templates" }
+      ],
+      "translations": {
+        "english": {
+          "title": "LinkedIn Application Tracker",
+          "description": "A web application that helps you monitor your LinkedIn job applications by analyzing your Gmail inbox and scraping your LinkedIn saved jobs."
+        },
+        "portuguese": {
+          "title": "Rastreador de Aplicações do LinkedIn",
+          "description": "Uma aplicação web que ajuda você a monitorar suas candidaturas de emprego no LinkedIn, analisando sua caixa de entrada do Gmail e raspando suas vagas salvas no LinkedIn."
+        }
+      }
+    },
+    "random-number-predictor": {
+      "image": "predicting-numbers.png",
+      "link": "https://github.com/mateusb12/randomNumberGeneratorPredictor/",
+      "coreSkills": [
+        { "icon": "backend", "label": "Backend" },
+        { "icon": "security", "label": "Security" },
+        { "icon": "reverse-engineering", "label": "Reverse Engineering" }
+      ],
+      "frameworks": [],
+      "libraries": [
+        { "icon": "z3", "label": "puzzle" },
+        { "icon": "numpy", "label": "NumPy" }
+      ],
+      "translations": {
+        "english": {
+          "title": "Predicting Random Numbers",
+          "description": "V8 XorShift128+ Seed State Solver. Reverse-engineers the internal seed state of Chrome's V8 engine XorShift128+ PRNG from a sequence of Math.random() outputs and predicts the next float or integer."
+        },
+        "portuguese": {
+          "title": "Prevendo Números Aleatórios",
+          "description": "Solucionador do Estado de Semente V8 XorShift128+. Reverte o estado interno da semente do PRNG XorShift128+ do motor V8 do Chrome a partir de uma sequência de resultados de Math.random() e prevê o próximo valor (float ou inteiro)."
+        }
+      }
+    }
+  }
+}

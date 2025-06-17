@@ -1,0 +1,153 @@
+{
+  "english": {
+    "key": {
+      "title": "Key Skills",
+      "description": "Core competencies in software development",
+      "skillList": [
+        "UI/UX Design",
+        "Website creation",
+        "Backend Development",
+        "APIs",
+        "Databases",
+        "Cloud",
+        "DevOps and CI/CD Pipelines",
+        "Security"
+      ]
+    },
+    "foundations": {
+      "title": "Programming Foundations",
+      "description": "Essential programming languages that serves as foundations for using the frameworks",
+      "skillList": [
+        "Python",
+        "Javascript",
+        "C#",
+        "Java",
+        "SQL",
+        "HTML",
+        "CSS"
+      ]
+    },
+    "stack": {
+      "title": "Tech Stack",
+      "description": "Technologies that I have experience with",
+      "skillList": [
+        "GIT",
+        "Flask",
+        "React",
+        "JWT",
+        "Postgres",
+        "Docker",
+        "AWS",
+        "Google Cloud"
+      ]
+    }
+  },
+  "portuguese": {
+    "key": {
+      "title": "Habilidades Chave",
+      "description": "Competências principais em desenvolvimento de software",
+      "skillList": [
+        "Design UI/UX",
+        "Criação de websites",
+        "Desenvolvimento Backend",
+        "APIs",
+        "Bancos de Dados",
+        "Cloud",
+        "DevOps e Pipelines CI/CD",
+        "Segurança"
+      ]
+    },
+    "foundations": {
+      "title": "Fundamentos de Programação",
+      "description": "Linguagens de programação essenciais que servem como base para o uso dos frameworks",
+      "skillList": [
+        "Python",
+        "Javascript",
+        "C#",
+        "Java",
+        "SQL",
+        "HTML",
+        "CSS"
+      ]
+    },
+    "stack": {
+      "title": "Tech Stack",
+      "description": "Tecnologias com as quais tenho experiência",
+      "skillList": [
+        "GIT",
+        "Flask",
+        "React",
+        "JWT",
+        "Postgres",
+        "Docker",
+        "AWS",
+        "Google Cloud"
+      ]
+    }
+  },
+  "skillMap":
+  {
+    "english": {
+      "key": {
+        "design": "UI/UX Design",
+        "website": "Website creation",
+        "backend": "Backend Development",
+        "api": "APIs",
+        "database": "Databases",
+        "cloud": "Cloud",
+        "deploy": "DevOps and CI/CD Pipelines",
+        "lock": "Security"
+      },
+      "foundations": {
+        "python": "Python",
+        "javascript": "Javascript",
+        "csharp": "C#",
+        "java": "Java",
+        "html": "HTML",
+        "css": "CSS",
+        "sql": "SQL"
+      },
+      "stack": {
+        "git": "GIT",
+        "flask": "Flask",
+        "react": "React",
+        "jwt": "JWT",
+        "postgres": "Postgres",
+        "docker": "Docker",
+        "aws": "AWS",
+        "google-cloud": "Google Cloud"
+      }
+    },
+    "portuguese": {
+      "key": {
+        "design": "Design UI/UX",
+        "website": "Criação de websites",
+        "backend": "Desenvolvimento Backend",
+        "api": "APIs",
+        "database": "Bancos de Dados",
+        "cloud": "Cloud",
+        "deploy": "DevOps e Pipelines CI/CD",
+        "lock": "Segurança"
+      },
+      "foundations": {
+        "python": "Python",
+        "javascript": "Javascript",
+        "csharp": "C#",
+        "java": "Java",
+        "html": "HTML",
+        "css": "CSS",
+        "sql": "SQL"
+      },
+      "stack": {
+        "git": "GIT",
+        "flask": "Flask",
+        "react": "React",
+        "jwt": "JWT",
+        "postgres": "Postgres",
+        "docker": "Docker",
+        "aws": "AWS",
+        "google-cloud": "Google Cloud"
+      }
+    }
+  }
+}

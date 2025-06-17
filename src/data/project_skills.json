@@ -1,0 +1,334 @@
+{
+  "skills": {
+    "api": {
+      "icon": "api.png",
+      "english": {
+        "label": "APIs",
+        "description": "I develop RESTful APIs that support communication between different systems in a scalable way. Use security practices like OAuth authentication and rate limiting to protect data and ensure performance, even under high demand. Integrate APIs with SQL and NoSQL databases for efficient data retrieval and use of caching techniques to reduce latency and increase response speed."
+      },
+      "portuguese": {
+        "label": "APIs",
+        "description": "Desenvolvo APIs RESTful que suportam a comunicação entre diferentes sistemas. Utilizo práticas de segurança como autenticação OAuth e rate limiting para proteger os dados e garantir o desempenho, mesmo sob alta demanda. Integro as APIs com bancos de dados SQL e NoSQL para uma recuperação eficiente dos dados e emprego técnicas de caching para reduzir a latência e aumentar a rapidez das respostas."
+      }
+    },
+    "backend": {
+      "icon": "server.png",
+      "english": {
+        "label": "Backend",
+        "description": "I design and manage server-side architectures, implementing complex logic, handling database interactions, and ensuring seamless component integration."
+      },
+      "portuguese": {
+        "label": "Backend",
+        "description": "Projeto e gerencio arquiteturas do lado do servidor, implementando a lógica das regras de negócio, programando interações com bancos de dados e garantindo a integração perfeita de todos os componentes."
+      }
+    },
+    "data-analysis": {
+      "icon": "data_analysis.png",
+      "english": {
+        "label": "Data Analysis",
+        "description": "I extract, clean, and interpret data to uncover insights through statistical analysis and visualizations, supporting data-driven decision-making."
+      },
+      "portuguese": {
+        "label": "Análise de Dados",
+        "description": "Extraio, limpo e interpreto dados para descobrir insights por meio de análises estatísticas e visualizações, apoiando a tomada de decisões baseada em dados."
+      }
+    },
+    "django": {
+      "icon": "django.png",
+      "english": {
+        "label": "Django",
+        "description": "Leveraging Django's robust framework, I build scalable web applications with integrated admin interfaces and secure authentication systems."
+      },
+      "portuguese": {
+        "label": "Django",
+        "description": "Utilizando o robusto framework Django, construo aplicações web escaláveis com interfaces administrativas integradas e sistemas de autenticação seguros."
+      }
+    },
+    "ejs": {
+      "icon": "ejs.png",
+      "english": {
+        "label": "EJS Templates",
+        "description": "I create dynamic and reusable HTML templates with EJS, enabling efficient server-side rendering and seamless integration with Node.js applications."
+      },
+      "portuguese": {
+        "label": "Templates EJS",
+        "description": "Crio templates HTML dinâmicos e reutilizáveis com EJS, permitindo renderização eficiente no server-side e integração perfeita com aplicações Node.js."
+      }
+    },
+    "firebase": {
+      "icon": "firebase.png",
+      "english": {
+        "label": "Firebase",
+        "description": "I utilize Firebase to build and scale web and mobile applications, leveraging real-time databases, authentication, cloud functions, and hosting services."
+      },
+      "portuguese": {
+        "label": "Firebase",
+        "description": "Utilizo o Firebase para construir aplicações web e mobile, aproveitando o realtime database, autenticação, cloud functions e serviços de hospedagem."
+      }
+    },
+    "flask": {
+      "icon": "flask.png",
+      "english": {
+        "label": "Flask",
+        "description": "Using Flask's lightweight framework, I create custom web services tailored to specific project requirements with clean architecture."
+      },
+      "portuguese": {
+        "label": "Flask",
+        "description": "Utilizando o framework leve Flask, crio serviços web personalizados adaptados a requisitos específicos de projetos com arquitetura limpa."
+      }
+    },
+    "frontend": {
+      "icon": "frontend.png",
+      "english": {
+        "label": "Frontend Development",
+        "description": "I specialize in crafting dynamic and responsive user interfaces using HTML, CSS, and JavaScript. Skilled in frameworks like React and Angular, I ensure optimal performance and user experience by employing best practices in web standards, accessibility, and SEO optimization."
+      },
+      "portuguese": {
+        "label": "Desenvolvimento Frontend",
+        "description": "Especializo-me na criação de interfaces de usuário dinâmicas e responsivas usando HTML, CSS e JavaScript. Habilidoso em frameworks como React e Angular, garanto desempenho ótimo e experiência do usuário empregando as melhores práticas em padrões web, acessibilidade e otimização de SEO."
+      }
+    },
+    "gmail": {
+      "icon": "gmail.png",
+      "english": {
+        "label": "Gmail API",
+        "description": "I integrate the Gmail API to manage email functionalities, including sending, receiving, and organizing emails programmatically within applications."
+      },
+      "portuguese": {
+        "label": "Gmail API",
+        "description": "Integro a Gmail API para gerenciar funcionalidades de e-mail, incluindo envio, recebimento e organização de e-mails programaticamente em aplicações."
+      }
+    },
+    "graphviz": {
+      "icon": "graphviz.png",
+      "english": {
+        "label": "Graphviz",
+        "description": "Using the Graphviz library I create detailed graph structures for visualizing complex networks and hierarchies using the Graphviz library."
+      },
+      "portuguese": {
+        "label": "Graphviz",
+        "description": "Com o GraphViz eu crio estruturas de grafos detalhadas para visualizar redes complexas e hierarquias"
+      }
+    },
+    "lightgbm": {
+      "icon": "lightgbm.png",
+      "english": {
+        "label": "LightGBM",
+        "description": "I develop high-performance gradient boosting models with LightGBM, optimizing large datasets for precise and efficient predictions."
+      },
+      "portuguese": {
+        "label": "LightGBM",
+        "description": "Desenvolvo modelos de gradient boosting de alto desempenho com LightGBM, otimizando grandes conjuntos de dados para previsões precisas e eficientes."
+      }
+    },
+    "machine-learning": {
+      "icon": "machine_learning.png",
+      "english": {
+        "label": "Machine Learning",
+        "description": "I design and implement machine learning models, from data collection and preparation to the final choice of models, using cross-validation and hyperparameter tuning to optimize performance and predictive accuracy.\n\n"
+      },
+      "portuguese": {
+        "label": "Aprendizado de Máquina",
+        "description": "Projeto e implemento modelos de machine learning, desde a coleta e preparação de dados até a escolha final dos modelos, utilizando validação cruzada e ajuste de hiperparâmetros para otimizar desempenho e precisão preditiva."
+      }
+    },
+    "matplotlib": {
+      "icon": "matplotlib.png",
+      "english": {
+        "label": "Matplotlib",
+        "description": "I create static, animated, and interactive visualizations in Python using Matplotlib to enhance data representation and communication."
+      },
+      "portuguese": {
+        "label": "Matplotlib",
+        "description": "Crio visualizações estáticas, animadas e interativas em Python utilizando Matplotlib para aprimorar a representação de dados e a comunicação."
+      }
+    },
+    "networkx": {
+      "icon": "networkx.png",
+      "english": {
+        "label": "NetworkX",
+        "description": "I build and manipulate graph structures for complex network analysis and visualization using the NetworkX library."
+      },
+      "portuguese": {
+        "label": "NetworkX",
+        "description": "Construo e manipulo estruturas de grafos para análise e visualização de redes complexas utilizando a biblioteca NetworkX."
+      }
+    },
+    "nlp": {
+      "icon": "nlp.png",
+      "english": {
+        "label": "NLP",
+        "description": "I leverage natural language processing techniques and machine learning algorithms to extract meaningful insights from text data."
+      },
+      "portuguese": {
+        "label": "Processamento de Linguagem Natural",
+        "description": "Utilizo técnicas de processamento de linguagem natural e algoritmos de aprendizado de máquina para extrair insights significativos de dados textuais."
+      }
+    },
+    "nodejs": {
+      "icon": "nodejs.png",
+      "english": {
+        "label": "Node.js",
+        "description": "I develop scalable server-side applications using Node.js, leveraging its event-driven architecture and non-blocking I/O for high performance."
+      },
+      "portuguese": {
+        "label": "Node.js",
+        "description": "Desenvolvo aplicações server-side escaláveis utilizando Node.js, aproveitando sua arquitetura orientada a eventos e I/O não bloqueante para alto desempenho."
+      }
+    },
+    "express": {
+      "icon": "express.png",
+      "english": {
+        "label": "Express.js",
+        "description": "I build robust web applications and APIs with Express.js, utilizing its minimalist framework to streamline development and enhance flexibility."
+      },
+      "portuguese": {
+        "label": "Express.js",
+        "description": "Construo aplicações web e APIs robustas com Express.js, utilizando seu framework minimalista para agilizar o desenvolvimento e aumentar a flexibilidade."
+      }
+    },
+    "numpy": {
+      "icon": "numpy.png",
+      "english": {
+        "label": "NumPy",
+        "description": "I have experience with numerical calculations and matrix/tensor computations using the NumPy library."
+      },
+      "portuguese": {
+        "label": "NumPy",
+        "description": "Tenho experiência com os cálculos numéricos e computações de matrizes/tensores utilizando a biblioteca NumPy."
+      }
+    },
+    "oauth2": {
+      "icon": "oauth2.png",
+      "english": {
+        "label": "OAuth 2.0",
+        "description": "I implement OAuth 2.0 for secure authentication and authorization, enabling users to grant applications access to their resources without exposing credentials."
+      },
+      "portuguese": {
+        "label": "OAuth 2.0",
+        "description": "Implemento OAuth 2.0 para autenticação e autorização seguras, permitindo que usuários concedam acesso a recursos de aplicações sem expor suas credenciais."
+      }
+    },
+    "optuna": {
+      "icon": "optuna.png",
+      "english": {
+        "label": "Optuna",
+        "description": "I conduct hyperparameter optimization for machine learning models with Optuna, enhancing model accuracy through efficient search and tuning."
+      },
+      "portuguese": {
+        "label": "Optuna",
+        "description": "Realizo otimização de hiperparâmetros para modelos de aprendizado de máquina com Optuna, aprimorando a precisão dos modelos por meio de busca e ajuste eficientes."
+      }
+    },
+    "pandas": {
+      "icon": "pandas.png",
+      "english": {
+        "label": "Pandas",
+        "description": "I manipulate and organize data in tables using Pandas for effective data preparation and analysis."
+      },
+      "portuguese": {
+        "label": "Pandas",
+        "description": "Manipulo e organizo dados em tabelas utilizando Pandas para preparação e análise de dados."
+      }
+    },
+    "seaborn": {
+      "icon": "seaborn.png",
+      "english": {
+        "label": "Seaborn",
+        "description": "I design sophisticated statistical visualizations with Seaborn to reveal deep data insights and enhance analytical clarity."
+      },
+      "portuguese": {
+        "label": "Seaborn",
+        "description": "Crio visualizações estatísticas sofisticadas com Seaborn para revelar insights profundos dos dados e aprimorar a clareza analítica."
+      }
+    },
+    "selenium": {
+      "icon": "selenium.png",
+      "english": {
+        "label": "Selenium",
+        "description": "I automate web browsers with Selenium for efficient testing and data scraping of web applications."
+      },
+      "portuguese": {
+        "label": "Selenium",
+        "description": "Consigo fazer automações em navegadores web com Selenium para realizar testes e raspagem de dados de aplicações web."
+      }
+    },
+    "scikit-learn": {
+      "icon": "scikit_learn.png",
+      "english": {
+        "label": "Scikit-Learn",
+        "description": "I develop and deploy robust machine learning models with Scikit-Learn, utilizing diverse algorithms for comprehensive predictive solutions."
+      },
+      "portuguese": {
+        "label": "Scikit-Learn",
+        "description": "Desenvolvo e implanto modelos de aprendizado de máquina robustos com Scikit-Learn, utilizando diversos algoritmos para soluções preditivas abrangentes."
+      }
+    },
+    "scipy": {
+      "icon": "scipy.png",
+      "english": {
+        "label": "SciPy",
+        "description": "I perform advanced scientific and numerical computations with SciPy, addressing complex mathematical and engineering challenges."
+      },
+      "portuguese": {
+        "label": "SciPy",
+        "description": "Realizo cálculos científicos e numéricos avançados com SciPy, abordando desafios matemáticos e de engenharia complexos."
+      }
+    },
+    "spacy": {
+      "icon": "spacy.png",
+      "english": {
+        "label": "SpaCy",
+        "description": "I utilize SpaCy for efficient natural language processing tasks, enhancing text data analysis and interpretation."
+      },
+      "portuguese": {
+        "label": "SpaCy",
+        "description": "Utilizo SpaCy para tarefas eficientes de processamento de linguagem natural, aprimorando a análise e interpretação de dados textuais."
+      }
+    },
+    "telegram": {
+      "icon": "telegram.png",
+      "english": {
+        "label": "Telegram Bot API",
+        "description": "I create interactive Telegram bots using the Telegram Bot API, automating tasks and delivering notifications effectively with Python."
+      },
+      "portuguese": {
+        "label": "API do Bot do Telegram",
+        "description": "Crio bots interativos para Telegram utilizando a API do Bot do Telegram, automatizando tarefas e entregando notificações de forma eficaz com Python."
+      }
+    },
+    "z3": {
+      "icon": "z3.png",
+      "english": {
+        "label": "Z3 Solver",
+        "description": "I use the Z3 theorem prover for solving complex logical puzzles, symbolic execution, and constraint satisfaction problems in reverse engineering and security research."
+      },
+      "portuguese": {
+        "label": "Z3 Solver",
+        "description": "Utilizo o solucionador Z3 para resolver problemas lógicos complexos, execução simbólica e problemas de satisfação de restrições em engenharia reversa e pesquisa de segurança."
+      }
+    },
+    "reverse-engineering": {
+      "icon": "reverse-engineering.png",
+      "english": {
+        "label": "Reverse Engineering",
+        "description": "I analyze and deconstruct software or algorithms to understand their inner workings, recover lost information, or identify vulnerabilities."
+      },
+      "portuguese": {
+        "label": "Engenharia Reversa",
+        "description": "Analiso e desmonto softwares ou algoritmos para entender seu funcionamento interno, recuperar informações ou identificar vulnerabilidades."
+      }
+    },
+    "security": {
+      "icon": "security.png",
+      "english": {
+        "label": "Security",
+        "description": "I apply security best practices to protect systems and data, including vulnerability assessment, secure coding, and penetration testing."
+      },
+      "portuguese": {
+        "label": "Segurança",
+        "description": "Aplico boas práticas de segurança para proteger sistemas e dados, incluindo avaliação de vulnerabilidades, codificação segura e testes de penetração."
+      }
+    }
+  }
+}
