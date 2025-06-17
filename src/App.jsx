@@ -1,16 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import {useState} from 'react'
 import './App.css'
+import {Route, Routes} from "react-router-dom";
+import LanguageContext from './components/LanguageContext';
+import FullLayout from "./components/FullLayout.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [language, setLanguage] = useState('english');
+    const [selectedFlag, setSelectedFlag] = useState('usa');
 
-  return (
-    <div className="text-3xl">
-        Hello world!
-    </div>
-  )
+    return (
+        <LanguageContext.Provider value={{ selectedFlag, setSelectedFlag, language, setLanguage }}>
+            <div className="App">
+                <Routes>
+                    <Route path={`/`} element={<FullLayout />} />
+                    {/*<Route path={`${basePath}/navbar`} element={<NavBar />} />*/}
+                </Routes>
+            </div>
+        </LanguageContext.Provider>
+    )
 }
 
 export default App
