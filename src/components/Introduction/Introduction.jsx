@@ -32,27 +32,29 @@ export const Introduction = () => {
     };
 
     return (
-        <section
-            id="home"
-            className="container mx-auto px-4 py-10 w-full"
-        >
-            <TrackVisibility partialVisibility>
+        <section id="home" className="container mx-auto px-4 py-10 w-full">
+            {/* NO partialVisibility here: default = full-visibility */}
+            <TrackVisibility rootMargin="0px 0px -1px 0px">
                 {({ isVisible }) => (
                     <div className="flex w-full flex-col lg:flex-row items-start lg:items-center justify-center">
+                        {/* marker */}
                         <span
-                            className={`hidden md:flex flex-col items-center justify-center z-50 px-4 translate-y-[7%] 
-                            before:content-[''] before:block before:w-5 before:h-5 before:bg-[#09F7A5] before:rounded-full before:mb-[-1px]
-                            after:content-[''] after:block after:w-[10px] after:h-[390px] after:bg-gradient-to-b after:from-[#09F7A5] after:to-transparent
-                            `}
+                            className={`
+                hidden md:flex flex-col items-center justify-center
+                z-50 px-4 translate-y-[7%]
+                before:content-[''] before:block before:w-5 before:h-5 before:bg-[#09F7A5] before:rounded-full before:mb-[-1px]
+                after:content-[''] after:block after:w-[10px] after:h-[390px] after:bg-gradient-to-b after:from-[#09F7A5] after:to-transparent
+
+                transition-opacity duration-300
+                ${isVisible ? 'opacity-100' : 'opacity-0'}
+              `}
                         />
 
+                        {/* your intro content */}
                         <div className={`${isVisible ? 'animate__animated animate__fadeIn' : ''} flex flex-col max-w-3xl w-full`}>
-                            <h1
-                                className="text-[32px] sm:text-[40px] md:text-[55px] lg:text-[65px] font-bold tracking-tight leading-tight mb-4 text-white"
-                            >
+                            <h1 className="text-[32px] sm:text-[40px] md:text-[55px] lg:text-[65px] font-bold tracking-tight leading-tight mb-4 text-white">
                                 {title}
                             </h1>
-
                             <p className="text-white text-base sm:text-lg tracking-wide leading-relaxed mb-4">
                                 {firstParagraph}
                             </p>
@@ -60,20 +62,19 @@ export const Introduction = () => {
                             <p className="text-white text-base sm:text-lg tracking-wide leading-relaxed mb-8">
                                 {secondParagraph}
                             </p>
-
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-25 w-full max-w-lg mx-auto">
                                 {[
                                     { to: '#projects', label: workBtn, Icon: WindowStack },
-                                    { to: '#connect', label: contactBtn, Icon: Whatsapp, smooth: true }
-                                ].map(({ to, label, Icon, smooth }) => (
-                                    <HashLink key={to} to={to}>
+                                    { to: '#connect',  label: contactBtn, Icon: Whatsapp }
+                                ].map(({ to, label, Icon }) => (
+                                    <HashLink key={to} to={to} smooth>
                                         <button
                                             className="
-          w-full
-          bg-black/50 border-2 border-[#09F7A5] text-[#09F7A5] font-bold
-          text-lg px-6 py-3 rounded-2xl flex items-center justify-center gap-2 uppercase
-          tracking-wider transition-all duration-300 hover:bg-[#09F7A5] hover:text-black
-        "
+                        w-full
+                        bg-black/50 border-2 border-[#09F7A5] text-[#09F7A5] font-bold
+                        text-lg px-6 py-3 rounded-2xl flex items-center justify-center gap-2 uppercase
+                        tracking-wider transition-all duration-300 hover:bg-[#09F7A5] hover:text-black
+                      "
                                         >
                                             {label}
                                             <Icon className="text-xl" />
