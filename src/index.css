@@ -5,7 +5,7 @@
 @layer components {
     .flag {
         @apply inline-block relative rounded transition-transform duration-300 mr-[5px]
-        w-[60px] h-[40px] object-cover border-0;
+        w-[62px] h-[42px] object-cover border-0;
     }
     .flag:hover {
         @apply scale-105;

@@ -31,4 +31,48 @@
     width: 40%;
     z-index: 1;
     transition: 0.3s ease-in-out;
+    mix-blend-mode: difference;
+}
+
+.social-icon:hover img {
+    filter: brightness(0) invert(1);
+}
+
+.connect-btn {
+    position: relative;
+    display: inline-block;
+    padding: 18px 34px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    border: 1px solid #fff;
+    background: transparent;
+    overflow: hidden;
+    cursor: pointer;
+
+    transition: color 0.3s ease-in-out;
+}
+
+.connect-btn__label {
+    position: relative;
+    z-index: 1;
+}
+
+.connect-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #fff;
+    z-index: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.connect-btn:hover {
+    color: #121212;
+}
+
+.connect-btn:hover::before {
+    width: 100%;
 }

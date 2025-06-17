@@ -52,35 +52,36 @@ const NavBar = () => {
       `}
         >
             {/* 1. Centered “container” */}
-            <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
+            <div className="max-w-7xl mx-auto flex items-center justify-between">
                 {/* ‣ Flags */}
                 <div className="flex items-center space-x-2">
                     <button onClick={() => toggleFlag('usa')}>
                         <img
                             src={usaFlag} alt="USA"
-                            className={`flag ${selectedFlag==='usa'?'selected-flag':''}`}
+                            className={`flag ${selectedFlag === 'usa' ? 'selected-flag' : ''}`}
                         />
                     </button>
                     <button onClick={() => toggleFlag('brazil')}>
                         <img
                             src={brazilFlag} alt="Brazil"
-                            className={`flag ${selectedFlag==='brazil'?'selected-flag':''}`}
+                            className={`flag ${selectedFlag === 'brazil' ? 'selected-flag' : ''}`}
                         />
                     </button>
                 </div>
 
                 {/* ‣ Desktop menu (hidden on mobile) */}
-                <div className="hidden md:flex items-center space-x-6">
-                    {['home','skills','projects'].map((link, idx) => (
+                <div className="hidden md:flex items-center gap-0">
+                    {['home', 'skills', 'projects'].map((link, idx) => (
                         <HashLink
                             key={link}
                             to={`#${link}`} smooth
                             className={`
                 text-white text-lg font-medium tracking-wide
-                px-4 py-2 border border-transparent
-                hover:border-white
+border border-transparent hover:border-white
                 transition-colors duration-300
-                ${activeLink===link?'opacity-100':'opacity-75'}
+                !px-[25px] !py-[18px]
+                !m-0 !mx-0 !my-0
+                ${activeLink === link ? 'opacity-100' : 'opacity-75'}
               `}
                             onClick={() => handleLinkClick(link)}
                         >
@@ -88,12 +89,12 @@ const NavBar = () => {
                         </HashLink>
                     ))}
 
-                    <div className="flex items-center space-x-3">
+                    <div className="flex items-center space-x-2 ml-3">
                         {[
-                            { icon: linkedinIcon, url: linkedinURL,  alt: 'LinkedIn' },
-                            { icon: githubIcon,   url: githubURL,    alt: 'GitHub'   },
-                            { icon: instagramIcon,url: instagramURL, alt: 'Instagram'},
-                        ].map(({icon,url,alt})=>(
+                            {icon: linkedinIcon, url: linkedinURL, alt: 'LinkedIn'},
+                            {icon: githubIcon, url: githubURL, alt: 'GitHub'},
+                            {icon: instagramIcon, url: instagramURL, alt: 'Instagram'},
+                        ].map(({icon, url, alt}) => (
                             <a
                                 key={url}
                                 href={url}
@@ -101,30 +102,21 @@ const NavBar = () => {
                                 rel="noopener noreferrer"
                                 className="social-icon"
                             >
-                                <img src={icon} alt={alt} />
+                                <img src={icon} alt={alt}/>
                             </a>
                         ))}
-
-                        <HashLink to="#connect" smooth>
-                            <button
-                                onClick={() => handleLinkClick('connect')}
-                                className="
-                  relative font-bold text-lg text-white
-                  border border-white px-6 py-2
-                  overflow-hidden transition-all
-                  hover:text-gray-900
-                "
-                            >
-                <span className="relative z-10">
-                  {buttonTexts[3]}
-                </span>
-                                <span className="
-                  absolute left-0 top-0 w-0 h-full bg-white
-                  transition-all hover:w-full
-                "/>
-                            </button>
-                        </HashLink>
                     </div>
+
+                    <HashLink to="#connect" smooth>
+                        <button
+                            onClick={() => handleLinkClick('connect')}
+                            className="connect-btn ml-7"
+                        >
+    <span className="connect-btn__label">
+      {buttonTexts[3]}
+    </span>
+                        </button>
+                    </HashLink>
                 </div>
 
                 {/* ‣ Mobile burger (hidden on md+) */}
@@ -136,17 +128,17 @@ const NavBar = () => {
             <span className={`
               block h-1 w-6 bg-white
               transition-transform
-              ${menuOpen?'rotate-45 translate-y-2':''}
+              ${menuOpen ? 'rotate-45 translate-y-2' : ''}
             `}/>
                         <span className={`
               block h-1 w-6 bg-white
               transition-opacity
-              ${menuOpen?'opacity-0':'opacity-100'}
+              ${menuOpen ? 'opacity-0' : 'opacity-100'}
             `}/>
                         <span className={`
               block h-1 w-6 bg-white
               transition-transform
-              ${menuOpen?'-rotate-45 -translate-y-2':''}
+              ${menuOpen ? '-rotate-45 -translate-y-2' : ''}
             `}/>
                     </div>
                 </button>
@@ -156,15 +148,19 @@ const NavBar = () => {
             {menuOpen && (
                 <div className="md:hidden bg-gray-900 bg-opacity-90 py-4">
                     <div className="flex flex-col items-center space-y-4">
-                        {['home','skills','projects'].map((link, idx) => (
+                        {['home', 'skills', 'projects'].map((link, idx) => (
                             <HashLink
                                 key={link}
-                                to={`#${link}`} smooth
+                                to={`#${link}`}
+                                smooth
                                 className={`
-                  text-white text-xl font-medium tracking-wide
-                  transition-opacity
-                  ${activeLink===link?'opacity-100':'opacity-75'}
-                `}
+    text-white text-lg font-medium tracking-wide
+    border border-transparent hover:border-white
+    transition-colors duration-300
+    ${activeLink === link ? 'opacity-100' : 'opacity-75'}
+    !py-[18px] !px-[25px] !h-[61px]
+    !m-0 !mr-0 !ml-0 !me-0 !ms-0 !my-0 !mx-0
+  `}
                                 onClick={() => handleLinkClick(link)}
                             >
                                 {buttonTexts[idx]}
