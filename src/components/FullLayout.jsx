@@ -1,16 +1,17 @@
 import React from 'react';
 import NavBar from "./NavBar/NavBar.jsx";
+import {Introduction} from "./Introduction/Introduction.jsx";
 
 const FullLayout = () => {
     return (
         <>
             {/*<VisitorTracking />*/}
             <NavBar/>
-            {/*<div className="section shared-background w-full max-w-screen-xl px-4 flex flex-col items-center">*/}
-            {/*    <Introduction/>*/}
-            {/*    <ServiceCardList />*/}
-            {/*    <Skills/>*/}
-            {/*</div>*/}
+            <div className="section shared-background">
+                <Introduction/>
+                {/*<ServiceCardList />*/}
+                {/*<Skills/>*/}
+            </div>
             {/*/!*<Projects/>*!/*/}
             {/*<CustomCarousel/>*/}
             {/*<Contact/>*/}

@@ -1,4 +1,3 @@
-@import "./core.css";
 @import "tailwindcss";
 
 /* ✅ Tailwind-compatible styles */
@@ -20,4 +19,61 @@
         @apply absolute inset-[1px] rounded-[1px] transition-colors duration-300 pointer-events-none;
         border: 2px solid transparent;
     }
+}
+
+@font-face {
+    font-family: Centra;
+    src: url('./assets/font/CentraNo2-Bold.ttf');
+    font-weight: 700;
+}
+@font-face {
+    font-family: Centra;
+    src: url('./assets/font/CentraNo2-Medium.ttf');
+    font-weight: 500;
+}
+@font-face {
+    font-family: Centra;
+    src: url('./assets/font/CentraNo2-Book.ttf');
+    font-weight: 400;
+}
+
+body {
+    font-family: 'Centra', sans-serif;
+}
+
+@keyframes updown {
+    0% {
+        transform: translateY(-20px);
+    }
+    50% {
+        transform: translateY(20px);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+.txt-rotate > .wrap {
+    border-right: 0.08em solid #666;
+}
+
+/************ Shared background Css ************/
+.section {
+    padding: 10px 0;
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.shared-background {
+    background-image: url('./assets/img/moon-bg3.jpg');
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 6rem;
 }

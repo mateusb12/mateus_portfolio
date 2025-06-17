@@ -2,6 +2,12 @@ module.exports = {
     content: [
         "./src/**/*.{js,jsx,ts,tsx}"
     ],
+    safelist: [
+        'text-[18px]',
+        'text-[65px]',
+        'text-[72px]',
+        'text-[80px]',
+    ],
     theme: {
         extend: {
             keyframes: {
