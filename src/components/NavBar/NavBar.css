@@ -1,0 +1,34 @@
+.social-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: rgba(217, 217, 217, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+    margin-left: 6px;
+}
+
+.social-icon::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: white;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.3s ease-in-out;
+    z-index: 0;
+}
+
+.social-icon:hover::before {
+    transform: scale(1);
+}
+
+.social-icon img {
+    width: 40%;
+    z-index: 1;
+    transition: 0.3s ease-in-out;
+}

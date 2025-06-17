@@ -1,3 +1,4 @@
+import './NavBar.css';
 import {useState, useEffect, useContext} from 'react';
 import {HashLink} from 'react-router-hash-link';
 import usaFlag from '../../assets/img/usa.svg';
@@ -98,20 +99,9 @@ const NavBar = () => {
                                 href={url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="
-                  relative w-10 h-10 bg-gray-800 bg-opacity-50
-                  rounded-full flex items-center justify-center
-                  border border-white transition-all
-                  before:absolute before:w-0 before:h-full
-                  before:bg-white before:rounded-full
-                  before:transition-transform before:duration-300
-                  hover:before:w-full
-                "
+                                className="social-icon"
                             >
-                                <img
-                                    src={icon} alt={alt}
-                                    className="w-5 z-10 transition-filter hover:filter-none"
-                                />
+                                <img src={icon} alt={alt} />
                             </a>
                         ))}
 

@@ -1,6 +1,7 @@
 @import "./core.css";
 @import "tailwindcss";
 
+/* ✅ Tailwind-compatible styles */
 @layer components {
     .flag {
         @apply inline-block relative rounded transition-transform duration-300 mr-[5px]
