@@ -1,1 +1,22 @@
+@import "./core.css";
 @import "tailwindcss";
+
+@layer components {
+    .flag {
+        @apply inline-block relative rounded transition-transform duration-300 mr-[5px]
+        w-[60px] h-[40px] object-cover border-0;
+    }
+    .flag:hover {
+        @apply scale-105;
+        box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    }
+    .selected-flag {
+        @apply border-2 border-white;
+        box-shadow: 0 0 8px #005a9c;
+    }
+    .flag::after {
+        content: '';
+        @apply absolute inset-[1px] rounded-[1px] transition-colors duration-300 pointer-events-none;
+        border: 2px solid transparent;
+    }
+}

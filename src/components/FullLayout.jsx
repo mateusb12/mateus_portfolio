@@ -1,11 +1,21 @@
 import React from 'react';
+import NavBar from "./NavBar/NavBar.jsx";
 
 const FullLayout = () => {
     return (
-        <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
-            <h1 className="text-4xl font-bold">Hello World from FullLayout!</h1>
-        </div>
-    );
+        <>
+            {/*<VisitorTracking />*/}
+            <NavBar/>
+            {/*<div className="section shared-background w-full max-w-screen-xl px-4 flex flex-col items-center">*/}
+            {/*    <Introduction/>*/}
+            {/*    <ServiceCardList />*/}
+            {/*    <Skills/>*/}
+            {/*</div>*/}
+            {/*/!*<Projects/>*!/*/}
+            {/*<CustomCarousel/>*/}
+            {/*<Contact/>*/}
+            {/*<Footer/>*/}
+        </>)
 };
 
 export default FullLayout;
