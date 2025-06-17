@@ -1,227 +1,115 @@
-import './Skills.css';
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
-import server from "../../assets/img/skills_icons/server.png";
-import api from "../../assets/img/skills_icons/api.png";
-import database from "../../assets/img/skills_icons/database.png";
-import cloud from "../../assets/img/skills_icons/cloud.png";
-import deploy from "../../assets/img/skills_icons/deploy.png";
-import lock from "../../assets/img/skills_icons/lock.png";
-import python from "../../assets/img/skills_icons/python.png";
-import javascript from "../../assets/img/skills_icons/javascript.png";
-import csharp from "../../assets/img/skills_icons/csharp.png";
-import java from "../../assets/img/skills_icons/java.png";
-import html from "../../assets/img/skills_icons/html.png";
-import css from "../../assets/img/skills_icons/css.png";
-import sql from "../../assets/img/skills_icons/sql.png";
-import git from "../../assets/img/skills_icons/git.png";
-import flask from "../../assets/img/skills_icons/flask.png";
-import _react from "../../assets/img/skills_icons/react.png";
-import jwt from "../../assets/img/skills_icons/jwt.png";
-import postgres from "../../assets/img/skills_icons/postgres.png";
-import docker from "../../assets/img/skills_icons/docker.png";
-import aws from "../../assets/img/skills_icons/aws.png";
-import google from "../../assets/img/skills_icons/google-cloud-small.png";
-import frontend from "../../assets/img/skills_icons/frontend_dev.png";
-import design from "../../assets/img/skills_icons/design.png";
+// src/components/Skills/KeySkills.jsx
+import React from 'react'
+import server from "../../assets/img/skills_icons/server.png"
+import api from "../../assets/img/skills_icons/api.png"
+import database from "../../assets/img/skills_icons/database.png"
+import cloud from "../../assets/img/skills_icons/cloud.png"
+import deploy from "../../assets/img/skills_icons/deploy.png"
+import lock from "../../assets/img/skills_icons/lock.png"
+import python from "../../assets/img/skills_icons/python.png"
+import javascript from "../../assets/img/skills_icons/javascript.png"
+import csharp from "../../assets/img/skills_icons/csharp.png"
+import java from "../../assets/img/skills_icons/java.png"
+import html from "../../assets/img/skills_icons/html.png"
+import css from "../../assets/img/skills_icons/css.png"
+import sql from "../../assets/img/skills_icons/sql.png"
+import git from "../../assets/img/skills_icons/git.png"
+import flask from "../../assets/img/skills_icons/flask.png"
+import _react from "../../assets/img/skills_icons/react.png"
+import jwt from "../../assets/img/skills_icons/jwt.png"
+import postgres from "../../assets/img/skills_icons/postgres.png"
+import docker from "../../assets/img/skills_icons/docker.png"
+import aws from "../../assets/img/skills_icons/aws.png"
+import google from "../../assets/img/skills_icons/google-cloud-small.png"
+import frontend from "../../assets/img/skills_icons/frontend_dev.png"
+import design from "../../assets/img/skills_icons/design.png"
 
-import LanguageContext from '../LanguageContext';
-import {useContext, useEffect, useState} from "react";
-import languageFile from "../../data/skills.json";
+const skillIcons = {
+    "backend": server,
+    "api": api,
+    "database": database,
+    "cloud": cloud,
+    "deploy": deploy,
+    "lock": lock,
+    "python": python,
+    "javascript": javascript,
+    "csharp": csharp,
+    "java": java,
+    "html": html,
+    "css": css,
+    "sql": sql,
+    "git": git,
+    "flask": flask,
+    "react": _react,
+    "jwt": jwt,
+    "postgres": postgres,
+    "docker": docker,
+    "aws": aws,
+    "google-cloud": google,
+    "website": frontend,
+    "design": design
+};
 
-// import '@fortawesome/fontawesome-free/css/all.min.css';
+const keySkills = [
+    { id: "website", title: "Website creation" },
+    { id: "backend", title: "Backend Development" },
+    { id: "api", title: "APIs" },
+]
 
-export const Skills = () => {
-    const { selectedFlag } = useContext(LanguageContext);
-    const [selectedLanguage, setSelectedLanguage] = useState('english');
+const KeySkills = () => (
+    <section className="relative py-20">
+        <div className="w-full bg-black/50 backdrop-blur-2xl rounded-3xl py-12 border border-green-500">
+            <div className="max-w-6xl mx-auto">
+                <h2 className="text-5xl font-bold text-white text-center mb-4">
+                    Key Skills
+                </h2>
+                <p className="text-center text-gray-100 text-lg font-medium mb-12">
+                    Core competencies in software development
+                </p>
 
-    useEffect(() => {
-        const languageKey = selectedFlag === 'usa' ? 'english' : 'portuguese';
-        setSelectedLanguage(languageKey);
-    }, [selectedFlag]);
+                {/* Row with arrows and content inside */}
+                <div className="flex items-center justify-center gap-x-6 w-full">
+                    {/* Left arrow */}
+                    <button
+                        aria-label="Previous"
+                        className="bg-black/50 hover:bg-black/60 text-white rounded-full p-2 z-20 focus:outline-none border border-yellow-500"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                             viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
 
-    const responsive = {
-        superLargeDesktop: {
-            // the naming can be any, depends on you.
-            breakpoint: {max: 4000, min: 3000},
-            items: 5
-        },
-        desktop: {
-            breakpoint: {max: 3000, min: 1024},
-            items: 3
-        },
-        tablet: {
-            breakpoint: {max: 1024, min: 464},
-            items: 2
-        },
-        mobile: {
-            breakpoint: {max: 464, min: 0},
-            items: 1
-        }
-    };
-
-    function mapSkillsToIcons(skillNames, skillMap, skillIcons) {
-        const icons = {};
-        skillNames.forEach((name) => {
-            // Find the key in the skillMap that corresponds to the name
-            const skillKey = Object.keys(skillMap).find(key => skillMap[key].toLowerCase() === name.toLowerCase());
-
-            // If a corresponding key is found and an icon exists for that key, map it
-            if (skillKey && skillIcons[skillKey]) {
-                icons[skillKey] = skillIcons[skillKey];
-            } else {
-                // Optionally handle the case where no corresponding icon is found
-                console.warn(`No icon found for skill: ${name}`);
-            }
-        });
-        return icons;
-    }
-
-    const skillIcons = {
-        "backend": server,
-        "api": api,
-        "database": database,
-        "cloud": cloud,
-        "deploy": deploy,
-        "lock": lock,
-        "python": python,
-        "javascript": javascript,
-        "csharp": csharp,
-        "java": java,
-        "html": html,
-        "css": css,
-        "sql": sql,
-        "git": git,
-        "flask": flask,
-        "react": _react,
-        "jwt": jwt,
-        "postgres": postgres,
-        "docker": docker,
-        "aws": aws,
-        "google-cloud": google,
-        "website": frontend,
-        "design": design
-    };
-
-    const selectedLanguageMap = languageFile.skillMap[selectedLanguage];
-    const coreSkillsIcons = mapSkillsToIcons(languageFile[selectedLanguage].key.skillList, selectedLanguageMap.key, skillIcons);
-    const foundationSkillsIcons = mapSkillsToIcons(languageFile[selectedLanguage].foundations.skillList, selectedLanguageMap.foundations, skillIcons);
-    const stackSkillsIcons = mapSkillsToIcons(languageFile[selectedLanguage].stack.skillList, selectedLanguageMap.stack, skillIcons);
-
-    const translateSkill = (skillKey) => {
-        if (languageFile[selectedLanguage] && languageFile[selectedLanguage].skills) {
-            return languageFile[selectedLanguage].skills[skillKey] || skillKey;
-        } else {
-            // console.warn(`No skills found for language: ${selectedLanguage}`);
-            return skillKey;
-        }
-    }
-
-    const convertToRenderArray = (skillsIcons, skillMap) => {
-        return Object.keys(skillsIcons).map((skillKey) => ({
-            title: skillMap[skillKey],
-            src: skillsIcons[skillKey]
-        }));
-    };
-
-    const keySkills = convertToRenderArray(coreSkillsIcons, selectedLanguageMap.key);
-    const basicTechnologies = convertToRenderArray(foundationSkillsIcons, selectedLanguageMap.foundations);
-    const frameworks = convertToRenderArray(stackSkillsIcons, selectedLanguageMap.stack);
-
-
-    const handleImageError = (errorEvent, skillName) => {
-        console.error(`Error loading image for skill: ${skillName}`, errorEvent);
-    }
-
-    const getDynamicFontSize = (title) => {
-        const baseSize = 45; // Base font size in pixels
-        const longTitleSize = 35; // Reduced font size for longer titles
-        return {
-            fontSize: title.length > 15 ? `${longTitleSize}px` : `${baseSize}px`
-        };
-    };
-
-    const CustomLeftArrow = ({ onClick, ...rest }) => {
-        return (
-            <button
-                className="custom-arrow custom-left-arrow"
-                onClick={onClick}
-                {...rest}
-            >
-                <i className="fas fa-chevron-left"></i>
-            </button>
-        );
-    };
-
-    const CustomRightArrow = ({ onClick, ...rest }) => {
-        return (
-            <button
-                className="custom-arrow custom-right-arrow"
-                onClick={onClick}
-                {...rest}
-            >
-                <i className="fas fa-chevron-right"></i>
-            </button>
-        );
-    };
-
-    return (
-        <section className="skill" id="skills">
-            <div className="container">
-                <div className="row">
-                    <div className="col-12">
-                        <div className="skill-bx wow zoomIn">
-                            <h2 style={getDynamicFontSize(languageFile[selectedLanguage].key.title)}>{languageFile[selectedLanguage].key.title}</h2>
-                            <p>{languageFile[selectedLanguage].key.description}</p>
-                            <Carousel responsive={responsive} infinite={false}
-                                      className="owl-carousel owl-theme skill-slider">
-                                {keySkills.map((skill, index) => {
-                                    const translatedTitle = translateSkill(skill.title);
-                                    return (
-                                        <div className="item" key={index}>
-                                            <img src={skill.src} alt={translatedTitle}
-                                                 onError={(e) => handleImageError(e, translatedTitle)}/>
-                                            <h5>{translatedTitle}</h5>
-                                        </div>
-                                    )
-                                })}
-                            </Carousel>
-                        </div>
-                        <div className="skill-bx wow zoomIn">
-                            <h2 style={getDynamicFontSize(languageFile[selectedLanguage].foundations.title)}>{languageFile[selectedLanguage].foundations.title}</h2>
-                            <p>{languageFile[selectedLanguage].foundations.description}</p>
-                            <Carousel responsive={responsive} infinite={false}
-                                      className="owl-carousel owl-theme skill-slider">
-                                {basicTechnologies.map((skill, index) => {
-                                    const translatedTitle = translateSkill(skill.title);
-                                    return (
-                                        <div className="item" key={index}>
-                                            <img src={skill.src} alt={translatedTitle}/>
-                                            <h5>{translatedTitle}</h5>
-                                        </div>
-                                    )
-                                })}
-                            </Carousel>
-                        </div>
-                        <div className="skill-bx wow zoomIn">
-                            <h2 style={getDynamicFontSize(languageFile[selectedLanguage].stack.title)}>{languageFile[selectedLanguage].stack.title}</h2>
-                            <p>{languageFile[selectedLanguage].stack.description}</p>
-                            <Carousel responsive={responsive} infinite={false}
-                                      className="owl-carousel owl-theme skill-slider">
-                                {frameworks.map((skill, index) => {
-                                    const translatedTitle = translateSkill(skill.title);
-                                    return (
-                                        <div className="item" key={index}>
-                                            <img src={skill.src} alt={translatedTitle}/>
-                                            <h5>{translatedTitle}</h5>
-                                        </div>
-                                    )
-                                })}
-                            </Carousel>
-                        </div>
+                    {/* Skills */}
+                    <div className="flex justify-between items-center gap-x-30 border border-red-500">
+                        {keySkills.map((skill) => (
+                            <div key={skill.id} className="flex flex-col items-center">
+                                <img
+                                    src={skillIcons[skill.id]}
+                                    alt={skill.title}
+                                    className="w-40 h-40 object-contain"
+                                />
+                                <h5 className="mt-4 text-white font-bold text-lg">
+                                    {skill.title}
+                                </h5>
+                            </div>
+                        ))}
                     </div>
+
+                    {/* Right arrow */}
+                    <button
+                        aria-label="Next"
+                        className="bg-black/50 hover:bg-black/60 text-white rounded-full p-2 z-20 focus:outline-none border border-yellow-500"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                             viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
                 </div>
             </div>
-        </section>
-    )
-}
+        </div>
+    </section>
+);
+
+export default KeySkills

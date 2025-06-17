@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from "./NavBar/NavBar.jsx";
 import {Introduction} from "./Introduction/Introduction.jsx";
-import {Skills} from "./Skills/Skills.jsx";
+import KeySkills from "./Skills/Skills.jsx";
 
 const FullLayout = () => {
     return (
@@ -11,7 +11,7 @@ const FullLayout = () => {
             <div className="section shared-background">
                 <Introduction/>
                 {/*<ServiceCardList />*/}
-                <Skills/>
+                <KeySkills/>
             </div>
             {/*/!*<Projects/>*!/*/}
             {/*<CustomCarousel/>*/}
