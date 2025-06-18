@@ -75,6 +75,9 @@ const SkillCarousel = () => {
     const arrowSize = 35
     const arrowPadding = arrowSize / 4
 
+    const containerBg = "bg-black/50 backdrop-blur-2xl";
+    const carouselLaneBg = "";
+
     const scrollByStep = (direction) => {
         const container = carouselRef.current
         const cards = Array.from(container.querySelectorAll('.flex-shrink-0'))
@@ -117,9 +120,9 @@ const SkillCarousel = () => {
     }
 
     return (
-        <section className="relative py-20 border w-full border-yellow-500">
+        <section className="relative md:py-20 w-full">
             <div className="flex justify-center w-full">
-                <div className="relative w-[90%] md:w-[70%] bg-black/50 backdrop-blur-2xl rounded-3xl py-12 border border-green-500">
+                <div className={`relative w-[90%] md:w-[70%] ${containerBg} rounded-3xl py-12`}>
                     <div className="mx-auto">
                         <h2 className="text-5xl leading-[54px] font-bold text-white text-center mb-4 font-[Centra,sans-serif]">
                             Key Skills
@@ -135,7 +138,7 @@ const SkillCarousel = () => {
                                 aria-label="Previous"
                                 className="absolute z-20 top-1/2 -translate-y-1/2 left-[7.5%]
                   bg-black/50 hover:bg-black/60 text-white rounded-full
-                  focus:outline-none border border-yellow-500"
+                  focus:outline-none"
                                 style={{ padding: `${arrowPadding}px` }}
                             >
                                 <svg
@@ -158,9 +161,9 @@ const SkillCarousel = () => {
                                     onPointerUp={endDrag}
                                     onPointerCancel={endDrag}
                                     style={{ touchAction: 'pan-y' }}
-                                    className="flex gap-x-8 overflow-x-auto scroll-smooth
-                    hide-scrollbar border-2 border-red-500 rounded-xl
-                    py-6 bg-black/30 w-full md:w-[70%] mx-auto cursor-grab"
+                                    className={`flex gap-x-8 overflow-x-auto scroll-smooth
+hide-scrollbar rounded-xl py-6 ${carouselLaneBg}
+w-full md:w-[70%] mx-auto cursor-grab`}
                                 >
                                     {keySkills.map((skill) => (
                                         <div
@@ -187,7 +190,7 @@ const SkillCarousel = () => {
                                 aria-label="Next"
                                 className="absolute z-20 top-1/2 -translate-y-1/2 right-[7.5%]
                   bg-black/50 hover:bg-black/60 text-white rounded-full
-                  focus:outline-none border border-yellow-500"
+                  focus:outline-none"
                                 style={{ padding: `${arrowPadding}px` }}
                             >
                                 <svg
