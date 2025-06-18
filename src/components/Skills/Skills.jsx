@@ -1,4 +1,3 @@
-// src/components/Skills/KeySkills.jsx
 import React, { useRef } from 'react'
 import server from "../../assets/img/skills_icons/server.png"
 import api from "../../assets/img/skills_icons/api.png"
@@ -61,25 +60,25 @@ const keySkills = [
     { id: "lock",    title: "Security" },
 ]
 
-const getGap = el => {
+const getGap = (el) => {
     const style = window.getComputedStyle(el)
     return parseInt(style.getPropertyValue('column-gap'), 10) || 0
 }
 
 const SkillCarousel = () => {
     const carouselRef = useRef(null)
+    const pointerStartX = useRef(0)
+    const scrollStartX = useRef(0)
+    const isDragging = useRef(false)
 
     // ─── CENTRALIZED SIZING ───────────────────────────────────────────────────────
     const arrowSize = 35
     const arrowPadding = arrowSize / 4
 
-    const scroll = direction => {
+    const scrollByStep = (direction) => {
         const container = carouselRef.current
-        if (!container) return
-
         const cards = Array.from(container.querySelectorAll('.flex-shrink-0'))
         if (!cards.length) return
-
         const cardWidth = cards[0].offsetWidth
         const gap = getGap(container)
         const step = cardWidth + gap
@@ -93,6 +92,28 @@ const SkillCarousel = () => {
                 : Math.max(currentIndex - 1, 0)
 
         container.scrollTo({ left: newIndex * step, behavior: 'smooth' })
+    }
+
+    // Pointer drag handlers (for mouse & touch)
+    const handlePointerDown = (e) => {
+        isDragging.current = true
+        pointerStartX.current = e.clientX
+        scrollStartX.current = carouselRef.current.scrollLeft
+        e.currentTarget.setPointerCapture(e.pointerId)
+        carouselRef.current.classList.add('cursor-grabbing', 'select-none')
+    }
+
+    const handlePointerMove = (e) => {
+        if (!isDragging.current) return
+        const delta = e.clientX - pointerStartX.current
+        carouselRef.current.scrollLeft = scrollStartX.current - delta
+    }
+
+    const endDrag = (e) => {
+        if (!isDragging.current) return
+        isDragging.current = false
+        e.currentTarget.releasePointerCapture(e.pointerId)
+        carouselRef.current.classList.remove('cursor-grabbing', 'select-none')
     }
 
     return (
@@ -110,11 +131,11 @@ const SkillCarousel = () => {
                         <div className="relative w-full">
                             {/* Previous arrow */}
                             <button
-                                onClick={() => scroll("left")}
+                                onClick={() => scrollByStep('left')}
                                 aria-label="Previous"
                                 className="absolute z-20 top-1/2 -translate-y-1/2 left-[7.5%]
-                           bg-black/50 hover:bg-black/60 text-white rounded-full
-                           focus:outline-none border border-yellow-500"
+                  bg-black/50 hover:bg-black/60 text-white rounded-full
+                  focus:outline-none border border-yellow-500"
                                 style={{ padding: `${arrowPadding}px` }}
                             >
                                 <svg
@@ -124,8 +145,7 @@ const SkillCarousel = () => {
                                     stroke="currentColor"
                                     style={{ width: `${arrowSize}px`, height: `${arrowSize}px` }}
                                 >
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                          d="M15 19l-7-7 7-7" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                                 </svg>
                             </button>
 
@@ -133,15 +153,20 @@ const SkillCarousel = () => {
                             <div className="overflow-hidden w-full px-4">
                                 <div
                                     ref={carouselRef}
+                                    onPointerDown={handlePointerDown}
+                                    onPointerMove={handlePointerMove}
+                                    onPointerUp={endDrag}
+                                    onPointerCancel={endDrag}
+                                    style={{ touchAction: 'pan-y' }}
                                     className="flex gap-x-8 overflow-x-auto scroll-smooth
-                             hide-scrollbar border-2 border-red-500 rounded-xl
-                             py-6 bg-black/30 w-[70%] mx-auto"
+                    hide-scrollbar border-2 border-red-500 rounded-xl
+                    py-6 bg-black/30 w-[70%] mx-auto cursor-grab"
                                 >
-                                    {keySkills.map(skill => (
+                                    {keySkills.map((skill) => (
                                         <div
                                             key={skill.id}
                                             className="flex-shrink-0 basis-[calc((100%-4rem)/3)]
-                                 flex flex-col items-center justify-center"
+                        flex flex-col items-center justify-center"
                                         >
                                             <img
                                                 src={skillIcons[skill.id]}
@@ -158,11 +183,11 @@ const SkillCarousel = () => {
 
                             {/* Next arrow */}
                             <button
-                                onClick={() => scroll("right")}
+                                onClick={() => scrollByStep('right')}
                                 aria-label="Next"
                                 className="absolute z-20 top-1/2 -translate-y-1/2 right-[7.5%]
-                           bg-black/50 hover:bg-black/60 text-white rounded-full
-                           focus:outline-none border border-yellow-500"
+                  bg-black/50 hover:bg-black/60 text-white rounded-full
+                  focus:outline-none border border-yellow-500"
                                 style={{ padding: `${arrowPadding}px` }}
                             >
                                 <svg
@@ -172,8 +197,7 @@ const SkillCarousel = () => {
                                     stroke="currentColor"
                                     style={{ width: `${arrowSize}px`, height: `${arrowSize}px` }}
                                 >
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                          d="M9 5l7 7-7 7" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                 </svg>
                             </button>
                         </div>
