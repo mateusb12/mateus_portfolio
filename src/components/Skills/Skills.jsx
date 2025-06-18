@@ -119,7 +119,7 @@ const SkillCarousel = () => {
     return (
         <section className="relative py-20 border w-full border-yellow-500">
             <div className="flex justify-center w-full">
-                <div className="relative w-[70%] bg-black/50 backdrop-blur-2xl rounded-3xl py-12 border border-green-500">
+                <div className="relative w-[90%] md:w-[70%] bg-black/50 backdrop-blur-2xl rounded-3xl py-12 border border-green-500">
                     <div className="mx-auto">
                         <h2 className="text-5xl leading-[54px] font-bold text-white text-center mb-4 font-[Centra,sans-serif]">
                             Key Skills
@@ -160,12 +160,12 @@ const SkillCarousel = () => {
                                     style={{ touchAction: 'pan-y' }}
                                     className="flex gap-x-8 overflow-x-auto scroll-smooth
                     hide-scrollbar border-2 border-red-500 rounded-xl
-                    py-6 bg-black/30 w-[70%] mx-auto cursor-grab"
+                    py-6 bg-black/30 w-full md:w-[70%] mx-auto cursor-grab"
                                 >
                                     {keySkills.map((skill) => (
                                         <div
                                             key={skill.id}
-                                            className="flex-shrink-0 basis-[calc((100%-4rem)/3)]
+                                            className="flex-shrink-0 basis-full md:basis-[calc((100%-4rem)/3)]
                         flex flex-col items-center justify-center"
                                         >
                                             <img
