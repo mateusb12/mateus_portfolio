@@ -17,15 +17,26 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
     const arrowPadding = arrowSize / 4
     const pixelTol     = 4
 
-    // force exactly 3 visible cards per view
-    const visiblePerPage = 3
+    // responsive visible count
+    const [carouselSize, setCarouselSize] = useState(
+        window.matchMedia('(min-width: 768px)').matches ? 3 : 1
+    )
+
+    // update carouselSize on resize
+    useEffect(() => {
+        const mq = window.matchMedia('(min-width: 768px)')
+        const handler = (e) => setCarouselSize(e.matches ? 3 : 1)
+        handler(mq)
+        mq.addEventListener('change', handler)
+        return () => mq.removeEventListener('change', handler)
+    }, [])
 
     const totalCount = skillContent.length
-    const maxIndex   = Math.max(totalCount - visiblePerPage, 0)
+    const maxIndex   = Math.max(totalCount - carouselSize, 0)
 
     // state
     const [canScrollLeft,  setCanScrollLeft]  = useState(false)
-    const [canScrollRight, setCanScrollRight] = useState(totalCount > visiblePerPage)
+    const [canScrollRight, setCanScrollRight] = useState(totalCount > carouselSize)
     const [scrollIndex,    setScrollIndex]    = useState(0)
 
     // update scroll state
@@ -38,7 +49,6 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
         setCanScrollLeft(scrollLeft > pixelTol)
         setCanScrollRight(maxScrollLeft - scrollLeft > pixelTol)
 
-        // determine index by scrollLeft
         const cards    = Array.from(container.querySelectorAll('.carousel-card'))
         if (!cards.length) return
         const cardWidth = cards[0].offsetWidth
@@ -60,7 +70,7 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
             container.removeEventListener('scroll', updateScrollState)
             window.removeEventListener('resize', updateScrollState)
         }
-    }, [])
+    }, [carouselSize])
 
     // scroll by one page at a time
     const scrollByStep = (direction) => {
