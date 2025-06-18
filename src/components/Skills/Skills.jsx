@@ -55,6 +55,7 @@ const SkillCarousel = () => {
     const pointerStartX    = useRef(0)
     const scrollStartX     = useRef(0)
     const isDragging       = useRef(false)
+    const showDebugText = false;
     const [debugX, setDebugX] = useState(null)
 
     // Centralised sizing
@@ -136,7 +137,7 @@ const SkillCarousel = () => {
                             Core competencies in software development
                         </p>
                         {/* Debugging position display below description */}
-                        {debugX !== null && (
+                        {showDebugText && debugX !== null && (
                             <div className="text-center text-sm text-gray-300 mb-4">
                                 Drag X: {debugX}px
                             </div>
@@ -171,7 +172,7 @@ const SkillCarousel = () => {
                                             key={skill.id}
                                             className="carousel-card flex-shrink-0 basis-full md:basis-[calc((100%-4rem)/3)] flex flex-col items-center justify-center"
                                         >
-                                            <img src={skillIcons[skill.id]} alt={skill.title} className="w-32 h-32 object-contain mb-4" />
+                                            <img src={skillIcons[skill.id]} alt={skill.title} draggable={false} className="w-32 h-32 object-contain mb-4" />
                                             <h5 className="text-white font-bold text-xl text-center leading-tight font-[Centra,sans-serif]">
                                                 {skill.title}
                                             </h5>
