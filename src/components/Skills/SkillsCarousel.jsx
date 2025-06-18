@@ -1,3 +1,4 @@
+// ─── REACT & HOOKS ─────────────────────────────────────────────────────────────
 import React, { useRef, useState, useEffect } from 'react'
 
 // ─── ICON IMPORTS ───────────────────────────────────────────────────────────────
@@ -32,7 +33,10 @@ const skillIcons = {
     postgres, docker, aws, "google-cloud": google, website: frontend, design,
 }
 
-const keySkills = [
+const defaultTitle = "Key Skills"
+const defaultSubtitle = "Core competencies in software development"
+
+const defaultSkills = [
     { id: "design",   title: "UI/UX Design" },
     { id: "website",  title: "Website Creation" },
     { id: "backend",  title: "Backend Development" },
@@ -50,35 +54,29 @@ const getGap = (el) => {
 }
 
 // ─── COMPONENT ──────────────────────────────────────────────────────────────────
-const SkillCarousel = () => {
+const SkillCarousel = ({ sectionTitle = defaultTitle, sectionSubtitle = defaultSubtitle, skillContent = defaultSkills }) => {
     const carouselRef   = useRef(null)
     const pointerStartX = useRef(0)
     const scrollStartX  = useRef(0)
     const isDragging    = useRef(false)
 
-    // centralised sizing
     const arrowSize    = 35
     const arrowPadding = arrowSize / 4
 
     const containerBg     = "bg-black/50 backdrop-blur-2xl"
     const carouselLaneBg = ""
 
-    // state for scroll availability
     const [canScrollLeft, setCanScrollLeft] = useState(false)
     const [canScrollRight, setCanScrollRight] = useState(true)
-
-    // state for current index (for click logic)
     const [currentIndex, setCurrentIndex] = useState(0)
-    const maxIndex = keySkills.length - 1
+    const maxIndex = skillContent.length - 1
 
-    // update scroll availability and index
     const updateScrollState = () => {
         const container = carouselRef.current
         if (!container) return
         const { scrollLeft, scrollWidth, clientWidth } = container
         setCanScrollLeft(scrollLeft > 1)
         setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1)
-        // compute index for arrow click
         const cards = Array.from(container.querySelectorAll('.carousel-card'))
         if (cards.length) {
             const step = cards[0].offsetWidth + getGap(container)
@@ -95,7 +93,6 @@ const SkillCarousel = () => {
         return () => container.removeEventListener('scroll', updateScrollState)
     }, [])
 
-    // Scroll one card left/right (arrow buttons)
     const scrollByStep = (direction) => {
         const container = carouselRef.current
         const cards     = Array.from(container.querySelectorAll('.carousel-card'))
@@ -111,7 +108,6 @@ const SkillCarousel = () => {
         container.scrollTo({ left: newIndex * step, behavior: 'smooth' })
     }
 
-    // ─── POINTER / SWIPE LOGIC ───────────────────────────────────────────────────
     const handlePointerDown = (e) => {
         isDragging.current    = true
         pointerStartX.current = e.clientX
@@ -126,7 +122,6 @@ const SkillCarousel = () => {
         carouselRef.current.scrollLeft = scrollStartX.current - delta
     }
 
-    // ─── POINTER RELEASE ──────────────────────────────────────────────────────────
     const endDrag = (e) => {
         if (!isDragging.current) return
         isDragging.current = false
@@ -148,14 +143,13 @@ const SkillCarousel = () => {
                 <div className={`relative w-[90%] md:w-[70%] ${containerBg} rounded-3xl py-12`}>
                     <div className="mx-auto">
                         <h2 className="text-5xl leading-[54px] font-bold text-white text-center mb-4 font-[Centra,sans-serif]">
-                            Key Skills
+                            {sectionTitle}
                         </h2>
                         <p className="text-center text-gray-400 text-lg font-normal leading-7 tracking-wide mb-2 font-[Centra,sans-serif]">
-                            Core competencies in software development
+                            {sectionSubtitle}
                         </p>
 
                         <div className="relative w-full">
-                            {/* ─── PREV ARROW (hidden at start) ───────────────────────────── */}
                             {canScrollLeft && (
                                 <button
                                     onClick={() => scrollByStep('left')}
@@ -169,7 +163,6 @@ const SkillCarousel = () => {
                                 </button>
                             )}
 
-                            {/* ─── CAROUSEL ───────────────────────────────────────────────── */}
                             <div className="overflow-hidden w-full px-4">
                                 <div
                                     ref={carouselRef}
@@ -180,7 +173,7 @@ const SkillCarousel = () => {
                                     style={{ touchAction: 'pan-y' }}
                                     className={`flex gap-x-8 overflow-x-auto hide-scrollbar rounded-xl py-6 ${carouselLaneBg} w-full md:w-[70%] mx-auto cursor-grab`}
                                 >
-                                    {keySkills.map((skill) => (
+                                    {skillContent.map((skill) => (
                                         <div
                                             key={skill.id}
                                             className="carousel-card flex-shrink-0 basis-full md:basis-[calc((100%-4rem)/3)] flex flex-col items-center justify-center"
@@ -194,7 +187,6 @@ const SkillCarousel = () => {
                                 </div>
                             </div>
 
-                            {/* ─── NEXT ARROW (hidden at end) ────────────────────────────── */}
                             {canScrollRight && (
                                 <button
                                     onClick={() => scrollByStep('right')}
