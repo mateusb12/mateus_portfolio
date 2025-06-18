@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 
 // ─── ICON IMPORTS ───────────────────────────────────────────────────────────────
 import server        from "../../assets/img/skills_icons/server.png"
@@ -51,32 +51,60 @@ const getGap = (el) => {
 
 // ─── COMPONENT ──────────────────────────────────────────────────────────────────
 const SkillCarousel = () => {
-    const carouselRef      = useRef(null)
-    const pointerStartX    = useRef(0)
-    const scrollStartX     = useRef(0)
-    const isDragging       = useRef(false)
-    const showDebugText = false;
-    const [debugX, setDebugX] = useState(null)
+    const carouselRef   = useRef(null)
+    const pointerStartX = useRef(0)
+    const scrollStartX  = useRef(0)
+    const isDragging    = useRef(false)
 
-    // Centralised sizing
+    // centralised sizing
     const arrowSize    = 35
     const arrowPadding = arrowSize / 4
 
     const containerBg     = "bg-black/50 backdrop-blur-2xl"
     const carouselLaneBg = ""
 
+    // state for scroll availability
+    const [canScrollLeft, setCanScrollLeft] = useState(false)
+    const [canScrollRight, setCanScrollRight] = useState(true)
+
+    // state for current index (for click logic)
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const maxIndex = keySkills.length - 1
+
+    // update scroll availability and index
+    const updateScrollState = () => {
+        const container = carouselRef.current
+        if (!container) return
+        const { scrollLeft, scrollWidth, clientWidth } = container
+        setCanScrollLeft(scrollLeft > 1)
+        setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1)
+        // compute index for arrow click
+        const cards = Array.from(container.querySelectorAll('.carousel-card'))
+        if (cards.length) {
+            const step = cards[0].offsetWidth + getGap(container)
+            const idx = Math.round(scrollLeft / step)
+            setCurrentIndex(Math.min(Math.max(idx, 0), maxIndex))
+        }
+    }
+
+    useEffect(() => {
+        const container = carouselRef.current
+        if (!container) return
+        container.addEventListener('scroll', updateScrollState, { passive: true })
+        updateScrollState()
+        return () => container.removeEventListener('scroll', updateScrollState)
+    }, [])
+
     // Scroll one card left/right (arrow buttons)
     const scrollByStep = (direction) => {
-        const container    = carouselRef.current
-        const cards        = Array.from(container.querySelectorAll('.carousel-card'))
+        const container = carouselRef.current
+        const cards     = Array.from(container.querySelectorAll('.carousel-card'))
         if (!cards.length) return
 
-        const cardWidth    = cards[0].offsetWidth
-        const gap          = getGap(container)
-        const step         = cardWidth + gap
-        const currentIndex = Math.round(container.scrollLeft / step)
-        const maxIndex     = cards.length - 1
-        const newIndex     = direction === 'right'
+        const cardWidth = cards[0].offsetWidth
+        const gap       = getGap(container)
+        const step      = cardWidth + gap
+        const newIndex  = direction === 'right'
             ? Math.min(currentIndex + 1, maxIndex)
             : Math.max(currentIndex - 1, 0)
 
@@ -88,7 +116,6 @@ const SkillCarousel = () => {
         isDragging.current    = true
         pointerStartX.current = e.clientX
         scrollStartX.current  = carouselRef.current.scrollLeft
-        setDebugX(e.clientX)
         e.currentTarget.setPointerCapture(e.pointerId)
         carouselRef.current.classList.add('cursor-grabbing', 'select-none')
     }
@@ -97,7 +124,6 @@ const SkillCarousel = () => {
         if (!isDragging.current) return
         const delta = e.clientX - pointerStartX.current
         carouselRef.current.scrollLeft = scrollStartX.current - delta
-        setDebugX(e.clientX)
     }
 
     // ─── POINTER RELEASE ──────────────────────────────────────────────────────────
@@ -107,24 +133,15 @@ const SkillCarousel = () => {
         e.currentTarget.releasePointerCapture(e.pointerId)
         carouselRef.current.classList.remove('cursor-grabbing', 'select-none')
 
-        // ── SNAP TO NEAREST CARD ON RELEASE ──────────────────────────────
         const container = carouselRef.current
         const cards     = Array.from(container.querySelectorAll('.carousel-card'))
         if (cards.length) {
-            const cardWidth    = cards[0].offsetWidth
-            const gap          = getGap(container)
-            const step         = cardWidth + gap
-            const scrollLeft   = container.scrollLeft
-            const nearestIndex = Math.round(scrollLeft / step)
-            const maxIndex     = cards.length - 1
-            const targetIndex  = Math.min(Math.max(nearestIndex, 0), maxIndex)
+            const step         = cards[0].offsetWidth + getGap(container)
+            const targetIndex  = Math.min(Math.max(Math.round(container.scrollLeft / step), 0), maxIndex)
             container.scrollTo({ left: targetIndex * step, behavior: 'smooth' })
         }
-
-        setDebugX(null)
     }
 
-    // ─── RENDER ──────────────────────────────────────────────────────────────────
     return (
         <section className="relative md:py-20 w-full">
             <div className="flex justify-center w-full">
@@ -136,25 +153,21 @@ const SkillCarousel = () => {
                         <p className="text-center text-gray-400 text-lg font-normal leading-7 tracking-wide mb-2 font-[Centra,sans-serif]">
                             Core competencies in software development
                         </p>
-                        {/* Debugging position display below description */}
-                        {showDebugText && debugX !== null && (
-                            <div className="text-center text-sm text-gray-300 mb-4">
-                                Drag X: {debugX}px
-                            </div>
-                        )}
 
                         <div className="relative w-full">
-                            {/* ─── PREV ARROW ──────────────────────────────────────────────── */}
-                            <button
-                                onClick={() => scrollByStep('left')}
-                                aria-label="Previous"
-                                className="absolute z-20 top-1/2 -translate-y-1/2 left-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full focus:outline-none"
-                                style={{ padding: `${arrowPadding}px` }}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ width: `${arrowSize}px`, height: `${arrowSize}px` }}>
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                </svg>
-                            </button>
+                            {/* ─── PREV ARROW (hidden at start) ───────────────────────────── */}
+                            {canScrollLeft && (
+                                <button
+                                    onClick={() => scrollByStep('left')}
+                                    aria-label="Previous"
+                                    className="absolute z-20 top-1/2 -translate-y-1/2 left-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full focus:outline-none"
+                                    style={{ padding: `${arrowPadding}px` }}
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ width: `${arrowSize}px`, height: `${arrowSize}px` }}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                            )}
 
                             {/* ─── CAROUSEL ───────────────────────────────────────────────── */}
                             <div className="overflow-hidden w-full px-4">
@@ -181,17 +194,19 @@ const SkillCarousel = () => {
                                 </div>
                             </div>
 
-                            {/* ─── NEXT ARROW ──────────────────────────────────────────────── */}
-                            <button
-                                onClick={() => scrollByStep('right')}
-                                aria-label="Next"
-                                className="absolute z-20 top-1/2 -translate-y-1/2 right-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full focus:outline-none"
-                                style={{ padding: `${arrowPadding}px` }}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ width: `${arrowSize}px`, height: `${arrowSize}px` }}>
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                </svg>
-                            </button>
+                            {/* ─── NEXT ARROW (hidden at end) ────────────────────────────── */}
+                            {canScrollRight && (
+                                <button
+                                    onClick={() => scrollByStep('right')}
+                                    aria-label="Next"
+                                    className="absolute z-20 top-1/2 -translate-y-1/2 right-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full focus:outline-none"
+                                    style={{ padding: `${arrowPadding}px` }}
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ width: `${arrowSize}px`, height: `${arrowSize}px` }}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
