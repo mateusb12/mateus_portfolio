@@ -8,84 +8,68 @@ const getGap = (el) => {
 
 // ─── COMPONENT ──────────────────────────────────────────────────────────────────
 const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }) => {
-    // element refs
-    const carouselRef     = useRef(null)
-    const pointerStartX   = useRef(0)
-    const scrollStartX    = useRef(0)
-    const isDragging      = useRef(false)
+    const carouselRef   = useRef(null)
+    const pointerStartX = useRef(0)
+    const scrollStartX  = useRef(0)
+    const isDragging    = useRef(false)
 
-    // ui constants
-    const arrowSize     = 35
-    const arrowPadding  = arrowSize / 4
+    const arrowSize    = 35
+    const arrowPadding = arrowSize / 4
+    const pixelTol     = 4
 
-    // state hooks
-    const [canScrollLeft,  setCanScrollLeft]  = useState(false)
-    const [canScrollRight, setCanScrollRight] = useState(true)
-    const [scrollIndex,    setScrollIndex]    = useState(0)     // how many “steps” we have already scrolled
-    const [pageCount,      setPageCount]      = useState(0)     // number of beans ( = elements - 2 )
+    // force exactly 3 visible cards per view
+    const visiblePerPage = 3
 
     const totalCount = skillContent.length
+    const maxIndex   = Math.max(totalCount - visiblePerPage, 0)
 
-    // ─── CORE: UPDATE SCROLL STATE ────────────────────────────────────────────────
+    // state
+    const [canScrollLeft,  setCanScrollLeft]  = useState(false)
+    const [canScrollRight, setCanScrollRight] = useState(totalCount > visiblePerPage)
+    const [scrollIndex,    setScrollIndex]    = useState(0)
+
+    // update scroll state
     const updateScrollState = () => {
         const container = carouselRef.current
         if (!container) return
 
         const { scrollLeft, scrollWidth, clientWidth } = container
         const maxScrollLeft = scrollWidth - clientWidth
+        setCanScrollLeft(scrollLeft > pixelTol)
+        setCanScrollRight(maxScrollLeft - scrollLeft > pixelTol)
 
-        // enable / disable arrows
-        setCanScrollLeft(scrollLeft > 1)
-        setCanScrollRight(scrollLeft < maxScrollLeft - 1)
-
-        // calculate sizes only once cards are rendered
-        const cards = Array.from(container.querySelectorAll('.carousel-card'))
+        // determine index by scrollLeft
+        const cards    = Array.from(container.querySelectorAll('.carousel-card'))
         if (!cards.length) return
+        const cardWidth = cards[0].offsetWidth
+        const gap       = getGap(container)
+        const step      = cardWidth + gap
 
-        const cardWidth   = cards[0].offsetWidth
-        const gap         = getGap(container)
-        const step        = cardWidth + gap
-        const visibleCnt  = Math.max(1, Math.floor(clientWidth / step))
-        const maxIndex    = Math.max(totalCount - visibleCnt, 0)  // last valid scroll index
-
-        // beans = array length - 2 ( user‑defined rule )
-        const beans = Math.max(totalCount - 2, 0)
-        setPageCount(beans)
-
-        // where are we now?
-        const reachedEnd = maxScrollLeft - scrollLeft <= 1
+        const reachedEnd = maxScrollLeft - scrollLeft <= pixelTol
         const idx        = reachedEnd ? maxIndex : Math.min(Math.round(scrollLeft / step), maxIndex)
         setScrollIndex(idx)
     }
 
-    // attach listeners once
     useEffect(() => {
         const container = carouselRef.current
         if (!container) return
-
         container.addEventListener('scroll', updateScrollState, { passive: true })
         window.addEventListener('resize', updateScrollState)
-
-        // initial calculation
         updateScrollState()
-
         return () => {
             container.removeEventListener('scroll', updateScrollState)
             window.removeEventListener('resize', updateScrollState)
         }
     }, [])
 
-    // ─── SCROLL BY STEP ───────────────────────────────────────────────────────────
+    // scroll by one page at a time
     const scrollByStep = (direction) => {
         const container = carouselRef.current
         const cards     = Array.from(container.querySelectorAll('.carousel-card'))
         if (!cards.length) return
-
-        const cardWidth  = cards[0].offsetWidth
-        const gap        = getGap(container)
-        const step       = cardWidth + gap
-        const visibleCnt = Math.max(1, Math.floor(container.clientWidth / step))
-        const maxIndex   = Math.max(totalCount - visibleCnt, 0)
+        const cardWidth = cards[0].offsetWidth
+        const gap       = getGap(container)
+        const step      = cardWidth + gap
 
         const newIndex = direction === 'right'
             ? Math.min(scrollIndex + 1, maxIndex)
@@ -94,7 +78,6 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
         container.scrollTo({ left: newIndex * step, behavior: 'smooth' })
     }
 
-    // ─── DRAG HANDLERS ────────────────────────────────────────────────────────────
     const handlePointerDown = (e) => {
         isDragging.current    = true
         pointerStartX.current = e.clientX
@@ -105,8 +88,7 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
 
     const handlePointerMove = (e) => {
         if (!isDragging.current) return
-        const delta = e.clientX - pointerStartX.current
-        carouselRef.current.scrollLeft = scrollStartX.current - delta
+        carouselRef.current.scrollLeft = scrollStartX.current - (e.clientX - pointerStartX.current)
     }
 
     const endDrag = (e) => {
@@ -114,24 +96,12 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
         isDragging.current = false
         e.currentTarget.releasePointerCapture(e.pointerId)
         carouselRef.current.classList.remove('cursor-grabbing', 'select-none')
-
-        const container = carouselRef.current
-        const cards     = Array.from(container.querySelectorAll('.carousel-card'))
-        if (!cards.length) return
-
-        const cardWidth  = cards[0].offsetWidth
-        const gap        = getGap(container)
-        const step       = cardWidth + gap
-        const targetIdx  = Math.round(container.scrollLeft / step)
-        container.scrollTo({ left: targetIdx * step, behavior: 'smooth' })
+        updateScrollState()
     }
 
-    // how many beans should be green right now?
-    //   • when not at the end:   beansFilled = scrollIndex
-    //   • when at the end:       beansFilled = pageCount  (all green)
-    const beansFilled = canScrollRight ? scrollIndex : pageCount
+    // beans correspond to scroll steps + 1 for initial position
+    const beansFilled = scrollIndex + 1
 
-    // ─── RENDER ───────────────────────────────────────────────────────────────────
     return (
         <section className="relative py-8 md:py-15 w-full">
             <div className="flex justify-center w-full">
@@ -140,42 +110,18 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
                         <h2 className="text-5xl font-bold text-white mb-4">{sectionTitle}</h2>
                         <p className="text-gray-400 text-lg mb-2">{sectionSubtitle}</p>
 
-                        {/* ─── CAROUSEL WRAPPER ─────────────────────────────────────────────── */}
                         <div className="relative w-full">
                             {canScrollLeft && (
-                                <button
-                                    onClick={() => scrollByStep('left')}
-                                    aria-label="Previous"
-                                    className="absolute z-20 top-1/2 -translate-y-1/2 left-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full"
-                                    style={{ padding: `${arrowPadding}px` }}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ width: `${arrowSize}px`, height: `${arrowSize}px` }}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                    </svg>
+                                <button onClick={() => scrollByStep('left')} aria-label="Previous" className="absolute z-20 top-1/2 -translate-y-1/2 left-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full" style={{ padding: `${arrowPadding}px` }}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ width: `${arrowSize}px`, height: `${arrowSize}px` }}><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                                 </button>
                             )}
 
                             <div className="overflow-hidden w-full px-4">
-                                <div
-                                    ref={carouselRef}
-                                    onPointerDown={handlePointerDown}
-                                    onPointerMove={handlePointerMove}
-                                    onPointerUp={endDrag}
-                                    onPointerCancel={endDrag}
-                                    style={{ touchAction: 'pan-y' }}
-                                    className="flex gap-x-8 overflow-x-auto hide-scrollbar rounded-xl py-6 w-full md:w-[70%] mx-auto cursor-grab"
-                                >
-                                    {skillContent.map((skill) => (
-                                        <div
-                                            key={skill.id}
-                                            className="carousel-card flex-shrink-0 basis-full md:basis-[calc((100%-4rem)/3)] flex flex-col items-center"
-                                        >
-                                            <img
-                                                src={iconsMap[skill.id]}
-                                                alt={skill.title}
-                                                draggable={false}
-                                                className="w-32 h-32 mb-4"
-                                            />
+                                <div ref={carouselRef} onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={endDrag} onPointerCancel={endDrag} style={{ touchAction: 'pan-y' }} className="flex gap-x-8 overflow-x-auto hide-scrollbar rounded-xl py-6 w-full md:w-[70%] mx-auto cursor-grab">
+                                    {skillContent.map(skill => (
+                                        <div key={skill.id} className="carousel-card flex-shrink-0 basis-full md:basis-[calc((100%-4rem)/3)] flex flex-col items-center">
+                                            <img src={iconsMap[skill.id]} alt={skill.title} draggable={false} className="w-32 h-32 mb-4" />
                                             <h5 className="text-white font-bold text-xl text-center">{skill.title}</h5>
                                         </div>
                                     ))}
@@ -183,27 +129,16 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
                             </div>
 
                             {canScrollRight && (
-                                <button
-                                    onClick={() => scrollByStep('right')}
-                                    aria-label="Next"
-                                    className="absolute z-20 top-1/2 -translate-y-1/2 right-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full"
-                                    style={{ padding: `${arrowPadding}px` }}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ width: `${arrowSize}px`, height: `${arrowSize}px` }}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                    </svg>
+                                <button onClick={() => scrollByStep('right')} aria-label="Next" className="absolute z-20 top-1/2 -translate-y-1/2 right-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full" style={{ padding: `${arrowPadding}px` }}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ width: `${arrowSize}px`, height: `${arrowSize}px` }}><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                                 </button>
                             )}
                         </div>
 
-                        {/* ─── BEANS (SCROLL PROGRESS) ──────────────────────────────────────── */}
-                        {pageCount > 0 && (
+                        {maxIndex > 0 && (
                             <div className="flex justify-center items-center mt-6 space-x-2">
-                                {Array.from({ length: pageCount }).map((_, idx) => (
-                                    <div
-                                        key={idx}
-                                        className={`w-8 h-2 rounded transition-all ${idx < beansFilled ? 'bg-green-400 shadow-lg shadow-green-400/50' : 'bg-gray-400'}`}
-                                    />
+                                {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
+                                    <div key={idx} className={`w-8 h-2 rounded transition-all ${idx < beansFilled ? 'bg-green-400 shadow-lg shadow-green-400/50' : 'bg-gray-400'}`} />
                                 ))}
                             </div>
                         )}
