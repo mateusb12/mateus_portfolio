@@ -33,6 +33,15 @@ input:focus, textarea:focus, select:focus {
     outline: none;
 }
 
+.hide-scrollbar {
+    scrollbar-width: none;           /* Firefox */
+    -ms-overflow-style: none;        /* IE 10+ */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;                   /* Chrome, Safari */
+}
+
 @media (min-width:1700px) {
     main .container {
         max-width: 100%;
