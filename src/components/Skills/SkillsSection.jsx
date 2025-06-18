@@ -99,60 +99,58 @@ const iconsMap = {
 
 // ─── CONTENT ARRAYS ────────────────────────────────────────────────────────────
 const keySkills = [
-    {id: "design", title: "UI/UX Design"},
-    {id: "website", title: "Website Creation"},
-    {id: "backend", title: "Backend Development"},
-    {id: "api", title: "APIs"},
-    {id: "database", title: "Databases"},
-    {id: "cloud", title: "Cloud"},
-    {id: "deploy", title: "DevOps & CI/CD"},
-    {id: "lock", title: "Security"}
-]
+    { id: "backend", title: "Backend Development" },
+    { id: "website", title: "Frontend Development" },
+    { id: "api", title: "API Development" },
+    { id: "database", title: "Databases" },
+    { id: "design", title: "UI/UX Design" },
+    { id: "deploy", title: "DevOps & CI/CD" },
+];
 
-const foundations = [
-    {id: "python", title: "Python"},
-    {id: "javascript", title: "Javascript"},
-    {id: "csharp", title: "C#"},
-    {id: "java", title: "Java"},
-    {id: "sql", title: "SQL"},
-    {id: "html", title: "HTML"},
-    {id: "css", title: "CSS"}
-]
+const coreExpertise = [
+    { id: "python", title: "Python Programming" },
+    { id: "flask", title: "Flask" },
+    { id: "django", title: "Django" },
+    { id: "nodejs", title: "Node.js" },
+    { id: "linux", title: "Linux" },
+    { id: "docker", title: "Docker" },
+    { id: "postgres", title: "PostgreSQL" },
+    { id: "mongo", title: "MongoDB" },
+    { id: "git", title: "Git" },
+    { id: "cloud", title: "Cloud Platforms (AWS, GCP, Azure)" },
+    { id: "machineLearning", title: "Machine Learning" },
+    { id: "dataAnalysis", title: "Data Analysis" },
+    { id: "webScrapping", title: "Web Scraping" },
+];
 
-const frameworks = [
-    {id: "git", title: "GIT"},
-    {id: "flask", title: "Flask"},
-    {id: "react", title: "React"},
-    {id: "jwt", title: "JWT"},
-    {id: "postgres", title: "PostgreSQL"},
-    {id: "docker", title: "Docker"},
-    {id: "aws", title: "AWS"},
-    {id: "googleCloud", title: "Google Cloud"}
-]
+const fullStackStack = [
+    { id: "react", title: "React.js" },
+    { id: "typescript", title: "TypeScript" },
+];
 
 const SkillsSection = () => (
     <>
         <SkillCarousel
             sectionTitle="Key Skills"
-            sectionSubtitle="Core competencies in software development"
+            sectionSubtitle="Core competencies across full-stack development"
             skillContent={keySkills}
             iconsMap={iconsMap}
         />
 
         <SkillCarousel
-            sectionTitle="Programming Foundations"
-            sectionSubtitle="Essential programming languages that serves as foundations for using the frameworks"
-            skillContent={foundations}
+            sectionTitle="Core Expertise"
+            sectionSubtitle="My standout abilities and specialties"
+            skillContent={coreExpertise}
             iconsMap={iconsMap}
         />
 
         <SkillCarousel
-            sectionTitle="Tech Stack"
-            sectionSubtitle="Technologies that I have experience with"
-            skillContent={frameworks}
+            sectionTitle="Full Stack Tech Stack"
+            sectionSubtitle="Technologies and frameworks I utilize effectively"
+            skillContent={fullStackStack}
             iconsMap={iconsMap}
         />
     </>
-)
+);
 
-export default SkillsSection
+export default SkillsSection;
