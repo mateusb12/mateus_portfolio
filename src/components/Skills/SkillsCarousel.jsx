@@ -17,7 +17,6 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
     const arrowPadding = arrowSize / 4
     const pixelTol     = 4
 
-    // responsive visible count
     const [carouselSize, setCarouselSize] = useState(
         window.matchMedia('(min-width: 768px)').matches ? 3 : 1
     )
@@ -33,12 +32,10 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
     const totalCount = skillContent.length
     const maxIndex   = Math.max(totalCount - carouselSize, 0)
 
-    // state
     const [canScrollLeft,  setCanScrollLeft]  = useState(false)
     const [canScrollRight, setCanScrollRight] = useState(totalCount > carouselSize)
     const [scrollIndex,    setScrollIndex]    = useState(0)
 
-    // snap to nearest on end drag
     const snapToNearest = () => {
         const container = carouselRef.current
         const cards     = Array.from(container.querySelectorAll('.carousel-card'))
@@ -51,7 +48,6 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
         container.scrollTo({ left: newIndex * step, behavior: 'smooth' })
     }
 
-    // update scroll state
     const updateScrollState = () => {
         const container = carouselRef.current
         if (!container) return
@@ -84,8 +80,7 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
         }
     }, [carouselSize])
 
-    // scroll by one page at a time
-    const scrollByStep = (direction) => {
+    const scrollByOneStepAtTime = (direction) => {
         const container = carouselRef.current
         const cards     = Array.from(container.querySelectorAll('.carousel-card'))
         if (!cards.length) return
@@ -119,11 +114,9 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
         isDragging.current = false
         e.currentTarget.releasePointerCapture(e.pointerId)
         carouselRef.current.classList.remove('cursor-grabbing', 'select-none')
-        // only now invoke snap
         snapToNearest()
     }
 
-    // beans correspond to scroll steps + 1 for initial position
     const beansFilled = scrollIndex + 1
 
     return (
@@ -136,13 +129,12 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
 
                         <div className="relative w-full">
                             {canScrollLeft && (
-                                <button onClick={() => scrollByStep('left')} aria-label="Previous" className="absolute z-20 top-1/2 -translate-y-1/2 left-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full" style={{ padding: `${arrowPadding}px` }}>
+                                <button onClick={() => scrollByOneStepAtTime('left')} aria-label="Previous" className="absolute z-20 top-1/2 -translate-y-1/2 left-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full" style={{ padding: `${arrowPadding}px` }}>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ width: `${arrowSize}px`, height: `${arrowSize}px` }}><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                                 </button>
                             )}
 
                             <div className="overflow-hidden w-full px-4">
-                                {/* free drag container, no CSS snap */}
                                 <div
                                     ref={carouselRef}
                                     onPointerDown={handlePointerDown}
@@ -165,17 +157,54 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
                             </div>
 
                             {canScrollRight && (
-                                <button onClick={() => scrollByStep('right')} aria-label="Next" className="absolute z-20 top-1/2 -translate-y-1/2 right-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full" style={{ padding: `${arrowPadding}px` }}>
+                                <button onClick={() => scrollByOneStepAtTime('right')} aria-label="Next" className="absolute z-20 top-1/2 -translate-y-1/2 right-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full" style={{ padding: `${arrowPadding}px` }}>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ width: `${arrowSize}px`, height: `${arrowSize}px` }}><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                                 </button>
                             )}
                         </div>
 
                         {maxIndex > 0 && (
-                            <div className="flex justify-center items-center mt-6 space-x-2">
-                                {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
-                                    <div key={idx} className={`w-8 h-2 rounded transition-all ${idx < beansFilled ? 'bg-green-400 shadow-lg shadow-green-400/50' : 'bg-gray-400'}`} />
-                                ))}
+                            <div
+                                className={`flex justify-center items-center mt-6 gap-x-2 ${
+                                    maxIndex + 1 > 8 && carouselSize === 1 ? 'flex-wrap' : ''
+                                }`}
+                                style={{
+                                    maxWidth: '90%',
+                                    margin: '0 auto',
+                                    rowGap: '1rem'
+                                }}
+                            >
+                                {(function () {
+                                    const totalBeans = maxIndex + 1;
+                                    const shouldSplit = totalBeans > 8 && carouselSize === 1;
+                                    const beansPerLine = shouldSplit ? Math.ceil(totalBeans / 2) : totalBeans;
+
+                                    const lines = shouldSplit ? 2 : 1;
+
+                                    let allBeans = Array.from({ length: totalBeans }).map((_, idx) => (
+                                        <div
+                                            key={idx}
+                                            className={`w-8 h-2 rounded transition-all ${
+                                                idx < beansFilled
+                                                    ? 'bg-green-400 shadow-lg shadow-green-400/50'
+                                                    : 'bg-gray-400'
+                                            }`}
+                                        />
+                                    ));
+
+                                    if (!shouldSplit) return allBeans;
+
+                                    return (
+                                        <>
+                                            <div className="flex gap-x-2 justify-center w-full mb-2">
+                                                {allBeans.slice(0, beansPerLine)}
+                                            </div>
+                                            <div className="flex gap-x-2 justify-center w-full">
+                                                {allBeans.slice(beansPerLine)}
+                                            </div>
+                                        </>
+                                    );
+                                })()}
                             </div>
                         )}
                     </div>

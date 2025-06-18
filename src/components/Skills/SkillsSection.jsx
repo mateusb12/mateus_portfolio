@@ -1,5 +1,5 @@
 // src/components/Skills/SkillsSection.jsx
-import React from 'react'
+import React, {useContext} from 'react'
 import SkillCarousel from './SkillsCarousel.jsx'
 
 // ─── ICON IMPORTS ───────────────────────────────────────────────────────────────
@@ -40,6 +40,7 @@ import tilt from "../../assets/img/skills_icons/tilt.png"
 import poetry from "../../assets/img/skills_icons/poetry.png"
 import alembic from "../../assets/img/skills_icons/alembic.png"
 import azure from "../../assets/img/skills_icons/azure.png"
+import LanguageContext from "../LanguageContext.jsx";
 
 // ─── ICON MAP ──────────────────────────────────────────────────────────────────
 const iconsMap = {
@@ -131,29 +132,66 @@ const frontendExpertise = [
     { id: "design", title: "UI/UX Design" },
 ];
 
-const SkillsSection = () => (
-    <>
-        <SkillCarousel
-            sectionTitle="Backend Stack"
-            sectionSubtitle="My standout abilities and specialties"
-            skillContent={backendExpertise}
-            iconsMap={iconsMap}
-        />
+const languageContent = {
+    english: {
+        backend: {
+            title: "Backend Stack",
+            subtitle: "APIs, databases, and communication between systems",
+        },
+        cloud: {
+            title: "Cloud & DevOps",
+            subtitle: "Automation, deployment, and scaling",
+        },
+        frontend: {
+            title: "Frontend Stack",
+            subtitle: "Turning designs into user experiences",
+        }
+    },
+    portuguese: {
+        backend: {
+            title: "Habilidades Backend",
+            subtitle: "APIs, bancos de dados e comunicação entre sistemas",
+        },
+        cloud: {
+            title: "Cloud & DevOps",
+            subtitle: "Automação, deploy e escalabilidade",
+        },
+        frontend: {
+            title: "Habilidades Frontend",
+            subtitle: "Desde o design até a experiência final do usuário",
+        }
+    }
+};
 
-        <SkillCarousel
-            sectionTitle="Cloud & DevOps"
-            sectionSubtitle="My standout abilities and specialties"
-            skillContent={cloudExpertise}
-            iconsMap={iconsMap}
-        />
+const SkillsSection = () => {
+    const { selectedFlag } = useContext(LanguageContext);
+    const key = selectedFlag === 'usa' ? 'english' : 'portuguese';
+    const lang = languageContent[key];
 
-        <SkillCarousel
-            sectionTitle="Frontend Stack"
-            sectionSubtitle="My standout abilities and specialties"
-            skillContent={frontendExpertise}
-            iconsMap={iconsMap}
-        />
-    </>
-);
+    return (
+        <>
+            <SkillCarousel
+                sectionTitle={lang.backend.title}
+                sectionSubtitle={lang.backend.subtitle}
+                skillContent={backendExpertise}
+                iconsMap={iconsMap}
+            />
+
+            <SkillCarousel
+                sectionTitle={lang.cloud.title}
+                sectionSubtitle={lang.cloud.subtitle}
+                skillContent={cloudExpertise}
+                iconsMap={iconsMap}
+            />
+
+            <SkillCarousel
+                sectionTitle={lang.frontend.title}
+                sectionSubtitle={lang.frontend.subtitle}
+                skillContent={frontendExpertise}
+                iconsMap={iconsMap}
+            />
+        </>
+    );
+};
 
 export default SkillsSection;
