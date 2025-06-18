@@ -22,7 +22,6 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
         window.matchMedia('(min-width: 768px)').matches ? 3 : 1
     )
 
-    // update carouselSize on resize
     useEffect(() => {
         const mq = window.matchMedia('(min-width: 768px)')
         const handler = (e) => setCarouselSize(e.matches ? 3 : 1)
@@ -38,6 +37,19 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
     const [canScrollLeft,  setCanScrollLeft]  = useState(false)
     const [canScrollRight, setCanScrollRight] = useState(totalCount > carouselSize)
     const [scrollIndex,    setScrollIndex]    = useState(0)
+
+    // snap to nearest on end drag
+    const snapToNearest = () => {
+        const container = carouselRef.current
+        const cards     = Array.from(container.querySelectorAll('.carousel-card'))
+        if (!cards.length) return
+        const cardWidth = cards[0].offsetWidth
+        const gap       = getGap(container)
+        const step      = cardWidth + gap
+        const nearest   = Math.round(container.scrollLeft / step)
+        const newIndex  = Math.max(0, Math.min(nearest, maxIndex))
+        container.scrollTo({ left: newIndex * step, behavior: 'smooth' })
+    }
 
     // update scroll state
     const updateScrollState = () => {
@@ -89,6 +101,7 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
     }
 
     const handlePointerDown = (e) => {
+        // start dragging but do not snap yet
         isDragging.current    = true
         pointerStartX.current = e.clientX
         scrollStartX.current  = carouselRef.current.scrollLeft
@@ -106,7 +119,8 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
         isDragging.current = false
         e.currentTarget.releasePointerCapture(e.pointerId)
         carouselRef.current.classList.remove('cursor-grabbing', 'select-none')
-        updateScrollState()
+        // only now invoke snap
+        snapToNearest()
     }
 
     // beans correspond to scroll steps + 1 for initial position
@@ -128,9 +142,21 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
                             )}
 
                             <div className="overflow-hidden w-full px-4">
-                                <div ref={carouselRef} onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={endDrag} onPointerCancel={endDrag} style={{ touchAction: 'pan-y' }} className="flex gap-x-8 overflow-x-auto hide-scrollbar rounded-xl py-6 w-full md:w-[70%] mx-auto cursor-grab">
+                                {/* free drag container, no CSS snap */}
+                                <div
+                                    ref={carouselRef}
+                                    onPointerDown={handlePointerDown}
+                                    onPointerMove={handlePointerMove}
+                                    onPointerUp={endDrag}
+                                    onPointerCancel={endDrag}
+                                    style={{ touchAction: 'pan-y' }}
+                                    className="flex gap-x-8 overflow-x-auto hide-scrollbar rounded-xl py-6 w-full md:w-[70%] mx-auto cursor-grab"
+                                >
                                     {skillContent.map(skill => (
-                                        <div key={skill.id} className="carousel-card flex-shrink-0 basis-full md:basis-[calc((100%-4rem)/3)] flex flex-col items-center">
+                                        <div
+                                            key={skill.id}
+                                            className="carousel-card flex-shrink-0 basis-full md:basis-[calc((100%-4rem)/3)] flex flex-col items-center"
+                                        >
                                             <img src={iconsMap[skill.id]} alt={skill.title} draggable={false} className="w-32 h-32 mb-4" />
                                             <h5 className="text-white font-bold text-xl text-center">{skill.title}</h5>
                                         </div>
