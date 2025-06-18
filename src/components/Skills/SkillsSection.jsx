@@ -40,6 +40,8 @@ import tilt from "../../assets/img/skills_icons/tilt.png"
 import poetry from "../../assets/img/skills_icons/poetry.png"
 import alembic from "../../assets/img/skills_icons/alembic.png"
 import azure from "../../assets/img/skills_icons/azure.png"
+import next_js from "../../assets/img/skills_icons/nextjs.png";
+import react_native from "../../assets/img/skills_icons/react-native.png";
 import LanguageContext from "../LanguageContext.jsx";
 
 // ─── ICON MAP ──────────────────────────────────────────────────────────────────
@@ -59,6 +61,8 @@ const iconsMap = {
     javascript: javascript,
     typescript: typescript,
     design: design,
+    nextJs: next_js,
+    reactNative: react_native,
 
     // ─── Programming Languages ───────────────────────────────
     python: python,
@@ -100,7 +104,7 @@ const iconsMap = {
 
 // ─── CONTENT ARRAYS ────────────────────────────────────────────────────────────
 const backendExpertise = [
-    { id: "python", title: "Python Programming" },
+    { id: "python", title: "Python" },
     { id: "flask", title: "Flask" },
     { id: "django", title: "Django" },
     { id: "nodejs", title: "Node.js" },
@@ -125,6 +129,8 @@ const cloudExpertise = [
 
 const frontendExpertise = [
     { id: "react", title: "React" },
+    { id: "nextJs", title: "Next.js" },
+    { id: "reactNative", title: "React Native" },
     { id: "typescript", title: "TypeScript" },
     { id: "html", title: "HTML" },
     { id: "css", title: "CSS" },

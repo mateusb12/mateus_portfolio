@@ -184,7 +184,7 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
                                     let allBeans = Array.from({ length: totalBeans }).map((_, idx) => (
                                         <div
                                             key={idx}
-                                            className={`w-8 h-2 rounded transition-all ${
+                                            className={`w-12 h-5 rounded-full border-4 box-border border-black transition-all ${
                                                 idx < beansFilled
                                                     ? 'bg-green-400 shadow-lg shadow-green-400/50'
                                                     : 'bg-gray-400'
