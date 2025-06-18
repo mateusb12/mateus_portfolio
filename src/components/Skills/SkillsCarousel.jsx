@@ -94,7 +94,7 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
     }
 
     return (
-        <section className="relative md:py-20 w-full">
+        <section className="relative py-8 md:py-15 w-full">
             <div className="flex justify-center w-full">
                 <div className={`relative w-[90%] md:w-[70%] ${containerBg} rounded-3xl py-12`}>
                     <div className="mx-auto text-center">
