@@ -98,56 +98,59 @@ const iconsMap = {
 };
 
 // ─── CONTENT ARRAYS ────────────────────────────────────────────────────────────
-const keySkills = [
-    { id: "backend", title: "Backend Development" },
-    { id: "website", title: "Frontend Development" },
-    { id: "api", title: "API Development" },
-    { id: "database", title: "Databases" },
-    { id: "design", title: "UI/UX Design" },
-    { id: "deploy", title: "DevOps & CI/CD" },
-];
-
-const coreExpertise = [
+const backendExpertise = [
     { id: "python", title: "Python Programming" },
     { id: "flask", title: "Flask" },
     { id: "django", title: "Django" },
     { id: "nodejs", title: "Node.js" },
     { id: "linux", title: "Linux" },
-    { id: "docker", title: "Docker" },
     { id: "postgres", title: "PostgreSQL" },
     { id: "mongo", title: "MongoDB" },
     { id: "git", title: "Git" },
-    { id: "cloud", title: "Cloud Platforms (AWS, GCP, Azure)" },
-    { id: "machineLearning", title: "Machine Learning" },
-    { id: "dataAnalysis", title: "Data Analysis" },
-    { id: "webScrapping", title: "Web Scraping" },
+    { id: "poetry", title: "Poetry" },
+    { id: "alembic", title: "Alembic" },
 ];
 
-const fullStackStack = [
-    { id: "react", title: "React.js" },
+const cloudExpertise = [
+    { id: "docker", title: "Docker" },
+    { id: "aws", title: "AWS" },
+    { id: "googleCloud", title: "Google Cloud" },
+    { id: "azure", title: "Azure" },
+    { id: "supabase", title: "Supabase" },
+    { id: "firebase", title: "Firebase" },
+    { id: "deploy", title: "CI/CD" },
+    { id: "tilt", title: "Tilt" },
+]
+
+const frontendExpertise = [
+    { id: "react", title: "React" },
     { id: "typescript", title: "TypeScript" },
+    { id: "html", title: "HTML" },
+    { id: "css", title: "CSS" },
+    { id: "javascript", title: "JavaScript" },
+    { id: "design", title: "UI/UX Design" },
 ];
 
 const SkillsSection = () => (
     <>
         <SkillCarousel
-            sectionTitle="Key Skills"
-            sectionSubtitle="Core competencies across full-stack development"
-            skillContent={keySkills}
-            iconsMap={iconsMap}
-        />
-
-        <SkillCarousel
-            sectionTitle="Core Expertise"
+            sectionTitle="Backend Stack"
             sectionSubtitle="My standout abilities and specialties"
-            skillContent={coreExpertise}
+            skillContent={backendExpertise}
             iconsMap={iconsMap}
         />
 
         <SkillCarousel
-            sectionTitle="Full Stack Tech Stack"
-            sectionSubtitle="Technologies and frameworks I utilize effectively"
-            skillContent={fullStackStack}
+            sectionTitle="Cloud & DevOps"
+            sectionSubtitle="My standout abilities and specialties"
+            skillContent={cloudExpertise}
+            iconsMap={iconsMap}
+        />
+
+        <SkillCarousel
+            sectionTitle="Frontend Stack"
+            sectionSubtitle="My standout abilities and specialties"
+            skillContent={frontendExpertise}
             iconsMap={iconsMap}
         />
     </>
