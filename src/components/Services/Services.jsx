@@ -112,7 +112,7 @@ const services = [
 ];
 
 // ─── Individual Card ────────────────────────────────────────────────────────────
-const ServiceCard = ({ index, title, icon, description, glowTheme = 'green' }) => {
+const SingleServiceCard = ({ index, title, icon, description, glowTheme = 'green' }) => {
     const {
         borderColor,
         borderHoverColor,
@@ -125,11 +125,20 @@ const ServiceCard = ({ index, title, icon, description, glowTheme = 'green' }) =
         titleColor
     } = getGlowTheme(glowTheme);
 
+    // ─── Layout Constants ─────────────────────────────────────
+    const cardWidthClass = 'w-[250px]';
+    const cardMinHeightClass = 'min-h-[240px]';
+    const iconSizeClass = 'w-16 h-16';
+    const titleTextSize = 'text-lg';
+    const descriptionTextSize = 'text-sm';
+    const cardPadding = 'p-5';
+    const borderRadius = 'rounded-[20px]';
+
     return (
-        <Tilt className="w-[250px]" {...tiltOptions}>
+        <Tilt className={cardWidthClass} {...tiltOptions}>
             <motion.div
                 variants={fadeIn('right', 'spring', 0.2 * index, 0.75)}
-                className={`relative group transition-all overflow-hidden p-5 rounded-[20px]
+                className={`relative group transition-all overflow-hidden ${cardPadding} ${borderRadius}
                     bg-[#031010] border
                     ${borderColor} ${borderHoverColor}
                     ${outerGlow} ${outerGlowHover}`}
@@ -140,16 +149,16 @@ const ServiceCard = ({ index, title, icon, description, glowTheme = 'green' }) =
                         transition-opacity duration-300`}
                 />
 
-                <div className="space-y-2 relative z-10 flex flex-col items-center text-center min-h-[240px]">
+                <div className={`space-y-2 relative z-10 flex flex-col items-center text-center ${cardMinHeightClass}`}>
                     <img
                         src={icon}
                         alt={`${title} icon`}
-                        className={`w-16 h-16 object-cover ${imageShadow}`}
+                        className={`${iconSizeClass} object-cover ${imageShadow}`}
                     />
-                    <h3 className={`mt-4 text-lg font-bold leading-tight ${titleColor}`}>
+                    <h3 className={`mt-4 font-bold leading-tight ${titleTextSize} ${titleColor}`}>
                         {title}
                     </h3>
-                    <p className="mt-2 text-gray-300 text-sm">
+                    <p className={`mt-2 text-gray-300 ${descriptionTextSize}`}>
                         {description}
                     </p>
                 </div>
@@ -159,11 +168,11 @@ const ServiceCard = ({ index, title, icon, description, glowTheme = 'green' }) =
 };
 
 // ─── Main Section ───────────────────────────────────────────────────────────────
-export const About = () => {
+export const ServiceCardSection = () => {
     return (
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
             {services.map((service, index) => (
-                <ServiceCard key={service.title} index={index} {...service} />
+                <SingleServiceCard key={service.title} index={index} {...service} />
             ))}
         </div>
     );
