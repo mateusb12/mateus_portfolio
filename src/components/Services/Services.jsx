@@ -126,12 +126,13 @@ const SingleServiceCard = ({ index, title, icon, description, glowTheme = 'green
     } = getGlowTheme(glowTheme);
 
     // ─── Layout Constants ─────────────────────────────────────
-    const cardWidthClass = 'w-[250px]';
-    const cardMinHeightClass = 'min-h-[240px]';
-    const iconSizeClass = 'w-16 h-16';
-    const titleTextSize = 'text-lg';
-    const descriptionTextSize = 'text-sm';
+    const cardWidthClass = 'w-[290px]';
+    const cardMinHeightClass = 'h-[320px]';
+    const iconSizeClass = 'w-25 h-25';
+    const titleTextSize = 'text-2xl';
+    const descriptionTextSize = 'text-base';
     const cardPadding = 'p-5';
+    const internalPadding = "space-y-3"
     const borderRadius = 'rounded-[20px]';
 
     return (
@@ -149,7 +150,7 @@ const SingleServiceCard = ({ index, title, icon, description, glowTheme = 'green
                         transition-opacity duration-300`}
                 />
 
-                <div className={`space-y-2 relative z-10 flex flex-col items-center text-center ${cardMinHeightClass}`}>
+                <div className={`${internalPadding} relative z-10 flex flex-col items-center text-center ${cardMinHeightClass}`}>
                     <img
                         src={icon}
                         alt={`${title} icon`}
