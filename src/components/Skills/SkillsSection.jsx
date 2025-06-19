@@ -33,14 +33,18 @@ import typescript from "../../assets/img/skills_icons/typescript.png"
 import linux from "../../assets/img/skills_icons/linux.png"
 import nodejs from "../../assets/img/skills_icons/nodejs.png"
 import django from "../../assets/img/skills_icons/django.png"
-import mongo from "../../assets/img/skills_icons/mongo.png"
+import mongo from "../../assets/img/skills_icons/mongo.svg"
 import supabase from "../../assets/img/skills_icons/supabase.png"
 import firebase from "../../assets/img/skills_icons/firebase.png"
 import tilt from "../../assets/img/skills_icons/tilt.png"
 import poetry from "../../assets/img/skills_icons/poetry.png"
 import alembic from "../../assets/img/skills_icons/alembic.png"
-import azure from "../../assets/img/skills_icons/azure.png"
-import next_js from "../../assets/img/skills_icons/nextjs.png";
+import azure from "../../assets/img/skills_icons/azure.svg"
+import figma from "../../assets/img/skills_icons/figma.svg";
+import github_actions from "../../assets/img/skills_icons/github-actions.svg";
+import next_js from "../../assets/img/skills_icons/nextjs.svg";
+import redis from "../../assets/img/skills_icons/redis.svg";
+import swagger from "../../assets/img/skills_icons/swagger.svg";
 import react_native from "../../assets/img/skills_icons/react-native.png";
 import LanguageContext from "../LanguageContext.jsx";
 
@@ -52,12 +56,14 @@ const iconsMap = {
     flask: flask,
     django: django,
     nodejs: nodejs,
+    swagger: swagger,
 
     // ─── Frontend Technologies ───────────────────────────────
     website: frontend,
     react: reactIcon,
     html: html,
     css: css,
+    figma: figma,
     javascript: javascript,
     typescript: typescript,
     design: design,
@@ -72,11 +78,13 @@ const iconsMap = {
 
     // ─── Cloud & DevOps ──────────────────────────────────────
     cloud: cloud,
+    redis: redis,
     deploy: deploy,
     docker: docker,
     aws: aws,
     googleCloud: googleCloud,
     azure: azure,
+    githubActions: github_actions,
     tilt: tilt,
 
     // ─── Databases ───────────────────────────────────────────
@@ -108,6 +116,7 @@ const backendExpertise = [
     { id: "flask", title: "Flask" },
     { id: "django", title: "Django" },
     { id: "nodejs", title: "Node.js" },
+    { id: "swagger", title: "Swagger" },
     { id: "linux", title: "Linux" },
     { id: "postgres", title: "PostgreSQL" },
     { id: "mongo", title: "MongoDB" },
@@ -118,12 +127,13 @@ const backendExpertise = [
 
 const cloudExpertise = [
     { id: "docker", title: "Docker" },
+    { id: "redis", title: "Redis" },
     { id: "aws", title: "AWS" },
     { id: "googleCloud", title: "Google Cloud" },
     { id: "azure", title: "Azure" },
     { id: "supabase", title: "Supabase" },
     { id: "firebase", title: "Firebase" },
-    { id: "deploy", title: "CI/CD" },
+    { id: "githubActions", title: "GitHub Actions" },
     { id: "tilt", title: "Tilt" },
 ]
 
@@ -131,6 +141,7 @@ const frontendExpertise = [
     { id: "react", title: "React" },
     { id: "nextJs", title: "Next.js" },
     { id: "reactNative", title: "React Native" },
+    { id: "figma", title: "Figma" },
     { id: "typescript", title: "TypeScript" },
     { id: "html", title: "HTML" },
     { id: "css", title: "CSS" },
