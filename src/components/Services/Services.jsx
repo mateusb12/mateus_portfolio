@@ -1,11 +1,9 @@
-// Finalizado com as descrições faltantes e exibição de textos em verde com descrição abaixo do título
-
 import Tilt from 'react-parallax-tilt';
 import { motion } from 'framer-motion';
-import aws from "../../assets/img/skills_icons/aws.png"
-import googleCloud from "../../assets/img/skills_icons/google-cloud-small.png"
-import frontend from "../../assets/img/skills_icons/frontend_dev.png"
-import design from "../../assets/img/skills_icons/design.png"
+import human_brain from "../../assets/img/skills_icons/human-brain.png"
+import dashboard from "../../assets/img/skills_icons/dashboard.png"
+import login from "../../assets/img/skills_icons/login.png"
+import plug from "../../assets/img/skills_icons/plug.png"
 
 // ─── Tilt Settings ──────────────────────────────────────────────────────────────
 const tiltOptions = {
@@ -69,6 +67,17 @@ const getGlowTheme = (theme = 'green') => {
             innerGlowHover: 'group-hover:opacity-30',
             imageShadow: 'shadow shadow-violet-100/10',
             titleColor: 'text-violet-400'
+        },
+        amber: {
+            borderColor: 'border-amber-400/10',
+            borderHoverColor: 'hover:border-amber-300',
+            outerGlow: 'shadow-[0_0_15px_5px_rgba(251,191,36,0.15)]',
+            outerGlowHover: 'hover:shadow-[0_0_25px_8px_rgba(251,191,36,0.25)]',
+            innerGlowColor: 'bg-amber-400',
+            innerGlowOpacity: 'opacity-20',
+            innerGlowHover: 'group-hover:opacity-30',
+            imageShadow: 'shadow shadow-amber-100/10',
+            titleColor: 'text-amber-400'
         }
     };
 
@@ -78,27 +87,27 @@ const getGlowTheme = (theme = 'green') => {
 const services = [
     {
         title: "Automações inteligentes",
-        description: "Automatizo tarefas repetitivas em websites por meio de soluções personalizadas",
+        description: "Crio automações como bots de scraping, preenchimento de formulários, disparos de mensagens ou fluxos de aprovação",
         glowTheme: "green",
-        icon: aws,
+        icon: human_brain,
     },
     {
         title: "Plataformas internas para equipes",
         description: "Crio ferramentas sob medida para sua equipe gerenciar tarefas, clientes ou estoque (ERP, CRM, etc)",
         glowTheme: "cyan",
-        icon: googleCloud,
+        icon: dashboard,
     },
     {
         title: "Aplicações completas sob demanda",
         description: "Desenvolvo o seu MVP do zero, com autenticação, CRUDs, dashboard e deploy, ideal para validar sua ideia no mercado",
-        glowTheme: "green",
-        icon: frontend,
+        glowTheme: "amber",
+        icon: login,
     },
     {
-        title: "Content Creation",
-        description: "Produzo conteúdo visual e textual para blogs, redes sociais e materiais institucionais.",
+        title: "Integrações com APIs e serviços externos",
+        description: "Conecto seu sistema com APIs de pagamento, WhatsApp, plataformas de vendas, e muito mais",
         glowTheme: "violet",
-        icon: design,
+        icon: plug,
     },
 ];
 
@@ -117,7 +126,7 @@ const ServiceCard = ({ index, title, icon, description, glowTheme = 'green' }) =
     } = getGlowTheme(glowTheme);
 
     return (
-        <Tilt className="w-[250px]" tiltMaxAngleX={25} tiltMaxAngleY={25}>
+        <Tilt className="w-[250px]" {...tiltOptions}>
             <motion.div
                 variants={fadeIn('right', 'spring', 0.2 * index, 0.75)}
                 className={`relative group transition-all overflow-hidden p-5 rounded-[20px]
@@ -131,11 +140,11 @@ const ServiceCard = ({ index, title, icon, description, glowTheme = 'green' }) =
                         transition-opacity duration-300`}
                 />
 
-                <div className="relative z-10 flex flex-col items-center text-center min-h-[240px]">
+                <div className="space-y-2 relative z-10 flex flex-col items-center text-center min-h-[240px]">
                     <img
                         src={icon}
                         alt={`${title} icon`}
-                        className={`w-16 h-16 object-contain rounded-full ${imageShadow}`}
+                        className={`w-16 h-16 object-cover ${imageShadow}`}
                     />
                     <h3 className={`mt-4 text-lg font-bold leading-tight ${titleColor}`}>
                         {title}
