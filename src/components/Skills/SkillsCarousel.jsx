@@ -36,6 +36,18 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
     const [canScrollRight, setCanScrollRight] = useState(totalCount > carouselSize)
     const [scrollIndex,    setScrollIndex]    = useState(0)
 
+    // Scroll to a given index (bean click)
+    const handleBeanClick = (index) => {
+        const container = carouselRef.current
+        const cards     = Array.from(container.querySelectorAll('.carousel-card'))
+        if (!cards.length) return
+        const cardWidth = cards[0].offsetWidth
+        const gap       = getGap(container)
+        const step      = cardWidth + gap
+        const clamped   = Math.max(0, Math.min(index, maxIndex))
+        container.scrollTo({ left: clamped * step, behavior: 'smooth' })
+    }
+
     const snapToNearest = () => {
         const container = carouselRef.current
         const cards     = Array.from(container.querySelectorAll('.carousel-card'))
@@ -96,7 +108,6 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
     }
 
     const handlePointerDown = (e) => {
-        // start dragging but do not snap yet
         isDragging.current    = true
         pointerStartX.current = e.clientX
         scrollStartX.current  = carouselRef.current.scrollLeft
@@ -181,10 +192,11 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
 
                                     const lines = shouldSplit ? 2 : 1;
 
-                                    let allBeans = Array.from({ length: totalBeans }).map((_, idx) => (
+                                    const allBeans = Array.from({ length: totalBeans }).map((_, idx) => (
                                         <div
                                             key={idx}
-                                            className={`w-12 h-5 rounded-full border-4 box-border border-black transition-all ${
+                                            onClick={() => handleBeanClick(idx)}
+                                            className={`w-12 h-5 rounded-full border-4 box-border border-black transition-all cursor-pointer ${
                                                 idx < beansFilled
                                                     ? 'bg-green-400 shadow-lg shadow-green-400/50'
                                                     : 'bg-gray-400'
