@@ -276,6 +276,11 @@ const ExperienceCard = ({ experience, active, iconRef }) => {
     // ────────────────────────────────────────────────────────────────────────────────
     return (
         <VerticalTimelineElement
+            date={
+                <span className="hidden md:block text-[13px] text-gray-300 font-semibold">
+      {experience.date}
+    </span>
+            }
             contentStyle={{
                 backgroundColor: "#071a1a",
                 backdropFilter: "blur(1rem)",
@@ -314,9 +319,9 @@ const ExperienceCard = ({ experience, active, iconRef }) => {
                 >
                     {experience.company_name}
                 </p>
-                <span className="block text-[13px] text-gray-300 font-semibold mt-1">
-          {experience.date}
-        </span>
+                <span className="block md:hidden text-[13px] text-gray-300 font-semibold mt-1">
+    {experience.date}
+  </span>
             </div>
 
             <ul className="mt-5 list-disc ml-5 space-y-2">
@@ -387,7 +392,7 @@ const Experience = () => {
                 <h2 className={styles.sectionHeadText}>{sectionTitle}</h2>
             </motion.div>
             <div className="mt-20 flex flex-col">
-                <VerticalTimeline>
+                <VerticalTimeline layout="2-columns">
                     {items.map((exp, idx) => (
                         <ExperienceCard
                             key={exp.key}
