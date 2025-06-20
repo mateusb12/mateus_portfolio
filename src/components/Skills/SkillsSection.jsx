@@ -185,6 +185,9 @@ const SkillsSection = () => {
     const key = selectedFlag === 'usa' ? 'english' : 'portuguese';
     const lang = languageContent[key];
 
+    const desktopCarouselSize = 5;
+    const mobileCarouselSize = 1;
+
     return (
         <>
             <SkillCarousel
@@ -192,6 +195,8 @@ const SkillsSection = () => {
                 sectionSubtitle={lang.backend.subtitle}
                 skillContent={backendExpertise}
                 iconsMap={iconsMap}
+                desktopVisible={desktopCarouselSize}
+                mobileVisible={mobileCarouselSize}
             />
 
             <SkillCarousel
@@ -199,6 +204,8 @@ const SkillsSection = () => {
                 sectionSubtitle={lang.cloud.subtitle}
                 skillContent={cloudExpertise}
                 iconsMap={iconsMap}
+                desktopVisible={desktopCarouselSize}
+                mobileVisible={mobileCarouselSize}
             />
 
             <SkillCarousel
@@ -206,6 +213,8 @@ const SkillsSection = () => {
                 sectionSubtitle={lang.frontend.subtitle}
                 skillContent={frontendExpertise}
                 iconsMap={iconsMap}
+                desktopVisible={desktopCarouselSize}
+                mobileVisible={mobileCarouselSize}
             />
         </>
     );
