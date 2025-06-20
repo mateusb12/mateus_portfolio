@@ -30,113 +30,130 @@ import redis from "../../assets/img/skills_icons/redis.svg";
 import insane from "../../assets/img/experience_icons/insane.png";
 import selenium from "../../assets/img/skills_icons/selenium.svg";
 import pandas from "../../assets/img/skills_icons/pandas.png";
+import {useContext} from "react";
+import LanguageContext from "../LanguageContext.jsx";
 
-const experiences = [
-    //COPY PASTE FOR NEW EXPERIENCE - AFTER {},
-    /*
-    {
-        title: "TITLE HERE",
-        company_name: "COMPANY NAME HERE",
-        icon: icon_name_here,
-        iconBg: "#383E56",
-        date: "Month YearStart - Month YearEnd",
-        points: [
-            "Bulletpoint 1",
-            "Bulletpoint 2",
-            "Bulletpoint 3",
-            "Bulletpoint 4",
-        ],
+const textContent = {
+    english: {
+        sectionTitle: 'Experiences',
+        experiences: {
+            pontotel: {
+                title: 'Backend Developer',
+                company: 'Pontotel',
+                date: 'Mar 2025 - Jun 2025',
+                points: [
+                    'Built Google Cloud scripts to handle urgent client demands, ensuring no wait on unavailable main system features',
+                    'Refactored critical legacy validations into DDD-driven DTOs and domain classes, improving codebase data integrity',
+                    'Developed Excel importers with pre-validation, type conversion, and integration tests, preventing inconsistent data entries',
+                    'Created internal REST API for calendar monitoring with MongoDB metrics, enhancing observability and reliability'
+                ]
+            },
+            startup: {
+                title: 'Backend Lead',
+                company: 'Omnichat Startup',
+                date: 'Feb 2024 - Jun 2024',
+                points: [
+                    'Led backend sprints and task distribution with Scrum, mentoring team members and speeding up efficient deliveries',
+                    'Built Flask microservices REST APIs with JWT auth, increasing application resilience and security',
+                    'Managed and optimized PostgreSQL via ORM modeling, ensuring data integrity',
+                    'Configured webhooks and CI with React frontend, improving real-time chatbot sync'
+                ]
+            },
+            freelancer: {
+                title: 'Freelancer Developer',
+                company: 'Independent Projects',
+                date: 'Aug 2024 - Present',
+                points: [
+                    'Automated lead qualification between HubSpot and IA Social with Python scripts, eliminating manual tasks',
+                    'Implemented automated login and platform integrations, reducing response time and operational errors',
+                    'Developed validated web forms with automatic PDF generation for service orders, standardizing client communication',
+                    'Created Excel table cross-check scripts with automated CPF scraping on Claro site, generating qualified leads'
+                ]
+            },
+            insane: {
+                title: 'Intern',
+                company: 'Insane Games',
+                date: 'Jul 2021 - Feb 2022',
+                points: [
+                    'Developed backend systems for Unity games using C#',
+                    'Collaborated with Game Design and Audio teams on multidisciplinary projects',
+                    'Managed Tech Art asset pipeline in Blender from creation to Unity import',
+                    'Handled intermediate steps like UV mapping and shader creation, ensuring product quality'
+                ]
+            }
+        }
     },
-    */
-    {
-        title: "Desenvolvedor Backend",
-        company_name: "Pontotel",
-        icon: pontotel,
-        iconBg: "#000000",
-        date: "Mar 2025 - Jun 2025",
-        spanStyle: "font-semibold text-[15px]",
-        points: [
-            "Implementei scripts via Google Cloud para atender demandas urgentes de clientes, <span>garantindo que o cliente não precisasse aguardar por funcionalidades ainda indisponíveis no sistema principal</span>",
-            "Refatorei validações críticas de código legado para a nova arquitetura, utilizando DTOs, classes de validação e integração de domínio, <span>sempre seguindo o Domain Driven Development (DDD) e melhorando a integridade dos dados na base de código</span>",
-            "Desenvolvi importadores com processos de pré-validação a partir de planilhas Excel, conversores de tipo e testes de integração, <span>evitando o registro de dados inconsistentes no banco de dados</span>",
-            "Criei uma API restful interna para monitoramento de calendário com métricas extraídas do MongoDB, utilizando unidade de trabalho e cobertura de testes, <span>garantindo a observabilidade e confiabilidade do componente</span>",
-        ],
-        skills: [
-            {icon: python, name: "Python"},
-            {icon: flask, name: "Flask"},
-            {icon: fastapi, name: "FastAPI"},
-            {icon: celery, name: "Celery"},
-            {icon: pytest, name: "Pytest"},
-            {icon: linux, name: "Linux"},
-            {icon: docker, name: "Docker"},
-            {icon: kubernetes, name: "Kubernetes"},
-            {icon: tilt, name: "Tilt"},
-            {icon: postgres, name: "PostgreSQL"},
-            {icon: mongo, name: "MongoDB"},
-            {icon: redis, name: "Redis"},
-            {icon: google_cloud, name: "Google Cloud"},
+    portuguese: {
+        sectionTitle: 'Experiências',
+        experiences: {
+            pontotel: {
+                title: 'Desenvolvedor Backend',
+                company: 'Pontotel',
+                date: 'Mar 2025 - Jun 2025',
+                points: [
+                    'Implementei scripts via Google Cloud para atender demandas urgentes de clientes, garantindo que o cliente não precisasse aguardar por funcionalidades indisponíveis',
+                    'Refatorei validações críticas de código legado usando DTOs e DDD, melhorando a integridade dos dados',
+                    'Desenvolvi importadores Excel com pré-validação, conversão de tipo e testes de integração, evitando dados inconsistentes',
+                    'Criei API REST interna para monitoramento de calendário com métricas do MongoDB, garantindo observabilidade e confiabilidade'
+                ]
+            },
+            startup: {
+                title: 'Backend Lead',
+                company: 'Omnichat Startup',
+                date: 'Fev 2024 - Jun 2024',
+                points: [
+                    'Coordenei sprints backend e tarefas com Scrum, mentorando a equipe e otimizando entregas',
+                    'Desenvolvi APIs RESTful em Flask com microsserviços e JWT, aumentando resiliência e segurança',
+                    'Gerenciei e otimizei PostgreSQL via ORM, garantindo integridade dos dados',
+                    'Configurei webhooks e CI com React, melhorando sincronização em tempo real do chatbot'
+                ]
+            },
+            freelancer: {
+                title: 'Desenvolvedor Freelancer',
+                company: 'Projetos Independentes',
+                date: 'Ago 2024 - Atualmente',
+                points: [
+                    'Automatizei qualificação de leads entre HubSpot e IA Social com scripts Python, eliminando tarefas manuais',
+                    'Implementei login automatizado e integrações entre plataformas, reduzindo tempo de resposta e erros',
+                    'Desenvolvi formulário web validado e geração automática de PDF para ordens de serviço, padronizando atendimento',
+                    'Criei script de cruzamento de tabelas Excel com scraping de CPF no site da Claro, gerando leads qualificados'
+                ]
+            },
+            insane: {
+                title: 'Estagiário',
+                company: 'Insane Games',
+                date: 'Jul 2021 - Fev 2022',
+                points: [
+                    'Desenvolvi sistemas backend para jogos em Unity com C#',
+                    'Colaborei com Game Design e Áudio em projetos multidisciplinares',
+                    'Gerenciei pipeline de assets Tech Art no Blender até import no Unity',
+                    'Responsável por mapeamento UV e criação de shaders, garantindo qualidade'
+                ]
+            }
+        }
+    }
+};
+
+const baseExperiences = [
+    { key: 'pontotel', icon: pontotel, iconBg: '#000000', skills: [
+            {icon: python, name: 'Python'}, {icon: flask, name: 'Flask'}, {icon: fastapi, name: 'FastAPI'}, {icon: celery, name: 'Celery'},
+            {icon: pytest, name: 'Pytest'}, {icon: linux, name: 'Linux'}, {icon: docker, name: 'Docker'}, {icon: kubernetes, name: 'Kubernetes'},
+            {icon: tilt, name: 'Tilt'}, {icon: postgres, name: 'PostgreSQL'}, {icon: mongo, name: 'MongoDB'}, {icon: redis, name: 'Redis'},
+            {icon: google_cloud, name: 'Google Cloud'}
         ]
     },
-    {
-        title: "Backend Lead",
-        company_name: "Omnichat Startup",
-        icon: startup,
-        iconBg: "#000000",
-        date: "Feb 2024 - Jun 2024",
-        spanStyle: "font-semibold text-[15px]",
-        points: [
-            "Coordenei os sprints da equipe de backend e distribuí as tarefas utilizando Scrum. Fiz mentoria e code review dos membros da equipe, <span>resultando em entregas mais rápidas e eficientes</span>",
-            "Desenvolvi APIs RESTful em Flask com arquitetura de microsserviços e autenticação via tokens JWT, <span>aumentando a resiliência e segurança da aplicação como um todo</span>",
-            "Fiz a gestão e a otimização do banco de dados PostgreSQL, incluindo modelagem via ORM, <span>garantindo a integridade dos dados</span>",
-            "Configurei webhooks e integração contínua com o frontend em React, <span>melhorando a sincronização em tempo real do chatbot</span>"
-        ],
-        skills: [
-            {icon: python, name: "Python"},
-            {icon: flask, name: "Flask"},
-            {icon: websocket, name: "Webhook"},
-            {icon: swagger, name: "Swagger"},
-            {icon: dialogflow, name: "Dialog Flow"},
-            {icon: react, name: "React"},
-            {icon: docker, name: "Docker"},
-            {icon: postgres, name: "PostgreSQL"},
-            {icon: aws, name: "AWS"},
+    { key: 'startup', icon: startup, iconBg: '#000000', skills: [
+            {icon: python, name: 'Python'}, {icon: flask, name: 'Flask'}, {icon: websocket, name: 'Webhook'}, {icon: swagger, name: 'Swagger'},
+            {icon: dialogflow, name: 'Dialog Flow'}, {icon: react, name: 'React'}, {icon: docker, name: 'Docker'}, {icon: postgres, name: 'PostgreSQL'},
+            {icon: aws, name: 'AWS'}
         ]
     },
-    {
-        title: "Desenvolvedor Freelancer",
-        company_name: "Projetos Independentes",
-        icon: freelancer,
-        iconBg: "#000000",
-        date: "Ago 2024 - Atualmente",
-        spanStyle: "font-semibold text-[15px]",
-        points: [
-            "Automatizei o fluxo de qualificação de leads entre HubSpot e IA Social com scripts Python, <span>eliminando tarefas manuais e acelerando a comunicação via WhatsApp</span>",
-            "Implementei login automatizado e integração entre plataformas, <span>reduzindo o tempo de resposta e os erros operacionais no processo comercial</span>",
-            "Desenvolvi um sistema de ordens de serviço com formulário web validado e geração automática de PDF, <span>padronizando o atendimento e profissionalizando a comunicação com o cliente</span>",
-            "Criei um script para cruzamento de tabelas Excel com scraping automatizado de CPF no site da Claro, <span>permitindo identificar clientes ativos e gerar leads qualificados</span>"
-        ],
-        skills: [
-            {icon: python, name: "Python"},
-            {icon: selenium, name: "Selenium"},
-            {icon: pandas, name: "Pandas"},
+    { key: 'freelancer', icon: freelancer, iconBg: '#000000', skills: [
+            {icon: python, name: 'Python'}, {icon: selenium, name: 'Selenium'}, {icon: pandas, name: 'Pandas'}
         ]
     },
-    {
-        title: "Estagiário",
-        company_name: "Insane Games",
-        icon: insane,
-        iconBg: "#000000",
-        date: "Jul 2021 - Fev 2022",
-        points: [
-            "Desenvolvi sistemas backend para jogos em Unity utilizando C#",
-            "Colaborei com as equipes de Game Design e Áudio em projetos multidisciplinares",
-            "Fiz a gestão do processo de produção de assets na área de Tech Art usando Blender, desde a criação até a importação final no Unity",
-            "Fui responsável por etapas intermediárias como mapeamento UV e shaders, garantindo a qualidade do produto"
-        ],
-        skills: [
-            {icon: csharp, name: "C#"},
-            {icon: unity, name: "Unity"},
-            {icon: blender, name: "Blender"}
+    { key: 'insane', icon: insane, iconBg: '#000000', skills: [
+            {icon: csharp, name: 'C#'}, {icon: unity, name: 'Unity'}, {icon: blender, name: 'Blender'}
         ]
     }
 ];
@@ -245,7 +262,6 @@ const ExperienceCard = ({experience}) => {
                 boxShadow: 'none'
             }}
             contentArrowStyle={{borderRight: '15px solid  #FFFFFF'}}
-            // date={experience.date}
             iconStyle={{background: experience.iconBg}}
             icon={
                 <div className="relative w-full h-full overflow-hidden rounded-full z-10">
@@ -294,20 +310,25 @@ const ExperienceCard = ({experience}) => {
 };
 
 const Experience = () => {
+    const { selectedFlag } = useContext(LanguageContext);
+    const lang = selectedFlag === 'usa' ? 'english' : 'portuguese';
+    const { sectionTitle, experiences } = textContent[lang];
+    const items = baseExperiences.map((base) => ({
+        ...base,
+        ...experiences[base.key]
+    }));
     return (
         <>
             <motion.div>
-                <h2 className={styles.sectionHeadText}>Experiências</h2>
+                <h2 className={styles.sectionHeadText}>{sectionTitle}</h2>
             </motion.div>
             <div className="mt-20 flex flex-col">
                 <VerticalTimeline>
-                    {experiences.map((experience, index) => (
-                        <ExperienceCard key={index} experience={experience}/>
-                    ))}
+                    {items.map((exp, idx) => <ExperienceCard key={idx} experience={exp} />)}
                 </VerticalTimeline>
             </div>
         </>
-    )
+    );
 }
 
 export default SectionWrapper(Experience, "experience")
