@@ -188,7 +188,7 @@ const SectionWrapper = (Component, idName) =>
         )
     }
 
-const ExperienceCard = ({ experience }) => {
+const ExperienceCard = ({experience}) => {
     // Split skills into two rows if more than 8
     const renderSkillRows = () => {
         if (!Array.isArray(experience.skills) || experience.skills.length === 0) return null;
@@ -205,7 +205,8 @@ const ExperienceCard = ({ experience }) => {
                                 alt={`${skill.name} icon`}
                                 className="h-11 w-11 object-contain transition-transform duration-200 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
                             />
-                            <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                            <span
+                                className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                 {skill.name}
               </span>
                         </div>
@@ -223,7 +224,8 @@ const ExperienceCard = ({ experience }) => {
                             alt={`${skill.name} icon`}
                             className="h-11 w-11 object-contain transition-transform duration-200 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
                         />
-                        <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        <span
+                            className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
               {skill.name}
             </span>
                     </div>
@@ -242,15 +244,16 @@ const ExperienceCard = ({ experience }) => {
                 borderRadius: '0.75rem',
                 boxShadow: 'none'
             }}
-            contentArrowStyle={{ borderRight: '15px solid  #FFFFFF' }}
-            date={experience.date}
-            iconStyle={{ background: experience.iconBg }}
+            contentArrowStyle={{borderRight: '15px solid  #FFFFFF'}}
+            // date={experience.date}
+            iconStyle={{background: experience.iconBg}}
             icon={
                 <div className="relative w-full h-full overflow-hidden rounded-full z-10">
                     <img
                         src={experience.icon}
                         alt={experience.company_name}
-                        className="absolute top-1/2 left-1/2 w-[160%] h-[160%] -translate-x-1/2 -translate-y-1/2 object-contain"
+                        draggable={false}
+                        className="absolute top-1/2 left-1/2 w-[160%] h-[160%] -translate-x-1/2 -translate-y-1/2 object-contain pointer-events-none select-none"
                     />
                 </div>
             }
@@ -259,9 +262,12 @@ const ExperienceCard = ({ experience }) => {
                 <h3 className="text-white text-[24px] font-bold">
                     {experience.title}
                 </h3>
-                <p className="text-secondary text-[16px] font-semibold" style={{ margin: 0 }}>
+                <p className="text-secondary text-[22px] font-semibold underline" style={{margin: 0}}>
                     {experience.company_name}
                 </p>
+                <span className="block text-[13px] text-gray-300 font-semibold mt-1">
+        {experience.date}
+    </span>
             </div>
 
             <ul className="mt-5 list-disc ml-5 space-y-2">
