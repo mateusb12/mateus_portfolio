@@ -8,23 +8,23 @@ const getGap = (el) => {
 
 // ─── LAYOUT CONFIGS ─────────────────────────────────────────────────────────────
 const desktopLayoutConfigs = {
-    1: { iconPx: 160, gapPx: 48, fontClass: 'text-5xl' },
-    2: { iconPx: 148, gapPx: 46, fontClass: 'text-4xl' },
-    3: { iconPx: 136, gapPx: 44, fontClass: 'text-3xl' },
-    4: { iconPx: 128, gapPx: 42, fontClass: 'text-2xl' },
-    5: { iconPx: 124, gapPx: 41, fontClass: 'text-xl'  },
-    6: { iconPx: 120, gapPx: 40, fontClass: 'text-xl'  },
-    7: { iconPx: 104, gapPx: 36, fontClass: 'text-lg'  },
-    8: { iconPx:  92, gapPx: 32, fontClass: 'text-base'},
-    9: { iconPx:  80, gapPx: 28, fontClass: 'text-sm'  },
-    10: { iconPx:  68, gapPx: 24, fontClass: 'text-xs'  }
+    1: { iconPx: 190, gapPx: 40, fontClass: 'text-5xl' },
+    2: { iconPx: 180, gapPx: 36, fontClass: 'text-5xl' },
+    3: { iconPx: 170, gapPx: 32, fontClass: 'text-4xl' },
+    4: { iconPx: 160, gapPx: 28, fontClass: 'text-3xl' },
+    5: { iconPx: 150, gapPx: 24, fontClass: 'text-2xl' },
+    6: { iconPx: 140, gapPx: 20, fontClass: 'text-xl' },
+    7: { iconPx: 130, gapPx: 16, fontClass: 'text-lg' },
+    8: { iconPx: 120, gapPx: 12, fontClass: 'text-base' },
+    9: { iconPx: 110, gapPx: 8,  fontClass: 'text-sm' },
+    10:{ iconPx: 100, gapPx: 4,  fontClass: 'text-sm' }
 }
 
 // Only allow up to n = 4 on mobile with tighter spacing
 const mobileLayoutConfigs = {
     1: { iconPx: 100, gapPx: 12, fontClass: 'text-2xl' },
     2: { iconPx:  80, gapPx:  8, fontClass: 'text-lg'  },
-    3: { iconPx:  70, gapPx:  6, fontClass: 'text-base'},
+    3: { iconPx:  100, gapPx:  6, fontClass: 'text-base'},
     4: { iconPx:  60, gapPx:  4, fontClass: 'text-sm'  }
 }
 
@@ -207,8 +207,8 @@ const SkillCarousel = ({
                                     {skillContent.map((skill) => (
                                         <div
                                             key={skill.id}
-                                            className="carousel-card flex-shrink-0 flex flex-col items-center"
-                                            style={{ flexBasis: cardBasis, width: cardBasis }}
+                                            className="carousel-card flex-shrink-0 flex flex-col items-center gap-4"
+                                            style={{ flexBasis: `${cardBasis}`}}
                                         >
                                             <img
                                                 src={iconsMap[skill.id]}
