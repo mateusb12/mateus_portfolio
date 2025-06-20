@@ -30,7 +30,7 @@ import redis from "../../assets/img/skills_icons/redis.svg";
 import insane from "../../assets/img/experience_icons/insane.png";
 import selenium from "../../assets/img/skills_icons/selenium.svg";
 import pandas from "../../assets/img/skills_icons/pandas.png";
-import {useContext} from "react";
+import React, {forwardRef, useContext, useEffect, useRef, useState} from "react";
 import LanguageContext from "../LanguageContext.jsx";
 
 const textContent = {
@@ -135,24 +135,43 @@ const textContent = {
 };
 
 const baseExperiences = [
-    { key: 'pontotel', icon: pontotel, iconBg: '#000000', skills: [
-            {icon: python, name: 'Python'}, {icon: flask, name: 'Flask'}, {icon: fastapi, name: 'FastAPI'}, {icon: celery, name: 'Celery'},
-            {icon: pytest, name: 'Pytest'}, {icon: linux, name: 'Linux'}, {icon: docker, name: 'Docker'}, {icon: kubernetes, name: 'Kubernetes'},
-            {icon: tilt, name: 'Tilt'}, {icon: postgres, name: 'PostgreSQL'}, {icon: mongo, name: 'MongoDB'}, {icon: redis, name: 'Redis'},
+    {
+        key: 'pontotel', icon: pontotel, iconBg: '#000000', skills: [
+            {icon: python, name: 'Python'}, {icon: flask, name: 'Flask'}, {
+                icon: fastapi,
+                name: 'FastAPI'
+            }, {icon: celery, name: 'Celery'},
+            {icon: pytest, name: 'Pytest'}, {icon: linux, name: 'Linux'}, {
+                icon: docker,
+                name: 'Docker'
+            }, {icon: kubernetes, name: 'Kubernetes'},
+            {icon: tilt, name: 'Tilt'}, {icon: postgres, name: 'PostgreSQL'}, {
+                icon: mongo,
+                name: 'MongoDB'
+            }, {icon: redis, name: 'Redis'},
             {icon: google_cloud, name: 'Google Cloud'}
         ]
     },
-    { key: 'startup', icon: startup, iconBg: '#000000', skills: [
-            {icon: python, name: 'Python'}, {icon: flask, name: 'Flask'}, {icon: websocket, name: 'Webhook'}, {icon: swagger, name: 'Swagger'},
-            {icon: dialogflow, name: 'Dialog Flow'}, {icon: react, name: 'React'}, {icon: docker, name: 'Docker'}, {icon: postgres, name: 'PostgreSQL'},
+    {
+        key: 'startup', icon: startup, iconBg: '#000000', skills: [
+            {icon: python, name: 'Python'}, {icon: flask, name: 'Flask'}, {
+                icon: websocket,
+                name: 'Webhook'
+            }, {icon: swagger, name: 'Swagger'},
+            {icon: dialogflow, name: 'Dialog Flow'}, {icon: react, name: 'React'}, {
+                icon: docker,
+                name: 'Docker'
+            }, {icon: postgres, name: 'PostgreSQL'},
             {icon: aws, name: 'AWS'}
         ]
     },
-    { key: 'freelancer', icon: freelancer, iconBg: '#000000', skills: [
+    {
+        key: 'freelancer', icon: freelancer, iconBg: '#000000', skills: [
             {icon: python, name: 'Python'}, {icon: selenium, name: 'Selenium'}, {icon: pandas, name: 'Pandas'}
         ]
     },
-    { key: 'insane', icon: insane, iconBg: '#000000', skills: [
+    {
+        key: 'insane', icon: insane, iconBg: '#000000', skills: [
             {icon: csharp, name: 'C#'}, {icon: unity, name: 'Unity'}, {icon: blender, name: 'Blender'}
         ]
     }
@@ -205,11 +224,14 @@ const SectionWrapper = (Component, idName) =>
         )
     }
 
-const ExperienceCard = ({experience}) => {
-    // Split skills into two rows if more than 8
+const ExperienceCard = ({ experience, active, iconRef }) => {
+    // ────────────────────────────────────────────────────────────────────────────────
+    // Renders skills: one row if ≤8, two rows if >8
+    // ────────────────────────────────────────────────────────────────────────────────
     const renderSkillRows = () => {
-        if (!Array.isArray(experience.skills) || experience.skills.length === 0) return null;
-        const skills = experience.skills;
+        const skills = experience.skills || [];
+        if (skills.length === 0) return null;
+
         if (skills.length > 8) {
             const half = Math.ceil(skills.length / 2);
             const rows = [skills.slice(0, half), skills.slice(half)];
@@ -222,8 +244,7 @@ const ExperienceCard = ({experience}) => {
                                 alt={`${skill.name} icon`}
                                 className="h-11 w-11 object-contain transition-transform duration-200 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
                             />
-                            <span
-                                className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                            <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                 {skill.name}
               </span>
                         </div>
@@ -231,7 +252,7 @@ const ExperienceCard = ({experience}) => {
                 </div>
             ));
         }
-        // For 8 or fewer skills, render a single row
+
         return (
             <div className="mt-7 flex flex-wrap justify-center w-full gap-2">
                 {skills.map((skill, idx) => (
@@ -241,8 +262,7 @@ const ExperienceCard = ({experience}) => {
                             alt={`${skill.name} icon`}
                             className="h-11 w-11 object-contain transition-transform duration-200 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
                         />
-                        <span
-                            className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
               {skill.name}
             </span>
                     </div>
@@ -251,20 +271,30 @@ const ExperienceCard = ({experience}) => {
         );
     };
 
+    // ────────────────────────────────────────────────────────────────────────────────
+    // Main render
+    // ────────────────────────────────────────────────────────────────────────────────
     return (
         <VerticalTimelineElement
             contentStyle={{
-                backgroundColor: '#071a1a',
-                backdropFilter: 'blur(1rem)',
-                WebkitBackdropFilter: 'blur(1rem)',
-                color: '#fff',
-                borderRadius: '0.75rem',
-                boxShadow: 'none'
+                backgroundColor: "#071a1a",
+                backdropFilter: "blur(1rem)",
+                WebkitBackdropFilter: "blur(1rem)",
+                color: "#fff",
+                borderRadius: "0.75rem",
+                boxShadow: "none",
             }}
-            contentArrowStyle={{borderRight: '15px solid  #FFFFFF'}}
-            iconStyle={{background: experience.iconBg}}
+            contentArrowStyle={{ borderRight: "15px solid #FFFFFF" }}
+            iconStyle={{
+                background: experience.iconBg,
+                border: active ? "3px solid #22c55e" : "3px solid transparent",
+                transition: "border 200ms ease",
+            }}
             icon={
-                <div className="relative w-full h-full overflow-hidden rounded-full z-10">
+                <div
+                    ref={iconRef}
+                    className="relative w-full h-full overflow-hidden rounded-full z-10"
+                >
                     <img
                         src={experience.icon}
                         alt={experience.company_name}
@@ -278,12 +308,15 @@ const ExperienceCard = ({experience}) => {
                 <h3 className="text-white text-[24px] font-bold">
                     {experience.title}
                 </h3>
-                <p className="text-secondary text-[22px] font-semibold underline" style={{margin: 0}}>
+                <p
+                    className="text-secondary text-[22px] font-semibold underline"
+                    style={{ margin: 0 }}
+                >
                     {experience.company_name}
                 </p>
                 <span className="block text-[13px] text-gray-300 font-semibold mt-1">
-        {experience.date}
-    </span>
+          {experience.date}
+        </span>
             </div>
 
             <ul className="mt-5 list-disc ml-5 space-y-2">
@@ -295,9 +328,7 @@ const ExperienceCard = ({experience}) => {
                             className="text-white-100 font-thin text-[14px] pl-1 tracking-wider"
                         >
                             {before}
-                            {highlight && (
-                                <span className={experience.spanStyle}>{highlight}</span>
-                            )}
+                            {highlight && <span className={experience.spanStyle}>{highlight}</span>}
                             {after}
                         </li>
                     );
@@ -309,14 +340,47 @@ const ExperienceCard = ({experience}) => {
     );
 };
 
+
 const Experience = () => {
     const { selectedFlag } = useContext(LanguageContext);
-    const lang = selectedFlag === 'usa' ? 'english' : 'portuguese';
+    const lang = selectedFlag === "usa" ? "english" : "portuguese";
     const { sectionTitle, experiences } = textContent[lang];
+
+    // merge your baseExperiences with the localized text
     const items = baseExperiences.map((base) => ({
         ...base,
-        ...experiences[base.key]
+        ...experiences[base.key],
     }));
+
+    // which index is currently “active”
+    const [activeIdx, setActiveIdx] = useState(null);
+
+    // an array of refs, one per card
+    const cardRefs = useRef([]);
+    if (cardRefs.current.length !== items.length) {
+        cardRefs.current = items.map(() => React.createRef());
+    }
+
+    useEffect(() => {
+        const obs = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        // find which card’s ref matched
+                        const idx = cardRefs.current.findIndex((r) => r.current === entry.target);
+                        if (idx !== -1) setActiveIdx(idx);
+                    }
+                });
+            },
+            { threshold: 0.5 }
+        );
+
+        cardRefs.current.forEach((r) => {
+            if (r.current) obs.observe(r.current);
+        });
+        return () => obs.disconnect();
+    }, [items]);
+
     return (
         <>
             <motion.div>
@@ -324,11 +388,19 @@ const Experience = () => {
             </motion.div>
             <div className="mt-20 flex flex-col">
                 <VerticalTimeline>
-                    {items.map((exp, idx) => <ExperienceCard key={idx} experience={exp} />)}
+                    {items.map((exp, idx) => (
+                        <ExperienceCard
+                            key={exp.key}
+                            ref={cardRefs.current[idx]}
+                            iconRef={cardRefs.current[idx]}
+                            experience={exp}
+                            active={idx === activeIdx}
+                        />
+                    ))}
                 </VerticalTimeline>
             </div>
         </>
     );
-}
+};
 
 export default SectionWrapper(Experience, "experience")
