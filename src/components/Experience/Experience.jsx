@@ -12,10 +12,24 @@ import pytest from "../../assets/img/skills_icons/pytest.svg"
 import linux from "../../assets/img/skills_icons/linux.png"
 import docker from "../../assets/img/skills_icons/docker.png"
 import kubernetes from "../../assets/img/skills_icons/kubernetes.svg"
-import html from "../../assets/img/skills_icons/html.png"
-import css from "../../assets/img/skills_icons/css.png"
-import sql from "../../assets/img/skills_icons/sql.png"
-import git from "../../assets/img/skills_icons/git.png"
+import postgres from "../../assets/img/skills_icons/postgres.png"
+import mongo from "../../assets/img/skills_icons/mongo.svg"
+import tilt from "../../assets/img/skills_icons/tilt.png"
+import blender from "../../assets/img/skills_icons/blender.svg"
+import csharp from "../../assets/img/skills_icons/csharp.svg"
+import unity from "../../assets/img/skills_icons/unity.svg"
+import freelancer from "../../assets/img/experience_icons/freelancer.png"
+import react from "../../assets/img/skills_icons/react.png"
+import websocket from "../../assets/img/skills_icons/websocket.svg"
+import startup from "../../assets/img/experience_icons/startup.svg"
+import swagger from "../../assets/img/skills_icons/swagger.svg"
+import google_cloud from "../../assets/img/skills_icons/google-cloud.png"
+import aws from "../../assets/img/skills_icons/aws.png"
+import dialogflow from "../../assets/img/skills_icons/dialogflow.svg"
+import redis from "../../assets/img/skills_icons/redis.svg";
+import insane from "../../assets/img/experience_icons/insane.png";
+import selenium from "../../assets/img/skills_icons/selenium.svg";
+import pandas from "../../assets/img/skills_icons/pandas.png";
 
 const experiences = [
     //COPY PASTE FOR NEW EXPERIENCE - AFTER {},
@@ -34,13 +48,12 @@ const experiences = [
         ],
     },
     */
-    //EXP-VERTEBRA
     {
         title: "Desenvolvedor Backend",
         company_name: "Pontotel",
         icon: pontotel,
         iconBg: "#000000",
-        date: "Jan 2023 - Apr 2024",
+        date: "Mar 2025 - Jun 2025",
         spanStyle: "font-semibold text-[15px]",
         points: [
             "Implementei scripts via Google Cloud para atender demandas urgentes de clientes, <span>garantindo que o cliente não precisasse aguardar por funcionalidades ainda indisponíveis no sistema principal</span>",
@@ -49,126 +62,83 @@ const experiences = [
             "Criei uma API restful interna para monitoramento de calendário com métricas extraídas do MongoDB, utilizando unidade de trabalho e cobertura de testes, <span>garantindo a observabilidade e confiabilidade do componente</span>",
         ],
         skills: [
-            { icon: python, name: "Python" },
-            { icon: flask, name: "Flask" },
-            { icon: celery, name: "Celery" },
-            { icon: fastapi, name: "FastAPI" },
-            { icon: pytest, name: "Pytest" },
-            { icon: linux, name: "Linux" },
-            { icon: docker, name: "Docker" },
-            { icon: kubernetes, name: "Kubernetes" }
+            {icon: python, name: "Python"},
+            {icon: flask, name: "Flask"},
+            {icon: fastapi, name: "FastAPI"},
+            {icon: celery, name: "Celery"},
+            {icon: pytest, name: "Pytest"},
+            {icon: linux, name: "Linux"},
+            {icon: docker, name: "Docker"},
+            {icon: kubernetes, name: "Kubernetes"},
+            {icon: tilt, name: "Tilt"},
+            {icon: postgres, name: "PostgreSQL"},
+            {icon: mongo, name: "MongoDB"},
+            {icon: redis, name: "Redis"},
+            {icon: google_cloud, name: "Google Cloud"},
         ]
     },
-    //EXP-TREMA
     {
-        title: "Founder / Webdeveloper",
-        company_name: "Trema Labs",
-        icon: html,
+        title: "Backend Lead",
+        company_name: "Omnichat Startup",
+        icon: startup,
         iconBg: "#000000",
-        date: "Jun 2022 - Apr 2024",
-        /*
+        date: "Feb 2024 - Jun 2024",
+        spanStyle: "font-semibold text-[15px]",
         points: [
-            "Founded Trema Labs with a mission to provide top-notch web development and application creation services.",
-            "Developing web and mobile applications that meet the highest standards of quality, functionality, and user experience.",
-            "Utilizing HTML, CSS, and React.js, among other technologies, to create interactive, robust, and user-friendly web and mobile applications.",
-            "Maintaining a hands-on approach in overseeing all aspects of the business from operations to technical development, ensuring alignment with our mission and goals.",
+            "Coordenei os sprints da equipe de backend e distribuí as tarefas utilizando Scrum. Fiz mentoria e code review dos membros da equipe, <span>resultando em entregas mais rápidas e eficientes</span>",
+            "Desenvolvi APIs RESTful em Flask com arquitetura de microsserviços e autenticação via tokens JWT, <span>aumentando a resiliência e segurança da aplicação como um todo</span>",
+            "Fiz a gestão e a otimização do banco de dados PostgreSQL, incluindo modelagem via ORM, <span>garantindo a integridade dos dados</span>",
+            "Configurei webhooks e integração contínua com o frontend em React, <span>melhorando a sincronização em tempo real do chatbot</span>"
         ],
-        */
-        points: [
-            "Established Trema Labs to deliver exceptional web and app solutions.",
-            "Developed applications prioritizing quality, functionality, and user experience.",
-            "Led the entire business spectrum, from operations to technical innovations.",
-        ],
+        skills: [
+            {icon: python, name: "Python"},
+            {icon: flask, name: "Flask"},
+            {icon: websocket, name: "Webhook"},
+            {icon: swagger, name: "Swagger"},
+            {icon: dialogflow, name: "Dialog Flow"},
+            {icon: react, name: "React"},
+            {icon: docker, name: "Docker"},
+            {icon: postgres, name: "PostgreSQL"},
+            {icon: aws, name: "AWS"},
+        ]
     },
-    //EXP-RUSESP
     {
-        title: "Russian-Spanish Translator",
-        company_name: "Freelance",
-        icon: css,
-        iconBg: "#383E56",
-        date: "Jul 2021 - Present",
-        /*
-        points: [
-            "Translating literary works from Russian to Spanish, preserving the authors' voice and narrative style in the translations.",
-            "Working extensively with the masterpieces of writers such as Boris Akunin, Vladimir Sorokin, Mikhail Lermontov, and Katya Metelitsa.",
-            "Delivering high-quality translations that resonate with the Spanish-speaking audience, fostering cross-cultural understanding and appreciation for Russian literature.",
-            "Working independently to manage all aspects of the freelance translation process, including client communication, project management, and deadline adherence.",
-            "Thoroughly researching cultural, historical, and linguistic nuances to ensure accurate and contextually appropriate translations.",
-            "Continually updating language skills and knowledge of cultural changes, ensuring that translations remain contemporary and engaging for the target audience.",
-            "Maintaining confidentiality and professional discretion as per industry standards and client requirements.",
-        ],
-        */
-        points: [
-            "Specialized in translating iconic literary works from Russian to Spanish, preserving the essence and style of the original text.",
-            "Handled translations for various works, including those of Boris Akunin and Mikhail Lermontov, among others.",
-            "Navigated the challenges of freelance work, ensuring accurate translations, timely deliveries, and maintaining client confidentiality.",
-        ],
-    },
-    //EXP-STEAKS
-    {
-        title: "Content Creator / Social Media Manager",
-        company_name: "@SteakSteakSteaks (IG Page)",
-        icon: sql,
+        title: "Desenvolvedor Freelancer",
+        company_name: "Projetos Independentes",
+        icon: freelancer,
         iconBg: "#000000",
-        date: "Oct 2020 - Present",
-        /*
+        date: "Ago 2024 - Atualmente",
+        spanStyle: "font-semibold text-[15px]",
         points: [
-            "Creating engaging and appetizing content, focusing on providing my audience with insights into the world's best steaks.",
-            "Managing the Instagram profile, curating content in both Portuguese and English to cater to a diverse audience.",
-            "Photographing and filming all content independently, ensuring each post accurately represents each individual experience.",
-            "Actively sourcing new steaks and restaurants to feature, staying on top of trends and delivering fresh content to followers.",
-            "Maintaining a regular posting schedule and ensuring high-quality visual and written content to keep followers engaged and informed.",
+            "Automatizei o fluxo de qualificação de leads entre HubSpot e IA Social com scripts Python, <span>eliminando tarefas manuais e acelerando a comunicação via WhatsApp</span>",
+            "Implementei login automatizado e integração entre plataformas, <span>reduzindo o tempo de resposta e os erros operacionais no processo comercial</span>",
+            "Desenvolvi um sistema de ordens de serviço com formulário web validado e geração automática de PDF, <span>padronizando o atendimento e profissionalizando a comunicação com o cliente</span>",
+            "Criei um script para cruzamento de tabelas Excel com scraping automatizado de CPF no site da Claro, <span>permitindo identificar clientes ativos e gerar leads qualificados</span>"
         ],
-        */
-        points: [
-            "Produced and curated content, spotlighting global steak restaurants, with a hands-on approach to photography and videography.",
-            "Effectively managed the Instagram profile, delivering bilingual (Portuguese and English) content to cater to a broader audience.",
-            "Actively sought out and showcased new steak experiences, ensuring content remains fresh and relevant.",
-            "Upheld a consistent posting schedule, emphasizing both visual allure and informative value to engage followers.",
-        ],
+        skills: [
+            {icon: python, name: "Python"},
+            {icon: selenium, name: "Selenium"},
+            {icon: pandas, name: "Pandas"},
+        ]
     },
-    //EXP-NEURALUME
     {
-        title: "Localization Manager",
-        company_name: "Neuralume",
-        icon: git,
-        iconBg: "#11112b",
-        date: "Oct 2020 - Sep 2021",
-        /*
+        title: "Estagiário",
+        company_name: "Insane Games",
+        icon: insane,
+        iconBg: "#000000",
+        date: "Jul 2021 - Fev 2022",
         points: [
-            "Managed the localization process at Neuralume, ensuring our monitoring systems, transmission, and data analytics tools were accessible and effective across various geographical locations and cultures.",
-            "Developed and implemented localization strategies and processes to optimize efficiency and ensure consistent messaging across different markets.",
-            "Led quality assurance checks for localized content, ensuring consistency, accuracy, and cultural appropriateness.",
+            "Desenvolvi sistemas backend para jogos em Unity utilizando C#",
+            "Colaborei com as equipes de Game Design e Áudio em projetos multidisciplinares",
+            "Fiz a gestão do processo de produção de assets na área de Tech Art usando Blender, desde a criação até a importação final no Unity",
+            "Fui responsável por etapas intermediárias como mapeamento UV e shaders, garantindo a qualidade do produto"
         ],
-        */
-        points: [
-            "Ensured Neuralume's tools were globally accessible and culturally apt.",
-            "Championed efficient localization strategies for consistent messaging.",
-            "Oversaw quality checks for content integrity and relevance.",
-        ],
-    },
-    //EXP-FREONOMA
-    {
-        title: "Travel Blogger / Content Creator",
-        company_name: "freonoma.travel.blog",
-        icon: git,
-        iconBg: "#233565",
-        date: "Jan 2020 - Present",
-        /*
-        points: [
-            "Sharing personal reviews and recommendations of off-the-beaten-path destinations with a Portuguese-speaking audience.",
-            "Generating unique and engaging content, including written blog posts and high-quality photos to accompany travel reviews and recommendations, enhancing the visual appeal of the blog.",
-            "Handling all aspects of blog operation, from content creation to website management using WordPress.",
-            "Exploring unique and lesser-known travel destinations, providing readers with fresh and exciting travel ideas.",
-        ],
-        */
-        points: [
-            "Shared unique travel tales and recommendations for a Portuguese audience.",
-            "Produced vibrant content, from insightful blogs to captivating photos.",
-            "Unveiled hidden travel gems, offering readers novel adventures.",
-        ],
-    },
-
+        skills: [
+            {icon: csharp, name: "C#"},
+            {icon: unity, name: "Unity"},
+            {icon: blender, name: "Blender"}
+        ]
+    }
 ];
 
 const styles = {
@@ -218,70 +188,104 @@ const SectionWrapper = (Component, idName) =>
         )
     }
 
-const ExperienceCard = ({experience}) => (
-    <VerticalTimelineElement
-        contentStyle={{background: '#071a1a', color: '#fff', boxShadow: 'none',}}
-        contentArrowStyle={{borderRight: '7px solid  #232631'}}
-        date={experience.date}
-        iconStyle={{background: experience.iconBg}}
-        icon={
-            <div className="flex justify-center items-center w-full h-full">
-                <img
-                    src={experience.icon}
-                    alt={experience.company_name}
-                    className="w-[60%] h-[60%]
-          object-contain"
-                />
-            </div>
+const ExperienceCard = ({ experience }) => {
+    // Split skills into two rows if more than 8
+    const renderSkillRows = () => {
+        if (!Array.isArray(experience.skills) || experience.skills.length === 0) return null;
+        const skills = experience.skills;
+        if (skills.length > 8) {
+            const half = Math.ceil(skills.length / 2);
+            const rows = [skills.slice(0, half), skills.slice(half)];
+            return rows.map((row, rowIndex) => (
+                <div key={rowIndex} className="mt-3 flex justify-center w-full gap-2">
+                    {row.map((skill, idx) => (
+                        <div key={idx} className="relative group">
+                            <img
+                                src={skill.icon}
+                                alt={`${skill.name} icon`}
+                                className="h-11 w-11 object-contain transition-transform duration-200 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
+                            />
+                            <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                {skill.name}
+              </span>
+                        </div>
+                    ))}
+                </div>
+            ));
         }
-    >
-        <div>
-            <h3 className="text-white text-[24px] font-bold">
-                {experience.title}
-            </h3>
-            <p className="text-secondary text-[16px] font-semibold" style={{margin: 0}}>
-                {experience.company_name}
-            </p>
-        </div>
-
-        <ul className="mt-5 list-disc ml-5 space-y-2">
-            {experience.points.map((point, index) => {
-                const [before, highlight, after] = point.split(/<span>|<\/span>/);
-                return (
-                    <li
-                        key={`experience-point-${index}`}
-                        className="text-white-100 font-thin text-[14px] pl-1 tracking-wider"
-                    >
-                        {before}
-                        {highlight && (
-                            <span className={experience.spanStyle}>{highlight}</span>
-                        )}
-                        {after}
-                    </li>
-                );
-            })}
-        </ul>
-
-        {Array.isArray(experience.skills) && experience.skills.length > 0 && (
-            <div className="mt-4 flex flex-wrap justify-center w-full gap-1">
-                {experience.skills.map((skill, idx) => (
+        // For 8 or fewer skills, render a single row
+        return (
+            <div className="mt-7 flex flex-wrap justify-center w-full gap-2">
+                {skills.map((skill, idx) => (
                     <div key={idx} className="relative group">
                         <img
                             src={skill.icon}
                             alt={`${skill.name} icon`}
                             className="h-11 w-11 object-contain transition-transform duration-200 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
                         />
-                        <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2
-          whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0
-          group-hover:opacity-100 transition-opacity duration-200">
-          {skill.name}
-        </span>
+                        <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              {skill.name}
+            </span>
                     </div>
                 ))}
             </div>
-        )}
-    </VerticalTimelineElement>
-)
+        );
+    };
+
+    return (
+        <VerticalTimelineElement
+            contentStyle={{
+                backgroundColor: '#071a1a',
+                backdropFilter: 'blur(1rem)',
+                WebkitBackdropFilter: 'blur(1rem)',
+                color: '#fff',
+                borderRadius: '0.75rem',
+                boxShadow: 'none'
+            }}
+            contentArrowStyle={{ borderRight: '15px solid  #FFFFFF' }}
+            date={experience.date}
+            iconStyle={{ background: experience.iconBg }}
+            icon={
+                <div className="relative w-full h-full overflow-hidden rounded-full z-10">
+                    <img
+                        src={experience.icon}
+                        alt={experience.company_name}
+                        className="absolute top-1/2 left-1/2 w-[160%] h-[160%] -translate-x-1/2 -translate-y-1/2 object-contain"
+                    />
+                </div>
+            }
+        >
+            <div>
+                <h3 className="text-white text-[24px] font-bold">
+                    {experience.title}
+                </h3>
+                <p className="text-secondary text-[16px] font-semibold" style={{ margin: 0 }}>
+                    {experience.company_name}
+                </p>
+            </div>
+
+            <ul className="mt-5 list-disc ml-5 space-y-2">
+                {experience.points.map((point, index) => {
+                    const [before, highlight, after] = point.split(/<span>|<\/span>/);
+                    return (
+                        <li
+                            key={`experience-point-${index}`}
+                            className="text-white-100 font-thin text-[14px] pl-1 tracking-wider"
+                        >
+                            {before}
+                            {highlight && (
+                                <span className={experience.spanStyle}>{highlight}</span>
+                            )}
+                            {after}
+                        </li>
+                    );
+                })}
+            </ul>
+
+            {renderSkillRows()}
+        </VerticalTimelineElement>
+    );
+};
 
 const Experience = () => {
     return (
