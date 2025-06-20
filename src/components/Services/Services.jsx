@@ -178,7 +178,7 @@ export const ServiceCardSection = () => {
     }));
 
     return (
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+        <div className="my-25 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
             {services.map((svc, idx) => (
                 <SingleServiceCard key={svc.key} index={idx} {...svc} />
             ))}
