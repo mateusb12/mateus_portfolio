@@ -1,9 +1,17 @@
-import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
-import { motion } from 'framer-motion';
+import {VerticalTimeline, VerticalTimelineElement} from 'react-vertical-timeline-component';
+import {motion} from 'framer-motion';
 
 import 'react-vertical-timeline-component/style.min.css';
 
-import java from "../../assets/img/skills_icons/java.png"
+import pontotel from "../../assets/img/experience_icons/pontotel.png"
+import python from "../../assets/img/skills_icons/python.png"
+import flask from "../../assets/img/skills_icons/flask.png"
+import celery from "../../assets/img/skills_icons/celery.png"
+import fastapi from "../../assets/img/skills_icons/fastapi.svg"
+import pytest from "../../assets/img/skills_icons/pytest.svg"
+import linux from "../../assets/img/skills_icons/linux.png"
+import docker from "../../assets/img/skills_icons/docker.png"
+import kubernetes from "../../assets/img/skills_icons/kubernetes.svg"
 import html from "../../assets/img/skills_icons/html.png"
 import css from "../../assets/img/skills_icons/css.png"
 import sql from "../../assets/img/skills_icons/sql.png"
@@ -28,9 +36,9 @@ const experiences = [
     */
     //EXP-VERTEBRA
     {
-        title: "Operations Specialist / Webdeveloper",
-        company_name: "vertebra.ai",
-        icon: java,
+        title: "Desenvolvedor Backend",
+        company_name: "Pontotel",
+        icon: pontotel,
         iconBg: "#000000",
         date: "Jan 2023 - Apr 2024",
         /*points: [
@@ -40,10 +48,21 @@ const experiences = [
         ],
         */
         points: [
-            "Guided day-to-day operations, ensuring projects stayed on track.",
-            "Leveraged operational insights to streamline web development processes.",
-            "Crafted and managed the company's responsive website with HTML, CSS, and ReactJS.",
+            "Implementei scripts via Google Cloud para atender demandas urgentes de clientes, garantindo que o cliente não precisasse aguardar por funcionalidades ainda indisponíveis no sistema principal",
+            "Refatorei validações críticas de código legado para a nova arquitetura, utilizando DTOs, classes de validação e integração de domínio, sempre seguindo o Domain Driven Development (DDD) e melhorando a integridade dos dados na base de código",
+            "Desenvolvi importadores com processos de pré-validação a partir de planilhas Excel, conversores de tipo e testes de integração, evitando o registro de dados inconsistentes no banco de dados",
+            "Criei uma API restful interna para monitoramento de calendário com métricas extraídas do MongoDB, utilizando unidade de trabalho e cobertura de testes, garantindo a observabilidade e confiabilidade do componente",
         ],
+        skills: [
+            python,
+            flask,
+            celery,
+            fastapi,
+            pytest,
+            linux,
+            docker,
+            kubernetes
+        ]
     },
     //EXP-TREMA
     {
@@ -193,23 +212,23 @@ const SectionWrapper = (Component, idName) =>
                 variants={staggerContainer()}
                 initial="hidden"
                 whileInView="show"
-                viewport={{ once: true, amount: 0.25 }}
+                viewport={{once: true, amount: 0.25}}
                 className={`${styles.padding} max-w-7xl mx-auto relative z-0`}
             >
             <span className="hash-span" id={idName}>
                 &nbsp;
             </span>
-                <Component />
+                <Component/>
             </motion.section>
         )
     }
 
-const ExperienceCard = ({ experience }) => (
+const ExperienceCard = ({experience}) => (
     <VerticalTimelineElement
         contentStyle={{background: '#071a1a', color: '#fff'}}
         contentArrowStyle={{borderRight: '7px solid  #232631'}}
         date={experience.date}
-        iconStyle={{ background: experience.iconBg }}
+        iconStyle={{background: experience.iconBg}}
         icon={
             <div className="flex justify-center items-center w-full h-full">
                 <img
@@ -225,7 +244,7 @@ const ExperienceCard = ({ experience }) => (
             <h3 className="text-white text-[24px] font-bold">
                 {experience.title}
             </h3>
-            <p className="text-secondary text-[16px] font-semibold" style={{ margin: 0 }}>
+            <p className="text-secondary text-[16px] font-semibold" style={{margin: 0}}>
                 {experience.company_name}
             </p>
         </div>
@@ -240,6 +259,19 @@ const ExperienceCard = ({ experience }) => (
                 </li>
             ))}
         </ul>
+
+        {experience.skills && (
+            <div className="mt-4 flex flex-wrap justify-center w-full gap-2">
+                {experience.skills.map((skillIcon, idx) => (
+                    <img
+                        key={idx}
+                        src={skillIcon}
+                        alt="skill icon"
+                        className="h-11 w-11 object-contain"
+                    />
+                ))}
+            </div>
+        )}
     </VerticalTimelineElement>
 )
 
@@ -252,7 +284,7 @@ const Experience = () => {
             <div className="mt-20 flex flex-col">
                 <VerticalTimeline>
                     {experiences.map((experience, index) => (
-                        <ExperienceCard key={index} experience={experience} />
+                        <ExperienceCard key={index} experience={experience}/>
                     ))}
                 </VerticalTimeline>
             </div>
