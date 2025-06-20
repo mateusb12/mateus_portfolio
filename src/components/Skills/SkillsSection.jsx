@@ -186,7 +186,7 @@ const SkillsSection = () => {
     const lang = languageContent[key];
 
     const desktopCarouselSize = 5;
-    const mobileCarouselSize = 1;
+    const mobileCarouselSize = 3;
 
     return (
         <>

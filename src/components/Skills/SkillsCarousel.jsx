@@ -6,21 +6,28 @@ const getGap = (el) => {
     return parseInt(style.getPropertyValue('column-gap'), 10) || 0
 }
 
-const layoutConfigs = {
-    1:  { iconPx: 160, gapPx: 48, fontClass: 'text-5xl' },
-    2:  { iconPx: 148, gapPx: 46, fontClass: 'text-4xl' },
-    3:  { iconPx: 136, gapPx: 44, fontClass: 'text-3xl' },
-    4:  { iconPx: 128, gapPx: 42, fontClass: 'text-2xl' },
-    5:  { iconPx: 124, gapPx: 41, fontClass: 'text-xl' },
-    6:  { iconPx: 120, gapPx: 40, fontClass: 'text-xl' },
-    7:  { iconPx: 104, gapPx: 36, fontClass: 'text-lg' },
-    8:  { iconPx: 92,  gapPx: 32, fontClass: 'text-base' },
-    9:  { iconPx: 80,  gapPx: 28, fontClass: 'text-sm' },
-    10:  { iconPx: 68,  gapPx: 24, fontClass: 'text-xs' }
+// ─── LAYOUT CONFIGS ─────────────────────────────────────────────────────────────
+const desktopLayoutConfigs = {
+    1: { iconPx: 160, gapPx: 48, fontClass: 'text-5xl' },
+    2: { iconPx: 148, gapPx: 46, fontClass: 'text-4xl' },
+    3: { iconPx: 136, gapPx: 44, fontClass: 'text-3xl' },
+    4: { iconPx: 128, gapPx: 42, fontClass: 'text-2xl' },
+    5: { iconPx: 124, gapPx: 41, fontClass: 'text-xl'  },
+    6: { iconPx: 120, gapPx: 40, fontClass: 'text-xl'  },
+    7: { iconPx: 104, gapPx: 36, fontClass: 'text-lg'  },
+    8: { iconPx:  92, gapPx: 32, fontClass: 'text-base'},
+    9: { iconPx:  80, gapPx: 28, fontClass: 'text-sm'  },
+    10: { iconPx:  68, gapPx: 24, fontClass: 'text-xs'  }
 }
 
+// Only allow up to n = 4 on mobile with tighter spacing
+const mobileLayoutConfigs = {
+    1: { iconPx: 100, gapPx: 12, fontClass: 'text-2xl' },
+    2: { iconPx:  80, gapPx:  8, fontClass: 'text-lg'  },
+    3: { iconPx:  70, gapPx:  6, fontClass: 'text-base'},
+    4: { iconPx:  60, gapPx:  4, fontClass: 'text-sm'  }
+}
 
-// ─── COMPONENT ──────────────────────────────────────────────────────────────────
 const SkillCarousel = ({
                            sectionTitle,
                            sectionSubtitle,
@@ -35,29 +42,42 @@ const SkillCarousel = ({
     const isDragging    = useRef(false)
 
     const arrowSize    = 35
-    const arrowPadding = arrowSize / 4
+    const arrowPadding = 8
     const pixelTol     = 4
 
-    // Determine how many items to show based on viewport
-    const [carouselSize, setCarouselSize] = useState(
-        window.matchMedia('(min-width: 768px)').matches ? desktopVisible : mobileVisible
+    // track current viewport (desktop vs mobile)
+    const [isDesktop, setIsDesktop] = useState(
+        window.matchMedia('(min-width: 768px)').matches
     )
 
     useEffect(() => {
         const mq = window.matchMedia('(min-width: 768px)')
-        const handler = (e) => setCarouselSize(e.matches ? desktopVisible : mobileVisible)
-        handler(mq) // initialize on mount
+        const handler = (e) => setIsDesktop(e.matches)
+        handler(mq)
         mq.addEventListener('change', handler)
         return () => mq.removeEventListener('change', handler)
-    }, [desktopVisible, mobileVisible])
+    }, [])
 
-    // Get the hardcoded config or fallback to max
-    const { iconPx, gapPx, fontClass } = useMemo(
-        () => layoutConfigs[carouselSize] || layoutConfigs[10],
-        [carouselSize]
+    // determine carousel size based on viewport
+    const [carouselSize, setCarouselSize] = useState(
+        isDesktop ? desktopVisible : Math.min(mobileVisible, 4)
     )
 
-    // Calculate card width so items plus gaps fill full width
+    useEffect(() => {
+        setCarouselSize(
+            isDesktop ? desktopVisible : Math.min(mobileVisible, 4)
+        )
+    }, [isDesktop, desktopVisible, mobileVisible])
+
+    // select config from the appropriate map
+    const { iconPx, gapPx, fontClass } = useMemo(() => {
+        const configs = isDesktop ? desktopLayoutConfigs : mobileLayoutConfigs
+        const keys = Object.keys(configs).map(Number)
+        const key = Math.min(Math.max(carouselSize, Math.min(...keys)), Math.max(...keys))
+        return configs[key]
+    }, [isDesktop, carouselSize])
+
+    // compute flex basis: accounts for reduced gap on mobile
     const cardBasis = useMemo(
         () => `calc((100% - ${gapPx * (carouselSize - 1)}px) / ${carouselSize})`,
         [gapPx, carouselSize]
@@ -165,7 +185,7 @@ const SkillCarousel = ({
                                 <button
                                     onClick={() => scrollByStep('left')}
                                     aria-label="Previous"
-                                    className="absolute z-20 top-1/2 -translate-y-1/2 left-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full"
+                                    className="absolute z-20 top-1/2 -translate-y-1/2 left-0 md:left-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full"
                                     style={{ padding: `${arrowPadding}px` }}
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ width: `${arrowSize}px`, height: `${arrowSize}px` }}>
@@ -207,7 +227,7 @@ const SkillCarousel = ({
                                 <button
                                     onClick={() => scrollByStep('right')}
                                     aria-label="Next"
-                                    className="absolute z-20 top-1/2 -translate-y-1/2 right-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full"
+                                    className="absolute z-20 top-1/2 -translate-y-1/2 right-0 md:right-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full"
                                     style={{ padding: `${arrowPadding}px` }}
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ width: `${arrowSize}px`, height: `${arrowSize}px` }}>
