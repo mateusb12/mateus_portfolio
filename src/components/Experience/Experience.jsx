@@ -49,14 +49,14 @@ const experiences = [
             "Criei uma API restful interna para monitoramento de calendário com métricas extraídas do MongoDB, utilizando unidade de trabalho e cobertura de testes, <span>garantindo a observabilidade e confiabilidade do componente</span>",
         ],
         skills: [
-            python,
-            flask,
-            celery,
-            fastapi,
-            pytest,
-            linux,
-            docker,
-            kubernetes
+            { icon: python, name: "Python" },
+            { icon: flask, name: "Flask" },
+            { icon: celery, name: "Celery" },
+            { icon: fastapi, name: "FastAPI" },
+            { icon: pytest, name: "Pytest" },
+            { icon: linux, name: "Linux" },
+            { icon: docker, name: "Docker" },
+            { icon: kubernetes, name: "Kubernetes" }
         ]
     },
     //EXP-TREMA
@@ -262,15 +262,21 @@ const ExperienceCard = ({experience}) => (
             })}
         </ul>
 
-        {experience.skills && (
-            <div className="mt-4 flex flex-wrap justify-center w-full gap-2">
-                {experience.skills.map((skillIcon, idx) => (
-                    <img
-                        key={idx}
-                        src={skillIcon}
-                        alt="skill icon"
-                        className="h-11 w-11 object-contain"
-                    />
+        {Array.isArray(experience.skills) && experience.skills.length > 0 && (
+            <div className="mt-4 flex flex-wrap justify-center w-full gap-1">
+                {experience.skills.map((skill, idx) => (
+                    <div key={idx} className="relative group">
+                        <img
+                            src={skill.icon}
+                            alt={`${skill.name} icon`}
+                            className="h-11 w-11 object-contain transition-transform duration-200 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
+                        />
+                        <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2
+          whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0
+          group-hover:opacity-100 transition-opacity duration-200">
+          {skill.name}
+        </span>
+                    </div>
                 ))}
             </div>
         )}
