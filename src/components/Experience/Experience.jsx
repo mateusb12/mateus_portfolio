@@ -220,7 +220,7 @@ const SectionWrapper = (Component, idName) =>
 
 const ExperienceCard = ({experience}) => (
     <VerticalTimelineElement
-        contentStyle={{background: '#071a1a', color: '#fff'}}
+        contentStyle={{background: '#071a1a', color: '#fff', boxShadow: 'none',}}
         contentArrowStyle={{borderRight: '7px solid  #232631'}}
         date={experience.date}
         iconStyle={{background: experience.iconBg}}
