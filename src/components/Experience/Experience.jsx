@@ -277,7 +277,7 @@ const ExperienceCard = ({ experience, active, iconRef }) => {
     return (
         <VerticalTimelineElement
             date={
-                <span className="hidden md:block text-[13px] text-gray-300 font-semibold">
+                <span className="hidden md:block text-[17px] text-gray-300 font-semibold">
       {experience.date}
     </span>
             }
@@ -309,7 +309,7 @@ const ExperienceCard = ({ experience, active, iconRef }) => {
                 </div>
             }
         >
-            <div>
+            <div className="mt-[-12px]">
                 <h3 className="text-white text-[24px] font-bold">
                     {experience.title}
                 </h3>
@@ -319,7 +319,7 @@ const ExperienceCard = ({ experience, active, iconRef }) => {
                 >
                     {experience.company_name}
                 </p>
-                <span className="block md:hidden text-[13px] text-gray-300 font-semibold mt-1">
+                <span className="block md:hidden text-[14px] text-gray-300 font-semibold">
     {experience.date}
   </span>
             </div>
