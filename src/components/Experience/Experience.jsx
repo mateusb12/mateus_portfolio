@@ -41,17 +41,12 @@ const experiences = [
         icon: pontotel,
         iconBg: "#000000",
         date: "Jan 2023 - Apr 2024",
-        /*points: [
-            "Overseeing the smooth running of day-to-day operations, ensuring our projects remain on track and on time.",
-            "Providing insights from an operational perspective during the web development process, helping to streamline tasks and enhance efficiencies.",
-            "Developing and managing our company's website using HTML, CSS, and React.js. Ensuring our website is responsive and accessible across different browsers",
-        ],
-        */
+        spanStyle: "font-semibold text-[15px]",
         points: [
-            "Implementei scripts via Google Cloud para atender demandas urgentes de clientes, garantindo que o cliente não precisasse aguardar por funcionalidades ainda indisponíveis no sistema principal",
-            "Refatorei validações críticas de código legado para a nova arquitetura, utilizando DTOs, classes de validação e integração de domínio, sempre seguindo o Domain Driven Development (DDD) e melhorando a integridade dos dados na base de código",
-            "Desenvolvi importadores com processos de pré-validação a partir de planilhas Excel, conversores de tipo e testes de integração, evitando o registro de dados inconsistentes no banco de dados",
-            "Criei uma API restful interna para monitoramento de calendário com métricas extraídas do MongoDB, utilizando unidade de trabalho e cobertura de testes, garantindo a observabilidade e confiabilidade do componente",
+            "Implementei scripts via Google Cloud para atender demandas urgentes de clientes, <span>garantindo que o cliente não precisasse aguardar por funcionalidades ainda indisponíveis no sistema principal</span>",
+            "Refatorei validações críticas de código legado para a nova arquitetura, utilizando DTOs, classes de validação e integração de domínio, <span>sempre seguindo o Domain Driven Development (DDD) e melhorando a integridade dos dados na base de código</span>",
+            "Desenvolvi importadores com processos de pré-validação a partir de planilhas Excel, conversores de tipo e testes de integração, <span>evitando o registro de dados inconsistentes no banco de dados</span>",
+            "Criei uma API restful interna para monitoramento de calendário com métricas extraídas do MongoDB, utilizando unidade de trabalho e cobertura de testes, <span>garantindo a observabilidade e confiabilidade do componente</span>",
         ],
         skills: [
             python,
@@ -250,14 +245,21 @@ const ExperienceCard = ({experience}) => (
         </div>
 
         <ul className="mt-5 list-disc ml-5 space-y-2">
-            {experience.points.map((point, index) => (
-                <li
-                    key={`experience-point-${index}`}
-                    className="text-white-100 text-[14px] pl-1 tracking-wider"
-                >
-                    {point}
-                </li>
-            ))}
+            {experience.points.map((point, index) => {
+                const [before, highlight, after] = point.split(/<span>|<\/span>/);
+                return (
+                    <li
+                        key={`experience-point-${index}`}
+                        className="text-white-100 font-thin text-[14px] pl-1 tracking-wider"
+                    >
+                        {before}
+                        {highlight && (
+                            <span className={experience.spanStyle}>{highlight}</span>
+                        )}
+                        {after}
+                    </li>
+                );
+            })}
         </ul>
 
         {experience.skills && (
@@ -279,7 +281,7 @@ const Experience = () => {
     return (
         <>
             <motion.div>
-                <h2 className={styles.sectionHeadText}>Experience</h2>
+                <h2 className={styles.sectionHeadText}>Experiências</h2>
             </motion.div>
             <div className="mt-20 flex flex-col">
                 <VerticalTimeline>
