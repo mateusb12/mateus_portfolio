@@ -225,6 +225,22 @@ const SectionWrapper = (Component, idName) =>
     }
 
 const ExperienceCard = forwardRef(({ experience, active }, ref) => {
+    const ICON_CONFIG = {
+        mobile: {
+            size: 60,
+            translateX: -10,
+            scale: 1.3,
+        },
+        desktop: {
+            size: 70,
+            translateX: -35,
+            scale: 1.6,
+        },
+    };
+    const isMobile = window.innerWidth < 768;
+    const { size, translateX, scale } = isMobile
+        ? ICON_CONFIG.mobile
+        : ICON_CONFIG.desktop;
     /* ─ renderSkillRows unchanged ─ */
     const renderSkillRows = () => {
         const skills = experience.skills || [];
@@ -275,8 +291,8 @@ const ExperienceCard = forwardRef(({ experience, active }, ref) => {
             ref={ref}
             date={
                 <span className="hidden md:block mx-2 text-[17px] text-gray-300 font-semibold">
-        {experience.date}
-      </span>
+          {experience.date}
+        </span>
             }
             contentStyle={{
                 backgroundColor: "#071a1a",
@@ -287,38 +303,51 @@ const ExperienceCard = forwardRef(({ experience, active }, ref) => {
                 border: active ? "3px solid #22c55e" : "3px solid transparent",
                 boxShadow: "none",
             }}
-            contentArrowStyle={{ borderRight: "15px solid  #FFFFFF" }}
+            contentArrowStyle={{
+                borderRight: "15px solid #FFFFFF",
+                marginTop: window.innerWidth < 768 ? "4px" : "0px",
+            }}
             iconStyle={{
                 background: experience.iconBg,
                 border: active ? "3px solid #22c55e" : "3px solid transparent",
                 transition: "border 200ms ease",
+                width: `${size}px`,
+                height: `${size}px`,
+                marginLeft: `${translateX}px`,
                 overflow: "hidden",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
             }}
             icon={
-                <div className="relative w-[50px] h-[50px] md:w-[70px] md:h-[70px] rounded-full overflow-hidden -translate-x-1/2 left-1/2 absolute top-0">
+                <div className="relative w-full h-full rounded-full overflow-hidden">
                     <img
                         src={experience.icon}
                         alt={experience.company_name}
                         draggable={false}
-                        className="absolute top-1/2 left-1/2 w-[130%] h-[130%] md:w-[160%] md:h-[160%] -translate-x-1/2 -translate-y-1/2 object-contain pointer-events-none select-none"
+                        style={{
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            width: `${scale * 100}%`,
+                            height: `${scale * 100}%`,
+                            transform: "translate(-50%, -50%)",
+                            objectFit: "contain",
+                            pointerEvents: "none",
+                            userSelect: "none",
+                        }}
                     />
                 </div>
             }
         >
             <div ref={ref} className="mt-[-12px]">
                 <h3 className="text-white text-[24px] font-bold">{experience.title}</h3>
-                <p
-                    className="text-secondary text-[22px] font-semibold underline"
-                    style={{ margin: 0 }}
-                >
+                <p className="text-secondary text-[22px] font-semibold underline" style={{ margin: 0 }}>
                     {experience.company_name}
                 </p>
                 <span className="block md:hidden text-[14px] text-gray-300 font-semibold">
-        {experience.date}
-      </span>
+          {experience.date}
+        </span>
             </div>
 
             <ul className="mt-5 list-disc ml-5 space-y-2">
