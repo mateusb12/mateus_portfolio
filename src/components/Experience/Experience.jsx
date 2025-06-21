@@ -224,13 +224,11 @@ const SectionWrapper = (Component, idName) =>
         )
     }
 
-const ExperienceCard = ({ experience, active, cardRef, iconRef }) => {
-    // ────────────────────────────────────────────────────────────────────────────────
-    // Renders skills: one row if ≤8, two rows if >8
-    // ────────────────────────────────────────────────────────────────────────────────
+const ExperienceCard = forwardRef(({ experience, active }, ref) => {
+    /* ─ renderSkillRows unchanged ─ */
     const renderSkillRows = () => {
         const skills = experience.skills || [];
-        if (skills.length === 0) return null;
+        if (!skills.length) return null;
 
         if (skills.length > 8) {
             const half = Math.ceil(skills.length / 2);
@@ -271,15 +269,14 @@ const ExperienceCard = ({ experience, active, cardRef, iconRef }) => {
         );
     };
 
-    // ────────────────────────────────────────────────────────────────────────────────
-    // Main render
-    // ────────────────────────────────────────────────────────────────────────────────
+    /* ───────────────────────── main render ───────────────────────── */
     return (
         <VerticalTimelineElement
+            ref={ref}
             date={
                 <span className="hidden md:block text-[17px] text-gray-300 font-semibold">
-      {experience.date}
-    </span>
+        {experience.date}
+      </span>
             }
             contentStyle={{
                 backgroundColor: "#071a1a",
@@ -290,17 +287,14 @@ const ExperienceCard = ({ experience, active, cardRef, iconRef }) => {
                 border: active ? "3px solid #22c55e" : "3px solid transparent",
                 boxShadow: "none",
             }}
-            contentArrowStyle={{ borderRight: "15px solid #FFFFFF" }}
+            contentArrowStyle={{ borderRight: "15px solid  #FFFFFF" }}
             iconStyle={{
                 background: experience.iconBg,
                 border: active ? "3px solid #22c55e" : "3px solid transparent",
                 transition: "border 200ms ease",
             }}
             icon={
-                <div
-                    ref={iconRef}
-                    className="relative w-full h-full overflow-hidden rounded-full z-10"
-                >
+                <div className="relative w-full h-full overflow-hidden rounded-full z-10">
                     <img
                         src={experience.icon}
                         alt={experience.company_name}
@@ -310,10 +304,8 @@ const ExperienceCard = ({ experience, active, cardRef, iconRef }) => {
                 </div>
             }
         >
-            <div className="mt-[-12px]">
-                <h3 className="text-white text-[24px] font-bold">
-                    {experience.title}
-                </h3>
+            <div ref={ref} className="mt-[-12px]">
+                <h3 className="text-white text-[24px] font-bold">{experience.title}</h3>
                 <p
                     className="text-secondary text-[22px] font-semibold underline"
                     style={{ margin: 0 }}
@@ -321,30 +313,25 @@ const ExperienceCard = ({ experience, active, cardRef, iconRef }) => {
                     {experience.company_name}
                 </p>
                 <span className="block md:hidden text-[14px] text-gray-300 font-semibold">
-    {experience.date}
-  </span>
+        {experience.date}
+      </span>
             </div>
 
             <ul className="mt-5 list-disc ml-5 space-y-2">
-                {experience.points.map((point, index) => {
-                    const [before, highlight, after] = point.split(/<span>|<\/span>/);
-                    return (
-                        <li
-                            key={`experience-point-${index}`}
-                            className="text-white-100 font-thin text-[14px] pl-1 tracking-wider"
-                        >
-                            {before}
-                            {highlight && <span className={experience.spanStyle}>{highlight}</span>}
-                            {after}
-                        </li>
-                    );
-                })}
+                {experience.points.map((point, index) => (
+                    <li
+                        key={`experience-point-${index}`}
+                        className="text-white-100 font-thin text-[14px] pl-1 tracking-wider"
+                    >
+                        {point}
+                    </li>
+                ))}
             </ul>
 
             {renderSkillRows()}
         </VerticalTimelineElement>
     );
-};
+});
 
 
 const Experience = () => {
@@ -412,19 +399,17 @@ const Experience = () => {
             <motion.div>
                 <h2 className={styles.sectionHeadText}>{sectionTitle}</h2>
             </motion.div>
-            <div className="mt-20 flex flex-col">
-                <VerticalTimeline layout="2-columns">
-                    {items.map((exp, idx) => (
-                        <ExperienceCard
-                            key={exp.key}
-                            cardRef={cardRefs.current[idx]}
-                            iconRef={cardRefs.current[idx]}
-                            experience={exp}
-                            active={idx === activeIdx}
-                        />
-                    ))}
-                </VerticalTimeline>
-            </div>
+
+            <VerticalTimeline layout="2-columns" className="mt-20 flex flex-col">
+                {items.map((exp, idx) => (
+                    <ExperienceCard
+                        key={exp.key}
+                        ref={cardRefs.current[idx]}
+                        experience={exp}
+                        active={idx === activeIdx}
+                    />
+                ))}
+            </VerticalTimeline>
         </>
     );
 };
