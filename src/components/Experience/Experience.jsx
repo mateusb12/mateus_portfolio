@@ -274,7 +274,7 @@ const ExperienceCard = forwardRef(({ experience, active }, ref) => {
         <VerticalTimelineElement
             ref={ref}
             date={
-                <span className="hidden md:block text-[17px] text-gray-300 font-semibold">
+                <span className="hidden md:block mx-2 text-[17px] text-gray-300 font-semibold">
         {experience.date}
       </span>
             }
@@ -292,14 +292,18 @@ const ExperienceCard = forwardRef(({ experience, active }, ref) => {
                 background: experience.iconBg,
                 border: active ? "3px solid #22c55e" : "3px solid transparent",
                 transition: "border 200ms ease",
+                overflow: "hidden",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
             }}
             icon={
-                <div className="relative w-full h-full overflow-hidden rounded-full z-10">
+                <div className="relative w-[50px] h-[50px] md:w-[70px] md:h-[70px] rounded-full overflow-hidden -translate-x-1/2 left-1/2 absolute top-0">
                     <img
                         src={experience.icon}
                         alt={experience.company_name}
                         draggable={false}
-                        className="absolute top-1/2 left-1/2 w-[160%] h-[160%] -translate-x-1/2 -translate-y-1/2 object-contain pointer-events-none select-none"
+                        className="absolute top-1/2 left-1/2 w-[130%] h-[130%] md:w-[160%] md:h-[160%] -translate-x-1/2 -translate-y-1/2 object-contain pointer-events-none select-none"
                     />
                 </div>
             }
