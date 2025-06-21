@@ -5,6 +5,8 @@ import SkillsSection from "./Skills/SkillsSection.jsx";
 import SkillCarousel from "./Skills/SkillsCarousel.jsx";
 import {ServiceCardSection} from "./Services/Services.jsx";
 import Experience from "./Experience/Experience.jsx";
+import Contact from "./Contact/Contact.jsx";
+import StarsCanvas from "./Contact/StarsCanvas.jsx";
 
 const FullLayout = () => {
     return (
@@ -18,6 +20,10 @@ const FullLayout = () => {
                 <ServiceCardSection/>
             </div>
             <Experience />
+            <div className="relative z-0">
+                <Contact />
+                <StarsCanvas />
+            </div>
             {/*/!*<Projects/>*!/*/}
             {/*<CustomCarousel/>*/}
             {/*<Contact/>*/}
