@@ -224,7 +224,7 @@ const SectionWrapper = (Component, idName) =>
         )
     }
 
-const ExperienceCard = ({ experience, active, iconRef }) => {
+const ExperienceCard = ({ experience, active, cardRef, iconRef }) => {
     // ────────────────────────────────────────────────────────────────────────────────
     // Renders skills: one row if ≤8, two rows if >8
     // ────────────────────────────────────────────────────────────────────────────────
@@ -287,6 +287,7 @@ const ExperienceCard = ({ experience, active, iconRef }) => {
                 WebkitBackdropFilter: "blur(1rem)",
                 color: "#fff",
                 borderRadius: "0.75rem",
+                border: active ? "3px solid #22c55e" : "3px solid transparent",
                 boxShadow: "none",
             }}
             contentArrowStyle={{ borderRight: "15px solid #FFFFFF" }}
@@ -351,39 +352,59 @@ const Experience = () => {
     const lang = selectedFlag === "usa" ? "english" : "portuguese";
     const { sectionTitle, experiences } = textContent[lang];
 
-    // merge your baseExperiences with the localized text
     const items = baseExperiences.map((base) => ({
         ...base,
         ...experiences[base.key],
     }));
 
-    // which index is currently “active”
-    const [activeIdx, setActiveIdx] = useState(null);
+    const [activeIdx, setActiveIdx] = useState(0); // Start with the first card active
 
-    // an array of refs, one per card
     const cardRefs = useRef([]);
     if (cardRefs.current.length !== items.length) {
         cardRefs.current = items.map(() => React.createRef());
     }
 
     useEffect(() => {
-        const obs = new IntersectionObserver(
+        const observer = new IntersectionObserver(
             (entries) => {
+                let mostVisibleEntry = null;
+                let maxRatio = 0;
+
                 entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        // find which card’s ref matched
-                        const idx = cardRefs.current.findIndex((r) => r.current === entry.target);
-                        if (idx !== -1) setActiveIdx(idx);
+                    if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+                        maxRatio = entry.intersectionRatio;
+                        mostVisibleEntry = entry;
                     }
                 });
+
+                if (mostVisibleEntry) {
+                    const idx = cardRefs.current.findIndex(
+                        (ref) => ref.current === mostVisibleEntry.target
+                    );
+                    if (idx !== -1) {
+                        setActiveIdx(idx);
+                    }
+                }
             },
-            { threshold: 0.5 }
+            {
+                threshold: Array.from({ length: 101 }, (_, i) => i / 100), // More granular threshold
+                rootMargin: '0px 0px -30% 0px' // Activate when the card is in the top half of the viewport
+            }
         );
 
-        cardRefs.current.forEach((r) => {
-            if (r.current) obs.observe(r.current);
+        cardRefs.current.forEach((ref) => {
+            if (ref.current) {
+                observer.observe(ref.current);
+            }
         });
-        return () => obs.disconnect();
+
+        return () => {
+            cardRefs.current.forEach((ref) => {
+                if (ref.current) {
+                    observer.unobserve(ref.current);
+                }
+            });
+        };
     }, [items]);
 
     return (
@@ -396,7 +417,7 @@ const Experience = () => {
                     {items.map((exp, idx) => (
                         <ExperienceCard
                             key={exp.key}
-                            ref={cardRefs.current[idx]}
+                            cardRef={cardRefs.current[idx]}
                             iconRef={cardRefs.current[idx]}
                             experience={exp}
                             active={idx === activeIdx}
