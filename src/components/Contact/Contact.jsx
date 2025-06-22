@@ -138,7 +138,7 @@ const Contact = () => {
                 {/* Social Icons */}
                 <div className="mt-6 flex justify-center gap-6">
                     <a
-                        href="https://www.linkedin.com/in/yourprofile"
+                        href="https://www.linkedin.com/in/mateus-bessa-m"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-12 h-12 flex items-center justify-center rounded-full border border-white hover:scale-110 transition-transform duration-200"
@@ -146,7 +146,7 @@ const Contact = () => {
                         <img src={linkedinIcon} alt="LinkedIn" className="w-6 h-6 object-contain" />
                     </a>
                     <a
-                        href="https://github.com/yourprofile"
+                        href="https://github.com/mateusb12"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-12 h-12 flex items-center justify-center rounded-full border border-white hover:scale-110 transition-transform duration-200"
@@ -154,7 +154,7 @@ const Contact = () => {
                         <img src={githubIcon} alt="GitHub" className="w-6 h-6 object-contain" />
                     </a>
                     <a
-                        href="https://instagram.com/yourprofile"
+                        href="https://instagram.com/matbessa"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-12 h-12 flex items-center justify-center rounded-full border border-white hover:scale-110 transition-transform duration-200"
