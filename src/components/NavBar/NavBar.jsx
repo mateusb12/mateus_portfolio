@@ -4,7 +4,6 @@ import {HashLink} from 'react-router-hash-link';
 import usaFlag from '../../assets/img/usa.svg';
 import brazilFlag from '../../assets/img/brazil.svg';
 import linkedinIcon from '../../assets/img/nav-icon1.svg';
-import facebookIcon from '../../assets/img/nav-icon2.svg';
 import instagramIcon from '../../assets/img/nav-icon3.svg';
 import githubIcon from '../../assets/img/nav-icon4.svg';
 import LanguageContext from '../LanguageContext';
