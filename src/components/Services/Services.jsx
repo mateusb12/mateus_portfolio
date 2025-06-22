@@ -1,34 +1,65 @@
+import React, { useContext } from 'react';
 import Tilt from 'react-parallax-tilt';
 import { motion } from 'framer-motion';
-import { useContext } from 'react';
 import LanguageContext from '../LanguageContext';
-import human_brain from "../../assets/img/skills_icons/human-brain.png";
-import dashboard from "../../assets/img/skills_icons/dashboard.png";
-import login from "../../assets/img/skills_icons/login.png";
-import plug from "../../assets/img/skills_icons/plug.png";
+import human_brain from '../../assets/img/skills_icons/human-brain.png';
+import dashboard    from '../../assets/img/skills_icons/dashboard.png';
+import login        from '../../assets/img/skills_icons/login.png';
+import plug         from '../../assets/img/skills_icons/plug.png';
 
-// ─── Tilt Settings ──────────────────────────────────────────────────────────────
+export const fadeIn = (direction, type = 'tween', duration = 0.5) => {
+    const axis = ['left', 'right'].includes(direction)
+        ? { x: direction === 'left' ? 100 : -100 }
+        : ['up', 'down'].includes(direction)
+            ? { y: direction === 'up' ? 100 : -100 }
+            : {};
+
+    return {
+        hidden: {
+            ...axis,
+            opacity: 0,
+        },
+        show: {
+            x: 0,
+            y: 0,
+            opacity: 1,
+            transition: {
+                type,
+                duration,
+                ...(type === 'tween'
+                        ? { ease: 'easeOut' }
+                        : { stiffness: 100, damping: 20 }
+                ),
+            },
+        },
+    };
+};
+
+
+// File: src/components/Experience/StaggerContainer.jsx
+export const staggerContainer = (staggerChildren = 0.2, delayChildren = 0) => {
+    return {
+        hidden: {},
+        show: {
+            transition: {
+                staggerChildren,
+                delayChildren,
+            },
+        },
+    };
+};
+
+
+
+
+// Tilt settings
 const tiltOptions = {
     max: 25,
     scale: 1.05,
     speed: 400,
 };
 
-export const fadeIn = (direction, type, delay, duration) => ({
-    hidden: {
-        x: direction === 'left' ? 100 : direction === 'right' ? -100 : 0,
-        y: direction === 'up' ? 100 : direction === 'down' ? -100 : 0,
-        opacity: 0,
-    },
-    show: {
-        x: 0,
-        y: 0,
-        opacity: 1,
-        transition: { type, delay, duration, ease: 'easeOut' },
-    },
-});
-
-// ─── Glow Theme Config ────────────────────────────────────────────────────────────
+// Glow-theme utility (unchanged)
 const getGlowTheme = (theme = 'green') => {
     const colors = {
         green: {
@@ -79,82 +110,44 @@ const getGlowTheme = (theme = 'green') => {
     return colors[theme] || colors.green;
 };
 
-// ─── Static Service Config ──────────────────────────────────────────────────────
-const baseServices = [
-    { key: 'automation', glowTheme: 'green', icon: human_brain },
-    { key: 'platforms', glowTheme: 'cyan', icon: dashboard },
-    { key: 'apps', glowTheme: 'amber', icon: login },
-    { key: 'integrations', glowTheme: 'violet', icon: plug },
-];
-
-// ─── Translation Content ─────────────────────────────────────────────────────────
+// Text content
 const textContent = {
     english: {
-        automation: {
-            title: 'Intelligent automations',
-            description: 'I build automations like scraping bots, form fillers, message dispatchers or approval flows',
-        },
-        platforms: {
-            title: 'Custom internal platforms',
-            description: 'I craft tailored tools for your team to manage tasks, clients, or inventory (ERP, CRM, etc.)',
-        },
-        apps: {
-            title: 'Full-stack on-demand apps',
-            description: 'I develop your MVP from scratch, with auth, CRUD, dashboard and deploy—perfect to validate your idea',
-        },
-        integrations: {
-            title: 'Third-party API integrations',
-            description: 'I connect your system with payment gateways, WhatsApp, e-commerce platforms, and more',
-        },
+        automation:   { title: 'Intelligent automations',   description: 'I build automations like scraping bots, form fillers, message dispatchers or approval flows' },
+        platforms:    { title: 'Custom internal platforms', description: 'I craft tailored tools for your team to manage tasks, clients, or inventory (ERP, CRM, etc.)' },
+        apps:         { title: 'Full-stack on-demand apps',  description: 'I develop your MVP from scratch, with auth, CRUD, dashboard and deploy—perfect to validate your idea' },
+        integrations: { title: 'Third-party API integrations', description: 'I connect your system with payment gateways, WhatsApp, e-commerce platforms, and more' },
     },
     portuguese: {
-        automation: {
-            title: 'Automações inteligentes',
-            description: 'Crio automações como bots de scraping, preenchimento de formulários, disparos de mensagens ou fluxos de aprovação',
-        },
-        platforms: {
-            title: 'Plataformas internas para equipes',
-            description: 'Crio ferramentas sob medida para sua equipe gerenciar tarefas, clientes ou estoque (ERP, CRM, etc.)',
-        },
-        apps: {
-            title: 'Aplicações completas sob demanda',
-            description: 'Desenvolvo o seu MVP do zero, com autenticação, CRUDs, dashboard e deploy, ideal para validar sua ideia no mercado',
-        },
-        integrations: {
-            title: 'Integrações com APIs e serviços externos',
-            description: 'Conecto seu sistema com APIs de pagamento, WhatsApp, plataformas de vendas, e muito mais',
-        },
+        automation:   { title: 'Automações inteligentes', description: 'Crio automações como bots de scraping, preenchimento de formulários, disparos de mensagens ou fluxos de aprovação' },
+        platforms:    { title: 'Plataformas internas para equipes', description: 'Crio ferramentas sob medida para sua equipe gerenciar tarefas, clientes ou estoque (ERP, CRM, etc.)' },
+        apps:         { title: 'Aplicações completas sob demanda', description: 'Desenvolvo o seu MVP do zero, com autenticação, CRUDs, dashboard e deploy, ideal para validar sua ideia no mercado' },
+        integrations: { title: 'Integrações com APIs e serviços externos', description: 'Conecto seu sistema com APIs de pagamento, WhatsApp, plataformas de vendas, e muito mais' },
     },
 };
 
-// ─── Individual Card ────────────────────────────────────────────────────────────
-const SingleServiceCard = ({ index, title, icon, description, glowTheme = 'green' }) => {
+const baseServices = [
+    { key: 'automation',   glowTheme: 'green',  icon: human_brain },
+    { key: 'platforms',    glowTheme: 'cyan',   icon: dashboard   },
+    { key: 'apps',         glowTheme: 'amber',  icon: login       },
+    { key: 'integrations', glowTheme: 'violet', icon: plug        },
+];
+
+const SingleServiceCard = ({ title, icon, description, glowTheme }) => {
     const {
-        borderColor,
-        borderHoverColor,
-        outerGlow,
-        outerGlowHover,
-        innerGlowColor,
-        innerGlowOpacity,
-        innerGlowHover,
-        imageShadow,
-        titleColor,
+        borderColor, borderHoverColor,
+        outerGlow, outerGlowHover,
+        innerGlowColor, innerGlowOpacity, innerGlowHover,
+        imageShadow, titleColor,
     } = getGlowTheme(glowTheme);
 
     return (
         <Tilt className="w-[290px]" {...tiltOptions}>
             <motion.div
-                variants={fadeIn('right', 'spring', 0.2 * index, 0.75)}
-                className={
-                    `relative group transition-all overflow-hidden p-5 rounded-[20px] bg-[#031010] border ${borderColor} ${borderHoverColor} ${outerGlow} ${outerGlowHover}`
-                }
+                variants={fadeIn('right', 'tween', 1.5)}
+                className={`relative group overflow-hidden p-5 rounded-[20px] bg-[#031010] border ${borderColor} ${borderHoverColor} ${outerGlow} ${outerGlowHover}`}
             >
-                <div
-                    className={
-                        `absolute top-8 left-1/2 -translate-x-1/2 w-36 h-36 rounded-full z-0 ${innerGlowColor} ${innerGlowOpacity} ${innerGlowHover} blur-2xl transition-opacity duration-300`
-                    }
-                />
-
+                <div className={`absolute top-8 left-1/2 -translate-x-1/2 w-36 h-36 rounded-full z-0 ${innerGlowColor} ${innerGlowOpacity} ${innerGlowHover} blur-2xl transition-opacity duration-300`} />
                 <div className="relative z-10 flex flex-col items-center text-center h-[320px] space-y-3">
                     <img src={icon} alt={`${title} icon`} className={`w-25 h-25 object-cover ${imageShadow}`} />
                     <h3 className={`mt-4 text-2xl font-bold leading-tight ${titleColor}`}>{title}</h3>
@@ -165,23 +158,27 @@ const SingleServiceCard = ({ index, title, icon, description, glowTheme = 'green
     );
 };
 
-// ─── Main Section ───────────────────────────────────────────────────────────────
 export const ServiceCardSection = () => {
     const { selectedFlag } = useContext(LanguageContext);
     const lang = selectedFlag === 'usa' ? 'english' : 'portuguese';
 
-    const services = baseServices.map(({ key, ...rest }) => ({
-        ...rest,
+    const services = baseServices.map(({ key, glowTheme, icon }) => ({
         key,
-        title: textContent[lang][key].title,
+        glowTheme,
+        icon,
+        title:       textContent[lang][key].title,
         description: textContent[lang][key].description,
     }));
 
     return (
-        <div className="my-25 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-            {services.map((svc, idx) => (
-                <SingleServiceCard key={svc.key} index={idx} {...svc} />
-            ))}
-        </div>
+        <motion.div
+            variants={staggerContainer(0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.25 }}
+            className="mt-20 flex flex-wrap gap-10 justify-center"
+        >
+            {services.map(svc => <SingleServiceCard key={svc.key} {...svc} />)}
+        </motion.div>
     );
 };
