@@ -19,8 +19,8 @@ const FullLayout = () => {
                 <SkillsSection/>
                 <ServiceCardSection/>
             </div>
-            <Experience />
             <div className="relative z-0">
+                <Experience />
                 <Contact />
                 <StarsCanvas />
             </div>
