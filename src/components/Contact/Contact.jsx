@@ -42,12 +42,19 @@ const SectionWrapper = (Component, idName) =>
 const Contact = () => {
     const formRef = useRef();
     const [form, setForm] = useState({ name: '', email: '', message: '' });
+    const [whatsappMessage, setWhatsappMessage] = useState(
+        'Hey, Mateus! I am interested in your projects. I am looking forward to work with you.'
+    );
     const [loading, setLoading] = useState(false);
-    const [activeTab, setActiveTab] = useState('email');
+    const [activeTab, setActiveTab] = useState('whatsapp');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm({ ...form, [name]: value });
+    };
+
+    const handleWhatsAppChange = (e) => {
+        setWhatsappMessage(e.target.value);
     };
 
     const handleSubmit = (e) => {
@@ -76,6 +83,14 @@ const Contact = () => {
                 console.error(error);
                 alert('Oops, something went wrong.');
             });
+    };
+
+    const handleWhatsAppSend = () => {
+        const phoneNumber = '<YOUR_PHONE_NUMBER>'; // e.g. '5511999999999'
+        const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+            whatsappMessage
+        )}`;
+        window.open(url, '_blank');
     };
 
     const renderSocialMediaIcons = () => (
@@ -152,9 +167,9 @@ const Contact = () => {
 
                 <button
                     type="submit"
-                    className="bg-[#23B5B5] hover:bg-[#1a8a8a] py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl transition-colors duration-200"
+                    className="bg-[#1a73e8] hover:bg-[#155ab6] py-3 px-8 outline-none w-fit text-white font-bold shadow-md rounded-xl transition-colors duration-200"
                 >
-                    {loading ? 'Sending...' : 'Send'}
+                    {loading ? 'Sending...' : 'Send via email'}
                 </button>
             </form>
 
@@ -163,8 +178,22 @@ const Contact = () => {
     );
 
     const renderWhatsAppPane = () => (
-        <div className="mt-6">
-            <h1 className="text-white text-3xl font-bold">Hello world</h1>
+        <div className="mt-4 flex flex-col gap-4">
+            <label className="flex flex-col">
+                <span className="text-white font-medium mb-2">Message</span>
+                <textarea
+                    rows={4}
+                    value={whatsappMessage}
+                    onChange={handleWhatsAppChange}
+                    className="bg-[#031010] py-3 px-5 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
+                />
+            </label>
+            <button
+                onClick={handleWhatsAppSend}
+                className="bg-[#0B6623] hover:bg-[#095021] py-3 px-8 w-fit text-white font-bold shadow-md rounded-xl transition-colors duration-200"
+            >
+                Send via WhatsApp
+            </button>
             {renderSocialMediaIcons()}
         </div>
     );
