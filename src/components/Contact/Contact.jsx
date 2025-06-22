@@ -6,7 +6,6 @@ import linkedinIcon from '../../assets/img/nav-icon1.svg';
 import githubIcon from '../../assets/img/nav-icon4.svg';
 import instagramIcon from '../../assets/img/nav-icon3.svg';
 
-// Re-include slideIn helper
 export const slideIn = (direction, type, delay, duration) => ({
     hidden: {
         x: direction === 'left' ? '-100%' : direction === 'right' ? '100%' : 0,
@@ -44,6 +43,7 @@ const Contact = () => {
     const formRef = useRef();
     const [form, setForm] = useState({ name: '', email: '', message: '' });
     const [loading, setLoading] = useState(false);
+    const [activeTab, setActiveTab] = useState('email');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -78,6 +78,97 @@ const Contact = () => {
             });
     };
 
+    const renderSocialMediaIcons = () => (
+        <div className="mt-6 flex justify-center gap-6">
+            <a
+                href="https://www.linkedin.com/in/mateus-bessa-m"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 flex items-center justify-center rounded-full border border-white hover:scale-110 transition-transform duration-200"
+            >
+                <img src={linkedinIcon} alt="LinkedIn" className="w-6 h-6 object-contain" />
+            </a>
+            <a
+                href="https://github.com/mateusb12"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 flex items-center justify-center rounded-full border border-white hover:scale-110 transition-transform duration-200"
+            >
+                <img src={githubIcon} alt="GitHub" className="w-6 h-6 object-contain" />
+            </a>
+            <a
+                href="https://instagram.com/matbessa"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 flex items-center justify-center rounded-full border border-white hover:scale-110 transition-transform duration-200"
+            >
+                <img src={instagramIcon} alt="Instagram" className="w-6 h-6 object-contain" />
+            </a>
+        </div>
+    );
+
+    const renderEmailForm = () => (
+        <>
+            <form
+                ref={formRef}
+                onSubmit={handleSubmit}
+                className="mt-4 flex flex-col gap-4"
+            >
+                <label className="flex flex-col">
+                    <span className="text-white font-medium mb-2">Your Name</span>
+                    <input
+                        type="text"
+                        name="name"
+                        value={form.name}
+                        onChange={handleChange}
+                        placeholder="John Doe, is that you?"
+                        className="bg-[#031010] py-3 px-5 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
+                    />
+                </label>
+
+                <label className="flex flex-col">
+                    <span className="text-white font-medium mb-2">Email</span>
+                    <input
+                        type="email"
+                        name="email"
+                        value={form.email}
+                        onChange={handleChange}
+                        placeholder="johndoe@email.com sounds good!"
+                        className="bg-[#031010] py-3 px-5 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
+                    />
+                </label>
+
+                <label className="flex flex-col">
+                    <span className="text-white font-medium mb-2">Your Message</span>
+                    <textarea
+                        rows="7"
+                        name="message"
+                        value={form.message}
+                        onChange={handleChange}
+                        placeholder="Let's pen down your thoughts."
+                        className="bg-[#031010] py-3 px-5 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
+                    />
+                </label>
+
+                <button
+                    type="submit"
+                    className="bg-[#23B5B5] hover:bg-[#1a8a8a] py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl transition-colors duration-200"
+                >
+                    {loading ? 'Sending...' : 'Send'}
+                </button>
+            </form>
+
+            {renderSocialMediaIcons()}
+        </>
+    );
+
+    const renderWhatsAppPane = () => (
+        <div className="mt-6">
+            <h1 className="text-white text-3xl font-bold">Hello world</h1>
+            {renderSocialMediaIcons()}
+        </div>
+    );
+
     return (
         <div className="flex justify-center items-start">
             <motion.div
@@ -86,82 +177,31 @@ const Contact = () => {
             >
                 <h3 className={styles.sectionHeadText}>Contact</h3>
 
-                <form ref={formRef} onSubmit={handleSubmit} className="mt-4 flex flex-col gap-4">
-                    {/* Name */}
-                    <label className="flex flex-col">
-                        <span className="text-white font-medium mb-2">Your Name</span>
-                        <input
-                            type="text"
-                            name="name"
-                            value={form.name}
-                            onChange={handleChange}
-                            placeholder="John Doe, is that you?"
-                            className="bg-[#031010] py-3 px-5 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
-                        />
-                    </label>
-
-                    {/* Email */}
-                    <label className="flex flex-col">
-                        <span className="text-white font-medium mb-2">Email</span>
-                        <input
-                            type="email"
-                            name="email"
-                            value={form.email}
-                            onChange={handleChange}
-                            placeholder="johndoe@email.com sounds good!"
-                            className="bg-[#031010] py-3 px-5 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
-                        />
-                    </label>
-
-                    {/* Message */}
-                    <label className="flex flex-col">
-                        <span className="text-white font-medium mb-2">Your Message</span>
-                        <textarea
-                            rows="7"
-                            name="message"
-                            value={form.message}
-                            onChange={handleChange}
-                            placeholder="Let's pen down your thoughts."
-                            className="bg-[#031010] py-3 px-5 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
-                        />
-                    </label>
-
-                    {/* Send Button */}
+                <div className="flex gap-6 mt-4 border-b border-[#1a2e2e]">
                     <button
-                        type="submit"
-                        className="bg-[#23B5B5] hover:bg-[#1a8a8a] py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl transition-colors duration-200"
+                        className={`pb-2 border-b-2 font-medium transition-colors ${
+                            activeTab === 'whatsapp'
+                                ? 'border-[#23B5B5] text-white'
+                                : 'border-transparent text-secondary'
+                        }`}
+                        onClick={() => setActiveTab('whatsapp')}
                     >
-                        {loading ? 'Sending...' : 'Send'}
+                        WhatsApp
                     </button>
-                </form>
-
-                {/* Social Icons */}
-                <div className="mt-6 flex justify-center gap-6">
-                    <a
-                        href="https://www.linkedin.com/in/mateus-bessa-m"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-12 h-12 flex items-center justify-center rounded-full border border-white hover:scale-110 transition-transform duration-200"
+                    <button
+                        className={`pb-2 border-b-2 font-medium transition-colors ${
+                            activeTab === 'email'
+                                ? 'border-[#23B5B5] text-white'
+                                : 'border-transparent text-secondary'
+                        }`}
+                        onClick={() => setActiveTab('email')}
                     >
-                        <img src={linkedinIcon} alt="LinkedIn" className="w-6 h-6 object-contain" />
-                    </a>
-                    <a
-                        href="https://github.com/mateusb12"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-12 h-12 flex items-center justify-center rounded-full border border-white hover:scale-110 transition-transform duration-200"
-                    >
-                        <img src={githubIcon} alt="GitHub" className="w-6 h-6 object-contain" />
-                    </a>
-                    <a
-                        href="https://instagram.com/matbessa"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-12 h-12 flex items-center justify-center rounded-full border border-white hover:scale-110 transition-transform duration-200"
-                    >
-                        <img src={instagramIcon} alt="Instagram" className="w-6 h-6 object-contain" />
-                    </a>
+                        Email
+                    </button>
                 </div>
+
+                {activeTab === 'email' && renderEmailForm()}
+                {activeTab === 'whatsapp' && renderWhatsAppPane()}
             </motion.div>
         </div>
     );
