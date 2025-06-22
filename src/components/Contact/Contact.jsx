@@ -129,7 +129,7 @@ const Contact = () => {
     };
 
     const handleWhatsAppSend = () => {
-        const phoneNumber = '<YOUR_PHONE_NUMBER>'; // e.g. '5511999999999'
+        const phoneNumber = '<5585999171902>'; // e.g. '5511999999999'
         const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
             whatsappMessage
         )}`;

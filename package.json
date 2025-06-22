@@ -16,6 +16,7 @@
     "@react-three/fiber": "^9.1.2",
     "@tailwindcss/vite": "^4.1.10",
     "framer-motion": "^12.18.1",
+    "lucide-react": "^0.522.0",
     "maath": "^0.10.8",
     "react": "^19.1.0",
     "react-bootstrap-icons": "^1.11.6",
