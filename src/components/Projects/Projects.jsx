@@ -2,19 +2,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-
-import html from '../../assets/img/skills_icons/html.png';
-import css from '../../assets/img/skills_icons/css.png';
-import sql from '../../assets/img/skills_icons/sql.png';
-import { staggerContainer } from '../Experience/StaggerContainer.jsx';
 import witcher_reading_book from '../../assets/img/witcher_reading_book.png';
 import flight from '../../assets/img/flight.jpg';
 import data_analysis from '../../assets/img/data_analysis.jpg';
+import { staggerContainer } from '../Experience/StaggerContainer.jsx';
 
+// Fade-in animation helper
 export const fadeIn = (direction, type = 'tween', duration = 0.5) => {
-    const axis = ['left', 'right'].includes(direction)
+    const axis = ['left','right'].includes(direction)
         ? { x: direction === 'left' ? 100 : -100 }
-        : ['up', 'down'].includes(direction)
+        : ['up','down'].includes(direction)
             ? { y: direction === 'up' ? 100 : -100 }
             : {};
 
@@ -27,32 +24,38 @@ export const fadeIn = (direction, type = 'tween', duration = 0.5) => {
             transition: {
                 type,
                 duration,
-                ...(type === 'tween'
-                    ? { ease: 'easeOut' }
-                    : { stiffness: 100, damping: 20 }),
+                ...(type === 'tween' ? { ease: 'easeOut' } : { stiffness:100, damping:20 }),
             },
         },
     };
 };
 
+// Text animation helper
 export const textVariant = (delay = 0) => ({
     hidden: { y: -50, opacity: 0 },
-    show: {
-        y: 0,
-        opacity: 1,
-        transition: { type: 'spring', duration: 1.25, delay },
-    },
+    show: { y: 0, opacity: 1, transition: { type: 'spring', duration: 1.25, delay } },
 });
+
+// Violet glow theme
+const violetTheme = {
+    borderColor: 'border-violet-400/10',
+    borderHover: 'hover:border-violet-300',
+    outerGlow: 'shadow-[0_0_15px_5px_rgba(192,132,252,0.15)]',
+    outerGlowHover: 'hover:shadow-[0_0_25px_8px_rgba(192,132,252,0.25)]',
+    innerGlowColor: 'bg-violet-400',
+    innerGlowOpacity: 'opacity-20',
+    innerGlowHover: 'group-hover:opacity-30',
+};
 
 const styles = {
     padding: 'sm:px-16 px-6 sm:py-16 py-10',
 };
 
+// Project entries
 const projects = [
     {
         name: 'Book Analyzer',
-        description:
-            'Transform .txt book files into social media style graphs, similar to Instagram',
+        description: 'Transform .txt book files into social media style graphs, similar to Instagram',
         tags: [
             { name: 'react', color: 'green-text-gradient' },
             { name: 'mongodb', color: 'blue-text-gradient' },
@@ -65,8 +68,7 @@ const projects = [
     },
     {
         name: 'Flight Scraper',
-        description:
-            'Powered by Kiwi Tequilla API, this project scrapes flight data from the API and displays it in a user-friendly way. The main focus is to create alerts for the user when the price of a flight drops.',
+        description: 'Powered by Kiwi Tequilla API, this project scrapes flight data from the API and displays it in a user-friendly way. The main focus is to create alerts for the user when the price of a flight drops.',
         tags: [
             { name: 'react', color: 'green-text-gradient' },
             { name: 'typescript', color: 'blue-text-gradient' },
@@ -81,8 +83,7 @@ const projects = [
     },
     {
         name: 'Valorant Impact',
-        description:
-            'A tool that quantifies how much player actions can shift the odds of winning a Valorant round. By analyzing kills, weapon choices, economy and strategic moves, it reveals the real-time impact on victory chances',
+        description: 'A tool that quantifies how much player actions can shift the odds of winning a Valorant round. By analyzing kills, weapon choices, economy and strategic moves, it reveals the real-time impact on victory chances',
         tags: [
             { name: 'nextjs', color: 'green-text-gradient' },
             { name: 'prisma', color: 'pink-text-gradient' },
@@ -95,86 +96,75 @@ const projects = [
     },
 ];
 
-const Projects = () => {
-    return (
-        <>
-            {/* Section header */}
-            <motion.div variants={textVariant()} className="text-center mb-12">
-                <h2 className="text-white font-black md:text-[40px] sm:text-[30px] text-[24px]">
-                    Projects
-                </h2>
-                <p className="text-secondary text-[16px] mt-2">
-                    Take a closer look at what I’ve been working on.
-                </p>
-            </motion.div>
+const Projects = () => (
+    <>
+        {/* Section header */}
+        <motion.div variants={textVariant()} className="text-center mb-12">
+            <h2 className="text-white font-black md:text-[40px] sm:text-[30px] text-[24px]">Projects</h2>
+            <p className="text-secondary text-[16px] mt-2">Take a closer look at what I’ve been working on.</p>
+        </motion.div>
 
-            {/* Cards grid */}
-            <div className="mt-20 flex flex-wrap gap-8 justify-center">
-                {projects.map((proj, i) => (
-                    <motion.div
-                        key={`project-${i}`}
-                        variants={fadeIn('up', 'spring', 0.2 * i, 0.75)}
-                        className="w-full sm:w-[360px]"
-                    >
-                            <div className="w-full h-[200px] overflow-hidden">
-                                <img
-                                    src={proj.image}
-                                    alt={proj.name}
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
+        {/* Cards grid */}
+        <div className="mt-20 flex flex-wrap gap-8 justify-center">
+            {projects.map((proj, i) => (
+                <motion.div
+                    key={`project-${i}`}
+                    variants={fadeIn('up','spring',0.2*i)}
+                    className={
+                        `relative group w-full sm:w-[360px] rounded-2xl overflow-hidden
+             border ${violetTheme.borderColor} ${violetTheme.borderHover}
+             ${violetTheme.outerGlow} ${violetTheme.outerGlowHover}`
+                    }
+                >
+                    {/* Inner glow layer */}
+                    <div className={
+                        `absolute inset-0 ${violetTheme.innerGlowColor}
+             ${violetTheme.innerGlowOpacity} ${violetTheme.innerGlowHover}
+             blur-2xl transition-opacity duration-300`
+                    } />
 
-                            <div className="p-4 bg-[#1d1d1d]">
-                                <h3 className="text-white font-bold text-[24px]">{proj.name}</h3>
-                                <p className="mt-2 text-secondary text-[14px] leading-[20px]">
-                                    {proj.description}
-                                </p>
+                    {/* Image */}
+                    <div className="w-full h-[200px] overflow-hidden">
+                        <img src={proj.image} alt={proj.name} className="w-full h-full object-cover" />
+                    </div>
 
-                                <div className="mt-4 flex flex-wrap gap-2">
-                                    {proj.tags.map((tag) => (
-                                        <span
-                                            key={tag.name}
-                                            className={`inline-block text-[12px] font-medium ${tag.color} bg-black bg-opacity-30 px-2 py-1 rounded-full`}
-                                        >
-                                            {tag.name}
-                                        </span>
-                                    ))}
-                                </div>
+                    {/* Content */}
+                    <div className="relative z-10 p-4 bg-[#1a1d2e]">
+                        <h3 className="text-white font-bold text-[24px]">{proj.name}</h3>
+                        <p className="mt-2 text-secondary text-[14px] leading-[20px]">{proj.description}</p>
 
-                                <div className="mt-6 flex justify-between items-center">
-                                    <a
-                                        href={proj.readMoreLink}
-                                        className="text-green-400 text-sm hover:underline"
-                                    >
-                                        Read More
-                                    </a>
-                                    <a
-                                        href={proj.projectLink}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center gap-1 text-green-400 text-sm hover:underline"
-                                    >
-                                        View Project <ArrowRight size={14} />
-                                    </a>
-                                </div>
-                            </div>
-                    </motion.div>
-                ))}
-            </div>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                            {proj.tags.map(tag => (
+                                <span key={tag.name} className={
+                                    `inline-block text-[12px] font-medium ${tag.color}
+                   bg-black bg-opacity-30 px-2 py-1 rounded-full`
+                                }>
+                  {tag.name}
+                </span>
+                            ))}
+                        </div>
 
-            {/* View all button */}
-            <div className="mt-12 flex justify-center">
-                <a
-                    href="/projects"
-                    className="bg-green-500 hover:bg-green-600 text-white py-4 px-10 rounded-full font-medium inline-flex items-center gap-2"
-                >View all <ArrowRight size={16} />
-                </a>
-            </div>
-        </>
-    );
-};
+                        <div className="mt-6 flex justify-between items-center">
+                            <a href={proj.readMoreLink} className="text-green-400 text-sm hover:underline">Read More</a>
+                            <a href={proj.projectLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-green-400 text-sm hover:underline">
+                                View Project <ArrowRight size={14} />
+                            </a>
+                        </div>
+                    </div>
+                </motion.div>
+            ))}
+        </div>
 
-export default (props) => (
+        {/* View all button */}
+        <div className="mt-12 flex justify-center">
+            <a href="/projects" className="bg-green-500 hover:bg-green-600 text-white py-4 px-10 rounded-full font-medium inline-flex items-center gap-2">
+                View all <ArrowRight size={16} />
+            </a>
+        </div>
+    </>
+);
+
+export default props => (
     <motion.section
         variants={staggerContainer()}
         initial="hidden"
