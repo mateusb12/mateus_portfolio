@@ -40,10 +40,10 @@ export const textVariant = (delay = 0) => ({
 const violetTheme = {
     borderColor: 'border-violet-400/10',
     borderHover: 'hover:border-violet-300',
-    outerGlow: 'shadow-[0_0_15px_5px_rgba(192,132,252,0.15)]',
-    outerGlowHover: 'hover:shadow-[0_0_25px_8px_rgba(192,132,252,0.25)]',
+    outerGlow: 'shadow-[0_0_15px_5px_rgba(192,132,252,0.10)] opacity-70',
+    outerGlowHover: 'hover:shadow-[0_0_25px_8px_rgba(139,92,246,0.15)] hover:opacity-100 hover:bg-violet-950',
     innerGlowColor: 'bg-violet-400',
-    innerGlowOpacity: 'opacity-20',
+    innerGlowOpacity: 'opacity-25',
     innerGlowHover: 'group-hover:opacity-30',
 };
 
@@ -109,12 +109,11 @@ const Projects = () => (
             {projects.map((proj, i) => (
                 <motion.div
                     key={`project-${i}`}
-                    variants={fadeIn('up','spring',0.2*i)}
-                    className={
-                        `relative group w-full sm:w-[360px] rounded-2xl overflow-hidden
-             border ${violetTheme.borderColor} ${violetTheme.borderHover}
-             ${violetTheme.outerGlow} ${violetTheme.outerGlowHover}`
-                    }
+                    variants={fadeIn('up', 'spring', 0.2 * i)}
+                    className={`relative group w-full sm:w-[360px] rounded-2xl overflow-hidden
+    border-2 transition-all duration-300 ease-in-out
+    ${violetTheme.borderColor} ${violetTheme.borderHover}
+    ${violetTheme.outerGlow} ${violetTheme.outerGlowHover}`}
                 >
                     {/* Inner glow layer */}
                     <div className={
@@ -124,12 +123,12 @@ const Projects = () => (
                     } />
 
                     {/* Image */}
-                    <div className="w-full h-[200px] overflow-hidden">
-                        <img src={proj.image} alt={proj.name} className="w-full h-full object-cover" />
+                    <div className="relative z-10 w-full h-[200px] overflow-hidden">
+                        <img src={proj.image} alt={proj.name} className="w-full h-full object-cover w-full h-full object-cover z-20 relative" />
                     </div>
 
-                    {/* Content */}
-                    <div className="relative z-10 p-4 bg-[#1a1d2e]">
+                    {/* Content (removed background color) */}
+                    <div className="relative z-10 p-4">
                         <h3 className="text-white font-bold text-[24px]">{proj.name}</h3>
                         <p className="mt-2 text-secondary text-[14px] leading-[20px]">{proj.description}</p>
 
