@@ -224,7 +224,7 @@ const SectionWrapper = (Component, idName) =>
         )
     }
 
-const ExperienceCard = forwardRef(({ experience, active }, ref) => {
+const ExperienceCard = forwardRef(({experience, active}, ref) => {
     const ICON_CONFIG = {
         mobile: {
             size: 60,
@@ -238,7 +238,7 @@ const ExperienceCard = forwardRef(({ experience, active }, ref) => {
         },
     };
     const isMobile = window.innerWidth < 768;
-    const { size, translateX, scale } = isMobile
+    const {size, translateX, scale} = isMobile
         ? ICON_CONFIG.mobile
         : ICON_CONFIG.desktop;
     /* ─ renderSkillRows unchanged ─ */
@@ -258,7 +258,8 @@ const ExperienceCard = forwardRef(({ experience, active }, ref) => {
                                 alt={`${skill.name} icon`}
                                 className="h-11 w-11 object-contain transition-transform duration-200 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
                             />
-                            <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                            <span
+                                className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                 {skill.name}
               </span>
                         </div>
@@ -276,7 +277,8 @@ const ExperienceCard = forwardRef(({ experience, active }, ref) => {
                             alt={`${skill.name} icon`}
                             className="h-11 w-11 object-contain transition-transform duration-200 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
                         />
-                        <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        <span
+                            className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
               {skill.name}
             </span>
                     </div>
@@ -342,7 +344,7 @@ const ExperienceCard = forwardRef(({ experience, active }, ref) => {
         >
             <div ref={ref} className="mt-[-12px]">
                 <h3 className="text-white text-[24px] font-bold">{experience.title}</h3>
-                <p className="text-secondary text-[22px] font-semibold underline" style={{ margin: 0 }}>
+                <p className="text-secondary text-[22px] font-semibold underline" style={{margin: 0}}>
                     {experience.company_name}
                 </p>
                 <span className="block md:hidden text-[14px] text-gray-300 font-semibold">
@@ -368,9 +370,9 @@ const ExperienceCard = forwardRef(({ experience, active }, ref) => {
 
 
 const Experience = () => {
-    const { selectedFlag } = useContext(LanguageContext);
+    const {selectedFlag} = useContext(LanguageContext);
     const lang = selectedFlag === "usa" ? "english" : "portuguese";
-    const { sectionTitle, experiences } = textContent[lang];
+    const {sectionTitle, experiences} = textContent[lang];
 
     const items = baseExperiences.map((base) => ({
         ...base,
@@ -407,7 +409,7 @@ const Experience = () => {
                 }
             },
             {
-                threshold: Array.from({ length: 101 }, (_, i) => i / 100), // More granular threshold
+                threshold: Array.from({length: 101}, (_, i) => i / 100), // More granular threshold
                 rootMargin: '0px 0px -30% 0px' // Activate when the card is in the top half of the viewport
             }
         );
@@ -429,11 +431,26 @@ const Experience = () => {
 
     return (
         <>
+            <style>{`
+      .vertical-timeline--animate .vertical-timeline-element-content {
+        transition-duration: 1.5s !important;
+        animation-duration: 1.5s !important;
+      }
+      .vertical-timeline--animate .vertical-timeline-element-icon {
+        transition-duration: 1.5s !important;
+        animation-duration: 1.5s !important;
+      }
+    `}</style>
+
             <motion.div>
                 <h2 className={styles.sectionHeadText}>{sectionTitle}</h2>
             </motion.div>
 
-            <VerticalTimeline layout="2-columns" className="mt-20 flex flex-col">
+            <VerticalTimeline
+                layout="2-columns"
+                animate={true}
+                className="mt-20 flex flex-col"
+            >
                 {items.map((exp, idx) => (
                     <ExperienceCard
                         key={exp.key}
