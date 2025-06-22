@@ -1,7 +1,8 @@
-import { useState, useRef } from 'react';
+import React, {useState, useRef, useContext, useEffect} from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { staggerContainer } from "../Experience/StaggerContainer.jsx";
+import LanguageContext from '../LanguageContext';
 import linkedinIcon from '../../assets/img/nav-icon1.svg';
 import githubIcon from '../../assets/img/nav-icon4.svg';
 import instagramIcon from '../../assets/img/nav-icon3.svg';
@@ -23,6 +24,43 @@ const styles = {
     sectionHeadText: "text-white font-black md:text-[50px] sm:text-[40px] xs:text-[30px] text-[24px]",
 };
 
+const textContent = {
+    english: {
+        sectionTitle: 'Contact',
+        tabs: {
+            whatsapp: 'WhatsApp',
+            email: 'Email',
+        },
+        form: {
+            yourName: 'Your Name',
+            email: 'Email',
+            yourMessage: 'Your Message',
+            sendEmail: 'Send via email',
+            message: 'Message',
+            sendWhatsApp: 'Send via WhatsApp',
+            defaultWhatsAppMessage: 'Hey, Mateus! I am interested in your projects. I am looking forward to work with you.',
+        },
+        socialHeading: '',
+    },
+    portuguese: {
+        sectionTitle: 'Contato',
+        tabs: {
+            whatsapp: 'WhatsApp',
+            email: 'Email',
+        },
+        form: {
+            yourName: 'Seu Nome',
+            email: 'Email',
+            yourMessage: 'Sua Mensagem',
+            sendEmail: 'E-mail',
+            message: 'Mensagem',
+            sendWhatsApp: 'WhatsApp',
+            defaultWhatsAppMessage: 'Oi, Mateus! Tenho interesse no seu perfil. Queria conversar mais com você.',
+        },
+        socialHeading: '',
+    },
+};
+
 const SectionWrapper = (Component, idName) =>
     function HOC() {
         return (
@@ -40,13 +78,19 @@ const SectionWrapper = (Component, idName) =>
     };
 
 const Contact = () => {
+    const { selectedFlag } = useContext(LanguageContext);
+    const lang = selectedFlag === 'usa' ? 'english' : 'portuguese';
+    const t = textContent[lang];
+
     const formRef = useRef();
     const [form, setForm] = useState({ name: '', email: '', message: '' });
-    const [whatsappMessage, setWhatsappMessage] = useState(
-        'Hey, Mateus! I am interested in your projects. I am looking forward to work with you.'
-    );
+    const [whatsappMessage, setWhatsappMessage] = useState(t.form.defaultWhatsAppMessage);
     const [loading, setLoading] = useState(false);
     const [activeTab, setActiveTab] = useState('whatsapp');
+
+    useEffect(() => {
+        setWhatsappMessage(t.form.defaultWhatsAppMessage);
+    }, [lang, activeTab]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -60,7 +104,6 @@ const Contact = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-
         emailjs.send(
             'service_55c147f',
             'template_mw8jdf5',
@@ -75,7 +118,7 @@ const Contact = () => {
         )
             .then(() => {
                 setLoading(false);
-                alert('Thanks for the message, I will get back to you ASAP!');
+                alert(t.form.sendEmail + ' — ' + '✓');
                 setForm({ name: '', email: '', message: '' });
             })
             .catch((error) => {
@@ -130,37 +173,37 @@ const Contact = () => {
                 className="mt-4 flex flex-col gap-4"
             >
                 <label className="flex flex-col">
-                    <span className="text-white font-medium mb-2">Your Name</span>
+                    <span className="text-white font-medium mb-2">{t.form.yourName}</span>
                     <input
                         type="text"
                         name="name"
                         value={form.name}
                         onChange={handleChange}
-                        placeholder="John Doe, is that you?"
+                        placeholder={t.form.yourName}
                         className="bg-[#031010] py-3 px-5 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
                     />
                 </label>
 
                 <label className="flex flex-col">
-                    <span className="text-white font-medium mb-2">Email</span>
+                    <span className="text-white font-medium mb-2">{t.form.email}</span>
                     <input
                         type="email"
                         name="email"
                         value={form.email}
                         onChange={handleChange}
-                        placeholder="johndoe@email.com sounds good!"
+                        placeholder={t.form.email}
                         className="bg-[#031010] py-3 px-5 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
                     />
                 </label>
 
                 <label className="flex flex-col">
-                    <span className="text-white font-medium mb-2">Your Message</span>
+                    <span className="text-white font-medium mb-2">{t.form.yourMessage}</span>
                     <textarea
                         rows="7"
                         name="message"
                         value={form.message}
                         onChange={handleChange}
-                        placeholder="Let's pen down your thoughts."
+                        placeholder={t.form.yourMessage}
                         className="bg-[#031010] py-3 px-5 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
                     />
                 </label>
@@ -169,7 +212,7 @@ const Contact = () => {
                     type="submit"
                     className="bg-[#1a73e8] hover:bg-[#155ab6] py-3 px-8 outline-none w-fit text-white font-bold shadow-md rounded-xl transition-colors duration-200"
                 >
-                    {loading ? 'Sending...' : 'Send via email'}
+                    {loading ? '...' : t.form.sendEmail}
                 </button>
             </form>
 
@@ -180,7 +223,7 @@ const Contact = () => {
     const renderWhatsAppPane = () => (
         <div className="mt-4 flex flex-col gap-4">
             <label className="flex flex-col">
-                <span className="text-white font-medium mb-2">Message</span>
+                <span className="text-white font-medium mb-2">{t.form.message}</span>
                 <textarea
                     rows={4}
                     value={whatsappMessage}
@@ -192,7 +235,7 @@ const Contact = () => {
                 onClick={handleWhatsAppSend}
                 className="bg-[#0B6623] hover:bg-[#095021] py-3 px-8 w-fit text-white font-bold shadow-md rounded-xl transition-colors duration-200"
             >
-                Send via WhatsApp
+                {t.form.sendWhatsApp}
             </button>
             {renderSocialMediaIcons()}
         </div>
@@ -204,7 +247,7 @@ const Contact = () => {
                 variants={slideIn('left', 'tween', 0.2, 1)}
                 className="flex-[0.4] bg-[#071a1a] p-8 rounded-2xl"
             >
-                <h3 className={styles.sectionHeadText}>Contact</h3>
+                <h3 className={styles.sectionHeadText}>{t.sectionTitle}</h3>
 
                 <div className="flex gap-6 mt-4 border-b border-[#1a2e2e]">
                     <button
@@ -215,7 +258,7 @@ const Contact = () => {
                         }`}
                         onClick={() => setActiveTab('whatsapp')}
                     >
-                        WhatsApp
+                        {t.tabs.whatsapp}
                     </button>
                     <button
                         className={`pb-2 border-b-2 font-medium transition-colors ${
@@ -225,12 +268,11 @@ const Contact = () => {
                         }`}
                         onClick={() => setActiveTab('email')}
                     >
-                        Email
+                        {t.tabs.email}
                     </button>
                 </div>
 
-                {activeTab === 'email' && renderEmailForm()}
-                {activeTab === 'whatsapp' && renderWhatsAppPane()}
+                {activeTab === 'email' ? renderEmailForm() : renderWhatsAppPane()}
             </motion.div>
         </div>
     );
