@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-// Hook: Track viewport width
 const useWindowWidth = () => {
     const [width, setWidth] = useState(window.innerWidth);
     useEffect(() => {
@@ -12,7 +11,6 @@ const useWindowWidth = () => {
     return width;
 };
 
-// Determine how many icons to show per "page"
 const getItemsPerSlide = (width) => {
     if (width >= 1200) return 5;
     if (width >= 992) return 4;
@@ -24,79 +22,111 @@ const getItemsPerSlide = (width) => {
 const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }) => {
     const width = useWindowWidth();
     const itemsPerSlide = getItemsPerSlide(width);
-    const totalSlides = Math.ceil(skillContent.length / itemsPerSlide);
-    const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+    const totalItems = skillContent.length;
 
-    // Reset to first slide if layout changes
-    useEffect(() => setCurrentSlideIndex(0), [itemsPerSlide]);
+    // 1) decide how many slides we need at most:
+    const slidesCount = Math.ceil(totalItems / itemsPerSlide);
 
-    // Compute which icons to display now
-    const start = currentSlideIndex * itemsPerSlide;
-    const end = start + itemsPerSlide;
+    // 2) figure out the base size & how many slides get an extra item:
+    const baseSize = Math.floor(totalItems / slidesCount);
+    const extraItems = totalItems % slidesCount;
+
+    // 3) build an array of “page sizes” that sums to totalItems
+    const pageSizes = Array.from({ length: slidesCount }, (_, i) => (
+        baseSize + (i < extraItems ? 1 : 0)
+    ));
+
+    // 4) prefix-sum to know each slide’s start index
+    const startIndexes = pageSizes.reduce((acc, sz, idx) => {
+        if (idx === 0) acc.push(0);
+        else acc.push(acc[idx - 1] + pageSizes[idx - 1]);
+        return acc;
+    }, []);
+
+    const [currentSlide, setCurrentSlide] = useState(0);
+    useEffect(() => setCurrentSlide(0), [itemsPerSlide, totalItems]);
+
+    // 5) slice out only the items for the current slide
+    const start = startIndexes[currentSlide];
+    const end = start + pageSizes[currentSlide];
     const currentItems = skillContent.slice(start, end);
 
     return (
-        <div className="relative bg-black bg-opacity-50 backdrop-blur-md rounded-2xl shadow-2xl px-6 py-10 max-w-5xl mx-auto">
-            {/* Header */}
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-white mb-2">
-                {sectionTitle}
-            </h2>
-            <p className="text-sm md:text-base text-center text-white/75 mb-8">
-                {sectionSubtitle}
-            </p>
+        <section className="relative py-12 md:py-20 w-full">
+            <div className="flex justify-center w-full">
+                <div className="relative w-full md:max-w-[70%] px-4 bg-black/50 backdrop-blur-2xl rounded-3xl py-14">
 
-            {/* Icons Row */}
-            <div className="relative">
-                <div className="grid grid-flow-col auto-cols-fr gap-x-12 items-center justify-start">
-                    {currentItems.map((skill) => (
-                        <div key={skill.id} className="flex flex-col items-center">
-                            <img
-                                src={iconsMap[skill.id]}
-                                alt={skill.title}
-                                className="w-20 h-20 object-contain"
-                            />
-                            <span className="mt-4 text-sm md:text-base font-medium text-white">
-                {skill.title}
-              </span>
+                    {/* Title */}
+                    <div className="mx-auto text-center w-full">
+                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                            {sectionTitle}
+                        </h2>
+                        <p className="text-base md:text-lg text-white/75 mb-10">
+                            {sectionSubtitle}
+                        </p>
+                    </div>
+
+                    {/* Carousel */}
+                    <div className="relative">
+                        {/* Grid of just this slide’s items */}
+                        <div
+                            className="grid gap-x-8 items-center"
+                            style={{
+                                gridTemplateColumns: `repeat(${currentItems.length}, minmax(0, 1fr))`,
+                            }}
+                        >
+                            {currentItems.map(skill => (
+                                <div key={skill.id} className="flex flex-col items-center">
+                                    <img
+                                        src={iconsMap[skill.id]}
+                                        alt={skill.title}
+                                        className="object-contain max-h-40"
+                                    />
+                                    <span className="mt-5 text-lg md:text-xl font-semibold text-white">
+                    {skill.title}
+                  </span>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
 
-                {/* Arrows */}
-                {totalSlides > 1 && (
-                    <>
-                        <button
-                            onClick={() => setCurrentSlideIndex((i) => Math.max(i - 1, 0))}
-                            disabled={currentSlideIndex === 0}
-                            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 rounded-full p-3 text-white hover:bg-opacity-80 disabled:opacity-30"
-                        >
-                            <FaChevronLeft size={18} />
-                        </button>
+                        {/* Nav arrows */}
+                        {slidesCount > 1 && (
+                            <>
+                                <button
+                                    onClick={() => setCurrentSlide(i => Math.max(i - 1, 0))}
+                                    disabled={currentSlide === 0}
+                                    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 disabled:opacity-30"
+                                >
+                                    <FaChevronLeft size={20} />
+                                </button>
+                                <button
+                                    onClick={() => setCurrentSlide(i => Math.min(i + 1, slidesCount - 1))}
+                                    disabled={currentSlide === slidesCount - 1}
+                                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 disabled:opacity-30"
+                                >
+                                    <FaChevronRight size={20} />
+                                </button>
+                            </>
+                        )}
 
-                        <button
-                            onClick={() => setCurrentSlideIndex((i) => Math.min(i + 1, totalSlides - 1))}
-                            disabled={currentSlideIndex === totalSlides - 1}
-                            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 rounded-full p-3 text-white hover:bg-opacity-80 disabled:opacity-30"
-                        >
-                            <FaChevronRight size={18} />
-                        </button>
-                    </>
-                )}
-
-                {/* Pagination Pills */}
-                <div className="flex justify-center items-center space-x-2 mt-6">
-                    {Array.from({ length: totalSlides }).map((_, slideIdx) => (
-                        <button
-                            key={slideIdx}
-                            onClick={() => setCurrentSlideIndex(slideIdx)}
-                            className={`w-6 h-2 rounded-full transition-all ${
-                                slideIdx === currentSlideIndex ? 'bg-green-400' : 'bg-gray-500/50'
-                            }`}
-                        />
-                    ))}
+                        {/* Pagination pills */}
+                        <div className="flex justify-center items-center space-x-3 mt-10">
+                            {pageSizes.map((_, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => setCurrentSlide(idx)}
+                                    className={`w-8 h-2.5 rounded-full transition-all ${
+                                        idx === currentSlide
+                                            ? 'bg-green-400 shadow-lg shadow-green-400/50'
+                                            : 'bg-gray-500/50'
+                                    }`}
+                                />
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 
