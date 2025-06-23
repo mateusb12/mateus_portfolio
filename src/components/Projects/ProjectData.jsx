@@ -12,7 +12,7 @@ import prisma from '../../assets/img/skills_icons/database.png';
 import cloud from '../../assets/img/skills_icons/cloud.png';
 import deploy from '../../assets/img/skills_icons/deploy.png';
 import lock from '../../assets/img/skills_icons/lock.png';
-import python from '../../assets/img/skills_icons/python.png';
+import python from '../../assets/img/skills_icons/python.svg';
 import javascript from '../../assets/img/skills_icons/javascript.png';
 import csharp from '../../assets/img/skills_icons/csharp.png';
 import java from '../../assets/img/skills_icons/java.png';

@@ -1,15 +1,13 @@
 // src/components/Skills/SkillsSection.jsx
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import SkillCarousel from './SkillsCarousel.jsx'
-
-// ─── ICON IMPORTS ───────────────────────────────────────────────────────────────
 import server from "../../assets/img/skills_icons/server.png"
 import api from "../../assets/img/skills_icons/api.png"
 import database from "../../assets/img/skills_icons/database.png"
 import cloud from "../../assets/img/skills_icons/cloud.png"
 import deploy from "../../assets/img/skills_icons/deploy.png"
 import lock from "../../assets/img/skills_icons/lock.png"
-import python from "../../assets/img/skills_icons/python.png"
+import python from "../../assets/img/skills_icons/python.svg"
 import javascript from "../../assets/img/skills_icons/javascript.png"
 import csharp from "../../assets/img/skills_icons/csharp.png"
 import java from "../../assets/img/skills_icons/java.png"
@@ -40,75 +38,60 @@ import tilt from "../../assets/img/skills_icons/tilt.png"
 import poetry from "../../assets/img/skills_icons/poetry.png"
 import alembic from "../../assets/img/skills_icons/alembic.png"
 import azure from "../../assets/img/skills_icons/azure.svg"
-import figma from "../../assets/img/skills_icons/figma.svg";
-import github_actions from "../../assets/img/skills_icons/github-actions.svg";
-import next_js from "../../assets/img/skills_icons/nextjs.svg";
-import redis from "../../assets/img/skills_icons/redis.svg";
-import swagger from "../../assets/img/skills_icons/swagger.svg";
-import react_native from "../../assets/img/skills_icons/react-native.png";
-import LanguageContext from "../LanguageContext.jsx";
+import figma from "../../assets/img/skills_icons/figma.svg"
+import github_actions from "../../assets/img/skills_icons/github-actions.svg"
+import next_js from "../../assets/img/skills_icons/nextjs.svg"
+import redis from "../../assets/img/skills_icons/redis.svg"
+import swagger from "../../assets/img/skills_icons/swagger.svg"
+import react_native from "../../assets/img/skills_icons/react-native.png"
+import LanguageContext from "../LanguageContext.jsx"
 
 // ─── ICON MAP ──────────────────────────────────────────────────────────────────
 const iconsMap = {
-    // ─── Backend Technologies ────────────────────────────────
     backend: server,
-    api: api,
-    flask: flask,
-    django: django,
-    nodejs: nodejs,
-    swagger: swagger,
-
-    // ─── Frontend Technologies ───────────────────────────────
+    api,
+    flask,
+    django,
+    nodejs,
+    swagger,
     website: frontend,
     react: reactIcon,
-    html: html,
-    css: css,
-    figma: figma,
-    javascript: javascript,
-    typescript: typescript,
-    design: design,
+    html,
+    css,
+    figma,
+    javascript,
+    typescript,
+    design,
     nextJs: next_js,
     reactNative: react_native,
-
-    // ─── Programming Languages ───────────────────────────────
-    python: python,
-    csharp: csharp,
-    java: java,
-    sql: sql,
-
-    // ─── Cloud & DevOps ──────────────────────────────────────
-    cloud: cloud,
-    redis: redis,
-    deploy: deploy,
-    docker: docker,
-    aws: aws,
-    googleCloud: googleCloud,
-    azure: azure,
+    python,
+    csharp,
+    java,
+    sql,
+    cloud,
+    redis,
+    deploy,
+    docker,
+    aws,
+    googleCloud,
+    azure,
     githubActions: github_actions,
-    tilt: tilt,
-
-    // ─── Databases ───────────────────────────────────────────
-    database: database,
-    postgres: postgres,
-    mongo: mongo,
-    supabase: supabase,
-    firebase: firebase,
-
-    // ─── Security & Auth ─────────────────────────────────────
-    lock: lock,
-    jwt: jwt,
-
-    // ─── Data & AI ───────────────────────────────────────────
+    tilt,
+    database,
+    postgres,
+    mongo,
+    supabase,
+    firebase,
+    lock,
+    jwt,
     machineLearning: machine_learning,
     dataAnalysis: data_analysis,
     webScrapping: web_scrapping,
-
-    // ─── Tools & Utilities ───────────────────────────────────
-    git: git,
-    linux: linux,
-    poetry: poetry,
-    alembic: alembic
-};
+    git,
+    linux,
+    poetry,
+    alembic
+}
 
 // ─── CONTENT ARRAYS ────────────────────────────────────────────────────────────
 const backendExpertise = [
@@ -123,7 +106,7 @@ const backendExpertise = [
     { id: "git", title: "Git" },
     { id: "poetry", title: "Poetry" },
     { id: "alembic", title: "Alembic" },
-];
+]
 
 const cloudExpertise = [
     { id: "docker", title: "Docker" },
@@ -147,7 +130,7 @@ const frontendExpertise = [
     { id: "css", title: "CSS" },
     { id: "javascript", title: "JavaScript" },
     { id: "design", title: "UI/UX Design" },
-];
+]
 
 const languageContent = {
     english: {
@@ -162,7 +145,7 @@ const languageContent = {
         frontend: {
             title: "Frontend Stack",
             subtitle: "Turning designs into user experiences",
-        }
+        },
     },
     portuguese: {
         backend: {
@@ -176,17 +159,14 @@ const languageContent = {
         frontend: {
             title: "Habilidades Frontend",
             subtitle: "Desde o design até a experiência final do usuário",
-        }
-    }
-};
+        },
+    },
+}
 
 const SkillsSection = () => {
-    const { selectedFlag } = useContext(LanguageContext);
-    const key = selectedFlag === 'usa' ? 'english' : 'portuguese';
-    const lang = languageContent[key];
-
-    const desktopCarouselSize = 5;
-    const mobileCarouselSize = 3;
+    const { selectedFlag } = useContext(LanguageContext)
+    const key = selectedFlag === 'usa' ? 'english' : 'portuguese'
+    const lang = languageContent[key]
 
     return (
         <section id="skills">
@@ -195,8 +175,6 @@ const SkillsSection = () => {
                 sectionSubtitle={lang.backend.subtitle}
                 skillContent={backendExpertise}
                 iconsMap={iconsMap}
-                desktopVisible={desktopCarouselSize}
-                mobileVisible={mobileCarouselSize}
             />
 
             <SkillCarousel
@@ -204,8 +182,6 @@ const SkillsSection = () => {
                 sectionSubtitle={lang.cloud.subtitle}
                 skillContent={cloudExpertise}
                 iconsMap={iconsMap}
-                desktopVisible={desktopCarouselSize}
-                mobileVisible={mobileCarouselSize}
             />
 
             <SkillCarousel
@@ -213,11 +189,9 @@ const SkillsSection = () => {
                 sectionSubtitle={lang.frontend.subtitle}
                 skillContent={frontendExpertise}
                 iconsMap={iconsMap}
-                desktopVisible={desktopCarouselSize}
-                mobileVisible={mobileCarouselSize}
             />
         </section>
-    );
-};
+    )
+}
 
-export default SkillsSection;
+export default SkillsSection
