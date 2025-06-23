@@ -1,13 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const useWindowWidth = () => {
     const [width, setWidth] = useState(window.innerWidth);
+    const frame = useRef(null);
+
     useEffect(() => {
-        const onResize = () => setWidth(window.innerWidth);
-        window.addEventListener('resize', onResize);
-        return () => window.removeEventListener('resize', onResize);
+        const handleResize = () => {
+            if (frame.current !== null) return;
+            frame.current = window.requestAnimationFrame(() => {
+                setWidth(window.innerWidth);
+                frame.current = null;
+            });
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            if (frame.current) window.cancelAnimationFrame(frame.current);
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
+
     return width;
 };
 
@@ -21,50 +34,50 @@ const getItemsPerSlide = (width) => {
 
 const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }) => {
     const width = useWindowWidth();
-    const maxPerSlide = getItemsPerSlide(width);
+    const maxPerSlide = useMemo(() => getItemsPerSlide(width), [width]);
     const totalItems = skillContent.length;
-
-    // Determine number of pages (slides) based on max items per slide
     const pagesCount = Math.ceil(totalItems / maxPerSlide);
-    // Recalculate a balanced page size
     const pageSize = Math.ceil(totalItems / pagesCount);
 
-    // Build balanced pages array
-    const pages = Array.from({ length: pagesCount }).map((_, pageIndex) => {
-        const start = pageIndex * pageSize;
-        return skillContent.slice(start, start + pageSize);
-    });
+    const pages = useMemo(() => {
+        return Array.from({ length: pagesCount }, (_, i) =>
+            skillContent.slice(i * pageSize, i * pageSize + pageSize)
+        );
+    }, [skillContent, pageSize, pagesCount]);
 
     const [currentSlide, setCurrentSlide] = useState(0);
     useEffect(() => setCurrentSlide(0), [pageSize, totalItems]);
 
-    // Styles for track and each slide
-    const trackStyle = {
-        width: `${pages.length * 100}%`,
-        transform: `translateX(-${(100 / pages.length) * currentSlide}%)`,
-    };
-    const slideStyle = {
-        width: `${100 / pages.length}%`,
-    };
+    const trackStyle = useMemo(() => ({
+        width: `${pagesCount * 100}%`,
+        transform: `translate3d(-${(100 / pagesCount) * currentSlide}%, 0, 0)`,
+        willChange: 'transform',
+    }), [pagesCount, currentSlide]);
+
+    const slideStyle = useMemo(() => ({
+        width: `${100 / pagesCount}%`,
+    }), [pagesCount]);
+
+    const goPrev = useCallback(() => {
+        setCurrentSlide((i) => Math.max(i - 1, 0));
+    }, []);
+
+    const goNext = useCallback(() => {
+        setCurrentSlide((i) => Math.min(i + 1, pagesCount - 1));
+    }, [pagesCount]);
 
     return (
         <section className="relative py-12 md:py-20 w-full">
-            <div className="flex justify-center w-full">
+            <div className="flex justify-center">
                 <div className="relative w-full md:max-w-[70%] px-4 bg-black/50 backdrop-blur-2xl rounded-3xl py-14">
-
-                    {/* Title */}
-                    <div className="mx-auto text-center w-full">
-                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                            {sectionTitle}
-                        </h2>
-                        <p className="text-base md:text-lg text-white/75 mb-10">
-                            {sectionSubtitle}
-                        </p>
+                    {/* Header */}
+                    <div className="text-center mb-10">
+                        <h2 className="text-4xl md:text-5xl font-bold text-white">{sectionTitle}</h2>
+                        <p className="text-base md:text-lg text-white/75">{sectionSubtitle}</p>
                     </div>
 
-                    {/* Carousel Container */}
-                    <div className="relative overflow-hidden w-full">
-                        {/* Sliding Track */}
+                    {/* Carousel */}
+                    <div className="relative overflow-hidden">
                         <div
                             className="flex transition-transform duration-500 ease-in-out"
                             style={trackStyle}
@@ -81,6 +94,7 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
                                                 src={iconsMap[skill.id]}
                                                 alt={skill.title}
                                                 className="object-contain h-40 w-40"
+                                                loading="lazy"
                                                 draggable={false}
                                             />
                                             <span className="mt-5 text-lg md:text-xl font-semibold text-white">
@@ -92,28 +106,28 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
                             ))}
                         </div>
 
-                        {/* Nav arrows */}
+                        {/* Nav */}
                         {pagesCount > 1 && (
                             <>
                                 <button
-                                    onClick={() => setCurrentSlide((i) => Math.max(i - 1, 0))}
+                                    onClick={goPrev}
                                     disabled={currentSlide === 0}
-                                    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 disabled:opacity-30"
+                                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 disabled:opacity-30"
                                 >
                                     <FaChevronLeft size={20} />
                                 </button>
                                 <button
-                                    onClick={() => setCurrentSlide((i) => Math.min(i + 1, pagesCount - 1))}
+                                    onClick={goNext}
                                     disabled={currentSlide === pagesCount - 1}
-                                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 disabled:opacity-30"
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 disabled:opacity-30"
                                 >
                                     <FaChevronRight size={20} />
                                 </button>
                             </>
                         )}
 
-                        {/* Pagination pills */}
-                        <div className="flex justify-center items-center space-x-3 mt-10">
+                        {/* Pills */}
+                        <div className="flex justify-center space-x-3 mt-10">
                             {pages.map((_, idx) => (
                                 <button
                                     key={idx}
