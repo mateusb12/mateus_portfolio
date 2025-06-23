@@ -23,7 +23,9 @@ export const fadeIn = (direction, type = 'tween', duration = 0.5) => {
             transition: {
                 type,
                 duration,
-                ...(type === 'tween' ? { ease: 'easeOut' } : { stiffness: 100, damping: 20 }),
+                ...(type === 'tween'
+                    ? { ease: 'easeOut' }
+                    : { stiffness: 100, damping: 20 }),
             },
         },
     };
@@ -98,23 +100,26 @@ const projects = [
 // Individual project card with Read More toggle
 const ProjectCard = ({ proj, index }) => {
     const [expanded, setExpanded] = useState(false);
-    const limit = 100;
-    const shortText = proj.description.length > limit ? proj.description.slice(0, limit) + '...' : proj.description;
 
     return (
         <motion.div
             key={`project-${index}`}
             variants={fadeIn('up', 'spring', 0.2 * index)}
-            className={`relative group w-full sm:w-[360px] rounded-2xl overflow-hidden
-      border-2 transition-all duration-300 ease-in-out
-      ${violetTheme.borderColor} ${violetTheme.borderHover}
-      ${violetTheme.outerGlow} ${violetTheme.outerGlowHover}`}
+            className={`
+        relative group w-full sm:w-[360px] rounded-2xl overflow-hidden
+        bg-[#091011]
+        border-2 transition-all duration-300 ease-in-out
+        ${violetTheme.borderColor} ${violetTheme.borderHover}
+        ${violetTheme.outerGlow} ${violetTheme.outerGlowHover}
+      `}
         >
             {/* inner glow */}
             <div
-                className={`absolute inset-0 ${violetTheme.innerGlowColor}
-        ${violetTheme.innerGlowOpacity} ${violetTheme.innerGlowHover}
-        blur-2xl transition-opacity duration-300`}
+                className={`
+          absolute inset-0 ${violetTheme.innerGlowColor}
+          ${violetTheme.innerGlowOpacity} ${violetTheme.innerGlowHover}
+          blur-2xl transition-opacity duration-300
+        `}
             />
 
             {/* image */}
@@ -132,32 +137,39 @@ const ProjectCard = ({ proj, index }) => {
                     {proj.tags.map((tag) => (
                         <span
                             key={tag.name}
-                            className={`inline-block text-[12px] font-medium ${tag.color}
-              bg-black bg-opacity-30 px-2 py-1 rounded-full`}
+                            className={`
+                inline-block text-[12px] font-medium ${tag.color}
+                bg-black bg-opacity-30 px-2 py-1 rounded-full
+              `}
                         >
-            {tag.name}
-          </span>
+              {tag.name}
+            </span>
                     ))}
                 </div>
 
                 <h3 className="text-white font-bold text-[24px]">{proj.name}</h3>
 
-                {/* description with CSS clamp when collapsed */}
-                <p
-                    className="mt-2 text-secondary text-[14px] leading-[20px]"
-                    style={
-                        !expanded
-                            ? {
-                                display: '-webkit-box',
-                                WebkitBoxOrient: 'vertical',
-                                WebkitLineClamp: 3,
-                                overflow: 'hidden',
-                            }
-                            : {}
-                    }
-                >
-                    {proj.description}
-                </p>
+                {/* description with masked fade on last line */}
+                <div className="relative mt-2">
+                    <p
+                        className="text-secondary text-[14px] leading-[20px] overflow-hidden"
+                        style={
+                            !expanded
+                                ? {
+                                    display: '-webkit-box',
+                                    WebkitBoxOrient: 'vertical',
+                                    WebkitLineClamp: 3,
+                                    WebkitMaskImage:
+                                        'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)',
+                                    maskImage:
+                                        'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)',
+                                }
+                                : {}
+                        }
+                    >
+                        {proj.description}
+                    </p>
+                </div>
 
                 {/* Read More / Show Less */}
                 <div className="mt-1">
@@ -186,7 +198,9 @@ const ProjectCard = ({ proj, index }) => {
 const Projects = () => (
     <>
         <motion.div variants={textVariant()} className="text-center mb-12">
-            <h2 className="text-white font-black md:text-[40px] sm:text-[30px] text-[24px]">Projects</h2>
+            <h2 className="text-white font-black md:text-[40px] sm:text-[30px] text-[24px]">
+                Projects
+            </h2>
             <p className="text-secondary text-[16px] mt-2">
                 Take a closer look at what I’ve been working on.
             </p>
