@@ -1,6 +1,6 @@
 import './NavBar.css';
-import { useState, useEffect, useContext } from 'react';
-import { HashLink } from 'react-router-hash-link';
+import {useState, useEffect, useContext} from 'react';
+import {HashLink} from 'react-router-hash-link';
 import usaFlag from '../../assets/img/usa.svg';
 import brazilFlag from '../../assets/img/brazil.svg';
 import linkedinIcon from '../../assets/img/nav-icon1.svg';
@@ -12,24 +12,47 @@ const linkedinURL = 'https://www.linkedin.com/in/mateus-bessa-a89b07247/';
 const instagramURL = 'https://www.instagram.com/matbessa/';
 const githubURL = 'https://github.com/mateusb12';
 
-const NavBar = () => {
+export const NavBar = () => {
     const [activeLink, setActiveLink] = useState('home');
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
-    const { selectedFlag, setSelectedFlag } = useContext(LanguageContext);
+    const {selectedFlag, setSelectedFlag} = useContext(LanguageContext);
 
     const languageContent = {
-        english: ['Home', 'Skills', 'Experiences', 'Projects', 'Connect'],
-        portuguese: ['Início', 'Habilidades', 'Experiências', 'Projetos', 'Conectar'],
+        english: ['Home', 'Skills', 'Experiences', 'Projects', 'Contact'],
+        portuguese: ['Início', 'Habilidades', 'Experiências', 'Projetos', 'Contato'],
     };
     const buttonTexts =
         selectedFlag === 'brazil' ? languageContent.portuguese : languageContent.english;
 
     useEffect(() => {
-        setSelectedFlag('usa');
         const handleScroll = () => setScrolled(window.scrollY > 50);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    useEffect(() => {
+        const sectionIds = ['home', 'skills', 'experiences', 'projects', 'contact'];
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -50% 0px',  // fire when top of section crosses halfway down viewport
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setActiveLink(entry.target.id);
+                }
+            });
+        }, observerOptions);
+
+        sectionIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
+
+        return () => observer.disconnect();
     }, []);
 
     const toggleFlag = (flag) => {
@@ -91,10 +114,10 @@ const NavBar = () => {
 
                     <div className="flex items-center space-x-2 ml-3">
                         {[
-                            { icon: linkedinIcon, url: linkedinURL, alt: 'LinkedIn' },
-                            { icon: githubIcon, url: githubURL, alt: 'GitHub' },
-                            { icon: instagramIcon, url: instagramURL, alt: 'Instagram' },
-                        ].map(({ icon, url, alt }) => (
+                            {icon: linkedinIcon, url: linkedinURL, alt: 'LinkedIn'},
+                            {icon: githubIcon, url: githubURL, alt: 'GitHub'},
+                            {icon: instagramIcon, url: instagramURL, alt: 'Instagram'},
+                        ].map(({icon, url, alt}) => (
                             <a
                                 key={url}
                                 href={url}
@@ -102,14 +125,14 @@ const NavBar = () => {
                                 rel="noopener noreferrer"
                                 className="social-icon"
                             >
-                                <img src={icon} alt={alt} />
+                                <img src={icon} alt={alt}/>
                             </a>
                         ))}
                     </div>
 
-                    <HashLink to="#connect" smooth>
+                    <HashLink to="#contact" smooth>
                         <button
-                            onClick={() => handleLinkClick('connect')}
+                            onClick={() => handleLinkClick('contact')}
                             className="connect-btn ml-7"
                         >
               <span className="connect-btn__label">

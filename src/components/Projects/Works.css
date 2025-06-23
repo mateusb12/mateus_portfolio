@@ -1,0 +1,75 @@
+.project-card {
+    background-color: transparent;
+    border-radius: 12px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.black-gradient {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.description-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.description-container::after {
+    content: "";
+    position: absolute;
+    bottom: 24px;
+    left: 0;
+    right: 0;
+    height: 24px;
+    background: linear-gradient(to bottom, transparent, rgba(21, 46, 51, 0.9));
+    pointer-events: none;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@media screen and (min-width: 768px) {
+    .project-card {
+        width: 360px;
+    }
+}
+
+@media screen and (max-width: 992px) and (min-width: 768px) {
+    .project-card {
+        width: calc(50% - 14px);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .project-card {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari, Opera */
+}
