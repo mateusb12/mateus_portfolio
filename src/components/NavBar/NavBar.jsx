@@ -49,9 +49,9 @@ const NavBar = () => {
         ${scrolled ? 'bg-gray-900 py-[19px]' : 'bg-black bg-opacity-50 py-[19px]'}
       `}
         >
-            <div className="max-w-7xl mx-auto flex items-center justify-between">
+            <div className="w-full mx-auto flex items-center justify-between">
                 {/* Flags */}
-                <div className="flex items-center space-x-2 ml-4">
+                <div className="flex items-center space-x-2 ml-5 md:ml-[20%]">
                     <button onClick={() => toggleFlag('usa')}>
                         <img
                             src={usaFlag}
@@ -69,7 +69,7 @@ const NavBar = () => {
                 </div>
 
                 {/* Desktop menu */}
-                <div className="hidden md:flex items-center gap-0">
+                <div className="hidden mr-15 md:flex items-center gap-0">
                     {['home', 'skills', 'experiences', 'projects'].map((link, idx) => (
                         <HashLink
                             key={link}
