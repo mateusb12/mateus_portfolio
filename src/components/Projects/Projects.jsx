@@ -34,6 +34,11 @@ import machineLearning from '../../assets/img/skills_icons/machine-learning.png'
 import webScrapping from '../../assets/img/skills_icons/web-scrapping.png';
 import typescript from '../../assets/img/skills_icons/typescript.png';
 import linux from '../../assets/img/skills_icons/linux.png';
+import numpy from '../../assets/img/skills_icons/numpy.png';
+import graphviz from '../../assets/img/skills_icons/graphviz.png';
+import pandas from '../../assets/img/skills_icons/pandas.png';
+import networkx from '../../assets/img/skills_icons/networkx.png';
+import spacy from '../../assets/img/skills_icons/spacy.png';
 import nodejs from '../../assets/img/skills_icons/nodejs.png';
 import django from '../../assets/img/skills_icons/django.png';
 import mongo from '../../assets/img/skills_icons/mongo.svg';
@@ -49,9 +54,35 @@ import nextJs from '../../assets/img/skills_icons/nextjs.svg';
 import redis from '../../assets/img/skills_icons/redis.svg';
 import swagger from '../../assets/img/skills_icons/swagger.svg';
 import reactNative from '../../assets/img/skills_icons/react-native.png';
+import nlp from '../../assets/img/skills_icons/nlp.png';
 
 // map each tag to its icon
 const iconMap = {
+    api: api,
+    backend: server,
+    flask: flask,
+    django: django,
+    website: frontend,
+    html: html,
+    css: css,
+    javascript: javascript,
+    python: python,
+    csharp: csharp,
+    java: java,
+    sql: sql,
+    git: git,
+    jwt: jwt,
+    postgres: postgres,
+    docker: docker,
+    aws: aws,
+    googleCloud: googleCloud,
+    cloud: cloud,
+    deploy: deploy,
+    lock: lock,
+    design: design,
+    machineLearning: machineLearning,
+    webScrapping: webScrapping,
+    linux: linux,
     react: reactIcon,
     mongodb: mongo,
     nodejs: nodejs,
@@ -60,6 +91,21 @@ const iconMap = {
     supabase: supabase,
     nextjs: nextJs,
     prisma: database,
+    tilt: tilt,
+    poetry: poetry,
+    alembic: alembic,
+    azure: azure,
+    figma: figma,
+    githubActions: githubActions,
+    redis: redis,
+    reactNative: reactNative,
+    swagger: swagger,
+    nlp: nlp,
+    graphviz: graphviz,
+    pandas: pandas,
+    numpy: numpy,
+    networkx: networkx,
+    spacy: spacy
 };
 
 // Fade-in animation helper
@@ -114,9 +160,15 @@ const projects = [
         name: 'Book Analyzer',
         description: 'Transform .txt book files into social media style graphs, similar to Instagram',
         tags: [
-            { name: 'react' },
-            { name: 'mongodb' },
-            { name: 'nodejs' },
+            { name: 'api' },
+            { name: 'nlp' },
+            { name: 'django' },
+            { name: 'python' },
+            { name: 'numpy' },
+            { name: 'graphviz' },
+            { name: 'pandas' },
+            { name: 'networkx' },
+            { name: 'spacy' },
         ],
         image: witcher_reading_book,
         projectLink: 'https://your-langguesser-app.com',
