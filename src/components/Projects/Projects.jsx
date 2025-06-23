@@ -4,7 +4,7 @@ import {ArrowRight} from 'lucide-react';
 import LanguageContext from '../LanguageContext';
 import {projectsFadeIn, staggerContainer} from "../../utils/componentUtils.jsx";
 import {iconMap, projectsData, projectTextContent} from "./ProjectData.jsx";
-
+import { Link } from 'react-router-dom';
 // map each tag to its icon
 
 // fadeIn animation helper
@@ -156,12 +156,12 @@ const ProjectsSection = () => {
             </div>
 
             <div className="mt-12 flex justify-center">
-                <a
-                    href="/projects"
+                <Link
+                    to="/projects"
                     className="bg-green-700 hover:bg-green-600 text-white py-4 px-10 rounded-full font-medium inline-flex items-center gap-2"
                 >
                     {text.viewAll} <ArrowRight size={16}/>
-                </a>
+                </Link>
             </div>
         </section>
     );
