@@ -21,20 +21,22 @@ const getItemsPerSlide = (width) => {
 
 const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }) => {
     const width = useWindowWidth();
-    const itemsPerSlide = getItemsPerSlide(width);
+    const maxPerSlide = getItemsPerSlide(width);
     const totalItems = skillContent.length;
 
-    // Calculate how many slides/pages
-    const slidesCount = Math.ceil(totalItems / itemsPerSlide);
+    // Determine number of pages (slides) based on max items per slide
+    const pagesCount = Math.ceil(totalItems / maxPerSlide);
+    // Recalculate a balanced page size
+    const pageSize = Math.ceil(totalItems / pagesCount);
 
-    // Build pages array
-    const pages = Array.from({ length: slidesCount }).map((_, pageIndex) => {
-        const start = pageIndex * itemsPerSlide;
-        return skillContent.slice(start, start + itemsPerSlide);
+    // Build balanced pages array
+    const pages = Array.from({ length: pagesCount }).map((_, pageIndex) => {
+        const start = pageIndex * pageSize;
+        return skillContent.slice(start, start + pageSize);
     });
 
     const [currentSlide, setCurrentSlide] = useState(0);
-    useEffect(() => setCurrentSlide(0), [itemsPerSlide, totalItems]);
+    useEffect(() => setCurrentSlide(0), [pageSize, totalItems]);
 
     // Styles for track and each slide
     const trackStyle = {
@@ -63,14 +65,17 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
                     {/* Carousel Container */}
                     <div className="relative overflow-hidden w-full">
                         {/* Sliding Track */}
-                        <div className="flex transition-transform duration-500 ease-in-out" style={trackStyle}>
+                        <div
+                            className="flex transition-transform duration-500 ease-in-out"
+                            style={trackStyle}
+                        >
                             {pages.map((items, idx) => (
                                 <div
                                     key={idx}
                                     className="flex flex-shrink-0 gap-x-8 justify-center items-center"
                                     style={slideStyle}
                                 >
-                                    {items.map(skill => (
+                                    {items.map((skill) => (
                                         <div key={skill.id} className="flex flex-col items-center">
                                             <img
                                                 src={iconsMap[skill.id]}
@@ -88,18 +93,18 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
                         </div>
 
                         {/* Nav arrows */}
-                        {slidesCount > 1 && (
+                        {pagesCount > 1 && (
                             <>
                                 <button
-                                    onClick={() => setCurrentSlide(i => Math.max(i - 1, 0))}
+                                    onClick={() => setCurrentSlide((i) => Math.max(i - 1, 0))}
                                     disabled={currentSlide === 0}
                                     className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 disabled:opacity-30"
                                 >
                                     <FaChevronLeft size={20} />
                                 </button>
                                 <button
-                                    onClick={() => setCurrentSlide(i => Math.min(i + 1, slidesCount - 1))}
-                                    disabled={currentSlide === slidesCount - 1}
+                                    onClick={() => setCurrentSlide((i) => Math.min(i + 1, pagesCount - 1))}
+                                    disabled={currentSlide === pagesCount - 1}
                                     className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 disabled:opacity-30"
                                 >
                                     <FaChevronRight size={20} />
