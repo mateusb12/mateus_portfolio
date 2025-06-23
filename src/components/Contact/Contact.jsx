@@ -228,7 +228,7 @@ const Contact = () => {
                     rows={4}
                     value={whatsappMessage}
                     onChange={handleWhatsAppChange}
-                    className="bg-[#031010] py-3 px-5 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
+                    className="w-full bg-[#031010] py-3 px-5 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
                 />
             </label>
             <button
@@ -245,7 +245,7 @@ const Contact = () => {
         <div className="flex justify-center items-start">
             <motion.div
                 variants={slideIn('left', 'tween', 0.2, 1)}
-                className="flex-[0.4] bg-[#071a1a] p-8 rounded-2xl"
+                className="w-full sm:w-[400px] bg-[#071a1a] p-8 rounded-2xl"
             >
                 <h3 className={styles.sectionHeadText}>{t.sectionTitle}</h3>
 

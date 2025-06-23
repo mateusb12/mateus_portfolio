@@ -215,7 +215,7 @@ const Projects = () => (
         <div className="mt-12 flex justify-center">
             <a
                 href="/projects"
-                className="bg-green-500 hover:bg-green-600 text-white py-4 px-10 rounded-full font-medium inline-flex items-center gap-2"
+                className="bg-green-700 hover:bg-green-600 text-white py-4 px-10 rounded-full font-medium inline-flex items-center gap-2"
             >
                 View all <ArrowRight size={16} />
             </a>
