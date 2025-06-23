@@ -6,6 +6,62 @@ import flight from '../../assets/img/flight.jpg';
 import data_analysis from '../../assets/img/data_analysis.jpg';
 import { staggerContainer } from '../Experience/StaggerContainer.jsx';
 
+// skill icons
+import server from '../../assets/img/skills_icons/server.png';
+import api from '../../assets/img/skills_icons/api.png';
+import database from '../../assets/img/skills_icons/database.png';
+import cloud from '../../assets/img/skills_icons/cloud.png';
+import deploy from '../../assets/img/skills_icons/deploy.png';
+import lock from '../../assets/img/skills_icons/lock.png';
+import python from '../../assets/img/skills_icons/python.png';
+import javascript from '../../assets/img/skills_icons/javascript.png';
+import csharp from '../../assets/img/skills_icons/csharp.png';
+import java from '../../assets/img/skills_icons/java.png';
+import html from '../../assets/img/skills_icons/html.png';
+import css from '../../assets/img/skills_icons/css.png';
+import sql from '../../assets/img/skills_icons/sql.png';
+import git from '../../assets/img/skills_icons/git.png';
+import flask from '../../assets/img/skills_icons/flask.png';
+import reactIcon from '../../assets/img/skills_icons/react.png';
+import jwt from '../../assets/img/skills_icons/jwt.png';
+import postgres from '../../assets/img/skills_icons/postgres.png';
+import docker from '../../assets/img/skills_icons/docker.png';
+import aws from '../../assets/img/skills_icons/aws.png';
+import googleCloud from '../../assets/img/skills_icons/google-cloud-small.png';
+import frontend from '../../assets/img/skills_icons/frontend_dev.png';
+import design from '../../assets/img/skills_icons/design.png';
+import machineLearning from '../../assets/img/skills_icons/machine-learning.png';
+import webScrapping from '../../assets/img/skills_icons/web-scrapping.png';
+import typescript from '../../assets/img/skills_icons/typescript.png';
+import linux from '../../assets/img/skills_icons/linux.png';
+import nodejs from '../../assets/img/skills_icons/nodejs.png';
+import django from '../../assets/img/skills_icons/django.png';
+import mongo from '../../assets/img/skills_icons/mongo.svg';
+import supabase from '../../assets/img/skills_icons/supabase.png';
+import firebase from '../../assets/img/skills_icons/firebase.png';
+import tilt from '../../assets/img/skills_icons/tilt.png';
+import poetry from '../../assets/img/skills_icons/poetry.png';
+import alembic from '../../assets/img/skills_icons/alembic.png';
+import azure from '../../assets/img/skills_icons/azure.svg';
+import figma from '../../assets/img/skills_icons/figma.svg';
+import githubActions from '../../assets/img/skills_icons/github-actions.svg';
+import nextJs from '../../assets/img/skills_icons/nextjs.svg';
+import redis from '../../assets/img/skills_icons/redis.svg';
+import swagger from '../../assets/img/skills_icons/swagger.svg';
+import reactNative from '../../assets/img/skills_icons/react-native.png';
+
+// map each tag to its icon
+const iconMap = {
+    react: reactIcon,
+    mongodb: mongo,
+    nodejs: nodejs,
+    typescript: typescript,
+    firebase: firebase,
+    supabase: supabase,
+    nextjs: nextJs,
+    prisma: database,
+};
+
 // Fade-in animation helper
 export const fadeIn = (direction, type = 'tween', duration = 0.5) => {
     const axis = ['left', 'right'].includes(direction)
@@ -23,9 +79,7 @@ export const fadeIn = (direction, type = 'tween', duration = 0.5) => {
             transition: {
                 type,
                 duration,
-                ...(type === 'tween'
-                    ? { ease: 'easeOut' }
-                    : { stiffness: 100, damping: 20 }),
+                ...(type === 'tween' ? { ease: 'easeOut' } : { stiffness: 100, damping: 20 }),
             },
         },
     };
@@ -42,12 +96,14 @@ const violetTheme = {
     borderColor: 'border-violet-400/10',
     borderHover: 'hover:border-violet-300',
     outerGlow: 'shadow-[0_0_15px_5px_rgba(192,132,252,0.10)] opacity-70',
-    outerGlowHover: 'hover:shadow-[0_0_25px_8px_rgba(139,92,246,0.15)] hover:opacity-100 hover:bg-violet-950',
+    outerGlowHover:
+        'hover:shadow-[0_0_25px_8px_rgba(139,92,246,0.15)] hover:opacity-100 hover:bg-violet-950',
     innerGlowColor: 'bg-violet-400',
     innerGlowOpacity: 'opacity-25',
     innerGlowHover: 'group-hover:opacity-30',
 };
 
+// Tailwind padding styles
 const styles = {
     padding: 'sm:px-16 px-6 sm:py-16 py-10',
 };
@@ -56,13 +112,11 @@ const styles = {
 const projects = [
     {
         name: 'Book Analyzer',
-        description:
-            'Transform .txt book files into social media style graphs, similar to Instagram',
+        description: 'Transform .txt book files into social media style graphs, similar to Instagram',
         tags: [
-            { name: 'react', color: 'green-text-gradient' },
-            { name: 'mongodb', color: 'blue-text-gradient' },
-            { name: 'express.js', color: 'pink-text-gradient' },
-            { name: 'nodejs', color: 'orange-text-gradient' },
+            { name: 'react' },
+            { name: 'mongodb' },
+            { name: 'nodejs' },
         ],
         image: witcher_reading_book,
         projectLink: 'https://your-langguesser-app.com',
@@ -70,14 +124,11 @@ const projects = [
     {
         name: 'Flight Scraper',
         description:
-            'Powered by Kiwi Tequilla API, this project scrapes flight data from the API and displays it in a user-friendly way. The main focus is to create alerts for the user when the price of a flight drops.',
+            'Powered by Kiwi Tequilla API, this project scrapes flight data and alerts users when prices drop.',
         tags: [
-            { name: 'react', color: 'green-text-gradient' },
-            { name: 'typescript', color: 'blue-text-gradient' },
-            { name: 'tailwindcss', color: 'pink-text-gradient' },
-            { name: 'firebase', color: 'orange-text-gradient' },
-            { name: 'vite', color: 'purple-text-gradient' },
-            { name: 'shadcn/ui', color: 'yellow-text-gradient' },
+            { name: 'react' },
+            { name: 'typescript' },
+            { name: 'firebase' },
         ],
         image: flight,
         projectLink: 'https://your-roastroom-app.com',
@@ -85,19 +136,18 @@ const projects = [
     {
         name: 'Valorant Impact',
         description:
-            'A tool that quantifies how much player actions can shift the odds of winning a Valorant round. By analyzing kills, weapon choices, economy and strategic moves, it reveals the real-time impact on victory chances',
+            'Quantifies how player actions shift the odds of winning a Valorant round in real-time.',
         tags: [
-            { name: 'nextjs', color: 'green-text-gradient' },
-            { name: 'prisma', color: 'pink-text-gradient' },
-            { name: 'supabase', color: 'blue-text-gradient' },
-            { name: 'deepseek', color: 'yellow-text-gradient' },
+            { name: 'nextjs' },
+            { name: 'prisma' },
+            { name: 'supabase' },
         ],
         image: data_analysis,
         projectLink: 'https://your-porisma-app.com',
     },
 ];
 
-// Individual project card with Read More toggle
+// Individual project card
 const ProjectCard = ({ proj, index }) => {
     const [expanded, setExpanded] = useState(false);
 
@@ -105,21 +155,16 @@ const ProjectCard = ({ proj, index }) => {
         <motion.div
             key={`project-${index}`}
             variants={fadeIn('up', 'spring', 0.2 * index)}
-            className={`
-        relative group w-full sm:w-[360px] rounded-2xl overflow-hidden
-        bg-[#091011]
-        border-2 transition-all duration-300 ease-in-out
+            className={`relative w-full sm:w-[360px] rounded-2xl overflow-hidden
+        bg-[#091011] border-2 transition-all duration-300 ease-in-out
         ${violetTheme.borderColor} ${violetTheme.borderHover}
-        ${violetTheme.outerGlow} ${violetTheme.outerGlowHover}
-      `}
+        ${violetTheme.outerGlow} ${violetTheme.outerGlowHover}`}
         >
             {/* inner glow */}
             <div
-                className={`
-          absolute inset-0 ${violetTheme.innerGlowColor}
+                className={`absolute inset-0 ${violetTheme.innerGlowColor}
           ${violetTheme.innerGlowOpacity} ${violetTheme.innerGlowHover}
-          blur-2xl transition-opacity duration-300
-        `}
+          blur-2xl transition-opacity duration-300`}
             />
 
             {/* image */}
@@ -133,23 +178,31 @@ const ProjectCard = ({ proj, index }) => {
 
             {/* text + Read More */}
             <div className="relative z-10 p-4 pb-12">
+                {/* icons with hover & tooltip */}
                 <div className="flex flex-wrap gap-2 mb-3">
-                    {proj.tags.map((tag) => (
-                        <span
-                            key={tag.name}
-                            className={`
-                inline-block text-[12px] font-medium ${tag.color}
-                bg-black bg-opacity-30 px-2 py-1 rounded-full
-              `}
-                        >
-              {tag.name}
-            </span>
+                    {proj.tags.map(({ name }) => (
+                        <div key={name} className="relative group w-10 h-10">
+                            {iconMap[name] ? (
+                                <img
+                                    src={iconMap[name]}
+                                    alt={name}
+                                    className="w-full h-full object-contain transition-transform duration-200 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
+                                />
+                            ) : (
+                                <span className="inline-block w-full h-full px-2 py-1 bg-gray-600 text-white rounded text-[10px] flex items-center justify-center transition-transform duration-200 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]">
+                                    {name}
+                                </span>
+                            )}
+                            <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                {name}
+                            </span>
+                        </div>
                     ))}
                 </div>
 
                 <h3 className="text-white font-bold text-[24px]">{proj.name}</h3>
 
-                {/* description with masked fade on last line */}
+                {/* description with fade */}
                 <div className="relative mt-2">
                     <p
                         className="text-secondary text-[14px] leading-[20px] overflow-hidden"
@@ -171,7 +224,7 @@ const ProjectCard = ({ proj, index }) => {
                     </p>
                 </div>
 
-                {/* Read More / Show Less */}
+                {/* Read More toggle */}
                 <div className="mt-1">
                     <button
                         onClick={() => setExpanded(!expanded)}
@@ -182,7 +235,7 @@ const ProjectCard = ({ proj, index }) => {
                 </div>
             </div>
 
-            {/* View Project anchored */}
+            {/* View Project link */}
             <a
                 href={proj.projectLink}
                 target="_blank"
@@ -195,6 +248,7 @@ const ProjectCard = ({ proj, index }) => {
     );
 };
 
+// Projects section
 const Projects = () => (
     <>
         <motion.div variants={textVariant()} className="text-center mb-12">
