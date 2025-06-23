@@ -1,151 +1,99 @@
-import React, {useState, useEffect, useRef} from "react";
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-// --- A more robust useWindowSize hook ---
-const useWindowSize = () => {
-    const [size, setSize] = useState([0, 0]);
+// Hook: Track viewport width
+const useWindowWidth = () => {
+    const [width, setWidth] = useState(window.innerWidth);
     useEffect(() => {
-        function updateSize() {
-            setSize([window.innerWidth, window.innerHeight]);
-        }
-
-        window.addEventListener('resize', updateSize);
-        updateSize(); // Initial size
-        return () => window.removeEventListener('resize', updateSize);
+        const onResize = () => setWidth(window.innerWidth);
+        window.addEventListener('resize', onResize);
+        return () => window.removeEventListener('resize', onResize);
     }, []);
-    return size;
+    return width;
 };
 
-// --- A utility class for hiding the scrollbar ---
-const scrollbarHide = {
-    msOverflowStyle: 'none',  /* IE and Edge */
-    scrollbarWidth: 'none',  /* Firefox */
+// Determine how many icons to show per "page"
+const getItemsPerSlide = (width) => {
+    if (width >= 1200) return 5;
+    if (width >= 992) return 4;
+    if (width >= 768) return 3;
+    if (width >= 576) return 2;
+    return 1;
 };
-// For Webkit browsers, we can use a CSS class
-// Add this to your global CSS file:
-// .hide-scrollbar::-webkit-scrollbar {
-//   display: none;
-// }
 
+const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }) => {
+    const width = useWindowWidth();
+    const itemsPerSlide = getItemsPerSlide(width);
+    const totalSlides = Math.ceil(skillContent.length / itemsPerSlide);
+    const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
-// --- MAIN CAROUSEL COMPONENT ---
-const SkillCarousel = ({sectionTitle, sectionSubtitle, skillContent, iconsMap}) => {
-    const carouselRef = useRef(null);
-    const [width] = useWindowSize();
-    const [itemsPerPage, setItemsPerPage] = useState(5);
-    const [isMobile, setIsMobile] = useState(false);
+    // Reset to first slide if layout changes
+    useEffect(() => setCurrentSlideIndex(0), [itemsPerSlide]);
 
-    // 1. Determine the number of items to show and if we're on mobile
-    useEffect(() => {
-        setIsMobile(width < 768); // md breakpoint
-        if (width < 640) setItemsPerPage(3);      // sm
-        else if (width < 768) setItemsPerPage(4); // md
-        else if (width < 1024) setItemsPerPage(5);// lg
-        else setItemsPerPage(6);                  // xl
-    }, [width]);
-
-    // 2. Arrow handler to scroll by the container's width
-    const handleArrowClick = (direction) => {
-        if (!carouselRef.current) return;
-        const container = carouselRef.current;
-        container.scrollBy({
-            left: direction === 'next' ? container.offsetWidth : -container.offsetWidth,
-            behavior: 'smooth',
-        });
-    };
-
-    // 3. Calculate the width of each item dynamically
-    const cardWidthStyle = {
-        /*  grow | shrink | basis  */
-        flex: `1 1 calc(${100 / itemsPerPage}% - 0.75rem)`, // or 0 1 … if you never want them to grow
-        maxWidth: `calc(${100 / itemsPerPage}% - 0.75rem)`,
-        minWidth: 0,     // lets long titles truncate instead of stretching the card
-    };
+    // Compute which icons to display now
+    const start = currentSlideIndex * itemsPerSlide;
+    const end = start + itemsPerSlide;
+    const currentItems = skillContent.slice(start, end);
 
     return (
-        <div className="w-full max-w-6xl mx-auto my-8 px-0">
-            <div className="p-6 bg-black/40 backdrop-blur-lg border border-white/10 rounded-2xl shadow-lg">
-                {/* Header */}
-                <div className="text-center mb-6">
-                    <h2 className="text-3xl font-bold text-white">{sectionTitle}</h2>
-                    <p className="text-gray-300 mt-1">{sectionSubtitle}</p>
+        <div className="relative bg-black bg-opacity-50 backdrop-blur-md rounded-2xl shadow-2xl px-6 py-10 max-w-5xl mx-auto">
+            {/* Header */}
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-white mb-2">
+                {sectionTitle}
+            </h2>
+            <p className="text-sm md:text-base text-center text-white/75 mb-8">
+                {sectionSubtitle}
+            </p>
+
+            {/* Icons Row */}
+            <div className="relative">
+                <div className="grid grid-flow-col auto-cols-fr gap-x-12 items-center justify-start">
+                    {currentItems.map((skill) => (
+                        <div key={skill.id} className="flex flex-col items-center">
+                            <img
+                                src={iconsMap[skill.id]}
+                                alt={skill.title}
+                                className="w-20 h-20 object-contain"
+                            />
+                            <span className="mt-4 text-sm md:text-base font-medium text-white">
+                {skill.title}
+              </span>
+                        </div>
+                    ))}
                 </div>
 
-                {/* Carousel */}
-                <div className="relative overflow-visible">
-                    {/* Left Arrow - Hidden on mobile via state */}
-                    {(
+                {/* Arrows */}
+                {totalSlides > 1 && (
+                    <>
                         <button
-                            onClick={() => handleArrowClick('prev')}
-                            className="
-              absolute top-1/2
-              -left-4 sm:left-2 md:left-4
-              transform -translate-y-1/2
-              z-10 w-10 h-10
-              bg-black/30 hover:bg-white/20
-              text-white rounded-full
-              flex items-center justify-center
-              transition-all duration-300
-            "
-                            aria-label="Previous"
+                            onClick={() => setCurrentSlideIndex((i) => Math.max(i - 1, 0))}
+                            disabled={currentSlideIndex === 0}
+                            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 rounded-full p-3 text-white hover:bg-opacity-80 disabled:opacity-30"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                 stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>
-                            </svg>
+                            <FaChevronLeft size={18} />
                         </button>
-                    )}
 
-                    <div
-                        ref={carouselRef}
-                        className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar gap-4"
-                        style={scrollbarHide}
-                    >
-                        {skillContent.map(skill => {
-                            const iconSrc = iconsMap[skill.id];
-                            return (
-                                <div
-                                    key={skill.id}
-                                    className="snap-start text-center p-2 flex flex-col items-center"
-                                    style={cardWidthStyle}
-                                >
-                                    {/* Responsive Icon Size */}
-                                    <div className="h-12 w-12 md:h-16 md:w-16 flex items-center justify-center mb-2">
-                                        {iconSrc ? (
-                                            <img src={iconSrc} alt={skill.title}
-                                                 className="h-full w-full object-contain"/>
-                                        ) : (
-                                            <span className="text-white text-xl">?</span>
-                                        )}
-                                    </div>
-                                    <p className="text-sm text-white font-medium truncate w-full">{skill.title}</p>
-                                </div>
-                            );
-                        })}
-                    </div>
-
-                    {/* Right Arrow - Hidden on mobile via state */}
-                    {(
                         <button
-                            onClick={() => handleArrowClick('next')}
-                            className="
-              absolute top-1/2
-              -right-4 sm:right-2 md:right-4
-              transform -translate-y-1/2
-              z-10 w-10 h-10
-              bg-black/30 hover:bg-white/20
-              text-white rounded-full
-              flex items-center justify-center
-              transition-all duration-300
-            "
-                            aria-label="Next"
+                            onClick={() => setCurrentSlideIndex((i) => Math.min(i + 1, totalSlides - 1))}
+                            disabled={currentSlideIndex === totalSlides - 1}
+                            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 rounded-full p-3 text-white hover:bg-opacity-80 disabled:opacity-30"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                 stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
-                            </svg>
+                            <FaChevronRight size={18} />
                         </button>
-                    )}
+                    </>
+                )}
+
+                {/* Pagination Pills */}
+                <div className="flex justify-center items-center space-x-2 mt-6">
+                    {Array.from({ length: totalSlides }).map((_, slideIdx) => (
+                        <button
+                            key={slideIdx}
+                            onClick={() => setCurrentSlideIndex(slideIdx)}
+                            className={`w-6 h-2 rounded-full transition-all ${
+                                slideIdx === currentSlideIndex ? 'bg-green-400' : 'bg-gray-500/50'
+                            }`}
+                        />
+                    ))}
                 </div>
             </div>
         </div>
