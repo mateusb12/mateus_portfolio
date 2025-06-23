@@ -189,7 +189,7 @@ const SkillsSection = () => {
     const mobileCarouselSize = 3;
 
     return (
-        <>
+        <section id="skills">
             <SkillCarousel
                 sectionTitle={lang.backend.title}
                 sectionSubtitle={lang.backend.subtitle}
@@ -216,7 +216,7 @@ const SkillsSection = () => {
                 desktopVisible={desktopCarouselSize}
                 mobileVisible={mobileCarouselSize}
             />
-        </>
+        </section>
     );
 };
 

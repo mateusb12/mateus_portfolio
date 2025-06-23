@@ -265,7 +265,7 @@ const ProjectsSection = () => {
     }));
 
     return (
-        <>
+        <section id="projects">
             <motion.div variants={textVariant()} className="text-center mb-12">
                 <h2 className="text-white font-black md:text-[40px] sm:text-[30px] text-[24px]">
                     {text.sectionTitle}
@@ -289,7 +289,7 @@ const ProjectsSection = () => {
                     {text.viewAll} <ArrowRight size={16} />
                 </a>
             </div>
-        </>
+        </section>
     );
 };
 

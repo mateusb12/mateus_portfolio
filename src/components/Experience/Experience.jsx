@@ -430,7 +430,7 @@ const Experience = () => {
     }, [items]);
 
     return (
-        <>
+        <section id="experiences">
             <style>{`
       .vertical-timeline--animate .vertical-timeline-element-content {
         transition-duration: 1.5s !important;
@@ -460,7 +460,7 @@ const Experience = () => {
                     />
                 ))}
             </VerticalTimeline>
-        </>
+        </section>
     );
 };
 
