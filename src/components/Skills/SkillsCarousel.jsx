@@ -173,10 +173,10 @@ const SkillCarousel = ({
     const beansFilled = scrollIndex + 1
 
     return (
-        <section className="relative py-8 md:py-15 w-full">
-            <div className="flex justify-center w-full">
-                <div className="relative w-[60%] md:w-[70%] px-4 md:px-0 bg-black/50 backdrop-blur-2xl rounded-3xl py-12">
-                    <div className="mx-auto text-center">
+        <section className="relative py-8 md:py-15 w-full border border-green-500">
+            <div className="flex justify-center w-full border border-blue-500">
+                <div className="relative mx-auto w-full md:max-w-[70%] px-0 sm:px-4 bg-black/50 backdrop-blur-2xl rounded-3xl py-12 border border-red-500">
+                    <div className="mx-auto text-center w-full">
                         <h2 className="text-5xl font-bold text-white mb-4">{sectionTitle}</h2>
                         <p className="text-base sm:text-lg mb-2 break-words">{sectionSubtitle}</p>
 
@@ -194,7 +194,7 @@ const SkillCarousel = ({
                                 </button>
                             )}
 
-                            <div className="overflow-hidden w-full px-4">
+                            <div className="overflow-hidden w-full border border-pink-500">
                                 <div
                                     ref={carouselRef}
                                     onPointerDown={handlePointerDown}
@@ -202,7 +202,7 @@ const SkillCarousel = ({
                                     onPointerUp={endDrag}
                                     onPointerCancel={endDrag}
                                     style={{ touchAction: 'pan-y', gap: `${gapPx}px` }}
-                                    className="flex overflow-x-auto hide-scrollbar rounded-xl py-6 w-full md:w-[70%] mx-auto cursor-grab px-4"
+                                    className="flex overflow-x-auto hide-scrollbar rounded-xl py-6 w-full cursor-grab"
                                 >
                                     {skillContent.map((skill) => (
                                         <div
