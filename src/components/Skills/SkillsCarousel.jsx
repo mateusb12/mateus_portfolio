@@ -24,32 +24,26 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
     const itemsPerSlide = getItemsPerSlide(width);
     const totalItems = skillContent.length;
 
-    // 1) decide how many slides we need at most:
+    // Calculate how many slides/pages
     const slidesCount = Math.ceil(totalItems / itemsPerSlide);
 
-    // 2) figure out the base size & how many slides get an extra item:
-    const baseSize = Math.floor(totalItems / slidesCount);
-    const extraItems = totalItems % slidesCount;
-
-    // 3) build an array of “page sizes” that sums to totalItems
-    const pageSizes = Array.from({ length: slidesCount }, (_, i) => (
-        baseSize + (i < extraItems ? 1 : 0)
-    ));
-
-    // 4) prefix-sum to know each slide’s start index
-    const startIndexes = pageSizes.reduce((acc, sz, idx) => {
-        if (idx === 0) acc.push(0);
-        else acc.push(acc[idx - 1] + pageSizes[idx - 1]);
-        return acc;
-    }, []);
+    // Build pages array
+    const pages = Array.from({ length: slidesCount }).map((_, pageIndex) => {
+        const start = pageIndex * itemsPerSlide;
+        return skillContent.slice(start, start + itemsPerSlide);
+    });
 
     const [currentSlide, setCurrentSlide] = useState(0);
     useEffect(() => setCurrentSlide(0), [itemsPerSlide, totalItems]);
 
-    // 5) slice out only the items for the current slide
-    const start = startIndexes[currentSlide];
-    const end = start + pageSizes[currentSlide];
-    const currentItems = skillContent.slice(start, end);
+    // Styles for track and each slide
+    const trackStyle = {
+        width: `${pages.length * 100}%`,
+        transform: `translateX(-${(100 / pages.length) * currentSlide}%)`,
+    };
+    const slideStyle = {
+        width: `${100 / pages.length}%`,
+    };
 
     return (
         <section className="relative py-12 md:py-20 w-full">
@@ -66,25 +60,29 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
                         </p>
                     </div>
 
-                    {/* Carousel */}
-                    <div className="relative">
-                        {/* Grid of just this slide’s items */}
-                        <div
-                            className="grid gap-x-8 items-center"
-                            style={{
-                                gridTemplateColumns: `repeat(${currentItems.length}, minmax(0, 1fr))`,
-                            }}
-                        >
-                            {currentItems.map(skill => (
-                                <div key={skill.id} className="flex flex-col items-center">
-                                    <img
-                                        src={iconsMap[skill.id]}
-                                        alt={skill.title}
-                                        className="object-contain max-h-40"
-                                    />
-                                    <span className="mt-5 text-lg md:text-xl font-semibold text-white">
-                    {skill.title}
-                  </span>
+                    {/* Carousel Container */}
+                    <div className="relative overflow-hidden w-full">
+                        {/* Sliding Track */}
+                        <div className="flex transition-transform duration-500 ease-in-out" style={trackStyle}>
+                            {pages.map((items, idx) => (
+                                <div
+                                    key={idx}
+                                    className="flex flex-shrink-0 gap-x-8 justify-center items-center"
+                                    style={slideStyle}
+                                >
+                                    {items.map(skill => (
+                                        <div key={skill.id} className="flex flex-col items-center">
+                                            <img
+                                                src={iconsMap[skill.id]}
+                                                alt={skill.title}
+                                                className="object-contain h-40 w-40"
+                                                draggable={false}
+                                            />
+                                            <span className="mt-5 text-lg md:text-xl font-semibold text-white">
+                        {skill.title}
+                      </span>
+                                        </div>
+                                    ))}
                                 </div>
                             ))}
                         </div>
@@ -111,7 +109,7 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
 
                         {/* Pagination pills */}
                         <div className="flex justify-center items-center space-x-3 mt-10">
-                            {pageSizes.map((_, idx) => (
+                            {pages.map((_, idx) => (
                                 <button
                                     key={idx}
                                     onClick={() => setCurrentSlide(idx)}
