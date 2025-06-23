@@ -32,18 +32,7 @@ import selenium from "../../assets/img/skills_icons/selenium.svg";
 import pandas from "../../assets/img/skills_icons/pandas.png";
 import React, {forwardRef, useContext, useEffect, useRef, useState} from "react";
 import LanguageContext from "../LanguageContext.jsx";
-
-export const staggerContainer = (staggerChildren, delayChildren) => {
-    return {
-        hidden: {},
-        show: {
-            transition: {
-                staggerChildren: staggerChildren,
-                delayChildren: delayChildren || 0,
-            },
-        },
-    };
-};
+import {staggerContainer} from "../../utils/componentUtils.jsx";
 
 const textContent = {
     english: {

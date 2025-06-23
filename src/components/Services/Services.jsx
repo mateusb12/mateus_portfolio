@@ -6,51 +6,7 @@ import human_brain from '../../assets/img/skills_icons/human-brain.png';
 import dashboard    from '../../assets/img/skills_icons/dashboard.png';
 import login        from '../../assets/img/skills_icons/login.png';
 import plug         from '../../assets/img/skills_icons/plug.png';
-
-export const fadeIn = (direction, type = 'tween', duration = 0.5) => {
-    const axis = ['left', 'right'].includes(direction)
-        ? { x: direction === 'left' ? 100 : -100 }
-        : ['up', 'down'].includes(direction)
-            ? { y: direction === 'up' ? 100 : -100 }
-            : {};
-
-    return {
-        hidden: {
-            ...axis,
-            opacity: 0,
-        },
-        show: {
-            x: 0,
-            y: 0,
-            opacity: 1,
-            transition: {
-                type,
-                duration,
-                ...(type === 'tween'
-                        ? { ease: 'easeOut' }
-                        : { stiffness: 100, damping: 20 }
-                ),
-            },
-        },
-    };
-};
-
-
-// File: src/components/Experience/StaggerContainer.jsx
-export const staggerContainer = (staggerChildren = 0.2, delayChildren = 0) => {
-    return {
-        hidden: {},
-        show: {
-            transition: {
-                staggerChildren,
-                delayChildren,
-            },
-        },
-    };
-};
-
-
-
+import {servicesFadeIn, staggerContainer} from "../../utils/componentUtils.jsx";
 
 // Tilt settings
 const tiltOptions = {
@@ -144,7 +100,7 @@ const SingleServiceCard = ({ title, icon, description, glowTheme }) => {
     return (
         <Tilt className="w-[290px]" {...tiltOptions}>
             <motion.div
-                variants={fadeIn('right', 'tween', 1.5)}
+                variants={servicesFadeIn('right', 'tween', 1.5)}
                 className={`relative group overflow-hidden p-5 rounded-[20px] bg-[#031010] border ${borderColor} ${borderHoverColor} ${outerGlow} ${outerGlowHover}`}
             >
                 <div className={`absolute top-8 left-1/2 -translate-x-1/2 w-36 h-36 rounded-full z-0 ${innerGlowColor} ${innerGlowOpacity} ${innerGlowHover} blur-2xl transition-opacity duration-300`} />

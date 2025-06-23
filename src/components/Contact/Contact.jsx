@@ -1,11 +1,11 @@
 import React, {useState, useRef, useContext, useEffect} from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
-import { staggerContainer } from "../Experience/StaggerContainer.jsx";
 import LanguageContext from '../LanguageContext';
 import linkedinIcon from '../../assets/img/nav-icon1.svg';
 import githubIcon from '../../assets/img/nav-icon4.svg';
 import instagramIcon from '../../assets/img/nav-icon3.svg';
+import {staggerContainer} from "../../utils/componentUtils.jsx";
 
 export const slideIn = (direction, type, delay, duration) => ({
     hidden: {

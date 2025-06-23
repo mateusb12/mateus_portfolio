@@ -1,11 +1,10 @@
-import React, { useState, useContext } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import React, {useState, useContext} from 'react';
+import {motion} from 'framer-motion';
+import {ArrowRight} from 'lucide-react';
 import LanguageContext from '../LanguageContext';
 import witcher_reading_book from '../../assets/img/witcher_reading_book.png';
 import flight from '../../assets/img/flight.jpg';
 import data_analysis from '../../assets/img/data_analysis.jpg';
-import { staggerContainer } from '../Experience/StaggerContainer.jsx';
 
 // skill icons
 import backend from '../../assets/img/skills_icons/server.png';
@@ -65,6 +64,7 @@ import seaborn from '../../assets/img/skills_icons/seaborn.png';
 import scikit_learn from '../../assets/img/skills_icons/scikit-learn.svg';
 import optuna from '../../assets/img/skills_icons/optuna.png';
 import scipy from '../../assets/img/skills_icons/scipy.svg';
+import {projectsFadeIn, staggerContainer} from "../../utils/componentUtils.jsx";
 
 // map each tag to its icon
 const iconMap = {
@@ -80,25 +80,12 @@ const iconMap = {
 };
 
 // fadeIn animation helper
-const fadeIn = (direction, type = 'tween', duration = 0.5) => {
-    const axis = ['left', 'right'].includes(direction)
-        ? { x: direction === 'left' ? 100 : -100 }
-        : ['up', 'down'].includes(direction)
-            ? { y: direction === 'up' ? 100 : -100 }
-            : {};
-    return {
-        hidden: { ...axis, opacity: 0 },
-        show: {
-            x: 0, y: 0, opacity: 1,
-            transition: { type, duration, ...(type === 'tween' ? { ease: 'easeOut' } : { stiffness: 100, damping: 20 }) }
-        }
-    };
-};
+
 
 // textVariant animation helper
 const textVariant = (delay = 0) => ({
-    hidden: { y: -50, opacity: 0 },
-    show: { y: 0, opacity: 1, transition: { type: 'spring', duration: 1.25, delay } }
+    hidden: {y: -50, opacity: 0},
+    show: {y: 0, opacity: 1, transition: {type: 'spring', duration: 1.25, delay}}
 });
 
 // original project entries
@@ -137,9 +124,18 @@ const textContent = {
         readMore: 'Read More',
         showLess: 'Show Less',
         items: [
-            { name: 'Book Analyzer', description: 'Transform .txt book files into social media style graphs, similar to Instagram' },
-            { name: 'Flight Scraper', description: 'Powered by Kiwi Tequila API, this project scrapes flight data and alerts users when prices drop.' },
-            { name: 'Valorant Impact', description: 'Quantifies how player actions shift the odds of winning a Valorant round in real-time.' },
+            {
+                name: 'Book Analyzer',
+                description: 'Transform .txt book files into social media style graphs, similar to Instagram'
+            },
+            {
+                name: 'Flight Scraper',
+                description: 'Powered by Kiwi Tequila API, this project scrapes flight data and alerts users when prices drop.'
+            },
+            {
+                name: 'Valorant Impact',
+                description: 'Quantifies how player actions shift the odds of winning a Valorant round in real-time.'
+            },
         ]
     },
     portuguese: {
@@ -149,9 +145,18 @@ const textContent = {
         readMore: 'Ler mais',
         showLess: 'Mostrar menos',
         items: [
-            { name: 'Analisador de Livros', description: 'Transforme arquivos .txt de livros em gráficos estilo redes sociais, parecido com oo Instagram' },
-            { name: 'Alerta de Voos', description: 'Utilizando a API Kiwi Tequila, este projeto coleta dados de voos e alerta usuários quando os preços caem' },
-            { name: 'Valorant Impact', description: 'Quantifica em tempo real como as ações dos jogadores mudam as chances de vencer um round de Valorant' },
+            {
+                name: 'Analisador de Livros',
+                description: 'Transforme arquivos .txt de livros em gráficos estilo redes sociais, parecido com oo Instagram'
+            },
+            {
+                name: 'Alerta de Voos',
+                description: 'Utilizando a API Kiwi Tequila, este projeto coleta dados de voos e alerta usuários quando os preços caem'
+            },
+            {
+                name: 'Valorant Impact',
+                description: 'Quantifica em tempo real como as ações dos jogadores mudam as chances de vencer um round de Valorant'
+            },
         ]
     }
 };
@@ -172,12 +177,12 @@ const styles = {
     padding: 'sm:px-16 px-6 sm:py-16 py-10',
 };
 
-const ProjectCard = ({ proj, index, text }) => {
+const ProjectCard = ({proj, index, text}) => {
     const [expanded, setExpanded] = useState(false);
     return (
         <motion.div
             key={`project-${index}`}
-            variants={fadeIn('up', 'spring', 0.2 * index)}
+            variants={projectsFadeIn('up', 'spring', 0.2 * index)}
             className={`relative w-full sm:w-[360px] rounded-2xl overflow-hidden
         bg-[#091011] border-2 transition-all duration-300 ease-in-out
         ${violetTheme.borderColor} ${violetTheme.borderHover}
@@ -208,11 +213,13 @@ const ProjectCard = ({ proj, index, text }) => {
                                     className="w-full h-full object-contain transition-transform duration-200 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
                                 />
                             ) : (
-                                <span className="inline-block w-full h-full px-2 py-1 bg-gray-600 text-white rounded text-[10px] flex items-center justify-center">
+                                <span
+                                    className="inline-block w-full h-full px-2 py-1 bg-gray-600 text-white rounded text-[10px] flex items-center justify-center">
                   {name}
                 </span>
                             )}
-                            <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                            <span
+                                className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                 {name}
               </span>
                         </div>
@@ -258,14 +265,14 @@ const ProjectCard = ({ proj, index, text }) => {
                 rel="noopener noreferrer"
                 className="absolute bottom-4 left-4 flex items-center gap-1 text-green-400 text-sm hover:underline"
             >
-                {text.viewAll} <ArrowRight size={14} />
+                {text.viewAll} <ArrowRight size={14}/>
             </a>
         </motion.div>
     );
 };
 
 const ProjectsSection = () => {
-    const { selectedFlag } = useContext(LanguageContext);
+    const {selectedFlag} = useContext(LanguageContext);
     const lang = selectedFlag === 'usa' ? 'english' : 'portuguese';
     const text = textContent[lang];
     const merged = projects.map((p, i) => ({
@@ -287,7 +294,7 @@ const ProjectsSection = () => {
 
             <div className="mt-20 flex flex-wrap gap-8 justify-center">
                 {merged.map((proj, i) => (
-                    <ProjectCard key={i} proj={proj} index={i} text={text} />
+                    <ProjectCard key={i} proj={proj} index={i} text={text}/>
                 ))}
             </div>
 
@@ -296,7 +303,7 @@ const ProjectsSection = () => {
                     href="/projects"
                     className="bg-green-700 hover:bg-green-600 text-white py-4 px-10 rounded-full font-medium inline-flex items-center gap-2"
                 >
-                    {text.viewAll} <ArrowRight size={16} />
+                    {text.viewAll} <ArrowRight size={16}/>
                 </a>
             </div>
         </section>
@@ -306,9 +313,9 @@ const ProjectsSection = () => {
 export default (props) => (
     <motion.section
         variants={staggerContainer()} initial="hidden" whileInView="show"
-        viewport={{ once: true, amount: 0.25 }}
+        viewport={{once: true, amount: 0.25}}
         className={`${styles.padding} max-w-7xl mx-auto relative z-0`} {...props}
     >
-        <ProjectsSection />
+        <ProjectsSection/>
     </motion.section>
 );
