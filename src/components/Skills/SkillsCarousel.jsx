@@ -32,39 +32,41 @@ const getItemsPerSlide = (width) => {
     return 1;
 };
 
-const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }) => {
+const SkillCarousel = React.memo(({ sectionTitle, sectionSubtitle, skillContent, iconsMap }) => {
     const width = useWindowWidth();
-    const maxPerSlide = useMemo(() => getItemsPerSlide(width), [width]);
+    const itemsPerSlide = useMemo(() => getItemsPerSlide(width), [width]);
     const totalItems = skillContent.length;
-    const pagesCount = Math.ceil(totalItems / maxPerSlide);
-    const pageSize = Math.ceil(totalItems / pagesCount);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-    const pages = useMemo(() => {
-        return Array.from({ length: pagesCount }, (_, i) =>
-            skillContent.slice(i * pageSize, i * pageSize + pageSize)
-        );
-    }, [skillContent, pageSize, pagesCount]);
+    // This is the total number of times the user can scroll to the right.
+    const maxIndex = totalItems > itemsPerSlide ? totalItems - itemsPerSlide : 0;
 
-    const [currentSlide, setCurrentSlide] = useState(0);
-    useEffect(() => setCurrentSlide(0), [pageSize, totalItems]);
-
-    const trackStyle = useMemo(() => ({
-        width: `${pagesCount * 100}%`,
-        transform: `translate3d(-${(100 / pagesCount) * currentSlide}%, 0, 0)`,
-        willChange: 'transform',
-    }), [pagesCount, currentSlide]);
-
-    const slideStyle = useMemo(() => ({
-        width: `${100 / pagesCount}%`,
-    }), [pagesCount]);
+    useEffect(() => {
+        // Clamp index on resize to avoid out-of-bounds state
+        if (currentIndex > maxIndex) {
+            setCurrentIndex(maxIndex);
+        }
+    }, [itemsPerSlide, currentIndex, maxIndex]);
 
     const goPrev = useCallback(() => {
-        setCurrentSlide((i) => Math.max(i - 1, 0));
+        setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
     }, []);
 
     const goNext = useCallback(() => {
-        setCurrentSlide((i) => Math.min(i + 1, pagesCount - 1));
-    }, [pagesCount]);
+        setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, maxIndex));
+    }, [maxIndex]);
+
+    const trackStyle = useMemo(() => ({
+        display: 'flex',
+        transition: 'transform 0.5s ease-in-out',
+        willChange: 'transform',
+        transform: `translateX(-${currentIndex * (100 / itemsPerSlide)}%)`,
+    }), [currentIndex, itemsPerSlide]);
+
+    const itemStyle = useMemo(() => ({
+        flex: `0 0 ${100 / itemsPerSlide}%`,
+        padding: '0 1rem',
+    }), [itemsPerSlide]);
 
     return (
         <section className="relative py-12 md:py-20 w-full">
@@ -78,73 +80,83 @@ const SkillCarousel = ({ sectionTitle, sectionSubtitle, skillContent, iconsMap }
 
                     {/* Carousel */}
                     <div className="relative overflow-hidden">
-                        <div
-                            className="flex transition-transform duration-500 ease-in-out"
-                            style={trackStyle}
-                        >
-                            {pages.map((items, idx) => (
+                        <div style={trackStyle}>
+                            {skillContent.map((skill) => (
                                 <div
-                                    key={idx}
-                                    className="flex flex-shrink-0 gap-x-8 justify-center items-center"
-                                    style={slideStyle}
+                                    key={skill.id}
+                                    className="flex-shrink-0"
+                                    style={itemStyle}
                                 >
-                                    {items.map((skill) => (
-                                        <div key={skill.id} className="flex flex-col items-center">
-                                            <img
-                                                src={iconsMap[skill.id]}
-                                                alt={skill.title}
-                                                className="object-contain h-40 w-40"
-                                                loading="lazy"
-                                                draggable={false}
-                                            />
-                                            <span className="mt-5 text-lg md:text-xl font-semibold text-white">
-                        {skill.title}
-                      </span>
-                                        </div>
-                                    ))}
+                                    <div className="flex flex-col items-center">
+                                        <img
+                                            src={iconsMap?.[skill.id] || ''}
+                                            alt={skill.title}
+                                            className="object-contain h-40 w-40"
+                                            loading="lazy"
+                                            draggable={false}
+                                        />
+                                        <span className="mt-5 text-lg md:text-xl font-semibold text-white">
+                                            {skill.title}
+                                        </span>
+                                    </div>
                                 </div>
                             ))}
                         </div>
 
-                        {/* Nav */}
-                        {pagesCount > 1 && (
+                        {/* Navigation Buttons -- FIXED */}
+                        {maxIndex > 0 && ( // Only show controls if there's something to scroll
                             <>
                                 <button
                                     onClick={goPrev}
-                                    disabled={currentSlide === 0}
-                                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 disabled:opacity-30"
+                                    disabled={currentIndex === 0}
+                                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 disabled:opacity-30 transition-opacity z-10"
                                 >
                                     <FaChevronLeft size={20} />
                                 </button>
                                 <button
                                     onClick={goNext}
-                                    disabled={currentSlide === pagesCount - 1}
-                                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 disabled:opacity-30"
+                                    disabled={currentIndex === maxIndex}
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 disabled:opacity-30 transition-opacity z-10"
                                 >
                                     <FaChevronRight size={20} />
                                 </button>
                             </>
                         )}
 
-                        {/* Pills */}
-                        <div className="flex justify-center space-x-3 mt-10">
-                            {pages.map((_, idx) => (
-                                <button
-                                    key={idx}
-                                    onClick={() => setCurrentSlide(idx)}
-                                    className={`w-8 h-2.5 rounded-full transition-all ${
-                                        idx === currentSlide
-                                            ? 'bg-green-400 shadow-lg shadow-green-400/50'
-                                            : 'bg-gray-500/50'
-                                    }`}
-                                />
-                            ))}
-                        </div>
+                        {/* Pills -- FIXED */}
+                        {maxIndex > 0 && (
+                            <div className="flex justify-center flex-wrap space-x-3 mt-10">
+                                {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
+                                    <button
+                                        key={idx}
+                                        onClick={() => setCurrentIndex(idx)}
+                                        aria-label={`Go to item ${idx + 1}`}
+                                        className={`w-8 h-2.5 rounded-full transition-all my-1 ${
+                                            idx === currentIndex
+                                                ? 'bg-green-400 shadow-lg shadow-green-400/50'
+                                                : 'bg-gray-500/50'
+                                        }`}
+                                    />
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
         </section>
     );
+});
+
+SkillCarousel.displayName = 'SkillCarousel';
+
+SkillCarousel.propTypes = {
+    sectionTitle: PropTypes.string.isRequired,
+    sectionSubtitle: PropTypes.string.isRequired,
+    skillContent: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+    })).isRequired,
+    iconsMap: PropTypes.object,
 };
 
 export default SkillCarousel;
