@@ -106,16 +106,18 @@ const ProjectCard = ({ proj, index }) => {
             key={`project-${index}`}
             variants={fadeIn('up', 'spring', 0.2 * index)}
             className={`relative group w-full sm:w-[360px] rounded-2xl overflow-hidden
-        border-2 transition-all duration-300 ease-in-out
-        ${violetTheme.borderColor} ${violetTheme.borderHover}
-        ${violetTheme.outerGlow} ${violetTheme.outerGlowHover}`}
+      border-2 transition-all duration-300 ease-in-out
+      ${violetTheme.borderColor} ${violetTheme.borderHover}
+      ${violetTheme.outerGlow} ${violetTheme.outerGlowHover}`}
         >
+            {/* inner glow */}
             <div
                 className={`absolute inset-0 ${violetTheme.innerGlowColor}
-          ${violetTheme.innerGlowOpacity} ${violetTheme.innerGlowHover}
-          blur-2xl transition-opacity duration-300`}
+        ${violetTheme.innerGlowOpacity} ${violetTheme.innerGlowHover}
+        blur-2xl transition-opacity duration-300`}
             />
 
+            {/* image */}
             <div className="relative z-10 w-full h-[200px] overflow-hidden">
                 <img
                     src={proj.image}
@@ -124,43 +126,59 @@ const ProjectCard = ({ proj, index }) => {
                 />
             </div>
 
-            <div className="relative z-10 p-4">
+            {/* text + Read More */}
+            <div className="relative z-10 p-4 pb-12">
                 <div className="flex flex-wrap gap-2 mb-3">
                     {proj.tags.map((tag) => (
                         <span
                             key={tag.name}
                             className={`inline-block text-[12px] font-medium ${tag.color}
-                bg-black bg-opacity-30 px-2 py-1 rounded-full`}
+              bg-black bg-opacity-30 px-2 py-1 rounded-full`}
                         >
-              {tag.name}
-            </span>
+            {tag.name}
+          </span>
                     ))}
                 </div>
-                <div className="">
-                    <h3 className="text-white font-bold text-[24px]">{proj.name}</h3>
-                    <p className="mt-2 text-secondary text-[14px] leading-[20px]">
-                        {expanded ? proj.description : shortText}
-                    </p>
-                </div>
 
-                <div className="mt-6 flex justify-between items-center">
+                <h3 className="text-white font-bold text-[24px]">{proj.name}</h3>
+
+                {/* description with CSS clamp when collapsed */}
+                <p
+                    className="mt-2 text-secondary text-[14px] leading-[20px]"
+                    style={
+                        !expanded
+                            ? {
+                                display: '-webkit-box',
+                                WebkitBoxOrient: 'vertical',
+                                WebkitLineClamp: 3,
+                                overflow: 'hidden',
+                            }
+                            : {}
+                    }
+                >
+                    {proj.description}
+                </p>
+
+                {/* Read More / Show Less */}
+                <div className="mt-1">
                     <button
                         onClick={() => setExpanded(!expanded)}
                         className="text-green-400 text-sm hover:underline focus:outline-none"
                     >
                         {expanded ? 'Show Less' : 'Read More'}
                     </button>
-
-                    <a
-                        href={proj.projectLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-green-400 text-sm hover:underline"
-                    >
-                        View Project <ArrowRight size={14} />
-                    </a>
                 </div>
             </div>
+
+            {/* View Project anchored */}
+            <a
+                href={proj.projectLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-4 left-4 flex items-center gap-1 text-green-400 text-sm hover:underline"
+            >
+                View Project <ArrowRight size={14} />
+            </a>
         </motion.div>
     );
 };
