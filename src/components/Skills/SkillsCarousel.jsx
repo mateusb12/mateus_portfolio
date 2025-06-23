@@ -178,14 +178,14 @@ const SkillCarousel = ({
                 <div className="relative w-[60%] md:w-[70%] px-4 md:px-0 bg-black/50 backdrop-blur-2xl rounded-3xl py-12">
                     <div className="mx-auto text-center">
                         <h2 className="text-5xl font-bold text-white mb-4">{sectionTitle}</h2>
-                        <p className="text-gray-400 text-lg mb-2">{sectionSubtitle}</p>
+                        <p className="text-base sm:text-lg mb-2 break-words">{sectionSubtitle}</p>
 
                         <div className="relative w-full">
                             {canScrollLeft && (
                                 <button
                                     onClick={() => scrollByStep('left')}
                                     aria-label="Previous"
-                                    className="absolute z-20 top-1/2 -translate-y-1/2 left-0 md:left-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full"
+                                    className="absolute z-20 top-1/2 -translate-y-1/2 left-[5%] md:left-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full"
                                     style={{ padding: `${arrowPadding}px` }}
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ width: `${arrowSize}px`, height: `${arrowSize}px` }}>
@@ -227,7 +227,7 @@ const SkillCarousel = ({
                                 <button
                                     onClick={() => scrollByStep('right')}
                                     aria-label="Next"
-                                    className="absolute z-20 top-1/2 -translate-y-1/2 right-0 md:right-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full"
+                                    className="absolute z-20 top-1/2 -translate-y-1/2 right-[5%] md:right-[7.5%] bg-black/50 hover:bg-black/60 text-white rounded-full"
                                     style={{ padding: `${arrowPadding}px` }}
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ width: `${arrowSize}px`, height: `${arrowSize}px` }}>
