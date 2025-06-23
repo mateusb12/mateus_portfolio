@@ -175,7 +175,7 @@ const SkillCarousel = ({
     return (
         <section className="relative py-8 md:py-15 w-full">
             <div className="flex justify-center w-full">
-                <div className="relative w-[90%] md:w-[70%] bg-black/50 backdrop-blur-2xl rounded-3xl py-12">
+                <div className="relative w-[60%] md:w-[70%] px-4 md:px-0 bg-black/50 backdrop-blur-2xl rounded-3xl py-12">
                     <div className="mx-auto text-center">
                         <h2 className="text-5xl font-bold text-white mb-4">{sectionTitle}</h2>
                         <p className="text-gray-400 text-lg mb-2">{sectionSubtitle}</p>
@@ -202,7 +202,7 @@ const SkillCarousel = ({
                                     onPointerUp={endDrag}
                                     onPointerCancel={endDrag}
                                     style={{ touchAction: 'pan-y', gap: `${gapPx}px` }}
-                                    className="flex overflow-x-auto hide-scrollbar rounded-xl py-6 w-full md:w-[70%] mx-auto cursor-grab"
+                                    className="flex overflow-x-auto hide-scrollbar rounded-xl py-6 w-full md:w-[70%] mx-auto cursor-grab px-4"
                                 >
                                     {skillContent.map((skill) => (
                                         <div
