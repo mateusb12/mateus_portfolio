@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { useSwipeable } from 'react-swipeable'; // 1. Import the swipe hook
 
+// useWindowWidth and getItemsPerSlide hooks remain the same...
 const useWindowWidth = () => {
     const [width, setWidth] = useState(window.innerWidth);
     const frame = useRef(null);
@@ -32,17 +34,16 @@ const getItemsPerSlide = (width) => {
     return 1;
 };
 
+
 const SkillCarousel = React.memo(({ sectionTitle, sectionSubtitle, skillContent, iconsMap }) => {
     const width = useWindowWidth();
     const itemsPerSlide = useMemo(() => getItemsPerSlide(width), [width]);
     const totalItems = skillContent.length;
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    // This is the total number of times the user can scroll to the right.
     const maxIndex = totalItems > itemsPerSlide ? totalItems - itemsPerSlide : 0;
 
     useEffect(() => {
-        // Clamp index on resize to avoid out-of-bounds state
         if (currentIndex > maxIndex) {
             setCurrentIndex(maxIndex);
         }
@@ -55,6 +56,14 @@ const SkillCarousel = React.memo(({ sectionTitle, sectionSubtitle, skillContent,
     const goNext = useCallback(() => {
         setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, maxIndex));
     }, [maxIndex]);
+
+    // 2. Configure swipe handlers
+    const handlers = useSwipeable({
+        onSwipedLeft: () => goNext(),
+        onSwipedRight: () => goPrev(),
+        preventDefaultTouchmoveEvent: true,
+        trackMouse: true
+    });
 
     const trackStyle = useMemo(() => ({
         display: 'flex',
@@ -78,15 +87,11 @@ const SkillCarousel = React.memo(({ sectionTitle, sectionSubtitle, skillContent,
                         <p className="text-base md:text-lg text-white/75">{sectionSubtitle}</p>
                     </div>
 
-                    {/* Carousel */}
-                    <div className="relative overflow-hidden">
+                    {/* 3. Apply swipe handlers to the carousel container */}
+                    <div {...handlers} className="relative overflow-hidden">
                         <div style={trackStyle}>
                             {skillContent.map((skill) => (
-                                <div
-                                    key={skill.id}
-                                    className="flex-shrink-0"
-                                    style={itemStyle}
-                                >
+                                <div key={skill.id} className="flex-shrink-0" style={itemStyle}>
                                     <div className="flex flex-col items-center">
                                         <img
                                             src={iconsMap?.[skill.id] || ''}
@@ -103,8 +108,8 @@ const SkillCarousel = React.memo(({ sectionTitle, sectionSubtitle, skillContent,
                             ))}
                         </div>
 
-                        {/* Navigation Buttons -- FIXED */}
-                        {maxIndex > 0 && ( // Only show controls if there's something to scroll
+                        {/* Navigation Buttons -- ARROW FIX */}
+                        {maxIndex > 0 && (
                             <>
                                 <button
                                     onClick={goPrev}
@@ -123,7 +128,7 @@ const SkillCarousel = React.memo(({ sectionTitle, sectionSubtitle, skillContent,
                             </>
                         )}
 
-                        {/* Pills -- FIXED */}
+                        {/* Pills */}
                         {maxIndex > 0 && (
                             <div className="flex justify-center flex-wrap space-x-3 mt-10">
                                 {Array.from({ length: maxIndex + 1 }).map((_, idx) => (

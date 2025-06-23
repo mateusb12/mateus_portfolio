@@ -28,6 +28,7 @@
     "react-parallax-tilt": "^1.7.298",
     "react-router-dom": "^7.6.2",
     "react-router-hash-link": "^2.4.3",
+    "react-swipeable": "^7.0.2",
     "react-vertical-timeline-component": "^3.5.3",
     "tailwindcss": "^4.1.10",
     "tailwindcss-pseudo-elements": "^2.0.0"
