@@ -1,6 +1,6 @@
 // src/components/Skills/SkillsSection.jsx
 import React, { useContext } from 'react'
-import SkillCarousel from './SkillsCarousel.jsx'
+// import SkillCarousel from './SkillsCarousel.jsx'
 import server from "../../assets/img/skills_icons/server.png"
 import api from "../../assets/img/skills_icons/api.png"
 import database from "../../assets/img/skills_icons/database.png"

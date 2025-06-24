@@ -1,100 +1,258 @@
-import React, { useState, useEffect } from "react";
-import python from "../../assets/img/skills_icons/python.svg";
-import flask from "../../assets/img/skills_icons/flask.png";
-import django from "../../assets/img/skills_icons/django.png";
-import nodejs from "../../assets/img/skills_icons/nodejs.png";
+import React, { useState, useEffect, useRef } from "react";
+import flask from "../../assets/img/skills_icons/flask.svg"
+import django from "../../assets/img/skills_icons/django.svg"
+import alembic from "../../assets/img/skills_icons/alembic.png"
 
+// --- Reusable Core Components ---
+
+/**
+ * A custom hook to get the current window width.
+ * @returns {number} The current inner width of the window.
+ */
 function useWindowWidth() {
-    const [width, setWidth] = useState(window.innerWidth);
+    const [width, setWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
     useEffect(() => {
-        const onResize = () => setWidth(window.innerWidth);
-        window.addEventListener("resize", onResize);
-        return () => window.removeEventListener("resize", onResize);
+        if (typeof window === 'undefined') return;
+        const handleResize = () => setWidth(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
     return width;
 }
 
-const skills = [
-    { src: python, label: "Python" },
-    { src: flask, label: "Flask" },
-    { src: django, label: "Django" },
-    { src: nodejs, label: "Node.js" },
-];
-
-export default function ResponsiveCarousel() {
+/**
+ * A highly configurable and responsive carousel component.
+ * @param {object} props - The component props.
+ * @param {Array<object>} props.items - The array of items to display in the carousel.
+ * @param {object} [props.itemsPerScreen={ large: 3, medium: 2, small: 1 }] - Configuration for items per screen size.
+ * @param {object} [props.itemSizePerScreen] - // NEW: Optional configuration for item width percentage per screen size.
+ * @param {object} [props.breakpoints={ large: 1024, medium: 768 }] - The width breakpoints for screen sizes.
+ */
+function ConfigurableCarousel({
+                                  items,
+                                  title = "Full Stack Expertise",
+                                  subtitle = "From APIs and databases to modern frontend frameworks.",
+                                  itemsPerScreen: itemsPerScreenConfig = { large: 3, medium: 2, small: 1 },
+                                  itemSizePerScreen: itemSizePerScreenConfig,
+                                  breakpoints = { large: 1024, medium: 768 }
+                              }) {
+    // ... (all the existing hooks and logic remain the same)
     const width = useWindowWidth();
+    const carouselRef = useRef(null);
 
-    let itemsPerPage;
-    if (width < 400) itemsPerPage = 1;
-    else if (width < 768) itemsPerPage = 2;
-    else itemsPerPage = 3;
+    const getItemsPerPage = () => {
+        if (width >= breakpoints.large) return itemsPerScreenConfig.large;
+        if (width >= breakpoints.medium) return itemsPerScreenConfig.medium;
+        return itemsPerScreenConfig.small;
+    };
+    const itemsPerPage = getItemsPerPage();
 
-    const totalPages = Math.ceil(skills.length / itemsPerPage);
-    // Use a single icon size
-    const iconSize = 40;
-    const iconSizeClass = `w-${iconSize} h-${iconSize}`;
+    const getItemWidthPercentage = () => {
+        if (itemSizePerScreenConfig) {
+            if (width >= breakpoints.large) return itemSizePerScreenConfig.large;
+            if (width >= breakpoints.medium) return itemSizePerScreenConfig.medium;
+            return itemSizePerScreenConfig.small;
+        }
+        return 100 / itemsPerPage;
+    };
+    const itemWidthPercentage = getItemWidthPercentage();
 
-    const [page, setPage] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startPos, setStartPos] = useState(0);
+    const [dragOffset, setDragOffset] = useState(0);
 
-    const handlePrev = () => setPage((p) => (p - 1 + totalPages) % totalPages);
-    const handleNext = () => setPage((p) => (p + 1) % totalPages);
+    const maxIndex = Math.max(0, items.length - itemsPerPage);
 
-    const startIndex = page * itemsPerPage;
-    const visibleItems = skills.slice(startIndex, startIndex + itemsPerPage);
+    const handlePrev = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
+    const handleNext = () => setCurrentIndex((prev) => Math.min(prev + 1, maxIndex));
+    const goToSlide = (index) => setCurrentIndex(index);
+
+    const handleDragStart = (e) => {
+        setIsDragging(true);
+        setStartPos(e.type === 'touchstart' ? e.touches[0].clientX : e.clientX);
+    };
+
+    const handleDragMove = (e) => {
+        if (!isDragging) return;
+        const currentPos = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+        setDragOffset(currentPos - startPos);
+    };
+
+    const handleDragEnd = () => {
+        if (!isDragging) return;
+        setIsDragging(false);
+        const swipeThreshold = 50;
+        if (dragOffset < -swipeThreshold) {
+            handleNext();
+        } else if (dragOffset > swipeThreshold) {
+            handlePrev();
+        }
+        setDragOffset(0);
+    };
+
+    const getTranslateX = () => {
+        if (!carouselRef.current) return 0;
+        const containerWidth = carouselRef.current.offsetWidth;
+        const itemPixelWidth = (containerWidth * itemWidthPercentage) / 100;
+        const baseTranslate = -currentIndex * itemPixelWidth;
+        return baseTranslate + dragOffset;
+    };
+
+    useEffect(() => {
+        if (currentIndex > maxIndex) {
+            setCurrentIndex(maxIndex);
+        }
+    }, [width, currentIndex, maxIndex]);
+
+    useEffect(() => {
+        const carouselElement = carouselRef.current;
+        if (carouselElement) {
+            carouselElement.addEventListener('mousedown', handleDragStart);
+            carouselElement.addEventListener('touchstart', handleDragStart, { passive: true });
+        }
+        if (isDragging) {
+            window.addEventListener('mousemove', handleDragMove);
+            window.addEventListener('mouseup', handleDragEnd);
+            window.addEventListener('mouseleave', handleDragEnd);
+            window.addEventListener('touchmove', handleDragMove, { passive: true });
+            window.addEventListener('touchend', handleDragEnd);
+        }
+        return () => {
+            if (carouselElement) {
+                carouselElement.removeEventListener('mousedown', handleDragStart);
+                carouselElement.removeEventListener('touchstart', handleDragStart);
+            }
+            window.removeEventListener('mousemove', handleDragMove);
+            window.removeEventListener('mouseup', handleDragEnd);
+            window.removeEventListener('mouseleave', handleDragEnd);
+            window.removeEventListener('touchmove', handleDragMove);
+            window.removeEventListener('touchend', handleDragEnd);
+        };
+    }, [isDragging, handleDragStart, handleDragMove, handleDragEnd]);
+
 
     return (
-        <section className="relative py-12 md:py-20 w-full">
-            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="relative w-full px-4 bg-black/50 backdrop-blur-2xl rounded-3xl py-14 border border-blue-500">
-                    <div className="text-center mb-10">
-                        <h2 className="text-4xl md:text-5xl font-bold text-white">Backend Stack</h2>
-                        <p className="text-base md:text-lg text-white/75">APIs, databases, and communication between systems</p>
-                    </div>
+        // MODIFIED: Reduced vertical padding on mobile (py-8), keeps py-14 for medium screens and up.
+        <div className="relative w-full bg-black/50 backdrop-blur-2xl rounded-3xl border border-green-500/50 shadow-2xl shadow-emerald-500/30">
+            <div className="text-center my-4 md:my-6">
+                <h2 className="text-3xl md:text-6xl font-bold text-white">{title}</h2>
+                <p className="text-sm md:text-xl text-white/75 mt-2">{subtitle}</p>
+            </div>
 
-                    <div className="relative w-full mx-auto overflow-hidden">
-                        <div className="flex overflow-hidden w-full">
-                            {visibleItems.map(({ src, label }) => (
-                                <div
-                                    key={label}
-                                    className={`flex-shrink-0 flex flex-col items-center px-4 border border-amber-400
-                    ${itemsPerPage === 1 ? 'w-full' : itemsPerPage === 2 ? 'w-1/2' : 'w-1/3'}`}
-                                >
-                                    <img src={src} alt={label} className={`${iconSizeClass} object-contain border border-pink-500`} />
-                                    <span className="mt-5 text-white text-lg md:text-xl font-semibold">{label}</span>
-                                </div>
-                            ))}
+            <div ref={carouselRef} className="relative w-full mx-auto overflow-hidden cursor-grab active:cursor-grabbing">
+                <div
+                    className="flex"
+                    style={{
+                        transform: `translateX(${getTranslateX()}px)`,
+                        transition: isDragging ? 'none' : 'transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)',
+                    }}
+                >
+                    {items.map(({ src, label }) => (
+                        <div
+                            key={label}
+                            // MODIFIED: Reduced padding on mobile (p-2), scales to p-6 on medium screens.
+                            className="flex-shrink-0 flex flex-col items-center justify-center p-2 md:p-6"
+                            style={{ width: `${itemWidthPercentage}%` }}
+                        >
+                            {/* MODIFIED: Smaller icon circle on mobile (w-24 h-24), scales to w-30 h-30 on medium screens. */}
+                            <div className="overflow-hidden w-[20vw] h-[20vw] md:w-30 md:h-30 bg-gray-800/50 rounded-full flex items-center justify-center border border-gray-700/50 transition-all duration-300 hover:border-2 hover:border-emerald-400 hover:scale-105">
+                                <img
+                                    src={src}
+                                    alt={`${label} icon`}
+                                    // MODIFIED: Reduced padding inside the circle for mobile (p-3), scales to p-4 on medium screens.
+                                    className="w-full h-full p-2 md:p-3 object-contain"
+                                    onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/40x40/1a202c/ffffff?text=${label.charAt(0)}`; }}
+                                />
+                            </div>
+                            {/* MODIFIED: Smaller font for labels on mobile (text-base), scales to text-lg on medium screens. Reduced top margin. */}
+                            <span className="mt-3 md:mt-5 text-base md:text-lg text-white font-semibold tracking-wide">{label}</span>
                         </div>
-
-                        <button
-                            onClick={handlePrev}
-                            className="absolute left-5 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 transition-opacity z-10"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-
-                        <button
-                            onClick={handleNext}
-                            className="absolute right-5 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 transition-opacity z-10"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
-
-                    <div className="flex justify-center flex-wrap space-x-3 mt-10">
-                        {Array.from({ length: totalPages }).map((_, idx) => (
-                            <button
-                                key={idx}
-                                onClick={() => setPage(idx)}
-                                aria-label={`Go to page ${idx + 1}`}
-                                className={`w-8 h-2.5 rounded-full transition-all my-1 ${idx === page ? 'bg-green-400 shadow-lg shadow-green-400/50' : 'bg-gray-500/50'}`}
-                            />
-                        ))}
-                    </div>
+                    ))}
                 </div>
+            </div>
+
+            {/* MODIFIED: Pushed arrows in slightly on smallest screens to avoid overlap. */}
+            <button
+                onClick={handlePrev}
+                disabled={currentIndex === 0}
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-2 md:p-3 transition-all duration-300 z-10 disabled:opacity-30 disabled:cursor-not-allowed"
+                aria-label="Previous slide"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+            </button>
+            <button
+                onClick={handleNext}
+                disabled={currentIndex === maxIndex || items.length <= itemsPerPage}
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-2 md:p-3 transition-all duration-300 z-10 disabled:opacity-30 disabled:cursor-not-allowed"
+                aria-label="Next slide"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+            </button>
+
+            {/* MODIFIED: Reduced top margin on mobile. */}
+            {maxIndex > 0 && (
+                <div className="flex justify-center items-center space-x-2 md:space-x-3 my-6 md:my-8 mx-3 md:mx-4">
+                    {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
+                        <button
+                            key={idx}
+                            onClick={() => goToSlide(idx)}
+                            aria-label={`Go to slide ${idx + 1}`}
+                            // MODIFIED: Smaller pagination dots on mobile (w-10 h-3), scales up for medium screens.
+                            className={`w-10 h-3 md:w-12 md:h-4 border-2 border-black rounded-full transition-all duration-300 ease-in-out ${idx === currentIndex ? 'bg-emerald-400 shadow-lg shadow-emerald-400/50' : 'bg-gray-600/50 hover:bg-gray-500'}`}
+                        />
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
+
+const skillsData = [
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg", label: "React" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg", label: "Next.js" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-plain.svg", label: "Tailwind" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/supabase/supabase-original.svg",      label: "Supabase" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg",          label: "Docker" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg",  label: "TypeScript" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg",  label: "PostgreSQL" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg",          label: "C#" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original.svg",            label: "Redis" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg",            label: "HTML 5" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg",              label: "CSS 3" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg",              label: "Java" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/azure/azure-original.svg",            label: "Microsoft Azure" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/githubactions/githubactions-original.svg", label: "GitHub Actions" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/firebase/firebase-original.svg",      label: "Firebase" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/googlecloud/googlecloud-original.svg", label: "Google Cloud" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/figma/figma-original.svg",            label: "Figma" }
+];
+
+const backendPool = [
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg", label: "Python" },
+    { src: flask, label: "Flask" },
+    { src: django, label: "Django" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg", label: "Node.js" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/swagger/swagger-original.svg", label: "Swagger" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg", label: "Linux" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg", label: "Postgres" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg", label: "MongoDB" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg", label: "Git" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/poetry/poetry-original.svg", label: "Poetry"},
+    { src: alembic, label: "Alembic"},
+]
+
+export default function App() {
+    return (
+        <section className="relative py-12 md:py-20 w-full font-sans select-none ">
+            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <ConfigurableCarousel
+                    title="Backend Stack"
+                    subtitle="APIs, databases, and communication between systems"
+                    items={backendPool}
+                    itemsPerScreen={{ large: 5, medium: 3, small: 3 }}
+                    itemSizePerScreen={{ large: 20, medium: 30, small: 33 }}
+                />
             </div>
         </section>
     );
