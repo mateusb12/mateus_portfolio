@@ -1,32 +1,24 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { useSwipeable } from 'react-swipeable'; // 1. Import the swipe hook
 
-// useWindowWidth and getItemsPerSlide hooks remain the same...
+// NOTE: react-icons and react-swipeable were removed to resolve build errors.
+// Icons are replaced with inline SVGs, and swipe functionality will be handled by native browser scrolling on touch devices.
+
+// Custom hook to get window width efficiently
 const useWindowWidth = () => {
     const [width, setWidth] = useState(window.innerWidth);
-    const frame = useRef(null);
 
     useEffect(() => {
-        const handleResize = () => {
-            if (frame.current !== null) return;
-            frame.current = window.requestAnimationFrame(() => {
-                setWidth(window.innerWidth);
-                frame.current = null;
-            });
-        };
+        const handleResize = () => setWidth(window.innerWidth);
         window.addEventListener('resize', handleResize);
-        return () => {
-            if (frame.current) window.cancelAnimationFrame(frame.current);
-            window.removeEventListener('resize', handleResize);
-        };
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     return width;
 };
 
-const getItemsPerSlide = (width) => {
+// Determines how many items to show based on screen width
+const getItemsPerSlide = width => {
     if (width >= 1200) return 5;
     if (width >= 992) return 4;
     if (width >= 768) return 3;
@@ -34,51 +26,84 @@ const getItemsPerSlide = (width) => {
     return 1;
 };
 
-
 const SkillCarousel = React.memo(({ sectionTitle, sectionSubtitle, skillContent, iconsMap }) => {
     const width = useWindowWidth();
     const itemsPerSlide = useMemo(() => getItemsPerSlide(width), [width]);
     const totalItems = skillContent.length;
+
+    // Refs & state for native scrolling
+    const carouselRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(totalItems > itemsPerSlide);
 
     const maxIndex = totalItems > itemsPerSlide ? totalItems - itemsPerSlide : 0;
 
-    useEffect(() => {
-        if (currentIndex > maxIndex) {
-            setCurrentIndex(maxIndex);
+    // Update arrow visibility and dot position
+    const updateScrollState = useCallback(() => {
+        const el = carouselRef.current;
+        if (!el) return;
+
+        const { scrollLeft, scrollWidth, clientWidth } = el;
+        const tolerance = 10;
+
+        setCanScrollLeft(scrollLeft > tolerance);
+        setCanScrollRight(scrollWidth - scrollLeft - clientWidth > tolerance);
+
+        // Compute current index based on scrollLeft
+        const itemWidth = el.scrollWidth / totalItems;
+        if (itemWidth > 0) {
+            const newIndex = Math.round(scrollLeft / itemWidth);
+            setCurrentIndex(Math.min(newIndex, maxIndex));
         }
-    }, [itemsPerSlide, currentIndex, maxIndex]);
+    }, [totalItems, maxIndex]);
 
-    const goPrev = useCallback(() => {
-        setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-    }, []);
+    // Scroll by exactly one item on each click, updating dot immediately
+    const scrollBy = direction => {
+        const el = carouselRef.current;
+        if (!el) return;
 
-    const goNext = useCallback(() => {
-        setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, maxIndex));
-    }, [maxIndex]);
+        const itemWidth = el.scrollWidth / totalItems;
+        const delta = direction === 'left' ? -itemWidth : itemWidth;
 
-    // 2. Configure swipe handlers
-    const handlers = useSwipeable({
-        onSwipedLeft: () => goNext(),
-        onSwipedRight: () => goPrev(),
-        preventDefaultTouchmoveEvent: true,
-        trackMouse: true
-    });
+        // 1) update dots immediately
+        setCurrentIndex(prev => {
+            const next = prev + (direction === 'left' ? -1 : 1);
+            return Math.min(maxIndex, Math.max(0, next));
+        });
 
-    const trackStyle = useMemo(() => ({
-        display: 'flex',
-        transition: 'transform 0.5s ease-in-out',
-        willChange: 'transform',
-        transform: `translateX(-${currentIndex * (100 / itemsPerSlide)}%)`,
-    }), [currentIndex, itemsPerSlide]);
+        // 2) then smooth-scroll the carousel
+        el.scrollBy({ left: delta, behavior: 'smooth' });
+    };
 
-    const itemStyle = useMemo(() => ({
-        flex: `0 0 ${100 / itemsPerSlide}%`,
-        padding: '0 1rem',
-    }), [itemsPerSlide]);
+    // Attach scroll listener
+    useEffect(() => {
+        const el = carouselRef.current;
+        if (!el) return;
+
+        el.addEventListener('scroll', updateScrollState, { passive: true });
+        updateScrollState();
+
+        return () => el.removeEventListener('scroll', updateScrollState);
+    }, [updateScrollState]);
+
+    // Style for each item
+    const itemStyle = useMemo(
+        () => ({
+            flex: `0 0 calc(100% / ${itemsPerSlide})`,
+            padding: '0 1rem',
+            scrollSnapAlign: 'start',
+        }),
+        [itemsPerSlide]
+    );
 
     return (
         <section className="relative py-12 md:py-20 w-full">
+            <style>
+                {`.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }`}
+                {`.hide-scrollbar::-webkit-scrollbar { display: none; }`}
+            </style>
+
             <div className="flex justify-center">
                 <div className="relative w-full md:max-w-[70%] px-4 bg-black/50 backdrop-blur-2xl rounded-3xl py-14">
                     {/* Header */}
@@ -87,10 +112,21 @@ const SkillCarousel = React.memo(({ sectionTitle, sectionSubtitle, skillContent,
                         <p className="text-base md:text-lg text-white/75">{sectionSubtitle}</p>
                     </div>
 
-                    {/* 3. Apply swipe handlers to the carousel container */}
-                    <div {...handlers} className="relative overflow-hidden">
-                        <div style={trackStyle}>
-                            {skillContent.map((skill) => (
+                    {/* Carousel */}
+                    <div className="relative">
+                        {canScrollLeft && (
+                            <button
+                                onClick={() => scrollBy('left')}
+                                className="absolute left-5 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 transition-opacity z-10"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                </svg>
+                            </button>
+                        )}
+
+                        <div ref={carouselRef} className="flex overflow-x-auto hide-scrollbar" style={{ scrollSnapType: 'x mandatory' }}>
+                            {skillContent.map(skill => (
                                 <div key={skill.id} className="flex-shrink-0" style={itemStyle}>
                                     <div className="flex flex-col items-center">
                                         <img
@@ -100,52 +136,47 @@ const SkillCarousel = React.memo(({ sectionTitle, sectionSubtitle, skillContent,
                                             loading="lazy"
                                             draggable={false}
                                         />
-                                        <span className="mt-5 text-lg md:text-xl font-semibold text-white">
-                                            {skill.title}
-                                        </span>
+                                        <span className="mt-5 text-lg md:text-xl font-semibold text-white">{skill.title}</span>
                                     </div>
                                 </div>
                             ))}
                         </div>
 
-                        {/* Navigation Buttons -- ARROW FIX */}
-                        {maxIndex > 0 && (
-                            <>
-                                <button
-                                    onClick={goPrev}
-                                    disabled={currentIndex === 0}
-                                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 disabled:opacity-30 transition-opacity z-10"
-                                >
-                                    <FaChevronLeft size={20} />
-                                </button>
-                                <button
-                                    onClick={goNext}
-                                    disabled={currentIndex === maxIndex}
-                                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 disabled:opacity-30 transition-opacity z-10"
-                                >
-                                    <FaChevronRight size={20} />
-                                </button>
-                            </>
-                        )}
-
-                        {/* Pills */}
-                        {maxIndex > 0 && (
-                            <div className="flex justify-center flex-wrap space-x-3 mt-10">
-                                {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
-                                    <button
-                                        key={idx}
-                                        onClick={() => setCurrentIndex(idx)}
-                                        aria-label={`Go to item ${idx + 1}`}
-                                        className={`w-8 h-2.5 rounded-full transition-all my-1 ${
-                                            idx === currentIndex
-                                                ? 'bg-green-400 shadow-lg shadow-green-400/50'
-                                                : 'bg-gray-500/50'
-                                        }`}
-                                    />
-                                ))}
-                            </div>
+                        {canScrollRight && (
+                            <button
+                                onClick={() => scrollBy('right')}
+                                className="absolute right-5 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-3 transition-opacity z-10"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                </svg>
+                            </button>
                         )}
                     </div>
+
+                    {/* Dots */}
+                    {maxIndex > 0 && (
+                        <div className="flex justify-center flex-wrap space-x-3 mt-10">
+                            {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => {
+                                        const el = carouselRef.current;
+                                        if (el) {
+                                            const itemWidth = el.scrollWidth / totalItems;
+                                            el.scrollTo({ left: idx * itemWidth, behavior: 'smooth' });
+                                        }
+                                    }}
+                                    aria-label={`Go to page ${idx + 1}`}
+                                    className={`w-8 h-2.5 rounded-full transition-all my-1 ${
+                                        idx === currentIndex
+                                            ? 'bg-green-400 shadow-lg shadow-green-400/50'
+                                            : 'bg-gray-500/50'
+                                    }`}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
         </section>
@@ -157,10 +188,12 @@ SkillCarousel.displayName = 'SkillCarousel';
 SkillCarousel.propTypes = {
     sectionTitle: PropTypes.string.isRequired,
     sectionSubtitle: PropTypes.string.isRequired,
-    skillContent: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-    })).isRequired,
+    skillContent: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+        })
+    ).isRequired,
     iconsMap: PropTypes.object,
 };
 
