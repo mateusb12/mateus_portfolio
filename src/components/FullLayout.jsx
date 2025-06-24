@@ -7,6 +7,7 @@ import Experience from "./Experience/Experience.jsx";
 import Contact from "./Contact/Contact.jsx";
 import StarsCanvas from "./Contact/StarsCanvas.jsx";
 import Projects from "./Projects/Projects.jsx";
+import HardcodedCarousel from "./Skills/NewCarousel.jsx";
 
 const FullLayout = () => {
     return (
@@ -15,8 +16,8 @@ const FullLayout = () => {
             <NavBar/>
             <div className="section shared-background">
                 <Introduction/>
-                {/*<ServiceCardList />*/}
-                <SkillsSection/>
+                {/*<SkillsSection/>*/}
+                <HardcodedCarousel/>
                 <ServiceCardSection/>
             </div>
             <div className="relative z-0">
