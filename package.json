@@ -30,6 +30,7 @@
     "react-router-hash-link": "^2.4.3",
     "react-swipeable": "^7.0.2",
     "react-vertical-timeline-component": "^3.5.3",
+    "repomix": "^0.3.9",
     "tailwindcss": "^4.1.10",
     "tailwindcss-pseudo-elements": "^2.0.0"
   },
