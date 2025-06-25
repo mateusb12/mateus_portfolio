@@ -107,6 +107,7 @@ export const projectTextContent = {
     english: {
         sectionTitle: 'Projects',
         sectionSubtitle: 'Take a closer look at what I’ve been working on.',
+        visit: 'Link',
         viewAll: 'View all',
         readMore: 'Read More',
         showLess: 'Show Less',
@@ -128,6 +129,7 @@ export const projectTextContent = {
     portuguese: {
         sectionTitle: 'Projetos',
         sectionSubtitle: 'Alguns dos projetos que eu tenho trabalhado ultimamente',
+        visit: 'Link',
         viewAll: 'Ver todos',
         readMore: 'Ler mais',
         showLess: 'Mostrar menos',

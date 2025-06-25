@@ -274,7 +274,7 @@ export default function CarouselList() {
     const language = selectedFlag === 'usa' ? 'english' : 'portuguese';
 
     return (
-        <section className="relative py-12 md:py-20 w-full font-sans select-none ">
+        <section className="relative py-12 md:py-20 w-full font-sans select-none" id="skills">
             <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
                 {carousels.map(({ key, pool }) => (
                     <ConfigurableCarousel

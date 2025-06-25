@@ -4,7 +4,7 @@ import {ArrowRight} from 'lucide-react';
 import LanguageContext from '../LanguageContext';
 import {projectsFadeIn, staggerContainer} from "../../utils/componentUtils.jsx";
 import {iconMap, projectsData, projectTextContent} from "./ProjectData.jsx";
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 // map each tag to its icon
 
 // fadeIn animation helper
@@ -40,17 +40,24 @@ export const ProjectCard = ({proj, index, text}) => {
         <motion.div
             key={`project-${index}`}
             variants={projectsFadeIn('up', 'spring', 0.2 * index)}
-            className={`relative w-full sm:w-[360px] rounded-2xl overflow-hidden
-        bg-[#091011] border-2 transition-all duration-300 ease-in-out
-        ${violetTheme.borderColor} ${violetTheme.borderHover}
-        ${violetTheme.outerGlow} ${violetTheme.outerGlowHover}`}
+            className={`
+      relative w-full sm:w-[360px] rounded-2xl overflow-hidden
+      bg-[#091011] border-2 transition-all duration-300 ease-in-out
+      ${violetTheme.borderColor} ${violetTheme.borderHover}
+      ${violetTheme.outerGlow} ${violetTheme.outerGlowHover}
+    `}
         >
+            {/* glow overlay — now ignores pointer events */}
             <div
-                className={`absolute inset-0 ${violetTheme.innerGlowColor}
-          ${violetTheme.innerGlowOpacity} ${violetTheme.innerGlowHover}
-          blur-2xl transition-opacity duration-300`}
+                className={`
+        absolute inset-0 pointer-events-none
+        ${violetTheme.innerGlowColor} ${violetTheme.innerGlowOpacity}
+        ${violetTheme.innerGlowHover}
+        blur-2xl transition-opacity duration-300
+      `}
             />
 
+            {/* image */}
             <div className="relative z-10 w-full h-[200px] overflow-hidden">
                 <img
                     src={proj.image}
@@ -59,7 +66,9 @@ export const ProjectCard = ({proj, index, text}) => {
                 />
             </div>
 
-            <div className="relative z-10 p-4 pb-12">
+            {/* content + Read More + Visit link */}
+            <div className="relative z-10 p-4">
+                {/* tags */}
                 <div className="flex flex-wrap gap-2 mb-3">
                     {proj.tags.map((name) => (
                         <div key={name} className="relative group w-10 h-10">
@@ -72,19 +81,25 @@ export const ProjectCard = ({proj, index, text}) => {
                             ) : (
                                 <span
                                     className="inline-block w-full h-full px-2 py-1 bg-gray-600 text-white rounded text-[10px] flex items-center justify-center">
-                  {name}
-                </span>
-                            )}
-                            <span
-                                className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                 {name}
               </span>
+                            )}
+                            <span className="
+              pointer-events-none absolute bottom-full mb-2 left-1/2
+              transform -translate-x-1/2 whitespace-nowrap
+              bg-gray-800 text-white text-xs rounded px-2 py-1
+              opacity-0 group-hover:opacity-100 transition-opacity duration-200
+            ">
+              {name}
+            </span>
                         </div>
                     ))}
                 </div>
 
+                {/* title */}
                 <h3 className="text-white font-bold text-[24px]">{proj.name}</h3>
 
+                {/* description + Read More */}
                 <div className="relative mt-2">
                     <p
                         className="text-secondary text-[14px] leading-[20px] overflow-hidden"
@@ -94,10 +109,8 @@ export const ProjectCard = ({proj, index, text}) => {
                                     display: '-webkit-box',
                                     WebkitBoxOrient: 'vertical',
                                     WebkitLineClamp: 3,
-                                    WebkitMaskImage:
-                                        'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)',
-                                    maskImage:
-                                        'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)',
+                                    WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)',
+                                    maskImage: 'linear-gradient(to bottom, black 0%, black 75%, transparent 100%)',
                                 }
                                 : {}
                         }
@@ -105,7 +118,6 @@ export const ProjectCard = ({proj, index, text}) => {
                         {proj.description}
                     </p>
                 </div>
-
                 <div className="mt-1">
                     <button
                         onClick={() => setExpanded(!expanded)}
@@ -114,16 +126,19 @@ export const ProjectCard = ({proj, index, text}) => {
                         {expanded ? text.showLess : text.readMore}
                     </button>
                 </div>
-            </div>
 
-            <a
-                href={proj.projectLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute bottom-4 left-4 flex items-center gap-1 text-green-400 text-sm hover:underline"
-            >
-                {text.viewAll} <ArrowRight size={14}/>
-            </a>
+                {/* moved “Visit” link into the z-10 layer */}
+                <div className="mt-3">
+                    <a
+                        href={proj.projectLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 text-green-400 text-sm hover:underline"
+                    >
+                        {text.visit} <ArrowRight size={14}/>
+                    </a>
+                </div>
+            </div>
         </motion.div>
     );
 };
