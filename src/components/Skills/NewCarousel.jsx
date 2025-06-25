@@ -258,9 +258,9 @@ export default function CarouselList() {
             frontend: { title: 'Frontend Stack',     subtitle: 'Turning designs into user experiences' },
         },
         portuguese: {
-            backend:  { title: 'Stack de Backend',   subtitle: 'APIs, bancos de dados e comunicação entre sistemas' },
-            cloud:    { title: 'Nuvem & DevOps',      subtitle: 'Automação, implantação e escalabilidade' },
-            frontend: { title: 'Stack de Frontend',   subtitle: 'Transformando designs em experiências de usuário' },
+            backend:  { title: 'Habilidades Backend',   subtitle: 'APIs, bancos de dados e comunicação entre sistemas' },
+            cloud:    { title: 'Cloud & DevOps',      subtitle: 'Automação, deploy e escalabilidade' },
+            frontend: { title: 'Habilidades Frontend',   subtitle: 'Desde o design até a experiência final do usuário' },
         },
     };
 

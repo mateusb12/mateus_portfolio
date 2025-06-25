@@ -64,7 +64,7 @@ export const Introduction = () => {
                             <div className="w-full max-w-max sm:max-w-none mx-auto grid grid-cols-1 gap-6 sm:flex sm:justify-center sm:gap-10">
                                 {[
                                     { to: '#projects', label: workBtn,    Icon: WindowStack },
-                                    { to: '#connect',  label: contactBtn, Icon: Whatsapp   }
+                                    { to: '#contact',  label: contactBtn, Icon: Whatsapp   }
                                 ].map(({ to, label, Icon }) => (
                                     <HashLink key={to} to={to} smooth>
                                         <button
