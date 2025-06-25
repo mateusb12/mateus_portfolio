@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {useState, useEffect, useRef, useContext} from "react";
 import flask from "../../assets/img/skills_icons/flask.svg"
 import django from "../../assets/img/skills_icons/django.svg"
 import alembic from "../../assets/img/skills_icons/alembic.png"
@@ -6,6 +6,7 @@ import tilt from "../../assets/img/skills_icons/tilt.png"
 import aws from "../../assets/img/skills_icons/aws.png"
 import react_native from "../../assets/img/skills_icons/react-native.png"
 import design from "../../assets/img/skills_icons/design.png"
+import LanguageContext from "../LanguageContext.jsx";
 
 // --- Reusable Core Components ---
 
@@ -249,31 +250,42 @@ const frontendPool = [
     { src: design, label: "UI/UX Design" },
 ]
 
-export default function App() {
+export default function CarouselList() {
+    const carouselText = {
+        english: {
+            backend:  { title: 'Backend Stack',    subtitle: 'APIs, databases, and communication between systems' },
+            cloud:    { title: 'Cloud & DevOps',     subtitle: 'Automation, deployment, and scaling' },
+            frontend: { title: 'Frontend Stack',     subtitle: 'Turning designs into user experiences' },
+        },
+        portuguese: {
+            backend:  { title: 'Stack de Backend',   subtitle: 'APIs, bancos de dados e comunicação entre sistemas' },
+            cloud:    { title: 'Nuvem & DevOps',      subtitle: 'Automação, implantação e escalabilidade' },
+            frontend: { title: 'Stack de Frontend',   subtitle: 'Transformando designs em experiências de usuário' },
+        },
+    };
+
+    const carousels = [
+        { key: 'backend',  pool: backendPool },
+        { key: 'cloud',    pool: cloudPool   },
+        { key: 'frontend', pool: frontendPool},
+    ];
+
+    const { selectedFlag } = useContext(LanguageContext);
+    const language = selectedFlag === 'usa' ? 'english' : 'portuguese';
+
     return (
         <section className="relative py-12 md:py-20 w-full font-sans select-none ">
-            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <ConfigurableCarousel
-                    title="Backend Stack"
-                    subtitle="APIs, databases, and communication between systems"
-                    items={backendPool}
-                    itemsPerScreen={{ large: 5, medium: 3, small: 3 }}
-                    itemSizePerScreen={{ large: 20, medium: 30, small: 33 }}
-                />
-                <ConfigurableCarousel
-                    title="Cloud & DevOps"
-                    subtitle="Automation, deployment, and scaling"
-                    items={cloudPool}
-                    itemsPerScreen={{ large: 5, medium: 3, small: 3 }}
-                    itemSizePerScreen={{ large: 20, medium: 30, small: 33 }}
-                />
-                <ConfigurableCarousel
-                    title="Frontend Stack"
-                    subtitle="Turning designs into user experiences"
-                    items={frontendPool}
-                    itemsPerScreen={{ large: 5, medium: 3, small: 3 }}
-                    itemSizePerScreen={{ large: 20, medium: 30, small: 33 }}
-                />
+            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+                {carousels.map(({ key, pool }) => (
+                    <ConfigurableCarousel
+                        key={key}
+                        title={carouselText[language][key].title}
+                        subtitle={carouselText[language][key].subtitle}
+                        items={pool}
+                        itemsPerScreen={{ large: 5, medium: 3, small: 3 }}
+                        itemSizePerScreen={{ large: 20, medium: 30, small: 33 }}
+                    />
+                ))}
             </div>
         </section>
     );
