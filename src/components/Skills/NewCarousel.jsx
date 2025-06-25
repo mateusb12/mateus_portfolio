@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import flask from "../../assets/img/skills_icons/flask.svg"
 import django from "../../assets/img/skills_icons/django.svg"
 import alembic from "../../assets/img/skills_icons/alembic.png"
+import tilt from "../../assets/img/skills_icons/tilt.png"
+import aws from "../../assets/img/skills_icons/aws.png"
+import react_native from "../../assets/img/skills_icons/react-native.png"
+import design from "../../assets/img/skills_icons/design.png"
 
 // --- Reusable Core Components ---
 
@@ -208,26 +212,6 @@ function ConfigurableCarousel({
     );
 }
 
-const skillsData = [
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg", label: "React" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg", label: "Next.js" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-plain.svg", label: "Tailwind" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/supabase/supabase-original.svg",      label: "Supabase" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg",          label: "Docker" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg",  label: "TypeScript" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg",  label: "PostgreSQL" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg",          label: "C#" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original.svg",            label: "Redis" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg",            label: "HTML 5" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg",              label: "CSS 3" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg",              label: "Java" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/azure/azure-original.svg",            label: "Microsoft Azure" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/githubactions/githubactions-original.svg", label: "GitHub Actions" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/firebase/firebase-original.svg",      label: "Firebase" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/googlecloud/googlecloud-original.svg", label: "Google Cloud" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/figma/figma-original.svg",            label: "Figma" }
-];
-
 const backendPool = [
     { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg", label: "Python" },
     { src: flask, label: "Flask" },
@@ -242,6 +226,29 @@ const backendPool = [
     { src: alembic, label: "Alembic"},
 ]
 
+const cloudPool = [
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg", label: "Docker" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original.svg", label: "Redis" },
+    { src: aws, label: "AWS" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/googlecloud/googlecloud-original.svg", label: "Google Cloud" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/azure/azure-original.svg", label: "Azure" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/supabase/supabase-original.svg", label: "Supabase" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/firebase/firebase-original.svg", label: "Firebase" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/githubactions/githubactions-original.svg", label: "GitHub Actions" },
+    { src: tilt, label: "Tilt"},
+]
+
+const frontendPool = [
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg", label: "React" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/nextjs/nextjs-original.svg", label: "NextJS" },
+    { src: react_native, label: "React Native" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/figma/figma-original.svg", label: "Figma" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg", label: "Typescript" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg", label: "HTML5" },
+    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg", label: "CSS3" },
+    { src: design, label: "UI/UX Design" },
+]
+
 export default function App() {
     return (
         <section className="relative py-12 md:py-20 w-full font-sans select-none ">
@@ -250,6 +257,20 @@ export default function App() {
                     title="Backend Stack"
                     subtitle="APIs, databases, and communication between systems"
                     items={backendPool}
+                    itemsPerScreen={{ large: 5, medium: 3, small: 3 }}
+                    itemSizePerScreen={{ large: 20, medium: 30, small: 33 }}
+                />
+                <ConfigurableCarousel
+                    title="Cloud & DevOps"
+                    subtitle="Automation, deployment, and scaling"
+                    items={cloudPool}
+                    itemsPerScreen={{ large: 5, medium: 3, small: 3 }}
+                    itemSizePerScreen={{ large: 20, medium: 30, small: 33 }}
+                />
+                <ConfigurableCarousel
+                    title="Frontend Stack"
+                    subtitle="Turning designs into user experiences"
+                    items={frontendPool}
                     itemsPerScreen={{ large: 5, medium: 3, small: 3 }}
                     itemSizePerScreen={{ large: 20, medium: 30, small: 33 }}
                 />
