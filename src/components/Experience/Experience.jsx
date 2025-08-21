@@ -41,7 +41,7 @@ const textContent = {
             pontotel: {
                 title: 'Backend Developer',
                 company: 'Pontotel',
-                date: 'Mar 2025 - Jun 2025',
+                date: 'Mar 2025 - Today',
                 points: [
                     'Built Google Cloud scripts to handle urgent client demands, ensuring no wait on unavailable main system features',
                     'Refactored critical legacy validations into DDD-driven DTOs and domain classes, improving codebase data integrity',
@@ -90,7 +90,7 @@ const textContent = {
             pontotel: {
                 title: 'Desenvolvedor Backend',
                 company: 'Pontotel',
-                date: 'Mar 2025 - Jun 2025',
+                date: 'Mar 2025 - Hoje',
                 points: [
                     'Implementei scripts via Google Cloud para atender demandas urgentes de clientes, garantindo que o cliente não precisasse aguardar por funcionalidades indisponíveis',
                     'Refatorei validações críticas de código legado usando DTOs e DDD, melhorando a integridade dos dados',
