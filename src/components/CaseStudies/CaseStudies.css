@@ -1,0 +1,24 @@
+/* src/components/CaseStudies/CaseStudies.css */
+
+.case-study-card {
+    /* Ensures cards don't grow or shrink in the flex container */
+    flex: 0 0 auto;
+}
+
+.read-story-btn {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 12px 24px;
+    border-radius: 9999px; /* rounded-full */
+    color: white;
+    font-weight: 500; /* medium */
+    background-image: linear-gradient(to right, #6366f1, #a855f7); /* From indigo-500 to purple-500 */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+}
+
+.read-story-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+}

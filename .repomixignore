@@ -1,5 +1,40 @@
-# Add patterns to ignore here, one per line
-# Example:
-# *.log
-# tmp/
+# .repomixignore
+
+# Dependencies and build output
+node_modules/
+dist/
+build/
+.cache/
+.vscode/
+
+# Project-level configs and logs
+.git/
+.gitignore
+eslint.config.js
+vite.config.js
+tailwind.config.js
+repomix.config.json
+.repomixignore
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+*.log
+
+# Documentation and meta
+README.md
+index.html
+
+# CSS-only or asset files
+*.css
 *.svg
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# JSON data (if you don’t need them for context)
+src/data/*.json
+
+# Optional: ignore specific folders you don’t want summarized
+# src/components/Contact/
+# src/components/Services/

@@ -9,6 +9,7 @@ import StarsCanvas from "./Contact/StarsCanvas.jsx";
 import Projects from "./Projects/Projects.jsx";
 import HardcodedCarousel from "./Skills/NewCarousel.jsx";
 import LanguageContext from './LanguageContext';
+import CaseStudies from "./CaseStudies/CaseStudies.jsx";
 
 const FullLayout = () => {
     const [language, setLanguage] = useState('english');
@@ -59,6 +60,7 @@ const FullLayout = () => {
                 <div className="relative z-0">
                     <Experience />
                     <Projects />
+                    <CaseStudies />
                     <Contact />
                     <StarsCanvas />
                 </div>
