@@ -4,6 +4,7 @@ import {projectsFadeIn} from "../../utils/componentUtils.jsx";
 import witcher_reading_book from '../../assets/img/witcher_reading_book.png';
 import flight from '../../assets/img/flight.jpg';
 import data_analysis from '../../assets/img/data_analysis.jpg';
+import investments_calculator from '../../assets/img/investments_calculator.png';
 
 // skill icons
 import backend from '../../assets/img/skills_icons/server.png';
@@ -63,6 +64,9 @@ import seaborn from '../../assets/img/skills_icons/seaborn.png';
 import scikit_learn from '../../assets/img/skills_icons/scikit-learn.svg';
 import optuna from '../../assets/img/skills_icons/optuna.png';
 import scipy from '../../assets/img/skills_icons/scipy.svg';
+import vite from '../../assets/img/skills_icons/vite.svg';
+import tailwind from '../../assets/img/skills_icons/tailwind.svg';
+import recharts from '../../assets/img/skills_icons/recharts.png';
 
 export const iconMap = {
     api, backend, flask, django, website,
@@ -73,10 +77,18 @@ export const iconMap = {
     nextjs, prisma, tilt, poetry, alembic,
     azure, figma, githubActions, redis, swagger, reactNative,
     nlp, graphviz, pandas, numpy, networkx, spacy, selenium, matplotlib, telegram, machine_learning,
-    lightgbm, seaborn, scikit_learn, optuna, scipy
+    lightgbm, seaborn, scikit_learn, optuna, scipy, vite, tailwind, recharts
 };
 
 export const projectsData = [
+    {
+        name: 'Investments Calculator',
+        description:
+            'A React web app with multiple financial calculators focused on the Brazilian market (FIIs, CDBs, LCIs). Built with Vite, Tailwind, and Supabase.',
+        tags: ['react', 'vite', 'tailwind', 'recharts', 'supabase', 'javascript', 'website'],
+        image: investments_calculator,
+        projectLink: 'https://mateusb12.github.io/investments-calculator',
+    },
     {
         name: 'Book Analyzer',
         description: 'Transform .txt book files into social media style graphs, similar to Instagram',
@@ -113,6 +125,11 @@ export const projectTextContent = {
         showLess: 'Show Less',
         items: [
             {
+                name: 'Investments Calculator',
+                description:
+                    'A React web app with multiple financial calculators for the Brazilian market (FIIs, CDBs, LCIs). Built with Vite, Tailwind, and Supabase.',
+            },
+            {
                 name: 'Book Analyzer',
                 description: 'Transform .txt book files into social media style graphs, similar to Instagram'
             },
@@ -135,8 +152,13 @@ export const projectTextContent = {
         showLess: 'Mostrar menos',
         items: [
             {
+                name: 'Calculadora de Investimentos',
+                description:
+                    'Aplicação web em React com diversas calculadoras financeiras voltadas ao mercado brasileiro (FIIs, CDBs, LCIs). Construída com Vite, Tailwind e Supabase.',
+            },
+            {
                 name: 'Analisador de Livros',
-                description: 'Transforme arquivos .txt de livros em gráficos estilo redes sociais, parecido com oo Instagram'
+                description: 'Transforme arquivos .txt de livros em gráficos estilo redes sociais, parecido com o Instagram'
             },
             {
                 name: 'Alerta de Voos',
