@@ -3,7 +3,13 @@ import {motion} from 'framer-motion';
 
 import 'react-vertical-timeline-component/style.min.css';
 
+import rovester from "../../assets/img/experience_icons/rovester.jpeg"
 import pontotel from "../../assets/img/experience_icons/pontotel.png"
+import startup from "../../assets/img/experience_icons/startup.svg"
+import freelancer from "../../assets/img/experience_icons/freelancer.png"
+import insane from "../../assets/img/experience_icons/insane.png";
+
+// --- SKILL ICONS ---
 import python from "../../assets/img/skills_icons/python.png"
 import flask from "../../assets/img/skills_icons/flask.png"
 import celery from "../../assets/img/skills_icons/celery.png"
@@ -18,18 +24,20 @@ import tilt from "../../assets/img/skills_icons/tilt.png"
 import blender from "../../assets/img/skills_icons/blender.svg"
 import csharp from "../../assets/img/skills_icons/csharp.svg"
 import unity from "../../assets/img/skills_icons/unity.svg"
-import freelancer from "../../assets/img/experience_icons/freelancer.png"
 import react from "../../assets/img/skills_icons/react.png"
 import websocket from "../../assets/img/skills_icons/websocket.svg"
-import startup from "../../assets/img/experience_icons/startup.svg"
 import swagger from "../../assets/img/skills_icons/swagger.svg"
 import google_cloud from "../../assets/img/skills_icons/google-cloud.png"
 import aws from "../../assets/img/skills_icons/aws.png"
 import dialogflow from "../../assets/img/skills_icons/dialogflow.svg"
 import redis from "../../assets/img/skills_icons/redis.svg";
-import insane from "../../assets/img/experience_icons/insane.png";
 import selenium from "../../assets/img/skills_icons/selenium.svg";
 import pandas from "../../assets/img/skills_icons/pandas.png";
+// Added for new stack (Verify file names!)
+import rabbitmq from "../../assets/img/skills_icons/rabbit.svg";
+import nodejs from "../../assets/img/skills_icons/nodejs.png";
+import javascript from "../../assets/img/skills_icons/javascript.png";
+
 import React, {forwardRef, useContext, useEffect, useRef, useState} from "react";
 import LanguageContext from "../LanguageContext.jsx";
 import {staggerContainer} from "../../utils/componentUtils.jsx";
@@ -38,10 +46,22 @@ const textContent = {
     english: {
         sectionTitle: 'Experiences',
         experiences: {
+            rovesterAI: {
+                title: 'IoT & Full Stack Developer',
+                company: 'Rovester AI',
+                date: 'Aug 2025 - Today',
+                points: [
+                    'Orchestrated asynchronous drone communication via RabbitMQ with retry policies, ensuring reliability in critical feeding routines',
+                    'Developed FarmServer APIs using FastAPI and MongoDB to track robot status and diets, enhancing nursery observability',
+                    'Optimized embedded Linux environments (Raspberry Pi) with Bash scripts and lightweight solutions, maximizing performance on constrained hardware',
+                    'Integrated Adafruit ADS1x15 sensors and telemetry with a local web dashboard, facilitating real-time field diagnostics',
+                    'Implemented automatic service recovery using PM2, Watchdogs, and Cron, significantly reducing downtime and remote interventions'
+                ]
+            },
             pontotel: {
                 title: 'Backend Developer',
                 company: 'Pontotel',
-                date: 'Mar 2025 - Today',
+                date: 'Mar 2025 - Jun 2025',
                 points: [
                     'Built Google Cloud scripts to handle urgent client demands, ensuring no wait on unavailable main system features',
                     'Refactored critical legacy validations into DDD-driven DTOs and domain classes, improving codebase data integrity',
@@ -87,10 +107,22 @@ const textContent = {
     portuguese: {
         sectionTitle: 'Experiências',
         experiences: {
+            rovesterAI: {
+                title: 'Desenvolvedor IoT & Full Stack',
+                company: 'Rovester AI',
+                date: 'Ago 2025 - Hoje',
+                points: [
+                    'Orquestrei comunicação assíncrona de drones via RabbitMQ com políticas de retry, garantindo confiabilidade nas rotinas de alimentação',
+                    'Desenvolvi APIs do FarmServer utilizando FastAPI e MongoDB para rastreio de robôs, aumentando a observabilidade dos viveiros',
+                    'Otimizei ambientes Linux embarcados (Raspberry Pi) com scripts Bash, garantindo máxima performance em hardware restrito',
+                    'Integrei sensores Adafruit ADS1x15 e telemetria a um dashboard web local, facilitando diagnósticos em tempo real no campo',
+                    'Implementei recuperação automática de serviços com PM2, Watchdogs e Cron, reduzindo drasticamente paradas e intervenções manuais'
+                ]
+            },
             pontotel: {
                 title: 'Desenvolvedor Backend',
                 company: 'Pontotel',
-                date: 'Mar 2025 - Hoje',
+                date: 'Mar 2025 - Jun 2025',
                 points: [
                     'Implementei scripts via Google Cloud para atender demandas urgentes de clientes, garantindo que o cliente não precisasse aguardar por funcionalidades indisponíveis',
                     'Refatorei validações críticas de código legado usando DTOs e DDD, melhorando a integridade dos dados',
@@ -136,6 +168,23 @@ const textContent = {
 };
 
 const baseExperiences = [
+    {
+        key: 'rovesterAI',
+        icon: rovester,
+        iconBg: '#000000',
+        skills: [
+            { icon: python, name: 'Python' },
+            { icon: fastapi, name: 'FastAPI' },
+            { icon: mongo, name: 'MongoDB' },
+            { icon: rabbitmq, name: 'RabbitMQ' },
+            { icon: nodejs, name: 'Node.js' },
+            { icon: react, name: 'React Native' },
+            { icon: linux, name: 'Linux' },
+            { icon: docker, name: 'Docker' },
+            { icon: aws, name: 'AWS EC2' },
+            { icon: javascript, name: 'JavaScript' }
+        ]
+    },
     {
         key: 'pontotel', icon: pontotel, iconBg: '#000000', skills: [
             {icon: python, name: 'Python'}, {icon: flask, name: 'Flask'}, {
@@ -230,7 +279,7 @@ const ExperienceCard = forwardRef(({experience, active}, ref) => {
     const {size, translateX, scale} = isMobile
         ? ICON_CONFIG.mobile
         : ICON_CONFIG.desktop;
-    /* ─ renderSkillRows unchanged ─ */
+
     const renderSkillRows = () => {
         const skills = experience.skills || [];
         if (!skills.length) return null;
