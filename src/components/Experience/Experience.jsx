@@ -37,6 +37,14 @@ import pandas from "../../assets/img/skills_icons/pandas.png";
 import rabbitmq from "../../assets/img/skills_icons/rabbit.svg";
 import nodejs from "../../assets/img/skills_icons/nodejs.png";
 import javascript from "../../assets/img/skills_icons/javascript.png";
+import eslint from "../../assets/img/skills_icons/eslint.svg";
+import pm2 from "../../assets/img/skills_icons/pm2.svg";
+import alembic from "../../assets/img/skills_icons/alembic.png";
+import poetry from "../../assets/img/skills_icons/poetry.png";
+import sqlite3 from "../../assets/img/skills_icons/sqlite.svg";
+import s3 from "../../assets/img/skills_icons/s3.svg";
+import node_express from "../../assets/img/skills_icons/express.svg";
+import typescript from "../../assets/img/skills_icons/typescript.png";
 
 import React, {forwardRef, useContext, useEffect, useRef, useState} from "react";
 import LanguageContext from "../LanguageContext.jsx";
@@ -182,7 +190,17 @@ const baseExperiences = [
             { icon: linux, name: 'Linux' },
             { icon: docker, name: 'Docker' },
             { icon: aws, name: 'AWS EC2' },
-            { icon: javascript, name: 'JavaScript' }
+            { icon: javascript, name: 'JavaScript' },
+            { icon: swagger,  name: 'OpenAPI / Swagger' },
+            { icon: eslint, name: 'ESLint'},
+            { icon: pm2, name: 'Parallel Multithreaded Machine (PM2)'},
+            { icon: alembic, name: 'Alembic' },
+            { icon: poetry, name: 'Poetry' },
+            { icon: mongo, name: 'MongoDB'},
+            { icon: sqlite3, name: 'SQLite3' },
+            { icon: s3, name: 'AWS S3' },
+            { icon: node_express, name: 'Node Express' },
+            { icon: typescript, name: 'TypeScript' }
         ]
     },
     {
