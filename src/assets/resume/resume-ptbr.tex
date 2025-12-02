@@ -9,7 +9,7 @@
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
 \usepackage{fancyhdr}
-\usepackage[english]{babel}
+\usepackage[brazilian]{babel} % Alterado para hifenização correta em PT-BR
 \usepackage{tabularx}
 \usepackage{fontawesome5}
 \usepackage{multicol}
@@ -83,48 +83,48 @@
     \end{center}
 
     %-----------Experience---------------
-    \section{Work Experience}
+    \section{Experiência Profissional}
     \resumeSubHeadingListStart
 
-    \resumeSubheading{RovesterAI}{Aug 2025 -- Present}{Full-stack Developer}{Brazil}
+    \resumeSubheading{RovesterAI}{Ago 2025 -- Atualmente}{Desenvolvedor Full-stack}{Brasil}
     \resumeItemListStart
-    \resumeItem{Designed and deployed telemetry pipelines across \textbf{20+ Raspberry Pi drone units}, enabling real-time feeding coordination and diagnostics under low-bandwidth conditions.}
-    \resumeItem{Integrated \textbf{ADS1x15} electrical current sensors with a lightweight HTML/CSS/JS dashboard, reducing manual field diagnostics by \textbf{~70\%}.}
-    \resumeItem{Reduced drone message delivery failures by \textbf{~40\%} through \textbf{RabbitMQ} acknowledgements and retry policies.}
-    \resumeItem{Implemented autonomous recovery workflows using \textbf{APScheduler}, cron, and watchdogs, eliminating daily manual SSH resets.}
-    \resumeItem{Developed \textbf{8+ backend APIs} for farm listing, device presence, feeding states, and push-notifications.}
-    \resumeItem{Reduced RAM usage on drone agents by \textbf{35\%} through runtime optimization on Alpine/Linux environments.}
+    \resumeItem{Projetei e implantei pipelines de telemetria em \textbf{mais de 20 drones Raspberry Pi}, permitindo coordenação de alimentação e diagnósticos em tempo real sob condições de baixa largura de banda.}
+    \resumeItem{Integrei sensores de corrente \textbf{ADS1x15} a um dashboard leve (HTML/CSS/JS), reduzindo diagnósticos manuais em campo em \textbf{~70\%}.}
+    \resumeItem{Reduzi falhas de entrega de mensagens dos drones em \textbf{~40\%} através de políticas de retry e acknowledgements via \textbf{RabbitMQ}.}
+    \resumeItem{Implementei fluxos de recuperação autônoma usando \textbf{APScheduler}, cron e watchdogs, eliminando a necessidade de resets manuais diários via SSH.}
+    \resumeItem{Desenvolvi \textbf{mais de 8 APIs backend} para listagem de fazendas, presença de dispositivos, estados de alimentação e notificações push.}
+    \resumeItem{Reduzi o uso de RAM nos agentes dos drones em \textbf{35\%} através de otimização em tempo de execução em ambientes Alpine/Linux.}
     \resumeItem{Stack: \textbf{FastAPI}, \textbf{RabbitMQ}, \textbf{MongoDB}, \textbf{SQLite}, \textbf{Docker}, \textbf{AWS EC2}, \textbf{React Native}.}
     \resumeItemListEnd
 
-    \resumeSubheading{Pontotel}{Mar 2025 -- Jul 2025}{Backend Developer}{Brazil}
+    \resumeSubheading{Pontotel}{Mar 2025 -- Jul 2025}{Desenvolvedor Backend}{Brasil}
     \resumeItemListStart
-    \resumeItem{Built GCP-based automation scripts reducing turnaround time for customer requests from \textbf{hours to minutes}.}
-    \resumeItem{Refactored legacy validation logic using \textbf{DTOs}, reducing validation-related bugs by \textbf{~40\%}.}
-    \resumeItem{Developed importers with pre-validation steps to prevent inconsistent data ingestion.}
-    \resumeItem{Designed internal API for calendar monitoring using metrics from \textbf{MongoDB}, reducing debugging time by \textbf{~50\%}.}
+    \resumeItem{Construí scripts de automação baseados em GCP, reduzindo o tempo de resposta para solicitações de clientes de \textbf{horas para minutos}.}
+    \resumeItem{Refatorei lógica de validação legada utilizando \textbf{DTOs}, reduzindo bugs relacionados a validação em \textbf{~40\%}.}
+    \resumeItem{Desenvolvi importadores com etapas de pré-validação para prevenir a ingestão de dados inconsistentes.}
+    \resumeItem{Projetei API interna para monitoramento de calendários usando métricas do \textbf{MongoDB}, reduzindo o tempo de depuração em \textbf{~50\%}.}
     \resumeItem{Stack: \textbf{Flask, Celery, FastAPI, TILT, Alembic, Poetry, Linux, Docker, Kubernetes}.}
     \resumeItemListEnd
 
-    \resumeSubheading{Omnichat Startup}{Aug 2024 -- Jan 2025}{Backend Lead}{Brazil}
+    \resumeSubheading{Omnichat Startup}{Ago 2024 -- Jan 2025}{Líder Técnico Backend}{Brasil}
     \resumeItemListStart
-    \resumeItem{Coordinated backend team sprints and provided mentorship/code reviews.}
-    \resumeItem{Developed RESTful APIs in Flask with microservices architecture and JWT authentication.}
-    \resumeItem{Managed PostgreSQL database modeling and optimization.}
-    \resumeItem{Adopted Clean Code principles and documented APIs via Swagger.}
+    \resumeItem{Coordenei sprints da equipe de backend e forneci mentoria/code reviews.}
+    \resumeItem{Desenvolvi APIs RESTful em Flask com arquitetura de microsserviços e autenticação JWT.}
+    \resumeItem{Gerenciei modelagem e otimização de banco de dados PostgreSQL.}
+    \resumeItem{Adotei princípios de Clean Code e documentei APIs via Swagger.}
     \resumeItemListEnd
 
-    \resumeSubheading{Insane Games}{Feb 2024 -- Jun 2024}{Intern}{Brazil}
+    \resumeSubheading{Insane Games}{Fev 2024 -- Jun 2024}{Estagiário}{Brasil}
     \resumeItemListStart
-    \resumeItem{Developed backend systems for Unity games in C\#.}
-    \resumeItem{Managed asset production process in Tech Art using Blender.}
+    \resumeItem{Desenvolvi sistemas de backend para jogos Unity em C\#.}
+    \resumeItem{Gerenciei o processo de produção de assets em Tech Art utilizando Blender.}
     \resumeItemListEnd
 
     \resumeSubHeadingListEnd
 
 
     %-----------PROJECTS-----------
-    \section{Projects}
+    \section{Projetos}
     \resumeSubHeadingListStart
 
     % --- Investments Calculator ---
@@ -132,7 +132,7 @@
     {\textbf{Investments Calculator} $|$ \emph{React, Vite, Tailwind, Supabase}}
     {\emph{\href{https://mateusb12.github.io/investments-calculator}{Website}}}
     \resumeItemListStart
-    \resumeItem{A React web app providing multiple Brazilian-market financial calculators (FIIs, CDBs, LCIs).}
+    \resumeItem{Aplicação web React que fornece múltiplas calculadoras financeiras para o mercado brasileiro (FIIs, CDBs, LCIs).}
     \resumeItemListEnd
 
     % --- Book Analyzer ---
@@ -140,7 +140,7 @@
     {\textbf{Book Analyzer} $|$ \emph{NLP, Django, Python, Pandas, SpaCy}}
     {\emph{\href{https://github.com/mateusb12/WitcherAnalysis}{GitHub}}}
     \resumeItemListStart
-    \resumeItem{Transforms raw \texttt{.txt} books into structured social-media-style graphs using NLP pipelines.}
+    \resumeItem{Transforma livros brutos (\texttt{.txt}) em grafos estruturados estilo rede social usando pipelines de NLP.}
     \resumeItemListEnd
 
     % --- Flight Scraper ---
@@ -148,7 +148,7 @@
     {\textbf{Flight Scraper} $|$ \emph{Flask, Firebase, Selenium, Telegram}}
     {\emph{\href{https://github.com/mateusb12/TravelScrapper}{GitHub}}}
     \resumeItemListStart
-    \resumeItem{Scrapes flight data and sends automated alerts when prices drop via Telegram notifications.}
+    \resumeItem{Realiza raspagem de dados de voos e envia alertas automatizados via Telegram quando os preços caem.}
     \resumeItemListEnd
 
     % --- Valorant Impact ---
@@ -156,35 +156,46 @@
     {\textbf{Valorant Impact} $|$ \emph{ML, Flask, LightGBM, Scikit-Learn}}
     {\emph{\href{https://github.com/mateusb12/valorant_impact}{GitHub}}}
     \resumeItemListStart
-    \resumeItem{Quantifies player actions on win probability using ML models optimized with Optuna.}
+    \resumeItem{Quantifica ações de jogadores sobre a probabilidade de vitória usando modelos de ML otimizados com Optuna.}
     \resumeItemListEnd
 
     \resumeSubHeadingListEnd
 
 
     %-----------EDUCATION-----------
-    \section{Education}
+    \section{Formação Acadêmica}
     \resumeSubHeadingListStart
     \resumeSubheading
     {Universidade de Fortaleza}{2019 -- 2023}
-    {Computer Science Bachelor}{Fortaleza, Brazil}
+    {Bacharelado em Ciência da Computação}{Fortaleza, Brasil}
 
     \resumeSubheading
     {Politechnika Lubelska}{2022}
-    {Erasmus / Interchange Student}{Lublin, Poland}
+    {Erasmus / Intercâmbio Acadêmico}{Lublin, Polônia}
     \resumeSubHeadingListEnd
 
 
     %-----------TECHNICAL SKILLS-----------
-    \section{Technical Skills}
+    \section{Habilidades Técnicas}
     \begin{itemize}[leftmargin=0.15in, label={}]
         \small{\item{
-            \textbf{Languages}{: Python, C\#, JavaScript, TypeScript, SQL, Bash} \\
+            \textbf{Linguagens}{: Python, C\#, JavaScript, TypeScript, SQL, Bash} \\
             \textbf{Frameworks}{: Flask, Django, FastAPI, Node.js, React, React Native, NextJS} \\
             \textbf{Cloud \& Infra}{: AWS, Google Cloud, Azure, Docker, Kubernetes, TILT, GitHub Actions, Linux} \\
-            \textbf{Databases}{: PostgreSQL, MongoDB, Supabase} \\
-            \textbf{Concepts \& Tools}{: Scrum, Agile, Kanban, JWT, OAuth2, Swagger, Unit Testing} \\
-            \textbf{Spoken Languages}{: Portuguese (Native), English (C2 Fluent), Spanish (Basic)}
+            \textbf{Banco de Dados}{: PostgreSQL, MongoDB, Supabase} \\
+            \textbf{Conceitos \& Ferramentas}{: Scrum, Agile, Kanban, JWT, OAuth2, Swagger, Unit Testing} \\
+            \textbf{Idiomas}{: Português (Nativo), Inglês (C2 Fluente), Espanhol (Básico)}
+        }}
+    \end{itemize}
+
+    %-----------LANGUAGES-----------
+    \section{Idiomas}
+
+    \begin{itemize}[leftmargin=0.15in, label={}]
+        \small{\item{
+            \textbf{Inglês}: C2 Fluente \\
+            \textbf{Português}: C2 Nativo \\
+            \textbf{Espanhol}: A1 Básico
         }}
     \end{itemize}
 

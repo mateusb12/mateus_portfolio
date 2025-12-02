@@ -69,7 +69,7 @@ const textContent = {
             pontotel: {
                 title: 'Backend Developer',
                 company: 'Pontotel',
-                date: 'Jan 2025 - Jun 2025',
+                date: 'Jun 2024 - Jun 2025',
                 points: [
                     'Built Google Cloud scripts to handle urgent client demands, ensuring no wait on unavailable main system features',
                     'Refactored critical legacy validations into DDD-driven DTOs and domain classes, improving codebase data integrity',
@@ -80,7 +80,7 @@ const textContent = {
             startup: {
                 title: 'Backend Lead',
                 company: 'Omnichat Startup',
-                date: 'Feb 2024 - Jun 2024',
+                date: 'Dec 2023 - May 2024',
                 points: [
                     'Led backend sprints and task distribution with Scrum, mentoring team members and speeding up efficient deliveries',
                     'Built Flask microservices REST APIs with JWT auth, increasing application resilience and security',
@@ -130,7 +130,7 @@ const textContent = {
             pontotel: {
                 title: 'Desenvolvedor Backend',
                 company: 'Pontotel',
-                date: 'Jan 2025 - Jun 2025',
+                date: 'Jun 2024 - Jun 2025',
                 points: [
                     'Implementei scripts via Google Cloud para atender demandas urgentes de clientes, garantindo que o cliente não precisasse aguardar por funcionalidades indisponíveis',
                     'Refatorei validações críticas de código legado usando DTOs e DDD, melhorando a integridade dos dados',
@@ -141,7 +141,7 @@ const textContent = {
             startup: {
                 title: 'Backend Lead',
                 company: 'Omnichat Startup',
-                date: 'Fev 2024 - Jun 2024',
+                date: 'Dec 2023 - May 2024',
                 points: [
                     'Coordenei sprints backend e tarefas com Scrum, mentorando a equipe e otimizando entregas',
                     'Desenvolvi APIs RESTful em Flask com microsserviços e JWT, aumentando resiliência e segurança',
