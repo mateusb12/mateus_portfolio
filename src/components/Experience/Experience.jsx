@@ -298,52 +298,43 @@ const ExperienceCard = forwardRef(({experience, active}, ref) => {
         ? ICON_CONFIG.mobile
         : ICON_CONFIG.desktop;
 
+    // --- UPDATED FUNCTION START ---
     const renderSkillRows = () => {
         const skills = experience.skills || [];
         if (!skills.length) return null;
 
-        if (skills.length > 8) {
-            const half = Math.ceil(skills.length / 2);
-            const rows = [skills.slice(0, half), skills.slice(half)];
-            return rows.map((row, rowIndex) => (
-                <div key={rowIndex} className="mt-3 flex justify-center w-full gap-2">
-                    {row.map((skill, idx) => (
-                        <div key={idx} className="relative group">
-                            <img
-                                src={skill.icon}
-                                alt={`${skill.name} icon`}
-                                className="h-11 w-11 object-contain transition-transform duration-200 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
-                            />
-                            <span
-                                className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                {skill.name}
-              </span>
-                        </div>
-                    ))}
-                </div>
-            ));
+        const ITEMS_PER_ROW = 7;
+        const rows = [];
+
+        // Chunk the skills array into groups of 7
+        for (let i = 0; i < skills.length; i += ITEMS_PER_ROW) {
+            rows.push(skills.slice(i, i + ITEMS_PER_ROW));
         }
 
         return (
-            <div className="mt-7 flex flex-wrap justify-center w-full gap-2">
-                {skills.map((skill, idx) => (
-                    <div key={idx} className="relative group">
-                        <img
-                            src={skill.icon}
-                            alt={`${skill.name} icon`}
-                            className="h-11 w-11 object-contain transition-transform duration-200 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
-                        />
-                        <span
-                            className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-              {skill.name}
-            </span>
+            <div className="mt-5 flex flex-col gap-3">
+                {rows.map((row, rowIndex) => (
+                    <div key={rowIndex} className="flex justify-center w-full gap-2">
+                        {row.map((skill, idx) => (
+                            <div key={idx} className="relative group">
+                                <img
+                                    src={skill.icon}
+                                    alt={`${skill.name} icon`}
+                                    className="h-11 w-11 object-contain transition-transform duration-200 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
+                                />
+                                <span
+                                    className="pointer-events-none absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+                                    {skill.name}
+                                </span>
+                            </div>
+                        ))}
                     </div>
                 ))}
             </div>
         );
     };
+    // --- UPDATED FUNCTION END ---
 
-    /* ───────────────────────── main render ───────────────────────── */
     return (
         <VerticalTimelineElement
             ref={ref}
