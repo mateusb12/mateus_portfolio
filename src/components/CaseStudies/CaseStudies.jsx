@@ -3,9 +3,8 @@ import {motion, AnimatePresence} from 'framer-motion';
 import LanguageContext from '../LanguageContext';
 import {caseStudiesData, caseStudyTextContent} from "./CaseStudyData.jsx";
 import {projectsFadeIn, staggerContainer, textVariant} from "../../utils/componentUtils.jsx";
-import { X, ChevronRight } from 'lucide-react'; // Ícones para melhorar a UX
+import { X, ChevronRight } from 'lucide-react';
 
-// Tema visual (mantido igual)
 const cyanTheme = {
     borderColor: 'border-cyan-400/10',
     borderHover: 'hover:border-cyan-300',
@@ -14,12 +13,11 @@ const cyanTheme = {
 };
 
 export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) => {
-    // Se não tiver história completa, desabilitamos o botão de expandir
     const hasFullStory = !!caseStudy.fullStory;
 
     return (
         <motion.div
-            layout // Ativa animação automática de layout quando width/height mudar
+            layout
             transition={{ layout: { duration: 0.4, type: "spring", stiffness: 100, damping: 15 } }}
             className={`
                 case-study-card relative rounded-2xl overflow-hidden
@@ -31,9 +29,8 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
         >
             <motion.div layout className={`flex ${isExpanded ? 'flex-col md:flex-row gap-8' : 'flex-col h-full'}`}>
 
-                {/* === COLUNA ESQUERDA (Ou Topo no Mobile) === */}
+                {/* === LEFT COLUMN / TOP === */}
                 <div className={`${isExpanded ? 'w-full md:w-1/3' : 'w-full'}`}>
-                    {/* Imagem */}
                     <motion.div layout className="w-full h-[180px] rounded-lg overflow-hidden mb-5 bg-gray-900">
                         <img
                             src={caseStudy.image}
@@ -42,36 +39,51 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
                         />
                     </motion.div>
 
-                    {/* Título e Categoria */}
                     <motion.div layout>
                         <h3 className="text-white font-bold text-[24px] leading-tight">{caseStudy.title}</h3>
                         <p className="text-green-400 font-medium text-md mt-1">{caseStudy.category}</p>
                     </motion.div>
 
-                    {/* Descrição Curta (Só aparece se NÃO estiver expandido, ou pode manter nos dois) */}
                     {!isExpanded && (
                         <motion.p
                             initial={{ opacity: 0 }} animate={{ opacity: 1 }}
                             className="text-secondary text-[14px] leading-[22px] mt-4"
                         >
-                            {caseStudy.shortDescription}
+                            {caseStudy.description}
                         </motion.p>
                     )}
 
-                    {/* Features Chips */}
+                    {/* === CONDITIONAL FEATURES RENDERING === */}
                     <motion.div layout className="mt-5">
-                        <h4 className="text-white font-semibold mb-3 text-sm uppercase tracking-wide opacity-80">{text.keyFeatures}</h4>
-                        <div className="flex flex-wrap gap-2">
-                            {caseStudy.keyFeatures.map((feature) => (
-                                <span key={feature}
-                                      className="bg-cyan-900/40 border border-cyan-500/30 text-cyan-100 text-xs font-medium px-3 py-1.5 rounded-full">
+                        <h4 className="text-white font-semibold mb-3 text-sm uppercase tracking-wide opacity-80">
+                            {text.keyFeatures}
+                        </h4>
+
+                        {/* Check if the features are complex Objects (New Style) or simple Strings (Old Style) */}
+                        {typeof caseStudy.keyFeatures[0] === 'object' ? (
+                            // NEW STYLE: Vertical Stack of Cards (Matches your Screenshot)
+                            <div className="flex flex-col gap-3">
+                                {caseStudy.keyFeatures.map((feature, idx) => (
+                                    <div key={idx} className="bg-black/40 border border-green-500/30 rounded-lg p-3 flex flex-col items-center text-center">
+                                        <img src={feature.icon} alt="" className="w-10 h-10 mb-2 object-contain" />
+                                        <h5 className="text-green-400 font-bold text-sm leading-tight mb-1">{feature.title}</h5>
+                                        <p className="text-gray-400 text-xs leading-tight">{feature.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            // OLD STYLE: Simple Chips (For projects without icons yet)
+                            <div className="flex flex-wrap gap-2">
+                                {caseStudy.keyFeatures.map((feature, idx) => (
+                                    <span key={idx}
+                                          className="bg-cyan-900/40 border border-cyan-500/30 text-cyan-100 text-xs font-medium px-3 py-1.5 rounded-full">
                                     {feature}
                                 </span>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                        )}
                     </motion.div>
 
-                    {/* Botão de Ação (Mobile ou Estado Normal) */}
                     {!isExpanded && (
                         <motion.div className="mt-6 pt-4 border-t border-white/5">
                             <button
@@ -87,7 +99,7 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
                     )}
                 </div>
 
-                {/* === CONTEÚDO EXPANDIDO (COLUNA DIREITA) === */}
+                {/* === EXPANDED CONTENT === */}
                 {isExpanded && (
                     <motion.div
                         initial={{ opacity: 0, x: 20 }}
@@ -95,7 +107,6 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
                         transition={{ delay: 0.2, duration: 0.4 }}
                         className="w-full md:w-2/3 flex flex-col border-l border-white/10 md:pl-8 pl-0 md:pt-0 pt-6 border-t md:border-t-0"
                     >
-                        {/* Botão de Fechar no Topo Direita */}
                         <div className="flex justify-end mb-2">
                             <button
                                 onClick={onToggle}
@@ -106,12 +117,17 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
                             </button>
                         </div>
 
-                        {/* A História Real */}
                         <div className="space-y-6 text-gray-300">
+                            {/* Short Description in Expanded view */}
+                            <p className="text-gray-400 italic border-l-2 border-cyan-500 pl-4">
+                                {caseStudy.description}
+                            </p>
+
                             <div>
                                 <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
                                     <span className="w-2 h-8 bg-red-500 rounded-full inline-block"></span>
-                                    O Desafio
+                                    {caseStudyTextContent[text === caseStudyTextContent.english ? 'english' : 'portuguese'].items[0].fullStory?.challenge ? "O Desafio" : "The Challenge"}
+                                    {/* Note: In production, better to use text labels passed from prop */}
                                 </h4>
                                 <p className="leading-relaxed">{caseStudy.fullStory?.challenge}</p>
                             </div>
@@ -119,7 +135,7 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
                             <div>
                                 <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
                                     <span className="w-2 h-8 bg-blue-500 rounded-full inline-block"></span>
-                                    A Solução
+                                    {caseStudyTextContent[text === caseStudyTextContent.english ? 'english' : 'portuguese'].items[0].fullStory?.solution ? "A Solução" : "The Solution"}
                                 </h4>
                                 <p className="leading-relaxed">{caseStudy.fullStory?.solution}</p>
                             </div>
@@ -127,7 +143,7 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
                             <div>
                                 <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
                                     <span className="w-2 h-8 bg-green-500 rounded-full inline-block"></span>
-                                    O Impacto
+                                    {caseStudyTextContent[text === caseStudyTextContent.english ? 'english' : 'portuguese'].items[0].fullStory?.impact ? "O Impacto" : "The Impact"}
                                 </h4>
                                 <p className="leading-relaxed text-white font-medium bg-green-900/20 p-4 rounded-lg border border-green-500/30">
                                     {caseStudy.fullStory?.impact}
@@ -135,7 +151,6 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
                             </div>
                         </div>
 
-                        {/* Footer do Card Expandido */}
                         <div className="mt-auto pt-8 flex justify-end">
                             <a
                                 href={caseStudy.link}
@@ -153,21 +168,20 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
     );
 };
 
+// ... CaseStudiesSection and export remain the same as your original file
 const CaseStudiesSection = () => {
     const {selectedFlag} = useContext(LanguageContext);
     const lang = selectedFlag === 'usa' ? 'english' : 'portuguese';
     const text = caseStudyTextContent[lang];
 
-    // Estado para saber qual card está expandido
     const [expandedIndex, setExpandedIndex] = useState(null);
 
     const mergedData = caseStudiesData.map((caseStudy, index) => ({
         ...caseStudy,
-        ...text.items[index], // Mescla com o texto traduzido
+        ...text.items[index],
     }));
 
     const handleToggle = (index) => {
-        // Se clicar no mesmo que já está aberto, fecha. Se for outro, abre o outro.
         setExpandedIndex(expandedIndex === index ? null : index);
     };
 
@@ -182,7 +196,6 @@ const CaseStudiesSection = () => {
                 </p>
             </motion.div>
 
-            {/* Container Centralizado - Flex Wrap para permitir expansão fluida */}
             <div className="mt-12 flex flex-wrap justify-center gap-6 pb-8 px-4">
                 <AnimatePresence>
                     {mergedData.map((cs, i) => (
