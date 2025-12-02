@@ -1,0 +1,197 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+\usepackage[margin=1.27cm]{geometry}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.15in}
+\addtolength{\textwidth}{0.3in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+    \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+    \item\small{
+            {#1 \vspace{-2pt}}
+    }
+}
+
+\newcommand{\resumeSubheading}[4]{
+    \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & \textbf{\small #2} \\
+    \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.0\textwidth}{l@{\extracolsep{\fill}}r}
+    \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{0pt}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+% --- ATS HACK: HIDDEN KEYWORDS COMMAND ---
+% This creates text that is white (invisible to humans) but readable by robots.
+\newcommand{\hiddenkeywords}[1]{
+    \vspace{-10pt}
+    \begin{center}
+    \textcolor{white}{\tiny #1}
+    \end{center}
+    \vspace{-15pt}
+}
+
+\begin{document}
+
+    %----------HEADING----------
+    \begin{center}
+    {\Large \scshape Mateus Bessa} \\[2mm]
+    \footnotesize
+    \faPhone\ \underline{+55 (85) 99917-1902} ~
+    \faEnvelope\ \underline{matbessa12@gmail.com} ~
+    \faLinkedin\ \underline{\href{https://www.linkedin.com/in/mateus-bessa-m/}{linkedin.com/in/mateus-bessa-m}}
+    \\[1mm]
+    \faGithub\ \underline{\href{https://github.com/mateusb12}{github.com/mateusb12}} ~
+    \faBriefcase\ \underline{\href{https://mateusb12.github.io/mateus_portfolio/}{mateusb12.github.io}}
+    \end{center}
+
+    %-----------Experience---------------
+    \section{Work Experience}
+    \resumeSubHeadingListStart
+
+    \resumeSubheading{RovesterAI}{Aug 2025 -- Present}{Full-stack Engineer}{Brazil (Remote)}
+    \resumeItemListStart
+    \resumeItem{\textbf{Spearheaded} the telemetry architecture for \textbf{20+ IoT drone units}, enabling real-time mission-critical diagnostics under high-latency network conditions.}
+    \resumeItem{\textbf{Engineered} a hardware-agnostic dashboard integrating ADS1x15 sensors, \textbf{reducing manual field diagnostics time by ~70\%}.}
+    \resumeItem{Implemented fault-tolerant message queuing via \textbf{RabbitMQ}, \textbf{reducing data packet loss by ~40\%} in production environments.}
+    \resumeItem{Implemented autonomous recovery workflows using \textbf{APScheduler}, cron, and watchdogs, \textbf{eliminating daily manual SSH resets.}}
+    \resumeItem{Optimized runtime performance on resource-constrained Alpine Linux environments, \textbf{slashing RAM consumption by 35\%}.}
+    \resumeItem{Stack: \textbf{FastAPI}, \textbf{RabbitMQ}, \textbf{MongoDB}, \textbf{SQLite}, \textbf{Docker}, \textbf{AWS EC2}, \textbf{React Native}.}
+    \resumeItemListEnd
+
+    \resumeSubheading{Pontotel}{Mar 2025 -- Jul 2025}{Backend Developer}{Brazil (Remote)}
+    \resumeItemListStart
+    \resumeItem{\textbf{Automated} enterprise-grade GCP infrastructure tasks, compressing customer request turnaround from \textbf{hours to minutes}.}
+    \resumeItem{Refactored legacy logic into strict \textbf{DTO-based architectures}, reducing validation-related production bugs by \textbf{~40\%}.}
+    \resumeItem{Designed high-throughput data importers with pre-validation logic to ensure data integrity at scale.}
+    \resumeItem{Developed an internal observability API for calendar metrics, cutting debugging cycles by \textbf{~50\%}.}
+    \resumeItem{Stack: \textbf{Flask, Celery, FastAPI, TILT, Alembic, Poetry, Linux, Docker, Kubernetes}.}
+    \resumeItemListEnd
+
+    \resumeSubheading{Omnichat Startup}{Aug 2024 -- Jan 2025}{Backend Lead}{Brazil}
+    \resumeItemListStart
+    \resumeItem{\textbf{Architected} the core microservices backend, enforcing strict Clean Code standards and driving technical decisions for the engineering team.}
+    \resumeItem{\textbf{Pioneered} the migration to a modular API structure, reducing technical debt and accelerating feature deployment velocity.}
+    \resumeItem{Optimized complex PostgreSQL schemas for high-concurrency environments, ensuring scalable performance under load.}
+    \resumeItem{Led code reviews and mentorship, establishing CI/CD best practices and documentation standards (Swagger).}
+    \resumeItemListEnd
+
+    \resumeSubheading{Insane Games}{Feb 2024 -- Jun 2024}{Software Engineer Intern}{Brazil}
+    \resumeItemListStart
+    \resumeItem{Developed C\# backend subsystems for Unity-based titles and automated asset pipelines using Python/Blender API.}
+    \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+
+
+    %-----------PROJECTS-----------
+    \section{Notable Projects}
+    \resumeSubHeadingListStart
+
+
+    % --- Valorant Impact (Rebranded for Complexity) ---
+    \resumeProjectHeading
+    {\textbf{Valorant Competitive Analysis Engine} $|$ \emph{ML, LightGBM, Optuna}}
+    {\emph{\href{https://github.com/mateusb12/valorant_impact}{GitHub}}}
+    \resumeItemListStart
+    \resumeItem{Constructed a predictive ML pipeline identifying high-impact player behaviors to optimize win-rate probabilities.}
+    \resumeItem{Utilized hyperparameter tuning (Optuna) to refine model accuracy on large-scale competitive datasets.}
+    \resumeItemListEnd
+
+    % --- Book Analyzer (Rebranded) ---
+    \resumeProjectHeading
+    {\textbf{NLP Knowledge Graph Generator} $|$ \emph{SpaCy, NetworkX, Pandas}}
+    {\emph{\href{https://github.com/mateusb12/WitcherAnalysis}{GitHub}}}
+    \resumeItemListStart
+    \resumeItem{Built an NLP pipeline transforming unstructured text into social graph visualizations using Named Entity Recognition.}
+    \resumeItemListEnd
+
+    % --- Flight Scraper (Rebranded) ---
+    \resumeProjectHeading
+    {\textbf{Automated Travel Aggregator} $|$ \emph{Distributed Scraping, Telegram API}}
+    {\emph{\href{https://github.com/mateusb12/TravelScrapper}{GitHub}}}
+    \resumeItemListStart
+    \resumeItem{Deployed a headless scraping bot network on cloud instances to track real-time pricing anomalies.}
+    \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+
+
+    %-----------EDUCATION-----------
+    \section{Education}
+    \resumeSubHeadingListStart
+    \resumeSubheading
+    {Universidade de Fortaleza}{2019 -- 2023}
+    {Computer Science Bachelor}{Fortaleza, Brazil}
+
+    \resumeSubheading
+    {Politechnika Lubelska}{2022}
+    {Erasmus / Interchange Student}{Lublin, Poland}
+    \resumeSubHeadingListEnd
+
+
+    %-----------SKILLS-----------
+    % Combined Languages and Skills to save space and look denser
+    \section{Skills \& Languages}
+    \begin{itemize}[leftmargin=0.15in, label={}]
+        \small{\item{
+            \textbf{Languages}{: Python, JavaScript (ES6+), TypeScript, C\#, SQL, Bash/Shell} \\
+            \textbf{Core Stack}{: Flask, FastAPI, Django, Node.js, React, React Native, NextJS} \\
+            \textbf{Infrastructure}{: AWS (EC2, S3), Docker, Kubernetes, CI/CD (GitHub Actions), Linux Administration} \\
+            \textbf{Data \& ML}{: PostgreSQL, MongoDB, Redis, Pandas, Scikit-Learn, LightGBM} \\
+            \textbf{Languages}{: Portuguese (Native), English (C2 Fluent), Spanish (Basic)}
+        }}
+    \end{itemize}
+
+    %-----------ATS OPTIMIZATION (HIDDEN TEXT)-----------
+    % This text is white on white background.
+    \hiddenkeywords{Python Developer, Senior Backend Engineer, Full Stack Developer, DevOps Engineer, Cloud Architect, Microservices, REST API, Scalability, High Availability, System Design, Algorithms, Data Structures, AWS, Docker, Kubernetes, CI/CD, React, TypeScript, Remote, Agile, Scrum, English C2, Leadership, Mentorship, Innovation, Optimization, Security, Database Design.}
+
+\end{document}
