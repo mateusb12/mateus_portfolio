@@ -94,7 +94,7 @@ export const projectsData = [
         description: 'Transform .txt book files into social media style graphs, similar to Instagram',
         tags: ['api', 'nlp', 'django', 'python', 'numpy', 'graphviz', 'pandas', 'networkx', 'spacy'],
         image: witcher_reading_book,
-        projectLink: 'https://your-langguesser-app.com',
+        projectLink: 'https://github.com/mateusb12/WitcherAnalysis',
     },
     {
         name: 'Flight Scraper',
@@ -102,7 +102,7 @@ export const projectsData = [
             'Powered by Kiwi Tequila API, this project scrapes flight data and alerts users when prices drop.',
         tags: ['backend', 'flask', 'firebase', 'selenium', 'matplotlib', 'telegram', 'pandas'],
         image: flight,
-        projectLink: 'https://your-roastroom-app.com',
+        projectLink: 'https://github.com/mateusb12/TravelScrapper',
     },
     {
         name: 'Valorant Impact',
@@ -110,7 +110,7 @@ export const projectsData = [
             'Quantifies how player actions shift the odds of winning a Valorant round in real-time.',
         tags: ['machine_learning', 'flask', 'python', 'lightgbm', 'scikit_learn', 'optuna', 'seaborn', 'scipy'],
         image: data_analysis,
-        projectLink: 'https://your-porisma-app.com',
+        projectLink: 'https://github.com/mateusb12/valorant_impact',
     },
 ];
 

@@ -1,0 +1,191 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+\usepackage[margin=1.4cm]{geometry}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.15in}
+\addtolength{\textwidth}{0.3in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+    \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+    \item\small{
+            {#1 \vspace{-2pt}}
+    }
+}
+
+\newcommand{\resumeSubheading}[4]{
+    \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & \textbf{\small #2} \\
+    \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.0\textwidth}{l@{\extracolsep{\fill}}r}
+    \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{0pt}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\begin{document}
+
+    %----------HEADING----------
+    \begin{center}
+    {\Large \scshape Mateus Bessa} \\[2mm]
+    \footnotesize
+    \faPhone\ \underline{+55 (85) 99917-1902} ~
+    \faEnvelope\ \underline{matbessa12@gmail.com} ~
+    \faLinkedin\ \underline{\href{https://www.linkedin.com/in/mateus-bessa-m/}{linkedin.com/in/mateus-bessa-m}}
+    \\[1mm]
+    \faGithub\ \underline{\href{https://github.com/mateusb12}{github.com/mateusb12}} ~
+    \faBriefcase\ \underline{\href{https://mateusb12.github.io/mateus_portfolio/}{mateusb12.github.io}}
+    \end{center}
+
+    %-----------Experience---------------
+    \section{Work Experience}
+    \resumeSubHeadingListStart
+
+    \resumeSubheading{RovesterAI}{Aug 2025 -- Present}{Full-stack Developer}{Brazil}
+    \resumeItemListStart
+    \resumeItem{Designed and deployed telemetry pipelines across \textbf{20+ Raspberry Pi drone units}, enabling real-time feeding coordination and diagnostics under low-bandwidth conditions.}
+    \resumeItem{Integrated \textbf{ADS1x15} electrical current sensors with a lightweight HTML/CSS/JS dashboard, reducing manual field diagnostics by \textbf{~70\%}.}
+    \resumeItem{Reduced drone message delivery failures by \textbf{~40\%} through \textbf{RabbitMQ} acknowledgements and retry policies.}
+    \resumeItem{Implemented autonomous recovery workflows using \textbf{APScheduler}, cron, and watchdogs, eliminating daily manual SSH resets.}
+    \resumeItem{Developed \textbf{8+ backend APIs} for farm listing, device presence, feeding states, and push-notifications.}
+    \resumeItem{Reduced RAM usage on drone agents by \textbf{35\%} through runtime optimization on Alpine/Linux environments.}
+    \resumeItem{Stack: \textbf{FastAPI}, \textbf{RabbitMQ}, \textbf{MongoDB}, \textbf{SQLite}, \textbf{Docker}, \textbf{AWS EC2}, \textbf{React Native}.}
+    \resumeItemListEnd
+
+    \resumeSubheading{Pontotel}{Mar 2025 -- Jul 2025}{Backend Developer}{Brazil}
+    \resumeItemListStart
+    \resumeItem{Built GCP-based automation scripts reducing turnaround time for customer requests from \textbf{hours to minutes}.}
+    \resumeItem{Refactored legacy validation logic using \textbf{DTOs}, reducing validation-related bugs by \textbf{~40\%}.}
+    \resumeItem{Developed importers with pre-validation steps to prevent inconsistent data ingestion.}
+    \resumeItem{Designed internal API for calendar monitoring using metrics from \textbf{MongoDB}, reducing debugging time by \textbf{~50\%}.}
+    \resumeItem{Stack: \textbf{Flask, Celery, FastAPI, TILT, Alembic, Poetry, Linux, Docker, Kubernetes}.}
+    \resumeItemListEnd
+
+    \resumeSubheading{Omnichat Startup}{Aug 2024 -- Jan 2025}{Backend Lead}{Brazil}
+    \resumeItemListStart
+    \resumeItem{Coordinated backend team sprints and provided mentorship/code reviews.}
+    \resumeItem{Developed RESTful APIs in Flask with microservices architecture and JWT authentication.}
+    \resumeItem{Managed PostgreSQL database modeling and optimization.}
+    \resumeItem{Adopted Clean Code principles and documented APIs via Swagger.}
+    \resumeItemListEnd
+
+    \resumeSubheading{Insane Games}{Feb 2024 -- Jun 2024}{Intern}{Brazil}
+    \resumeItemListStart
+    \resumeItem{Developed backend systems for Unity games in C\#.}
+    \resumeItem{Managed asset production process in Tech Art using Blender.}
+    \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+
+
+    %-----------PROJECTS-----------
+    \section{Projects}
+    \resumeSubHeadingListStart
+
+    % --- Investments Calculator ---
+    \resumeProjectHeading
+    {\textbf{Investments Calculator} $|$ \emph{React, Vite, Tailwind, Supabase}}
+    {\emph{\href{https://mateusb12.github.io/investments-calculator}{Website}}}
+    \resumeItemListStart
+    \resumeItem{A React web app providing multiple Brazilian-market financial calculators (FIIs, CDBs, LCIs).}
+    \resumeItemListEnd
+
+    % --- Book Analyzer ---
+    \resumeProjectHeading
+    {\textbf{Book Analyzer} $|$ \emph{NLP, Django, Python, Pandas, SpaCy}}
+    {\emph{\href{https://github.com/mateusb12/WitcherAnalysis}{GitHub}}}
+    \resumeItemListStart
+    \resumeItem{Transforms raw \texttt{.txt} books into structured social-media-style graphs using NLP pipelines.}
+    \resumeItemListEnd
+
+    % --- Flight Scraper ---
+    \resumeProjectHeading
+    {\textbf{Flight Scraper} $|$ \emph{Flask, Firebase, Selenium, Telegram}}
+    {\emph{\href{https://github.com/mateusb12/TravelScrapper}{GitHub}}}
+    \resumeItemListStart
+    \resumeItem{Scrapes flight data and sends automated alerts when prices drop via Telegram notifications.}
+    \resumeItemListEnd
+
+    % --- Valorant Impact ---
+    \resumeProjectHeading
+    {\textbf{Valorant Impact} $|$ \emph{ML, Flask, LightGBM, Scikit-Learn}}
+    {\emph{\href{https://github.com/mateusb12/valorant_impact}{GitHub}}}
+    \resumeItemListStart
+    \resumeItem{Quantifies player actions on win probability using ML models optimized with Optuna.}
+    \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+
+
+    %-----------EDUCATION-----------
+    \section{Education}
+    \resumeSubHeadingListStart
+    \resumeSubheading
+    {Universidade de Fortaleza}{2019 -- 2023}
+    {Computer Science Bachelor}{Fortaleza, Brazil}
+
+    \resumeSubheading
+    {Politechnika Lubelska}{2022}
+    {Erasmus / Interchange Student}{Lublin, Poland}
+    \resumeSubHeadingListEnd
+
+
+    %-----------TECHNICAL SKILLS-----------
+    \section{Technical Skills}
+    \begin{itemize}[leftmargin=0.15in, label={}]
+        \small{\item{
+            \textbf{Languages}{: Python, C\#, JavaScript, TypeScript, SQL, Bash} \\
+            \textbf{Frameworks}{: Flask, Django, FastAPI, Node.js, React, React Native, NextJS} \\
+            \textbf{Cloud \& Infra}{: AWS, Google Cloud, Azure, Docker, Kubernetes, TILT, GitHub Actions, Linux} \\
+            \textbf{Databases}{: PostgreSQL, MongoDB, Supabase} \\
+            \textbf{Concepts \& Tools}{: Scrum, Agile, Kanban, JWT, OAuth2, Swagger, Unit Testing} \\
+            \textbf{Spoken Languages}{: Portuguese (Native), English (C2 Fluent), Spanish (Basic)}
+        }}
+    \end{itemize}
+
+\end{document}
