@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import {motion, AnimatePresence} from 'framer-motion';
 import LanguageContext from '../LanguageContext';
 import {caseStudiesData, caseStudyTextContent} from "./CaseStudyData.jsx";
-import {projectsFadeIn, staggerContainer, textVariant} from "../../utils/componentUtils.jsx";
+import {staggerContainer, textVariant} from "../../utils/componentUtils.jsx";
 import { X, ChevronRight } from 'lucide-react';
 
 const cyanTheme = {
@@ -27,9 +27,33 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
                 ${isExpanded ? 'w-full md:w-[900px] z-20' : 'w-[350px] z-0'}
             `}
         >
+            {/* === ABSOLUTE CLOSE BUTTON === */}
+            {isExpanded && (
+                <button
+                    onClick={onToggle}
+                    className="absolute top-4 right-4 text-gray-400 hover:text-white p-2 hover:bg-white/10 rounded-full transition z-50"
+                    title={text.closeStory}
+                >
+                    <X size={24} />
+                </button>
+            )}
+
+            {/* === FULL WIDTH HEADER (Compact Version) === */}
+            {/* REMOVED THE DESCRIPTION TEXT COMPLETELY FROM HERE */}
+            {isExpanded && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="w-full mb-6 border-b border-white/10 pb-4 pr-12"
+                >
+                    <h3 className="text-white font-bold text-[32px] leading-tight mb-1">{caseStudy.title}</h3>
+                    <p className="text-green-400 font-medium text-lg">{caseStudy.category}</p>
+                </motion.div>
+            )}
+
             <motion.div layout className={`flex ${isExpanded ? 'flex-col md:flex-row gap-8' : 'flex-col h-full'}`}>
 
-                {/* === LEFT COLUMN / TOP === */}
+                {/* === LEFT COLUMN === */}
                 <div className={`${isExpanded ? 'w-full md:w-1/3' : 'w-full'}`}>
                     <motion.div layout className="w-full h-[180px] rounded-lg overflow-hidden mb-5 bg-gray-900">
                         <img
@@ -39,29 +63,27 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
                         />
                     </motion.div>
 
-                    <motion.div layout>
-                        <h3 className="text-white font-bold text-[24px] leading-tight">{caseStudy.title}</h3>
-                        <p className="text-green-400 font-medium text-md mt-1">{caseStudy.category}</p>
-                    </motion.div>
-
+                    {/* Standard Title/Desc - Only show if NOT expanded */}
                     {!isExpanded && (
-                        <motion.p
-                            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                            className="text-secondary text-[14px] leading-[22px] mt-4"
-                        >
-                            {caseStudy.description}
-                        </motion.p>
+                        <motion.div layout>
+                            <h3 className="text-white font-bold text-[24px] leading-tight">{caseStudy.title}</h3>
+                            <p className="text-green-400 font-medium text-md mt-1">{caseStudy.category}</p>
+                            <motion.p
+                                initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                                className="text-secondary text-[14px] leading-[22px] mt-4"
+                            >
+                                {caseStudy.description}
+                            </motion.p>
+                        </motion.div>
                     )}
 
-                    {/* === CONDITIONAL FEATURES RENDERING === */}
+                    {/* === FEATURES (Vertical Stack) === */}
                     <motion.div layout className="mt-5">
                         <h4 className="text-white font-semibold mb-3 text-sm uppercase tracking-wide opacity-80">
                             {text.keyFeatures}
                         </h4>
 
-                        {/* Check if the features are complex Objects (New Style) or simple Strings (Old Style) */}
                         {typeof caseStudy.keyFeatures[0] === 'object' ? (
-                            // NEW STYLE: Vertical Stack of Cards (Matches your Screenshot)
                             <div className="flex flex-col gap-3">
                                 {caseStudy.keyFeatures.map((feature, idx) => (
                                     <div key={idx} className="bg-black/40 border border-green-500/30 rounded-lg p-3 flex flex-col items-center text-center">
@@ -72,7 +94,6 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
                                 ))}
                             </div>
                         ) : (
-                            // OLD STYLE: Simple Chips (For projects without icons yet)
                             <div className="flex flex-wrap gap-2">
                                 {caseStudy.keyFeatures.map((feature, idx) => (
                                     <span key={idx}
@@ -99,35 +120,19 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
                     )}
                 </div>
 
-                {/* === EXPANDED CONTENT === */}
+                {/* === RIGHT COLUMN (Expanded Content) === */}
                 {isExpanded && (
                     <motion.div
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2, duration: 0.4 }}
-                        className="w-full md:w-2/3 flex flex-col border-l border-white/10 md:pl-8 pl-0 md:pt-0 pt-6 border-t md:border-t-0"
+                        className="w-full md:w-2/3 flex flex-col md:pl-8 pl-0 md:pt-0 pt-6 md:border-l border-white/10"
                     >
-                        <div className="flex justify-end mb-2">
-                            <button
-                                onClick={onToggle}
-                                className="text-gray-400 hover:text-white p-2 hover:bg-white/10 rounded-full transition"
-                                title={text.closeStory}
-                            >
-                                <X size={24} />
-                            </button>
-                        </div>
-
                         <div className="space-y-6 text-gray-300">
-                            {/* Short Description in Expanded view */}
-                            <p className="text-gray-400 italic border-l-2 border-cyan-500 pl-4">
-                                {caseStudy.description}
-                            </p>
-
                             <div>
                                 <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
                                     <span className="w-2 h-8 bg-red-500 rounded-full inline-block"></span>
                                     {caseStudyTextContent[text === caseStudyTextContent.english ? 'english' : 'portuguese'].items[0].fullStory?.challenge ? "O Desafio" : "The Challenge"}
-                                    {/* Note: In production, better to use text labels passed from prop */}
                                 </h4>
                                 <p className="leading-relaxed">{caseStudy.fullStory?.challenge}</p>
                             </div>
@@ -168,7 +173,7 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
     );
 };
 
-// ... CaseStudiesSection and export remain the same as your original file
+// ... CaseStudiesSection and export remain the same
 const CaseStudiesSection = () => {
     const {selectedFlag} = useContext(LanguageContext);
     const lang = selectedFlag === 'usa' ? 'english' : 'portuguese';
