@@ -24,7 +24,7 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
                 bg-[#091011] border-2 transition-colors duration-300 ease-in-out p-6 flex-shrink-0
                 ${cyanTheme.borderColor} ${isExpanded ? 'border-cyan-400' : cyanTheme.borderHover}
                 ${cyanTheme.outerGlow} ${isExpanded ? 'shadow-[0_0_30px_10px_rgba(34,211,238,0.2)] bg-cyan-950/30' : cyanTheme.outerGlowHover}
-                ${isExpanded ? 'w-full md:w-[900px] z-20' : 'w-[350px] z-0'}
+                ${isExpanded ? 'w-full md:w-[1100px] z-20' : 'w-[350px] z-0'}
             `}
         >
             {/* === ABSOLUTE CLOSE BUTTON === */}
@@ -38,8 +38,7 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
                 </button>
             )}
 
-            {/* === FULL WIDTH HEADER (Compact Version) === */}
-            {/* REMOVED THE DESCRIPTION TEXT COMPLETELY FROM HERE */}
+            {/* === FULL WIDTH HEADER (Title & Category) === */}
             {isExpanded && (
                 <motion.div
                     initial={{ opacity: 0 }}
@@ -51,10 +50,99 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
                 </motion.div>
             )}
 
-            <motion.div layout className={`flex ${isExpanded ? 'flex-col md:flex-row gap-8' : 'flex-col h-full'}`}>
+            {/* === CONTENT BODY === */}
+            {isExpanded ? (
+                /* === 3-COLUMN EXPANDED LAYOUT === */
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.1 }}
+                    className="flex flex-col lg:flex-row gap-8"
+                >
+                    {/* --- COLUMN 1: FEATURES (Left) --- */}
+                    <div className="lg:w-[25%] flex-shrink-0 border-r border-white/5 pr-6">
+                        <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wide opacity-80">
+                            {text.keyFeatures}
+                        </h4>
+                        <div className="flex flex-col gap-3">
+                            {typeof caseStudy.keyFeatures[0] === 'object' ? (
+                                caseStudy.keyFeatures.map((feature, idx) => (
+                                    <div key={idx} className="bg-black/40 border border-green-500/30 rounded-lg p-3 flex flex-col items-center text-center hover:bg-green-900/10 transition-colors">
+                                        <img src={feature.icon} alt="" className="w-10 h-10 mb-2 object-contain" />
+                                        <h5 className="text-green-400 font-bold text-sm leading-tight mb-1">{feature.title}</h5>
+                                        <p className="text-gray-400 text-xs leading-tight">{feature.desc}</p>
+                                    </div>
+                                ))
+                            ) : (
+                                // Fallback for old data structure
+                                caseStudy.keyFeatures.map((feature, idx) => (
+                                    <span key={idx} className="bg-cyan-900/40 border border-cyan-500/30 text-cyan-100 text-sm font-medium px-3 py-2 rounded-lg text-center">
+                                        {feature}
+                                    </span>
+                                ))
+                            )}
+                        </div>
+                    </div>
 
-                {/* === LEFT COLUMN === */}
-                <div className={`${isExpanded ? 'w-full md:w-1/3' : 'w-full'}`}>
+                    {/* --- COLUMN 2: STORY (Middle) --- */}
+                    <div className="lg:w-[45%] flex flex-col space-y-6 text-gray-300 pr-2">
+                        {/* Challenge */}
+                        <div>
+                            <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                                <span className="w-2 h-6 bg-red-500 rounded-full inline-block"></span>
+                                {caseStudyTextContent[text === caseStudyTextContent.english ? 'english' : 'portuguese'].items[0].fullStory?.challenge ? "O Desafio" : "The Challenge"}
+                            </h4>
+                            <p className="leading-relaxed text-sm lg:text-[15px]">{caseStudy.fullStory?.challenge}</p>
+                        </div>
+
+                        {/* Solution */}
+                        <div>
+                            <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                                <span className="w-2 h-6 bg-blue-500 rounded-full inline-block"></span>
+                                {caseStudyTextContent[text === caseStudyTextContent.english ? 'english' : 'portuguese'].items[0].fullStory?.solution ? "A Solução" : "The Solution"}
+                            </h4>
+                            <p className="leading-relaxed text-sm lg:text-[15px]">{caseStudy.fullStory?.solution}</p>
+                        </div>
+
+                        {/* Impact */}
+                        <div>
+                            <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                                <span className="w-2 h-6 bg-green-500 rounded-full inline-block"></span>
+                                {caseStudyTextContent[text === caseStudyTextContent.english ? 'english' : 'portuguese'].items[0].fullStory?.impact ? "O Impacto" : "The Impact"}
+                            </h4>
+                            <p className="leading-relaxed text-white font-medium bg-green-900/20 p-4 rounded-lg border border-green-500/30 text-sm lg:text-[15px]">
+                                {caseStudy.fullStory?.impact}
+                            </p>
+                        </div>
+
+                        <div className="pt-4 mt-auto">
+                            <a
+                                href={caseStudy.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-block w-full text-center bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-3 rounded-lg font-bold transition shadow-lg shadow-cyan-500/20"
+                            >
+                                Visitar Projeto Online
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* --- COLUMN 3: SCREENSHOT (Right) --- */}
+                    <div className="lg:w-[30%] flex flex-col">
+                        <div className="sticky top-4 border-2 border-white/10 rounded-xl overflow-hidden shadow-2xl shadow-black/50 bg-gray-900">
+                            <img
+                                src={caseStudy.image}
+                                alt={caseStudy.title}
+                                className="w-full h-auto object-cover"
+                            />
+                        </div>
+                    </div>
+                </motion.div>
+
+            ) : (
+                /* === NON-EXPANDED PREVIEW LAYOUT (Single Column) === */
+                <div className="flex flex-col h-full">
+                    {/* Image */}
                     <motion.div layout className="w-full h-[180px] rounded-lg overflow-hidden mb-5 bg-gray-900">
                         <img
                             src={caseStudy.image}
@@ -63,117 +151,60 @@ export const CaseStudyCard = ({caseStudy, index, text, isExpanded, onToggle}) =>
                         />
                     </motion.div>
 
-                    {/* Standard Title/Desc - Only show if NOT expanded */}
-                    {!isExpanded && (
-                        <motion.div layout>
-                            <h3 className="text-white font-bold text-[24px] leading-tight">{caseStudy.title}</h3>
-                            <p className="text-green-400 font-medium text-md mt-1">{caseStudy.category}</p>
-                            <motion.p
-                                initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                                className="text-secondary text-[14px] leading-[22px] mt-4"
-                            >
-                                {caseStudy.description}
-                            </motion.p>
-                        </motion.div>
-                    )}
+                    {/* Info */}
+                    <motion.div layout>
+                        <h3 className="text-white font-bold text-[24px] leading-tight">{caseStudy.title}</h3>
+                        <p className="text-green-400 font-medium text-md mt-1">{caseStudy.category}</p>
+                        <motion.p
+                            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                            className="text-secondary text-[14px] leading-[22px] mt-4"
+                        >
+                            {caseStudy.description}
+                        </motion.p>
+                    </motion.div>
 
-                    {/* === FEATURES (Vertical Stack) === */}
-                    <motion.div layout className="mt-5">
+                    {/* Simple Features Chips */}
+                    <motion.div layout className="mt-5 mb-auto">
                         <h4 className="text-white font-semibold mb-3 text-sm uppercase tracking-wide opacity-80">
                             {text.keyFeatures}
                         </h4>
-
-                        {typeof caseStudy.keyFeatures[0] === 'object' ? (
-                            <div className="flex flex-col gap-3">
-                                {caseStudy.keyFeatures.map((feature, idx) => (
-                                    <div key={idx} className="bg-black/40 border border-green-500/30 rounded-lg p-3 flex flex-col items-center text-center">
-                                        <img src={feature.icon} alt="" className="w-10 h-10 mb-2 object-contain" />
-                                        <h5 className="text-green-400 font-bold text-sm leading-tight mb-1">{feature.title}</h5>
-                                        <p className="text-gray-400 text-xs leading-tight">{feature.desc}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <div className="flex flex-wrap gap-2">
-                                {caseStudy.keyFeatures.map((feature, idx) => (
-                                    <span key={idx}
-                                          className="bg-cyan-900/40 border border-cyan-500/30 text-cyan-100 text-xs font-medium px-3 py-1.5 rounded-full">
-                                    {feature}
-                                </span>
-                                ))}
-                            </div>
-                        )}
+                        <div className="flex flex-wrap gap-2">
+                            {/* Always render simple chips in preview mode, even if data is complex */}
+                            {typeof caseStudy.keyFeatures[0] === 'object' ?
+                                caseStudy.keyFeatures.map((f, i) => (
+                                    <span key={i} className="bg-cyan-900/40 border border-cyan-500/30 text-cyan-100 text-xs font-medium px-3 py-1.5 rounded-full">
+                                        {f.title}
+                                    </span>
+                                ))
+                                :
+                                caseStudy.keyFeatures.map((f, i) => (
+                                    <span key={i} className="bg-cyan-900/40 border border-cyan-500/30 text-cyan-100 text-xs font-medium px-3 py-1.5 rounded-full">
+                                        {f}
+                                    </span>
+                                ))
+                            }
+                        </div>
                     </motion.div>
 
-                    {!isExpanded && (
-                        <motion.div className="mt-6 pt-4 border-t border-white/5">
-                            <button
-                                onClick={onToggle}
-                                disabled={!hasFullStory}
-                                className={`text-sm font-bold flex items-center gap-2 transition-colors ${
-                                    hasFullStory ? 'text-white hover:text-cyan-400 cursor-pointer' : 'text-gray-600 cursor-not-allowed'
-                                }`}
-                            >
-                                {text.readStory} <ChevronRight size={16} />
-                            </button>
-                        </motion.div>
-                    )}
+                    {/* Read More Button */}
+                    <motion.div className="mt-6 pt-4 border-t border-white/5">
+                        <button
+                            onClick={onToggle}
+                            disabled={!hasFullStory}
+                            className={`text-sm font-bold flex items-center gap-2 transition-colors ${
+                                hasFullStory ? 'text-white hover:text-cyan-400 cursor-pointer' : 'text-gray-600 cursor-not-allowed'
+                            }`}
+                        >
+                            {text.readStory} <ChevronRight size={16} />
+                        </button>
+                    </motion.div>
                 </div>
-
-                {/* === RIGHT COLUMN (Expanded Content) === */}
-                {isExpanded && (
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.2, duration: 0.4 }}
-                        className="w-full md:w-2/3 flex flex-col md:pl-8 pl-0 md:pt-0 pt-6 md:border-l border-white/10"
-                    >
-                        <div className="space-y-6 text-gray-300">
-                            <div>
-                                <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                                    <span className="w-2 h-8 bg-red-500 rounded-full inline-block"></span>
-                                    {caseStudyTextContent[text === caseStudyTextContent.english ? 'english' : 'portuguese'].items[0].fullStory?.challenge ? "O Desafio" : "The Challenge"}
-                                </h4>
-                                <p className="leading-relaxed">{caseStudy.fullStory?.challenge}</p>
-                            </div>
-
-                            <div>
-                                <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                                    <span className="w-2 h-8 bg-blue-500 rounded-full inline-block"></span>
-                                    {caseStudyTextContent[text === caseStudyTextContent.english ? 'english' : 'portuguese'].items[0].fullStory?.solution ? "A Solução" : "The Solution"}
-                                </h4>
-                                <p className="leading-relaxed">{caseStudy.fullStory?.solution}</p>
-                            </div>
-
-                            <div>
-                                <h4 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                                    <span className="w-2 h-8 bg-green-500 rounded-full inline-block"></span>
-                                    {caseStudyTextContent[text === caseStudyTextContent.english ? 'english' : 'portuguese'].items[0].fullStory?.impact ? "O Impacto" : "The Impact"}
-                                </h4>
-                                <p className="leading-relaxed text-white font-medium bg-green-900/20 p-4 rounded-lg border border-green-500/30">
-                                    {caseStudy.fullStory?.impact}
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="mt-auto pt-8 flex justify-end">
-                            <a
-                                href={caseStudy.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-2 rounded-lg font-bold transition shadow-lg shadow-cyan-500/20"
-                            >
-                                Visitar Projeto Online
-                            </a>
-                        </div>
-                    </motion.div>
-                )}
-            </motion.div>
+            )}
         </motion.div>
     );
 };
 
-// ... CaseStudiesSection and export remain the same
+// ... CaseStudiesSection and export remain unchanged
 const CaseStudiesSection = () => {
     const {selectedFlag} = useContext(LanguageContext);
     const lang = selectedFlag === 'usa' ? 'english' : 'portuguese';
