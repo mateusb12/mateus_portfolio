@@ -1,4 +1,7 @@
 import React, {useState, useEffect, useRef, useContext} from "react";
+import LanguageContext from "../LanguageContext.jsx";
+
+// --- Existing Imports ---
 import flask from "../../assets/img/skills_icons/flask.svg"
 import django from "../../assets/img/skills_icons/django.svg"
 import alembic from "../../assets/img/skills_icons/alembic.png"
@@ -6,9 +9,20 @@ import tilt from "../../assets/img/skills_icons/tilt.png"
 import aws from "../../assets/img/skills_icons/aws.png"
 import react_native from "../../assets/img/skills_icons/react-native.png"
 import design from "../../assets/img/skills_icons/design.png"
-import LanguageContext from "../LanguageContext.jsx";
 
-// --- Reusable Core Components ---
+import fastapi from "../../assets/img/skills_icons/fastapi.svg"
+import rabbitmq from "../../assets/img/skills_icons/rabbit.svg"
+import celery from "../../assets/img/skills_icons/celery.png"
+import kubernetes from "../../assets/img/skills_icons/kubernetes.svg"
+import sqlite from "../../assets/img/skills_icons/sqlite.svg"
+import selenium from "../../assets/img/skills_icons/selenium.svg"
+import pandas from "../../assets/img/skills_icons/pandas.png"
+import csharp from "../../assets/img/skills_icons/csharp.svg"
+import unity from "../../assets/img/skills_icons/unity.svg"
+import blender from "../../assets/img/skills_icons/blender.svg"
+import pm2 from "../../assets/img/skills_icons/pm2.svg"
+import javascript from "../../assets/img/skills_icons/javascript.png"
+
 
 /**
  * A custom hook to get the current window width.
@@ -30,7 +44,7 @@ function useWindowWidth() {
  * @param {object} props - The component props.
  * @param {Array<object>} props.items - The array of items to display in the carousel.
  * @param {object} [props.itemsPerScreen={ large: 3, medium: 2, small: 1 }] - Configuration for items per screen size.
- * @param {object} [props.itemSizePerScreen] - // NEW: Optional configuration for item width percentage per screen size.
+ * @param {object} [props.itemSizePerScreen] - Optional configuration for item width percentage per screen size.
  * @param {object} [props.breakpoints={ large: 1024, medium: 768 }] - The width breakpoints for screen sizes.
  */
 function ConfigurableCarousel({
@@ -41,7 +55,6 @@ function ConfigurableCarousel({
                                   itemSizePerScreen: itemSizePerScreenConfig,
                                   breakpoints = { large: 1024, medium: 768 }
                               }) {
-    // ... (all the existing hooks and logic remain the same)
     const width = useWindowWidth();
     const carouselRef = useRef(null);
 
@@ -138,7 +151,6 @@ function ConfigurableCarousel({
 
 
     return (
-        // MODIFIED: Reduced vertical padding on mobile (py-8), keeps py-14 for medium screens and up.
         <div className="relative w-full bg-black/50 backdrop-blur-2xl rounded-3xl border border-green-500/50 shadow-2xl shadow-emerald-500/30">
             <div className="text-center my-4 md:my-6">
                 <h2 className="text-3xl md:text-6xl font-bold text-white">{title}</h2>
@@ -156,28 +168,23 @@ function ConfigurableCarousel({
                     {items.map(({ src, label }) => (
                         <div
                             key={label}
-                            // MODIFIED: Reduced padding on mobile (p-2), scales to p-6 on medium screens.
                             className="flex-shrink-0 flex flex-col items-center justify-center p-2 md:p-6"
                             style={{ width: `${itemWidthPercentage}%` }}
                         >
-                            {/* MODIFIED: Smaller icon circle on mobile (w-24 h-24), scales to w-30 h-30 on medium screens. */}
                             <div className="overflow-hidden w-[20vw] h-[20vw] md:w-30 md:h-30 bg-gray-800/50 rounded-full flex items-center justify-center border border-gray-700/50 transition-all duration-300 hover:border-2 hover:border-emerald-400 hover:scale-105">
                                 <img
                                     src={src}
                                     alt={`${label} icon`}
-                                    // MODIFIED: Reduced padding inside the circle for mobile (p-3), scales to p-4 on medium screens.
                                     className="w-full h-full p-2 md:p-3 object-contain"
                                     onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/40x40/1a202c/ffffff?text=${label.charAt(0)}`; }}
                                 />
                             </div>
-                            {/* MODIFIED: Smaller font for labels on mobile (text-base), scales to text-lg on medium screens. Reduced top margin. */}
                             <span className="mt-3 md:mt-5 text-base md:text-lg text-white font-semibold tracking-wide">{label}</span>
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* MODIFIED: Pushed arrows in slightly on smallest screens to avoid overlap. */}
             <button
                 onClick={handlePrev}
                 disabled={currentIndex === 0}
@@ -195,7 +202,6 @@ function ConfigurableCarousel({
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
             </button>
 
-            {/* MODIFIED: Reduced top margin on mobile. */}
             {maxIndex > 0 && (
                 <div className="flex justify-center items-center space-x-2 md:space-x-3 my-6 md:my-8 mx-3 md:mx-4">
                     {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
@@ -203,7 +209,6 @@ function ConfigurableCarousel({
                             key={idx}
                             onClick={() => goToSlide(idx)}
                             aria-label={`Go to slide ${idx + 1}`}
-                            // MODIFIED: Smaller pagination dots on mobile (w-10 h-3), scales up for medium screens.
                             className={`w-10 h-3 md:w-12 md:h-4 border-2 border-black rounded-full transition-all duration-300 ease-in-out ${idx === currentIndex ? 'bg-emerald-400 shadow-lg shadow-emerald-400/50' : 'bg-gray-600/50 hover:bg-gray-500'}`}
                         />
                     ))}
@@ -213,42 +218,102 @@ function ConfigurableCarousel({
     );
 }
 
+const devicon = "https://raw.githubusercontent.com/devicons/devicon/master/icons";
+
+const iconSourceMap = {
+    python:      `${devicon}/python/python-original.svg`,
+    node:        `${devicon}/nodejs/nodejs-original.svg`,
+    swagger:     `${devicon}/swagger/swagger-original.svg`,
+    linux:       `${devicon}/linux/linux-original.svg`,
+    postgres:    `${devicon}/postgresql/postgresql-original.svg`,
+    mongodb:     `${devicon}/mongodb/mongodb-original.svg`,
+    git:         `${devicon}/git/git-original.svg`,
+    poetry:      `${devicon}/poetry/poetry-original.svg`,
+    docker:      `${devicon}/docker/docker-original.svg`,
+    gcloud:      `${devicon}/googlecloud/googlecloud-original.svg`,
+    azure:       `${devicon}/azure/azure-original.svg`,
+    redis:       `${devicon}/redis/redis-original.svg`,
+    supabase:    `${devicon}/supabase/supabase-original.svg`,
+    firebase:    `${devicon}/firebase/firebase-original.svg`,
+    githubActions: `${devicon}/githubactions/githubactions-original.svg`,
+    react:       `${devicon}/react/react-original.svg`,
+    nextjs:      `${devicon}/nextjs/nextjs-original.svg`,
+    typescript:  `${devicon}/typescript/typescript-original.svg`,
+    html:        `${devicon}/html5/html5-original.svg`,
+    css:         `${devicon}/css3/css3-original.svg`,
+    figma:       `${devicon}/figma/figma-original.svg`,
+
+    flask,
+    django,
+    fastapi,
+    alembic,
+    rabbitmq,
+    celery,
+    kubernetes,
+    sqlite,
+    selenium,
+    pandas,
+    csharp,
+    unity,
+    blender,
+    pm2,
+    javascript,
+    react_native,
+    tilt,
+    aws,
+    design,
+};
+
 const backendPool = [
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg", label: "Python" },
-    { src: flask, label: "Flask" },
-    { src: django, label: "Django" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg", label: "Node.js" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/swagger/swagger-original.svg", label: "Swagger" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg", label: "Linux" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg", label: "Postgres" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg", label: "MongoDB" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg", label: "Git" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/poetry/poetry-original.svg", label: "Poetry"},
-    { src: alembic, label: "Alembic"},
-]
+    { src: iconSourceMap.python, label: "Python" },
+    { src: iconSourceMap.fastapi, label: "FastAPI" },
+    { src: iconSourceMap.flask, label: "Flask" },
+    { src: iconSourceMap.django, label: "Django" },
+    { src: iconSourceMap.csharp, label: "C#" },
+    { src: iconSourceMap.node, label: "Node.js" },
+    { src: iconSourceMap.rabbitmq, label: "RabbitMQ" },
+    { src: iconSourceMap.swagger, label: "Swagger" },
+    { src: iconSourceMap.linux, label: "Linux" },
+    { src: iconSourceMap.postgres, label: "Postgres" },
+    { src: iconSourceMap.mongodb, label: "MongoDB" },
+    { src: iconSourceMap.sqlite, label: "SQLite" },
+    { src: iconSourceMap.git, label: "Git" },
+    { src: iconSourceMap.poetry, label: "Poetry" },
+    { src: iconSourceMap.alembic, label: "Alembic" },
+    { src: iconSourceMap.unity, label: "Unity" },
+    { src: iconSourceMap.celery, label: "Celery" },
+    { src: iconSourceMap.selenium, label: "Selenium" },
+    { src: iconSourceMap.pandas, label: "Pandas" },
+];
 
 const cloudPool = [
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg", label: "Docker" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original.svg", label: "Redis" },
-    { src: aws, label: "AWS" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/googlecloud/googlecloud-original.svg", label: "Google Cloud" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/azure/azure-original.svg", label: "Azure" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/supabase/supabase-original.svg", label: "Supabase" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/firebase/firebase-original.svg", label: "Firebase" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/githubactions/githubactions-original.svg", label: "GitHub Actions" },
-    { src: tilt, label: "Tilt"},
-]
+    { src: iconSourceMap.docker, label: "Docker" },
+    { src: iconSourceMap.kubernetes, label: "Kubernetes" },
+    { src: iconSourceMap.aws, label: "AWS" },
+    { src: iconSourceMap.gcloud, label: "Google Cloud" },
+    { src: iconSourceMap.azure, label: "Azure" },
+    { src: iconSourceMap.pm2, label: "PM2" },
+    { src: iconSourceMap.redis, label: "Redis" },
+    { src: iconSourceMap.supabase, label: "Supabase" },
+    { src: iconSourceMap.firebase, label: "Firebase" },
+    { src: iconSourceMap.githubActions, label: "GitHub Actions" },
+    { src: iconSourceMap.tilt, label: "Tilt" },
+];
+
 
 const frontendPool = [
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg", label: "React" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/nextjs/nextjs-original.svg", label: "NextJS" },
-    { src: react_native, label: "React Native" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/figma/figma-original.svg", label: "Figma" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg", label: "Typescript" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg", label: "HTML5" },
-    { src: "https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg", label: "CSS3" },
-    { src: design, label: "UI/UX Design" },
-]
+    { src: iconSourceMap.react, label: "React" },
+    { src: iconSourceMap.react_native, label: "React Native" },
+    { src: iconSourceMap.nextjs, label: "NextJS" },
+    { src: iconSourceMap.javascript, label: "JavaScript" },
+    { src: iconSourceMap.typescript, label: "Typescript" },
+    { src: iconSourceMap.blender, label: "Blender 3D" },
+    { src: iconSourceMap.figma, label: "Figma" },
+    { src: iconSourceMap.html, label: "HTML5" },
+    { src: iconSourceMap.css, label: "CSS3" },
+    { src: iconSourceMap.design, label: "UI/UX Design" },
+];
+
 
 export default function CarouselList() {
     const carouselText = {
