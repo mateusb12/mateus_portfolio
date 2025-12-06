@@ -11,7 +11,7 @@ export const caseStudiesData = [
         category: 'Web App Development',
         keyFeatures: ['Multi-row approval workflows', 'Real-time status tracking', 'Automated notifications'],
         image: BmEnergia,
-        link: 'https://vssoftware.com.br'
+        link: 'https://www.google.com.br/',
     },
 ];
 
