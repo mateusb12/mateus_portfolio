@@ -1,5 +1,8 @@
 import React, {useContext, useState} from 'react';
 import {motion, AnimatePresence} from 'framer-motion';
+import LanguageContext from '../LanguageContext';
+import {caseStudiesData, caseStudyTextContent} from "./CaseStudyData.jsx";
+import {staggerContainer, textVariant} from "../../utils/componentUtils.jsx";
 import { X, ChevronRight, ExternalLink } from 'lucide-react';
 
 const cyanTheme = {
@@ -49,6 +52,7 @@ export const CaseStudyCard = ({caseStudy, index, text, lang, isExpanded, onToggl
                 ${isExpanded ? 'w-full md:w-[1000px] z-20' : 'w-[350px] z-0'}
             `}
         >
+            {/* === ABSOLUTE CLOSE BUTTON === */}
             {isExpanded && (
                 <button
                     onClick={onToggle}
@@ -59,6 +63,7 @@ export const CaseStudyCard = ({caseStudy, index, text, lang, isExpanded, onToggl
                 </button>
             )}
 
+            {/* === HEADER === */}
             {isExpanded && (
                 <motion.div
                     initial={{ opacity: 0 }}
@@ -70,6 +75,7 @@ export const CaseStudyCard = ({caseStudy, index, text, lang, isExpanded, onToggl
                 </motion.div>
             )}
 
+            {/* === EXPANDED CONTENT === */}
             {isExpanded ? (
                 <motion.div
                     initial={{ opacity: 0 }}
@@ -219,3 +225,63 @@ export const CaseStudyCard = ({caseStudy, index, text, lang, isExpanded, onToggl
         </motion.div>
     );
 };
+
+const CaseStudiesSection = () => {
+    const {selectedFlag} = useContext(LanguageContext);
+    const lang = selectedFlag === 'usa' ? 'english' : 'portuguese';
+    const text = caseStudyTextContent[lang];
+
+    // Initialize with 0 to start expanded
+    const [expandedIndex, setExpandedIndex] = useState(0);
+
+    const mergedData = caseStudiesData.map((caseStudy, index) => ({
+        ...caseStudy,
+        ...text.items[index],
+    }));
+
+    const handleToggle = (index) => {
+        setExpandedIndex(expandedIndex === index ? null : index);
+    };
+
+    return (
+        <section id="case-studies">
+            <motion.div variants={textVariant()} className="text-center mb-12">
+                <h2 className="text-white font-black md:text-[40px] sm:text-[30px] text-[24px]">
+                    {text.sectionTitle}
+                </h2>
+                <p className="text-secondary text-[16px] mt-2">
+                    {text.sectionSubtitle}
+                </p>
+            </motion.div>
+
+            <div className="mt-12 flex flex-wrap justify-center gap-6 pb-8 px-4">
+                <AnimatePresence>
+                    {mergedData.map((cs, i) => (
+                        <CaseStudyCard
+                            key={i}
+                            caseStudy={cs}
+                            index={i}
+                            text={text}
+                            lang={lang}
+                            isExpanded={expandedIndex === i}
+                            onToggle={() => handleToggle(i)}
+                        />
+                    ))}
+                </AnimatePresence>
+            </div>
+        </section>
+    );
+};
+
+export default (props) => (
+    <motion.section
+        variants={staggerContainer()}
+        initial="hidden"
+        whileInView="show"
+        viewport={{once: true, amount: 0.1}}
+        className={`max-w-7xl mx-auto relative z-0 py-10`}
+        {...props}
+    >
+        <CaseStudiesSection/>
+    </motion.section>
+);
