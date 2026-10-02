@@ -57,7 +57,7 @@ const textContent = {
             rovesterAI: {
                 title: 'IoT & Full Stack Developer',
                 company: 'Rovester AI',
-                date: 'Aug 2025 - Today',
+                date: 'Aug 2025 - Jul 2026',
                 points: [
                     'Orchestrated asynchronous drone communication via RabbitMQ with retry policies, ensuring reliability in critical feeding routines',
                     'Developed FarmServer APIs using FastAPI and MongoDB to track robot status and diets, enhancing nursery observability',
@@ -69,7 +69,7 @@ const textContent = {
             pontotel: {
                 title: 'Backend Developer',
                 company: 'Pontotel',
-                date: 'Jun 2024 - Jun 2025',
+                date: 'Jun 2023 - Jun 2025',
                 points: [
                     'Built Google Cloud scripts to handle urgent client demands, ensuring no wait on unavailable main system features',
                     'Refactored critical legacy validations into DDD-driven DTOs and domain classes, improving codebase data integrity',
@@ -118,7 +118,7 @@ const textContent = {
             rovesterAI: {
                 title: 'Desenvolvedor IoT & Full Stack',
                 company: 'Rovester AI',
-                date: 'Ago 2025 - Hoje',
+                date: 'Ago 2025 - Jul 2026',
                 points: [
                     'Orquestrei comunicação assíncrona de drones via RabbitMQ com políticas de retry, garantindo confiabilidade nas rotinas de alimentação',
                     'Desenvolvi APIs do FarmServer utilizando FastAPI e MongoDB para rastreio de robôs, aumentando a observabilidade dos viveiros',
@@ -130,7 +130,7 @@ const textContent = {
             pontotel: {
                 title: 'Desenvolvedor Backend',
                 company: 'Pontotel',
-                date: 'Jun 2024 - Jun 2025',
+                date: 'Jun 2023 - Jun 2025',
                 points: [
                     'Implementei scripts via Google Cloud para atender demandas urgentes de clientes, garantindo que o cliente não precisasse aguardar por funcionalidades indisponíveis',
                     'Refatorei validações críticas de código legado usando DTOs e DDD, melhorando a integridade dos dados',
